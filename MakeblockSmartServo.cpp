@@ -1,13 +1,14 @@
 /**
  * \class MakeblockSmartServo
- * \brief   Driver for Me Smart Servo device.
+ * \brief   Driver for MakeBlock Smart Servo device.
  * @file    MakeblockSmartServo.cpp
- * @author  MakeBlock + Jakob Hoerbst FHTW
+ * @author  MakeBlock + Jakob Hoerbst FHTW + Johannes Rauer FHTW
  * @version V1.0.0
- * @date    2016/08/23 update 2020/01/28
- * @brief   Driver for Me Smart Servo device.
+ * @date    2016/08/23 update 2020/11/24
+ * @brief   Driver for MakeBlock Smart Servo device.
  * 
  * \par Method List:
+ *	  0. void beginSerial(Stream* servoPort);
  *    1. uint8_t MakeblockSmartServo::readByte(uint8_t *argv,int16_t idx);
  *    2. short MakeblockSmartServo::readShort(uint8_t *argv,int16_t idx,bool ignore_high);
  *    3. float MakeblockSmartServo::readFloat(uint8_t *argv,int16_t idx);
@@ -40,15 +41,9 @@
  * <pre>
  * `<Author>`         `<Time>`        `<Version>`        `<Descr>`
  * Mark Yan         2016/08/23     1.0.0            Build the new.
- * edited
- * Jakob Hoerbst    2020/01/28    
+ * Jakob Hoerbst    2020/01/28     1.0.0			edited
+ * Johannes Rauer	2020/11/24	   1.0.0			Adapted for morobot implementation.
  */
-
-
-
-
-
-
 
 
 #include <Arduino.h> 
@@ -73,21 +68,6 @@ MakeblockSmartServo::MakeblockSmartServo() : MeSerialStandalone(0)
  * Alternate Constructor which can call your own function to map the Me Smart Servo to arduino port,
  * If the hardware serial was selected, it will used the hardware serial.
  * \param[in]
- *   port - RJ25 port from PORT_1 to M2.
- */
-/*
-MakeblockSmartServo::MakeblockSmartServo(uint8_t port) : MeSerialStandalone(port)
-{
-  parsingSysex = false;
-  sysex = {0};
-  sysexBytesRead = 0;
-  servo_num_max = 0;
-}
-#else // ME_PORT_DEFINED
-*//**
- * Alternate Constructor which can call your own function to map the Me Smart Servo to arduino port,
- * If the hardware serial was selected, it will used the hardware serial.
- * \param[in]
  *   receivePin - the rx pin of serial(arduino port).
  * \param[in]
  *   transmitPin - the tx pin of serial(arduino port).
@@ -105,13 +85,25 @@ MakeblockSmartServo::MakeblockSmartServo(uint8_t receivePin, uint8_t transmitPin
 #endif // ME_PORT_DEFINED
 
 
-//////////////////// new function ////////////////
-void MakeblockSmartServo::beginserial(Stream* servoPort)
+
+/**
+ * \par Function
+ *   beginSerial
+ * \par Description
+ *   set the port for the serial communication. Has to be called to make read/write of SmartServo-Object possible
+ * \param[in]
+ *   *servoPort - A Stream-Object defining on which port the robot is connected (Serial1, Serial2, etc.). See https://www.arduino.cc/reference/en/language/functions/communication/serial/ for serial ports on Arduino.\n
+ * \par Output
+ *   None
+ * \return
+ *   None
+ * \par Others
+ *   None
+ */
+void MakeblockSmartServo::beginSerial(Stream* servoPort)
 {
 	port = servoPort;
 }
-
-
 
 /**
  * \par Function

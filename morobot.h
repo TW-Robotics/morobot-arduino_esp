@@ -58,8 +58,4 @@ class morobotClass {
 		//bool _positionReached[];
 };
 
-void callback_done(uint8_t servoNum);
-
-//extern morobotClass morobot;
-
 #endif

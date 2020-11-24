@@ -4,7 +4,6 @@
 #include <MakeblockSmartServo.h>
 
 //TODO: Implement kinematics and EEF-Frame
-//TODO: Implement blocking methods
 
 morobotClass::morobotClass(){
 	
@@ -13,7 +12,7 @@ morobotClass::morobotClass(){
 void morobotClass::begin(uint8_t numSmartServos, const char* stream){
 	Serial.begin(115200);
 	
-	if (stream == "Serial1") {
+	if (stream == "Serial1") { //https://www.arduino.cc/reference/en/language/functions/communication/serial/
 		Serial1.begin(115200);
 		_port = &Serial1;
 	} else if (stream == "Serial2") {
@@ -33,7 +32,7 @@ void morobotClass::begin(uint8_t numSmartServos, const char* stream){
 	_numSmartServos = numSmartServos;
 	positionReached[numSmartServos];
 	
-    smartServos.beginserial(_port);
+    smartServos.beginSerial(_port);
 	//delay(5);
     smartServos.assignDevIdRequest();
     delay(50);
@@ -79,13 +78,8 @@ void morobotClass::setIdle(){
 
 bool morobotClass::isReady(){
 	for (uint8_t i=0; i<_numSmartServos; i++) {
-		/*Serial.print("Testing ");
-		Serial.print(i);
-		Serial.println(positionReached[i]);*/
 		if (positionReached[i] == false) {
 			if (checkIfMotorMoves(i+1) == false) continue;
-			//Serial.print(i);
-			//Serial.println(": Got no callback yet and motor sill moves");
 			return false;
 		}
 	}
@@ -95,8 +89,6 @@ bool morobotClass::isReady(){
 void morobotClass::waitUntilIsReady(){
 	unsigned long startTime = millis();
 	while (true){
-		delay(100);
-		smartServos.smartServoEventHandle();
 		if (isReady() == true) break;
 		if ((millis() - startTime) > TIMEOUT_DELAY) {
 			Serial.println("Timeout");
@@ -140,11 +132,11 @@ float morobotClass::getCurrent(uint8_t servoId){
 /* MOVEMENTS */
 
 void morobotClass::moveToAngle(uint8_t servoId, long angle){
-	smartServos.moveTo(servoId+1, angle, _speedRPM, callback_done);
+	smartServos.moveTo(servoId+1, angle, _speedRPM);
 }
 
 void morobotClass::moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM){
-	smartServos.moveTo(servoId+1, angle, speedRPM, callback_done);
+	smartServos.moveTo(servoId+1, angle, speedRPM);
 }
 
 void morobotClass::moveToAngles(long angles[]){
@@ -166,11 +158,11 @@ void morobotClass::moveToAngles(long angles[], uint8_t speedRPM){
 }
 
 void morobotClass::moveAngle(uint8_t servoId, long angle){
-	smartServos.move(servoId+1, angle, _speedRPM, callback_done);
+	smartServos.move(servoId+1, angle, _speedRPM);
 }
 
 void morobotClass::moveAngle(uint8_t servoId, long angle, uint8_t speedRPM){
-	smartServos.move(servoId+1, angle, speedRPM, callback_done);
+	smartServos.move(servoId+1, angle, speedRPM);
 }
 
 void morobotClass::moveAngles(long angles[]){
@@ -200,10 +192,4 @@ void morobotClass::printAngles(long angles[]){
 		if (i != _numSmartServos-1) Serial.print(", ");
 		else Serial.println(" ");
 	}
-}
-
-//morobotClass morobot;
-
-void callback_done(uint8_t servoNum){
-	//morobot.positionReached[servoNum-1] = true;
 }

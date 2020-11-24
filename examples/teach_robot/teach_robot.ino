@@ -10,9 +10,11 @@ int delayDebounce = 500;
 int posId = 0;
 int idxPlayback = -1;
 
+morobotClass morobot;
+
 void setup() {
 	Dabble.begin(9600);
-	morobot.begin(NUM_SERVOS);
+	morobot.begin(NUM_SERVOS, "Serial1");
 	morobot.moveHome();	
 	delay(500);
 	morobot.releaseBreaks();

@@ -3,6 +3,8 @@
 
 #define NUM_SERVOS 3
 
+morobotClass morobot;
+
 void setup() {
 	Dabble.begin(9600);
 	morobot.begin(NUM_SERVOS);

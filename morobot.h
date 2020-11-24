@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <MakeblockSmartServo.h>
-//#include <Dabble.h>
 
 #ifndef MOROBOT_H
 #define MOROBOT_H
@@ -13,7 +12,7 @@
 class morobotClass {
 	public:
 		morobotClass();
-		void begin(uint8_t numSmartServos);
+		void begin(uint8_t numSmartServos, const char* stream);
 		void setZero();
 		void moveHome();
 		void setSpeedRPM(uint8_t speed);
@@ -55,11 +54,12 @@ class morobotClass {
 	private:
 		uint8_t _numSmartServos;
 		uint8_t _speedRPM;
+		Stream* _port;
 		//bool _positionReached[];
 };
 
 void callback_done(uint8_t servoNum);
 
-extern morobotClass morobot;
+//extern morobotClass morobot;
 
 #endif

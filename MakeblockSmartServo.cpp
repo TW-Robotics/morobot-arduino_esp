@@ -106,9 +106,9 @@ MakeblockSmartServo::MakeblockSmartServo(uint8_t receivePin, uint8_t transmitPin
 
 
 //////////////////// new function ////////////////
-void MakeblockSmartServo::beginserial()
+void MakeblockSmartServo::beginserial(Stream* servoPort)
 {
-  customserial.begin(115200);
+	port = servoPort;
 }
 
 
@@ -269,9 +269,9 @@ uint8_t MakeblockSmartServo::sendByte(uint8_t val)
   uint8_t val_7bit[2]={0};
   val1byte.charVal = val;
   val_7bit[0] = val1byte.byteVal[0] & 0x7f;
-  customserial.write(val_7bit[0]);
+  port->write(val_7bit[0]);
   val_7bit[1] = (val1byte.byteVal[0] >> 7) & 0x7f;
-  customserial.write(val_7bit[1]);
+  port->write(val_7bit[1]);
   checksum = val_7bit[0] + val_7bit[1];
   checksum = checksum & 0x7f;
   return checksum;
@@ -299,16 +299,16 @@ uint8_t MakeblockSmartServo::sendShort(int16_t val,bool ignore_high)
   uint8_t val_7bit[3]={0};
   val2byte.shortVal = val;
   val_7bit[0] = val2byte.byteVal[0] & 0x7f;
-  customserial.write(val_7bit[0]);
+  port->write(val_7bit[0]);
   val_7bit[1] = ((val2byte.byteVal[1] << 1) | (val2byte.byteVal[0] >> 7)) & 0x7f;
-  customserial.write(val_7bit[1]);
+  port->write(val_7bit[1]);
   checksum = val_7bit[0] + val_7bit[1];
   //Send analog can ignored high
   if(ignore_high == false)
   {
     val_7bit[2] = (val2byte.byteVal[1] >> 6) & 0x7f;
     checksum += val_7bit[2];
-    customserial.write(val_7bit[2]);
+    port->write(val_7bit[2]);
   }
   checksum = checksum & 0x7f;
   return checksum;
@@ -334,15 +334,15 @@ uint8_t MakeblockSmartServo::sendFloat(float val)
   uint8_t val_7bit[5]={0};
   val4byte.floatVal = val;
   val_7bit[0] = val4byte.byteVal[0] & 0x7f;
-  customserial.write(val_7bit[0]);
+  port->write(val_7bit[0]);
   val_7bit[1] = ((val4byte.byteVal[1] << 1) | (val4byte.byteVal[0] >> 7)) & 0x7f;
-  customserial.write(val_7bit[1]);
+  port->write(val_7bit[1]);
   val_7bit[2] = ((val4byte.byteVal[2] << 2) | (val4byte.byteVal[1] >> 6)) & 0x7f;
-  customserial.write(val_7bit[2]);
+  port->write(val_7bit[2]);
   val_7bit[3] = ((val4byte.byteVal[3] << 3) | (val4byte.byteVal[2] >> 5)) & 0x7f;
-  customserial.write(val_7bit[3]);
+  port->write(val_7bit[3]);
   val_7bit[4] = (val4byte.byteVal[3] >> 4) & 0x7f;
-  customserial.write(val_7bit[4]);
+  port->write(val_7bit[4]);
   checksum = val_7bit[0] + val_7bit[1] + val_7bit[2] + val_7bit[3] + val_7bit[4];
   checksum = checksum & 0x7f;
   return checksum;
@@ -368,15 +368,15 @@ uint8_t MakeblockSmartServo::sendLong(long val)
   uint8_t val_7bit[5]={0};
   val4byte.longVal = val;
   val_7bit[0] = val4byte.byteVal[0] & 0x7f;
-  customserial.write(val_7bit[0]);
+  port->write(val_7bit[0]);
   val_7bit[1] = ((val4byte.byteVal[1] << 1) | (val4byte.byteVal[0] >> 7)) & 0x7f;
-  customserial.write(val_7bit[1]);
+  port->write(val_7bit[1]);
   val_7bit[2] = ((val4byte.byteVal[2] << 2) | (val4byte.byteVal[1] >> 6)) & 0x7f;
-  customserial.write(val_7bit[2]);
+  port->write(val_7bit[2]);
   val_7bit[3] = ((val4byte.byteVal[3] << 3) | (val4byte.byteVal[2] >> 5)) & 0x7f;
-  customserial.write(val_7bit[3]);
+  port->write(val_7bit[3]);
   val_7bit[4] = (val4byte.byteVal[3] >> 4) & 0x7f;
-  customserial.write(val_7bit[4]);
+  port->write(val_7bit[4]);
   checksum = val_7bit[0] + val_7bit[1] + val_7bit[2] + val_7bit[3] + val_7bit[4];
   checksum = checksum & 0x7f;
   return checksum;
@@ -398,12 +398,12 @@ uint8_t MakeblockSmartServo::sendLong(long val)
  */
 bool MakeblockSmartServo::assignDevIdRequest(void)
 {
-  customserial.write(START_SYSEX);
-  customserial.write(ALL_DEVICE);
-  customserial.write(CTL_ASSIGN_DEV_ID);
-  customserial.write(0x00);
-  customserial.write(0x0f);
-  customserial.write(END_SYSEX);
+  port->write(START_SYSEX);
+  port->write(ALL_DEVICE);
+  port->write(CTL_ASSIGN_DEV_ID);
+  port->write((byte)0x00);
+  port->write(0x0f);
+  port->write(END_SYSEX);
   resFlag &= 0xfe;
   cmdTimeOutValue = millis();
   while(((resFlag & 0x01) != 0x01) || (millis() - cmdTimeOutValue < 150))
@@ -447,16 +447,16 @@ bool MakeblockSmartServo::moveTo(uint8_t dev_id,long angle_value,float speed,sma
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(dev_id);
-  customserial.write(SMART_SERVO);
-  customserial.write(SET_SERVO_ABSOLUTE_ANGLE_LONG);
+  port->write(START_SYSEX);
+  port->write(dev_id);
+  port->write(SMART_SERVO);
+  port->write(SET_SERVO_ABSOLUTE_ANGLE_LONG);
   checksum = (dev_id + SMART_SERVO + SET_SERVO_ABSOLUTE_ANGLE_LONG);
   checksum += sendLong(angle_value);
   checksum += sendShort((int)speed,true);
   checksum = checksum & 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xbf;
   _callback = callback;
   cmdTimeOutValue = millis();
@@ -501,16 +501,16 @@ bool MakeblockSmartServo::move(uint8_t dev_id,long angle_value,float speed,smart
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(dev_id);
-  customserial.write(SMART_SERVO);
-  customserial.write(SET_SERVO_RELATIVE_ANGLE_LONG);
+  port->write(START_SYSEX);
+  port->write(dev_id);
+  port->write(SMART_SERVO);
+  port->write(SET_SERVO_RELATIVE_ANGLE_LONG);
   checksum = (dev_id + SMART_SERVO + SET_SERVO_RELATIVE_ANGLE_LONG);
   checksum += sendLong(angle_value);
   checksum += sendShort((int)speed,true);
   checksum = checksum & 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xbf;
   _callback = callback;
   cmdTimeOutValue = millis();
@@ -549,13 +549,13 @@ bool MakeblockSmartServo::setZero(uint8_t dev_id)
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(dev_id);
-  customserial.write(SMART_SERVO);
-  customserial.write(SET_SERVO_CURRENT_ANGLE_ZERO_DEGREES);
+  port->write(START_SYSEX);
+  port->write(dev_id);
+  port->write(SMART_SERVO);
+  port->write(SET_SERVO_CURRENT_ANGLE_ZERO_DEGREES);
   checksum = (dev_id + SMART_SERVO + SET_SERVO_CURRENT_ANGLE_ZERO_DEGREES) & 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xbf;
   cmdTimeOutValue = millis();
   while((resFlag & 0x40) != 0x40)
@@ -595,14 +595,14 @@ bool MakeblockSmartServo::setBreak(uint8_t dev_id, uint8_t breakStatus)
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(dev_id);
-  customserial.write(SMART_SERVO);
-  customserial.write(SET_SERVO_BREAK);
-  customserial.write(breakStatus);
+  port->write(START_SYSEX);
+  port->write(dev_id);
+  port->write(SMART_SERVO);
+  port->write(SET_SERVO_BREAK);
+  port->write(breakStatus);
   checksum = (dev_id + SMART_SERVO + SET_SERVO_BREAK + breakStatus) & 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xbf;
   cmdTimeOutValue = millis();
   while((resFlag & 0x40) != 0x40)
@@ -646,17 +646,17 @@ bool MakeblockSmartServo::setRGBLed(uint8_t dev_id, uint8_t r_value, uint8_t g_v
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(dev_id);
-  customserial.write(SMART_SERVO);
-  customserial.write(SET_SERVO_RGB_LED);
+  port->write(START_SYSEX);
+  port->write(dev_id);
+  port->write(SMART_SERVO);
+  port->write(SET_SERVO_RGB_LED);
   checksum = (dev_id + SMART_SERVO + SET_SERVO_RGB_LED);
   checksum += sendByte(r_value);
   checksum += sendByte(g_value);
   checksum += sendByte(b_value);
   checksum &= 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xbf;
   cmdTimeOutValue = millis();
   while((resFlag & 0x40) != 0x40)
@@ -694,13 +694,13 @@ bool MakeblockSmartServo::handSharke(uint8_t dev_id)
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(dev_id);
-  customserial.write(SMART_SERVO);
-  customserial.write(SERVO_SHARKE_HAND);
+  port->write(START_SYSEX);
+  port->write(dev_id);
+  port->write(SMART_SERVO);
+  port->write(SERVO_SHARKE_HAND);
   checksum = (dev_id + SMART_SERVO + SERVO_SHARKE_HAND) & 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xbf;
   cmdTimeOutValue = millis();
   while((resFlag & 0x40) != 0x40)
@@ -740,15 +740,15 @@ bool MakeblockSmartServo::setPwmMove(uint8_t dev_id, int16_t pwm_value)
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(dev_id);
-  customserial.write(SMART_SERVO);
-  customserial.write(SET_SERVO_PWM_MOVE);
+  port->write(START_SYSEX);
+  port->write(dev_id);
+  port->write(SMART_SERVO);
+  port->write(SET_SERVO_PWM_MOVE);
   checksum = (dev_id + SMART_SERVO + SET_SERVO_PWM_MOVE);
   checksum += sendShort(pwm_value,false);
   checksum &= 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xbf;
   cmdTimeOutValue = millis();
   while((resFlag & 0x40) != 0x40)
@@ -790,16 +790,16 @@ bool MakeblockSmartServo::setInitAngle(uint8_t dev_id,uint8_t mode,int16_t speed
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(dev_id);
-  customserial.write(SMART_SERVO);
-  customserial.write(SET_SERVO_INIT_ANGLE);
-  customserial.write(mode);
+  port->write(START_SYSEX);
+  port->write(dev_id);
+  port->write(SMART_SERVO);
+  port->write(SET_SERVO_INIT_ANGLE);
+  port->write(mode);
   checksum = (dev_id + SMART_SERVO + SET_SERVO_INIT_ANGLE + mode);
   checksum += sendShort(abs(speed),true);
   checksum &= 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xbf;
   cmdTimeOutValue = millis();
   while((resFlag & 0x40) != 0x40)
@@ -837,14 +837,14 @@ long MakeblockSmartServo::getAngleRequest(uint8_t devId)
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(devId);
-  customserial.write(SMART_SERVO);
-  customserial.write(GET_SERVO_CUR_ANGLE);
-  customserial.write(0x00);
+  port->write(START_SYSEX);
+  port->write(devId);
+  port->write(SMART_SERVO);
+  port->write(GET_SERVO_CUR_ANGLE);
+  port->write((byte)0x00);
   checksum = (devId + SMART_SERVO + GET_SERVO_CUR_ANGLE + 0x00) & 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xfd;
   cmdTimeOutValue = millis();
   while((resFlag & 0x02) != 0x02)
@@ -881,14 +881,14 @@ float MakeblockSmartServo::getSpeedRequest(uint8_t devId)
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(devId);
-  customserial.write(SMART_SERVO);
-  customserial.write(GET_SERVO_SPEED);
-  customserial.write(0x00);
+  port->write(START_SYSEX);
+  port->write(devId);
+  port->write(SMART_SERVO);
+  port->write(GET_SERVO_SPEED);
+  port->write((byte)0x00);
   checksum = (devId + SMART_SERVO + GET_SERVO_SPEED + 0x00) & 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xfb;
   cmdTimeOutValue = millis();
   while((resFlag & 0x04) != 0x04)
@@ -925,14 +925,14 @@ float MakeblockSmartServo::getVoltageRequest(uint8_t devId)
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(devId);
-  customserial.write(SMART_SERVO);
-  customserial.write(GET_SERVO_VOLTAGE);
-  customserial.write(0x00);
+  port->write(START_SYSEX);
+  port->write(devId);
+  port->write(SMART_SERVO);
+  port->write(GET_SERVO_VOLTAGE);
+  port->write((byte)0x00);
   checksum = (devId + SMART_SERVO + GET_SERVO_VOLTAGE + 0x00) & 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xf7;
   cmdTimeOutValue = millis();
   while((resFlag & 0x08) != 0x08)
@@ -968,14 +968,14 @@ float MakeblockSmartServo::getTempRequest(uint8_t devId)
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(devId);
-  customserial.write(SMART_SERVO);
-  customserial.write(GET_SERVO_TEMPERATURE);
-  customserial.write(0x00);
+  port->write(START_SYSEX);
+  port->write(devId);
+  port->write(SMART_SERVO);
+  port->write(GET_SERVO_TEMPERATURE);
+  port->write((byte)0x00);
   checksum = (devId + SMART_SERVO + GET_SERVO_TEMPERATURE + 0x00) & 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xef;
   cmdTimeOutValue = millis();
   while((resFlag & 0x10) != 0x10)
@@ -1012,14 +1012,14 @@ float MakeblockSmartServo::getCurrentRequest(uint8_t devId)
   {
     return false;
   }
-  customserial.write(START_SYSEX);
-  customserial.write(devId);
-  customserial.write(SMART_SERVO);
-  customserial.write(GET_SERVO_ELECTRIC_CURRENT);
-  customserial.write(0x00);
+  port->write(START_SYSEX);
+  port->write(devId);
+  port->write(SMART_SERVO);
+  port->write(GET_SERVO_ELECTRIC_CURRENT);
+  port->write((byte)0x00);
   checksum = (devId + SMART_SERVO + GET_SERVO_ELECTRIC_CURRENT + 0x00) & 0x7f;
-  customserial.write(checksum);
-  customserial.write(END_SYSEX);
+  port->write(checksum);
+  port->write(END_SYSEX);
   resFlag &= 0xdf;
   cmdTimeOutValue = millis();
   while((resFlag & 0x20) != 0x20)
@@ -1115,10 +1115,10 @@ void MakeblockSmartServo::processSysexMessage(void)
  */
 void MakeblockSmartServo::smartServoEventHandle(void)
 {
-  while (customserial.available())
+  while (port->available())
   {
     // get the new byte:
-    uint8_t inputData = customserial.read();
+    uint8_t inputData = port->read();
     if(parsingSysex)
     {
       if (inputData == END_SYSEX)

@@ -45,9 +45,6 @@
  */
 
 
-// define Serial port for using Makeblock MS-12A SmartServo e.g. Serial for ESP32 at pins 16,17
-#define customserial Serial2
-
 
 #include <stdlib.h>
 
@@ -206,7 +203,7 @@ public:
 #endif // ME_PORT_DEFINED
 
 //// new function //////
-void beginserial();
+void beginserial(Stream* servoPort);
 
 
 /**
@@ -688,5 +685,6 @@ private:
   volatile long cmdTimeOutValue;
   volatile bool parsingSysex;
   smartServoCb _callback;
+  Stream* port;
 };
 #endif

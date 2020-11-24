@@ -3,15 +3,27 @@
 #include <SoftwareSerial.h>
 #include <MakeblockSmartServo.h>
 
-//TODO: Use different Serials as parameters to get multiple robots working
 //TODO: Implement kinematics and EEF-Frame
+//TODO: Implement blocking methods
 
 morobotClass::morobotClass(){
 	
 }
 
-void morobotClass::begin(uint8_t numSmartServos){
+void morobotClass::begin(uint8_t numSmartServos, const char* stream){
 	Serial.begin(115200);
+	
+	if (stream == "Serial1") {
+		Serial1.begin(115200);
+		_port = &Serial1;
+	} else if (stream == "Serial2") {
+		Serial2.begin(115200);
+		_port = &Serial2;
+	} else if (stream == "Serial3") {
+		Serial3.begin(115200);
+		_port = &Serial3;
+	}
+	else Serial.println("ERROR: Serial-Parameter not valid");
 	
 	if (numSmartServos > NUM_MAX_SERVOS){
 		Serial.print("Too many motors! Maximum number of motors: ");
@@ -21,8 +33,8 @@ void morobotClass::begin(uint8_t numSmartServos){
 	_numSmartServos = numSmartServos;
 	positionReached[numSmartServos];
 	
-    smartServos.beginserial();
-	delay(5);
+    smartServos.beginserial(_port);
+	//delay(5);
     smartServos.assignDevIdRequest();
     delay(50);
 
@@ -190,8 +202,8 @@ void morobotClass::printAngles(long angles[]){
 	}
 }
 
-morobotClass morobot;
+//morobotClass morobot;
 
 void callback_done(uint8_t servoNum){
-	morobot.positionReached[servoNum-1] = true;
+	//morobot.positionReached[servoNum-1] = true;
 }

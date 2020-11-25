@@ -3,8 +3,19 @@
 #include <SoftwareSerial.h>
 #include <MakeblockSmartServo.h>
 
-//TODO: Implement kinematics and EEF-Frame; updateCurrentXYZ, moveInOneDirection
 //TODO: Implement Limits (check if valid)
+//TODO: Store kinematic informations somehow
+//TODO: Calibrate with motor currents
+
+	// TODO: Change for other robots
+    float a = 47.0;		// From mounting to first axis
+    float b = 92.9;		// From first axis to second axis
+    float c = 72.79;	// From second axis to center of flange
+	float gearRatio = 16.25;		// Turn motor of linear axis by gearRatio degrees to move it 1 mm
+	float c_new;
+    float beta;
+	float c_newSQ;
+	float bSQ;
 
 morobotClass::morobotClass(){
 	
@@ -61,6 +72,13 @@ void morobotClass::setTCPpos(float xOffset, float yOffset, float zOffset){
 	_tcpPos[0] = xOffset;
 	_tcpPos[1] = yOffset;
 	_tcpPos[2] = zOffset;
+	
+	// Calculate new length and angle of last axis (since eef is connected to it statically)
+    c_new = sqrt(pow(_tcpPos[1],2) + pow(c+_tcpPos[0],2));
+    beta = asin(fabs(_tcpPos[1]/c_new));
+	
+	c_newSQ = pow(c_new,2);
+	bSQ = pow(b,2);
 }
 
 
@@ -205,8 +223,7 @@ bool morobotClass::moveToPosition(float x, float y, float z){
 	if (calculateAngles(x, y, z) == false) return false;
 	
 	long goalAngles[_numSmartServos];
-	for (uint8_t i=0; i<_numSmartServos; i++) goalAngles[i] = _goalAngles[i];
-	moveToAngles(goalAngles);
+	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, _goalAngles[i]);
 	return true;
 }
 
@@ -230,32 +247,25 @@ bool morobotClass::moveInDirection(char axis, float value){
 
 /* HELPER */
 
-bool morobotClass::calculateAngles(float x, float y, float z){
-	// TODO: Change for other robots
-    float a = 47.0;		// From mounting to first axis
-    float b = 92.9;		// From first axis to second axis
-    float c = 72.79;	// From second axis to center of flange
-	float gearRatio = 16.25;		// Turn motor of linear axis by gearRatio degrees to move it 1 mm
-    	
+bool morobotClass::calculateAngles(float x, float y, float z){    	
     x = x-a;	// Base is in x-orientation --> Just subtract its length from x-coordinate
 	z = z-_tcpPos[2];
-    
-	// Calculate new length and angle of last axis (since eef is connected to it statically)
-    float c_new = sqrt(pow(_tcpPos[1],2) + pow(c+_tcpPos[0],2));
-    float beta = asin(fabs(_tcpPos[1]/c_new));
+	
+	float xSQ = pow(x,2);
+	float ySQ = pow(y,2);
 	
 	// Calculate angle for 2nd axis
-	float phi2 = acos((pow(x,2) + pow(y,2) - pow(b,2) - pow(c_new,2)) / (2*b*c_new));
+	float phi2 = acos((xSQ + ySQ - bSQ - c_newSQ) / (2*b*c_new));
 	phi2 = (phi2 - beta) * 180/M_PI;
 	
 	// Calculate angle for 1st axis
 	float gamma = atan2(y, x);
-	float phi1 = acos((pow(x,2) + pow(y,2) + pow(b,2) - pow(c_new,2))/(2*b*sqrt(pow(x,2) + pow(y,2))));
+	float phi1 = acos((xSQ + ySQ + bSQ - c_newSQ) / (2*b*sqrt(xSQ + ySQ)));
 	phi1 = gamma + phi1;
     phi1 = phi1 * 180/M_PI;
 	
 	// Calculate angle for 3rd axis (z-direction)
-	float phi3 = z*gearRatio;
+	float phi3 = z * gearRatio;
 	
 	// Check if angles are valid
 	if (isnan(phi1) || isnan(phi2) || isnan(phi3) || fabs(phi1) > 100 || fabs(phi2) > 100 || phi3 < 0 || phi3 > 780){
@@ -290,17 +300,8 @@ void morobotClass::updateCurrentXYZ(){
 	setBusy();
 	waitUntilIsReady();
 	
-    float a = 47.0;		// From mounting to first axis
-    float b = 92.9;		// From first axis to second axis
-    float c = 72.79;	// From second axis to center of flange
-	float gearRatio = 16.25;		// Turn motor of linear axis by gearRatio degrees to move it 1 mm
-	
 	long actAngles[_numSmartServos];
 	for (uint8_t i=0; i<_numSmartServos; i++) actAngles[i] = getActAngle(i);
-	
-	// Calculate new length and angle of last axis (since eef is connected to it statically)
-    float c_new = sqrt(pow(_tcpPos[1],2) + pow(c+_tcpPos[0],2));
-    float beta = asin(fabs(_tcpPos[1]/c_new));
 	
 	float xnb = b*cos((float)actAngles[0]*M_PI/180);
     float ynb = b*sin((float)actAngles[0]*M_PI/180);
@@ -311,12 +312,12 @@ void morobotClass::updateCurrentXYZ(){
     
 	_actPos[0] = a + xnb + xncn;
     _actPos[1] = ynb + yncn;
-	_actPos[2] = actAngles[2]/gearRatio;
+	_actPos[2] = actAngles[2]/gearRatio + _tcpPos[2];
 	
-	/*Serial.print("Calculated Position: ");
+	Serial.print("Calculated Position: ");
 	Serial.println(_actPos[0]);
 	Serial.println(_actPos[1]);
-	Serial.println(_actPos[2]);*/
+	Serial.println(_actPos[2]);
 }
     
 

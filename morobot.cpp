@@ -121,6 +121,15 @@ long morobotClass::getActAngle(uint8_t servoId){
 	return smartServos.getAngleRequest(servoId+1);
 }
 
+float morobotClass::getActPosition(char axis){
+	updateCurrentXYZ();
+	
+	if (axis == 'x') return _actPos[0];
+	else if (axis == 'y') return _actPos[1];
+	else if (axis == 'z') return _actPos[2];
+	else Serial.println("ERROR! Invalid axis in getActPosition();");
+}
+
 float morobotClass::getSpeed(uint8_t servoId){
 	return smartServos.getSpeedRequest(servoId+1);
 }
@@ -201,9 +210,23 @@ bool morobotClass::moveToPosition(float x, float y, float z){
 	return true;
 }
 
-bool morobotClass::moveXYZ(float xOffset, float yOffset, float zOffset);
+bool morobotClass::moveXYZ(float xOffset, float yOffset, float zOffset){
+	updateCurrentXYZ();
+	return moveToPosition(_actPos[0]+xOffset, _actPos[1]+yOffset, _actPos[2]+zOffset);
+}
 
-bool morobotClass::moveInDirection(char axis, float value);
+bool morobotClass::moveInDirection(char axis, float value){
+	updateCurrentXYZ();
+	float goalxyz[3];
+	goalxyz[0] = _actPos[0];
+	goalxyz[1] = _actPos[1];
+	goalxyz[2] = _actPos[2];
+	
+	if (axis == 'x') goalxyz[0] = goalxyz[0]+value;
+	else if (axis == 'y') goalxyz[1] = goalxyz[1]+value;
+	else if (axis == 'z') goalxyz[2] = goalxyz[2]+value;
+	return moveToPosition(goalxyz[0], goalxyz[1], goalxyz[2]);
+}
 
 /* HELPER */
 
@@ -213,16 +236,13 @@ bool morobotClass::calculateAngles(float x, float y, float z){
     float b = 92.9;		// From first axis to second axis
     float c = 72.79;	// From second axis to center of flange
 	float gearRatio = 16.25;		// Turn motor of linear axis by gearRatio degrees to move it 1 mm
-      
+    	
     x = x-a;	// Base is in x-orientation --> Just subtract its length from x-coordinate
 	z = z-_tcpPos[2];
     
 	// Calculate new length and angle of last axis (since eef is connected to it statically)
     float c_new = sqrt(pow(_tcpPos[1],2) + pow(c+_tcpPos[0],2));
     float beta = asin(fabs(_tcpPos[1]/c_new));
-	
-	//Serial.println(c_new);
-	//Serial.println(beta);
 	
 	// Calculate angle for 2nd axis
 	float phi2 = acos((pow(x,2) + pow(y,2) - pow(b,2) - pow(c_new,2)) / (2*b*c_new));
@@ -238,23 +258,30 @@ bool morobotClass::calculateAngles(float x, float y, float z){
 	float phi3 = z*gearRatio;
 	
 	// Check if angles are valid
-	if (fabs(phi1) > 100 || fabs(phi2) > 100 || phi3 < 0 || phi3 > 780){
+	if (isnan(phi1) || isnan(phi2) || isnan(phi3) || fabs(phi1) > 100 || fabs(phi2) > 100 || phi3 < 0 || phi3 > 780){
 		Serial.print("Position cannot be reached: ");
 		Serial.print(phi1);
+		Serial.print(", ");
 		Serial.print(phi2);
+		Serial.print(", ");
 		Serial.println(phi3);
+		Serial.print(x);
+		Serial.print(", ");
+		Serial.print(y);
+		Serial.print(", ");
+		Serial.println(z);
 		return false;
 	}
 	_goalAngles[0] = phi1;
 	_goalAngles[1] = phi2;
 	_goalAngles[2] = phi3;
 	
-	Serial.print("Calculated Angles: ");
+	/*Serial.print("Calculated Angles: ");
 	Serial.print(_goalAngles[0]);
 	Serial.print(", ");
 	Serial.print(_goalAngles[1]);
 	Serial.print(", ");
-	Serial.println(_goalAngles[2]);
+	Serial.println(_goalAngles[2]);*/
 	
 	return true;
 }
@@ -284,12 +311,12 @@ void morobotClass::updateCurrentXYZ(){
     
 	_actPos[0] = a + xnb + xncn;
     _actPos[1] = ynb + yncn;
-	_actPos[2] = actAngles[2]*gearRatio;
+	_actPos[2] = actAngles[2]/gearRatio;
 	
-	Serial.print("Calculated Position: ");
+	/*Serial.print("Calculated Position: ");
 	Serial.println(_actPos[0]);
 	Serial.println(_actPos[1]);
-	Serial.println(_actPos[2]);
+	Serial.println(_actPos[2]);*/
 }
     
 

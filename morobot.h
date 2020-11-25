@@ -32,6 +32,7 @@ class morobotClass {
 		
 		/* GETTERS */
 		long getActAngle(uint8_t servoId);
+		float getActPosition(char axis);
 		float getSpeed(uint8_t servoId);
 		float getTemp(uint8_t servoId);
 		float getVoltage(uint8_t servoId);

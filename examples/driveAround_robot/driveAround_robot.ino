@@ -1,9 +1,9 @@
-#include <morobot.h>
+#include <morobotScaraRRP.h>
 #include <Dabble.h>
 
 #define NUM_SERVOS 3
 
-morobotClass morobot;
+morobotScaraRRP morobot;
 float step = 0.25;
 int delayDebounce = 250;
 float actPos[3];
@@ -44,6 +44,7 @@ void loop() {
 	if (actPosTemp[0] != actPos[0] || actPosTemp[1] != actPos[1] || actPosTemp[2] != actPos[2]){
 		if (morobot.moveToPosition(actPosTemp[0], actPosTemp[1], actPosTemp[2]) == false){
 			delay(delayDebounce);
+			for (uint8_t i=0; i<3; i++) actPosTemp[i] = actPos[i];
 		} else {
 			for (uint8_t i=0; i<3; i++) actPos[i] = actPosTemp[i];
 		}

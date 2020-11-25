@@ -16,6 +16,7 @@ class morobotClass {
 		void setZero();
 		void moveHome();
 		void setSpeedRPM(uint8_t speed);
+		void setTCPpos(float xOffset, float yOffset, float zOffset);
 		
 		/* BREAKS */
 		void setBreaks();
@@ -27,6 +28,7 @@ class morobotClass {
 		bool isReady();
 		void waitUntilIsReady();
 		bool checkIfMotorMoves(uint8_t servoId);
+		void updateCurrentXYZ();
 		
 		/* GETTERS */
 		long getActAngle(uint8_t servoId);
@@ -44,8 +46,12 @@ class morobotClass {
 		void moveAngle(uint8_t servoId, long angle, uint8_t speedRPM);
 		void moveAngles(long angles[]);
 		void moveAngles(long angles[], uint8_t speedRPM);
+		bool moveToPosition(float x, float y, float z);
+		bool moveXYZ(float xOffset, float yOffset, float zOffset);
+		bool moveInDirection(char axis, float value);
 		
 		/* HELPER */
+		bool calculateAngles(float x, float y, float z);
 		void printAngles(long angles[]);
 		
 		/* PUBLIC VARIABLES */
@@ -54,6 +60,9 @@ class morobotClass {
 	private:
 		uint8_t _numSmartServos;
 		uint8_t _speedRPM;
+		float _tcpPos[3];
+		float _goalAngles[NUM_MAX_SERVOS];
+		float _actPos[3];
 		Stream* _port;
 		//bool _positionReached[];
 };

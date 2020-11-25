@@ -14,7 +14,7 @@ morobotClass morobot;
 
 void setup() {
 	Dabble.begin(9600);
-	morobot.begin(NUM_SERVOS, "Serial1");
+	morobot.begin(NUM_SERVOS, "Serial2");
 	morobot.moveHome();	
 	delay(500);
 	morobot.releaseBreaks();

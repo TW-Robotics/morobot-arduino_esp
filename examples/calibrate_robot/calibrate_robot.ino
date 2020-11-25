@@ -7,7 +7,7 @@ morobotClass morobot;
 
 void setup() {
 	Dabble.begin(9600);
-	morobot.begin(NUM_SERVOS);
+	morobot.begin(NUM_SERVOS, "Serial2");
 	
 	delay(500);
 	morobot.releaseBreaks();
@@ -19,9 +19,9 @@ void loop() {
 	Dabble.processInput();
 	
 	if(GamePad.isPressed(0)) {			// UP
-		morobot.moveAngle(3, -5, 1);
+		morobot.moveAngle(2, -5, 1);
 	} else if(GamePad.isPressed(1)) {	// DOWN
-		morobot.moveAngle(3, 5, 1);
+		morobot.moveAngle(2, 5, 1);
 	} else if(GamePad.isPressed(4)) {	// START
 		morobot.setZero();
 		Serial.println("Axes set zero!");

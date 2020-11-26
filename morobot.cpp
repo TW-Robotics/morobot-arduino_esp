@@ -1,9 +1,7 @@
-#include <Arduino.h>
 #include <morobot.h>
-#include <SoftwareSerial.h>
-#include <MakeblockSmartServo.h>
 
 //TODO: Calibrate with motor currents
+//TODO: Documentation, Document Kinematics
 
 morobotClass::morobotClass(uint8_t numSmartServos){
 	if (numSmartServos > NUM_MAX_SERVOS){

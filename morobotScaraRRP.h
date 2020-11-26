@@ -1,5 +1,3 @@
-#include <Arduino.h>
-#include <MakeblockSmartServo.h>
 #include <morobot.h>
 
 #ifndef MOROBOTSCARARRP_H

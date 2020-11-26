@@ -1,8 +1,21 @@
 #include <morobotScaraRRP.h>
 
+void morobotScaraRRP::setTCPoffset(float xOffset, float yOffset, float zOffset){
+	_tcpOffset[0] = xOffset;
+	_tcpOffset[1] = yOffset;
+	_tcpOffset[2] = zOffset;
+	
+	// Calculate new length and angle of last axis (since eef is connected to it statically)
+    c_new = sqrt(pow(_tcpOffset[1],2) + pow(c+_tcpOffset[0],2));
+    beta = asin(fabs(_tcpOffset[1]/c_new));
+	
+	c_newSQ = pow(c_new,2);
+	bSQ = pow(b,2);
+}
+
 bool morobotScaraRRP::calculateAngles(float x, float y, float z){
     x = x-a;	// Base is in x-orientation --> Just subtract its length from x-coordinate
-	z = z-_tcpPos[2];
+	z = z-_tcpOffset[2];
 	
 	float xSQ = pow(x,2);
 	float ySQ = pow(y,2);
@@ -65,23 +78,10 @@ void morobotScaraRRP::updateCurrentXYZ(){
     
 	_actPos[0] = a + xnb + xncn;
     _actPos[1] = ynb + yncn;
-	_actPos[2] = actAngles[2]/gearRatio + _tcpPos[2];
+	_actPos[2] = actAngles[2]/gearRatio + _tcpOffset[2];
 	
 	Serial.print("Calculated Position: ");
 	Serial.println(_actPos[0]);
 	Serial.println(_actPos[1]);
 	Serial.println(_actPos[2]);
-}
-
-void morobotScaraRRP::setTCPpos(float xOffset, float yOffset, float zOffset){
-	_tcpPos[0] = xOffset;
-	_tcpPos[1] = yOffset;
-	_tcpPos[2] = zOffset;
-	
-	// Calculate new length and angle of last axis (since eef is connected to it statically)
-    c_new = sqrt(pow(_tcpPos[1],2) + pow(c+_tcpPos[0],2));
-    beta = asin(fabs(_tcpPos[1]/c_new));
-	
-	c_newSQ = pow(c_new,2);
-	bSQ = pow(b,2);
 }

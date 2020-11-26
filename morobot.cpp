@@ -32,14 +32,14 @@ void morobotClass::begin(uint8_t numSmartServos, const char* stream){
 		return NULL;
 	}
 	_numSmartServos = numSmartServos;
-	positionReached[numSmartServos];
+	_angleReached[numSmartServos];
 	
     smartServos.beginSerial(_port);
 	//delay(5);
     smartServos.assignDevIdRequest();
     delay(50);
 	
-	setTCPpos(0, 0, 0);
+	setTCPoffset(0, 0, 0);
 
 	Serial.println("Connected to motors");
 }
@@ -73,16 +73,16 @@ void morobotClass::releaseBreaks(){
 /* ROBOT STATUS */
 
 void morobotClass::setBusy(){
-	for (uint8_t i=0; i<_numSmartServos; i++) positionReached[i] = false;
+	for (uint8_t i=0; i<_numSmartServos; i++) _angleReached[i] = false;
 }
 
 void morobotClass::setIdle(){
-	for (uint8_t i=0; i<_numSmartServos; i++) positionReached[i] = true;
+	for (uint8_t i=0; i<_numSmartServos; i++) _angleReached[i] = true;
 }
 
 bool morobotClass::isReady(){
 	for (uint8_t i=0; i<_numSmartServos; i++) {
-		if (positionReached[i] == false) {
+		if (_angleReached[i] == false) {
 			if (checkIfMotorMoves(i+1) == false) continue;
 			return false;
 		}

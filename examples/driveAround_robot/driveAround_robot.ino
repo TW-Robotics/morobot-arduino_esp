@@ -13,7 +13,7 @@ void setup() {
 	Dabble.begin(9600);
 	morobot.begin(NUM_SERVOS, "Serial2");
 	morobot.setSpeedRPM(50);
-	morobot.setTCPpos(4.92,-34.1,10);
+	morobot.setTCPoffset(4.92,-34.1,10);
 	initVars();
 	morobot.moveHome();	
 }

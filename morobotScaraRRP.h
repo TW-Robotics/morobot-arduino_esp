@@ -7,16 +7,13 @@
 
 class morobotScaraRRP:public morobotClass {
 	public:
-
-		/* ROBOT STATUS */
-		virtual void updateCurrentXYZ();
-		
-		virtual void setTCPpos(float xOffset, float yOffset, float zOffset);
-		
-		/* HELPER */
+		virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 		virtual bool calculateAngles(float x, float y, float z);
+		virtual void updateCurrentXYZ();
+	
 	private:
-			// TODO: Change for other robots
+		float _tcpOffset[3];
+	
 		float a = 47.0;		// From mounting to first axis
 		float b = 92.9;		// From first axis to second axis
 		float c = 72.79;	// From second axis to center of flange

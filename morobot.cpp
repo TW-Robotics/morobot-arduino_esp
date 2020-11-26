@@ -3,15 +3,17 @@
 #include <SoftwareSerial.h>
 #include <MakeblockSmartServo.h>
 
-//TODO: Implement Limits (check if valid)
-//TODO: Store kinematic informations somehow
 //TODO: Calibrate with motor currents
 
-morobotClass::morobotClass(){
-	
+morobotClass::morobotClass(uint8_t numSmartServos){
+	if (numSmartServos > NUM_MAX_SERVOS){
+		Serial.print("Too many motors! Maximum number of motors: ");
+		Serial.println(NUM_MAX_SERVOS);
+	}
+	_numSmartServos = numSmartServos;
 }
 
-void morobotClass::begin(uint8_t numSmartServos, const char* stream){
+void morobotClass::begin(const char* stream){
 	Serial.begin(115200);
 	
 	if (stream == "Serial1") { //https://www.arduino.cc/reference/en/language/functions/communication/serial/
@@ -25,14 +27,6 @@ void morobotClass::begin(uint8_t numSmartServos, const char* stream){
 		_port = &Serial3;
 	}
 	else Serial.println("ERROR: Serial-Parameter not valid");
-	
-	if (numSmartServos > NUM_MAX_SERVOS){
-		Serial.print("Too many motors! Maximum number of motors: ");
-		Serial.println(NUM_MAX_SERVOS);
-		return NULL;
-	}
-	_numSmartServos = numSmartServos;
-	_angleReached[numSmartServos];
 	
     smartServos.beginSerial(_port);
 	//delay(5);
@@ -104,7 +98,7 @@ void morobotClass::waitUntilIsReady(){
 
 bool morobotClass::checkIfMotorMoves(uint8_t servoId){
 	long startPos = getActAngle(servoId);
-	delay(100);
+	delay(50);
 	if (startPos != getActAngle(servoId)) return true;
 	return false;
 }
@@ -145,11 +139,11 @@ float morobotClass::getCurrent(uint8_t servoId){
 /* MOVEMENTS */
 
 void morobotClass::moveToAngle(uint8_t servoId, long angle){
-	smartServos.moveTo(servoId+1, angle, _speedRPM);
+	if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, _speedRPM);
 }
 
 void morobotClass::moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM){
-	smartServos.moveTo(servoId+1, angle, speedRPM);
+	if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, speedRPM);
 }
 
 void morobotClass::moveToAngles(long angles[]){
@@ -171,11 +165,11 @@ void morobotClass::moveToAngles(long angles[], uint8_t speedRPM){
 }
 
 void morobotClass::moveAngle(uint8_t servoId, long angle){
-	smartServos.move(servoId+1, angle, _speedRPM);
+	if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, _speedRPM);
 }
 
 void morobotClass::moveAngle(uint8_t servoId, long angle, uint8_t speedRPM){
-	smartServos.move(servoId+1, angle, speedRPM);
+	if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, speedRPM);
 }
 
 void morobotClass::moveAngles(long angles[]){

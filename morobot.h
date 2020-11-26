@@ -11,13 +11,14 @@
 
 class morobotClass {
 	public:
-		morobotClass();
-		void begin(uint8_t numSmartServos, const char* stream);
+		morobotClass(uint8_t numSmartServos);
+		void begin(const char* stream);
 		void setZero();
 		void moveHome();
 		void setSpeedRPM(uint8_t speed);
 		virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 		virtual bool calculateAngles(float x, float y, float z);
+		virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 		
 		/* BREAKS */
 		void setBreaks();

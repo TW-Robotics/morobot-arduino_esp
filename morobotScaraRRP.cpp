@@ -34,30 +34,11 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 	float phi3 = z * gearRatio;
 	
 	// Check if angles are valid
-	if (isnan(phi1) || isnan(phi2) || isnan(phi3) || fabs(phi1) > 100 || fabs(phi2) > 100 || phi3 < 0 || phi3 > 780){
-		Serial.print("Position cannot be reached: ");
-		Serial.print(phi1);
-		Serial.print(", ");
-		Serial.print(phi2);
-		Serial.print(", ");
-		Serial.println(phi3);
-		Serial.print(x);
-		Serial.print(", ");
-		Serial.print(y);
-		Serial.print(", ");
-		Serial.println(z);
-		return false;
-	}
+	if (!checkIfAnglesValid(phi1, phi2, phi3)) return false;
+	
 	_goalAngles[0] = phi1;
 	_goalAngles[1] = phi2;
 	_goalAngles[2] = phi3;
-	
-	/*Serial.print("Calculated Angles: ");
-	Serial.print(_goalAngles[0]);
-	Serial.print(", ");
-	Serial.print(_goalAngles[1]);
-	Serial.print(", ");
-	Serial.println(_goalAngles[2]);*/
 	
 	return true;
 }
@@ -84,4 +65,30 @@ void morobotScaraRRP::updateCurrentXYZ(){
 	Serial.println(_actPos[0]);
 	Serial.println(_actPos[1]);
 	Serial.println(_actPos[2]);
+}
+
+bool morobotScaraRRP::checkIfAngleValid(uint8_t servoId, float angle){
+	if(isnan(angle)){
+		Serial.print("Angle for motor ");
+		Serial.print(servoId);
+		Serial.println(" is NAN!");
+		return false;
+	}
+	
+	if(angle < _jointLimits[servoId][0] || angle > _jointLimits[servoId][1]) {
+		Serial.print("Angle for motor ");
+		Serial.print(servoId);
+		Serial.print(" is invalid! (");
+		Serial.print(angle);
+		Serial.println(" degrees).");
+		return false;
+	}
+	return true;
+}
+
+bool morobotScaraRRP::checkIfAnglesValid(float phi1, float phi2, float phi3){
+	float angles[3] = {phi1, phi2, phi3};
+	
+	for (uint8_t i = 0; i < _numSmartServos; i++) if(checkIfAngleValid(i, angles[i]) == false) return false;
+	return true;
 }

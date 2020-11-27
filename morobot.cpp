@@ -52,10 +52,10 @@
 #include <morobot.h>
 
 //TODO: Calibrate with motor currents
-//TODO: Documentation, Document Kinematics
+//TODO: Document Kinematics
 //TODO: Use only morobot header files
-//TODO: Correct examples
 //TODO: Try with ESP32
+//TODO: Implement method to give values, not array (or pack-function)
 
 /**
  *  \brief Constructor of morobot class

@@ -1,4 +1,28 @@
-#include <morobot.h>
+/**
+ *  \file teach_robot.ino
+ *  \brief Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.
+ *  @author	Johannes Rauer FHTW
+ *  @date	2020/11/27
+ *  
+ *  Hardware: 		- Arduino Mega (or similar microcontroller)
+ *  				- HC-05 bluetooth controller (or similar)
+ *  				- morobot RRP
+ *  				- Powersupply 12V 5A (or more)
+ *  Connections:	- Powersupply to Arduino hollow connector
+ *  				- First smart servo of robot to Arduino:
+ *  					- Red cable to Vin
+ *  					- Black cable to GND
+ *  					- Yellow cable to pin 16 (TX2)
+ *  					- White calbe to pin 17 (RX2)
+ *  				- HC-05 to Arduino (Configuration to work with Dabble):
+ *  					- 5V to 5V
+ *  					- GND to GND
+ *  					- RX to pin 14 (TX3)
+ *  					- TX to pin 15 (RX3)
+ *  Install the Dabble-App on your smartphone or tablet
+ */
+
+#include <morobotScaraRRP.h>  	// If you are using another robot, change the name to the correct header file here
 #include <Dabble.h>
 
 #define MAX_NUM_POS 20
@@ -10,26 +34,36 @@ int delayDebounce = 500;
 int posId = 0;
 int idxPlayback = -1;
 
-morobotClass morobot;
+morobotScaraRRP morobot;
 
 void setup() {
 	Dabble.begin(9600);
-	morobot.begin(NUM_SERVOS, "Serial2");
+	morobot.begin("Serial2");
 	morobot.moveHome();	
 	delay(500);
 	morobot.releaseBreaks();
-	Serial.println("'Select' to store position, 'Start' to start moving, 'O' to move to init position, 'Left'/'Right' to jump through positions stored, 'Up'/'Down' to move last axis.");
-	morobot.setSpeedRPM(25);
+	morobot.setSpeedRPM(20);
+	
+	Serial.println("Waiting for Dabble to connect to smartphone. If you are already connected, press any app-key.");
+	Dabble.waitForAppConnection();
+	Serial.println("Dabble connected!");
+	
+	Serial.println("'Select' to store position.");
+	Serial.println("'Start' to start moving.");
+	Serial.println("'O' to move to init position.");
+	Serial.println("'Left'/'Right' to jump through positions stored.");
+	Serial.println("'Up'/'Down' to move last axis.");
+	Serial.println("'X' to release breaks.");
+	Serial.println("Square-symbol to export positions to the serial monitor.");
 }
 
 void loop() {
-	//TODO: Check if connected to dabble
 	Dabble.processInput();
 	
 	if(GamePad.isPressed(0)) {			// Up
-		if (morobot.getActAngle(2) > 0) morobot.moveAngle(2, -5, 1);
+		morobot.moveAngle(2, -20, 30);
 	} else if(GamePad.isPressed(1)) {   // Down
-		if (morobot.getActAngle(2) < 780) morobot.moveAngle(2, 5, 1);
+		morobot.moveAngle(2, 20, 30);
 	} else if(GamePad.isPressed(2)) {	// Left
 		if (idxPlayback == -1){
 			Serial.println("Store positions before going back");
@@ -81,6 +115,19 @@ void loop() {
 		Serial.println(morobot.getTemp(1));
 		Serial.println(morobot.getSpeed(1));
 		delay(delayDebounce);
+	} else if(GamePad.isPressed(9)) {   // Square
+		Serial.println("START COPYING HERE");
+		for (int i=0; i<posId; i++) {
+			Serial.print("morobot.moveToAngles(");
+			Serial.print(motorAngles[0][i]);
+			Serial.print(", ");
+			Serial.print(motorAngles[1][i]);
+			Serial.print(", ");
+			Serial.print(motorAngles[2][i]);
+			Serial.println(");");
+		}
+		Serial.println("STOP COPYING HERE");
+		Serial.println("Just paste the code into the loop of the base_importantFunctionCalls-example (or make a new file with it).");
 	}
 }
 

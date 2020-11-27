@@ -9,9 +9,15 @@ Download this library and install it in your Arduino IDE. See the [Arduino Help 
 See the examples on how to use the library.
 ### Examples
 - calibrate_robot
-- driveAround_robot
+  Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.
+- base_importantFunctionCalls.ino
+  Bare minimum program and function calls for controlling a morobot Scara RRP. Just put control commands into the loop and look what happens.
+- driveAroundXYZ
+  Control the robot with the dabble app and drive around giving x-y-z-coordinates
 - multiple_robots
+  Control multiple robots (in this case 2x Scara RRP) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.
 - teach_robot
+  Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.
 ### Supported robot types
 - Scara RRP
 

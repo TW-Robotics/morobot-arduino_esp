@@ -21,6 +21,9 @@ morobotScaraRRP morobot;		// And change the class-name here
 
 void setup() {
 	morobot.begin("Serial2");
+	morobot.moveHome();				// Move the robot into initial position
+	morobot.moveZAxisIn();			// Move the z-axis in (in case it is out more than one rotation of motor on startup)
+	morobot.setZero();				// Set the axes zero when move in
 }
 
 void loop() {

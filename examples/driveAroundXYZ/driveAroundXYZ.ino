@@ -38,6 +38,8 @@ void setup() {
 	morobot.setSpeedRPM(50);
 	//morobot.setTCPoffset(4.92,-34.1,10); // If the robot has an endeffector set its position here
 	morobot.moveHome();				// Move the robot into initial position
+	morobot.moveZAxisIn();			// Move the z-axis in (in case it is out more than one rotation of motor on startup)
+	morobot.setZero();				// Set the axes zero when move in
 	delay(200);
 	initVars();
 	

@@ -45,6 +45,7 @@
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
 			virtual void updateCurrentXYZ();
+			void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25);
 		private:
 			bool isReady();
  */
@@ -298,6 +299,13 @@ class morobotClass {
 		 *  		 This function does calculate and store the TCP position depending on the current motor angles.
 		 */
 		virtual void updateCurrentXYZ();
+		
+		/**
+		 *  \brief Calibrates a linear axis by increasing the angle until a current limit is reached
+		 *  \param [in] servoId Number of motor to calibrate (first motor has ID 0)
+		 *  \param [in] maxMotorCurrent (Optional) Current limit at which zero position is reached an calibration stops
+		 */
+		void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25);
 	
 		uint8_t _numSmartServos;			// Number of smart servos of robot
 		uint8_t _speedRPM;					// Default speed (used if movement-funtions to not provide specific speed)

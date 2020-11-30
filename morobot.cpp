@@ -45,17 +45,15 @@
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
 			virtual void updateCurrentXYZ();
+			void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25);
 		private:
 			bool isReady();
  */
 
 #include <morobot.h>
 
-//TODO: Calibrate with motor currents
 //TODO: Document Kinematics
-//TODO: Use only morobot header files
 //TODO: Try with ESP32
-//TODO: Implement method to give values, not array (or pack-function)
 
 /**
  *  \brief Constructor of morobot class
@@ -412,6 +410,16 @@ void morobotClass::printAngles(long angles[]){
 		if (i != _numSmartServos-1) Serial.print(", ");
 		else Serial.println(" ");
 	}
+}
+
+/* PROTECTED */
+void morobotClass::autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25){
+	while(true){
+		moveAngle(servoId, -2, 1, false);
+		if (getCurrent(servoId) > 25) break;
+	}
+	smartServos.setZero(servoId+1);
+	Serial.println("Linear axis set zero!");
 }
 
 /* ROBOT STATUS PRIVATE */

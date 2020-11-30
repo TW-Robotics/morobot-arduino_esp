@@ -26,6 +26,7 @@
 #include <Dabble.h>
 
 morobotScaraRRP morobot;			// And change the class-name here
+bool currentLimitReached = false;
 
 void setup() {
 	Dabble.begin(9600);
@@ -44,13 +45,17 @@ void setup() {
 void loop() {
 	Dabble.processInput();
 	
-	if(GamePad.isPressed(0)) {			// UP
-		morobot.moveAngle(2, -5, 1, false);
+	if(GamePad.isPressed(0) && currentLimitReached == false) {			// UP
+		morobot.moveAngle(2, -2, 1, false);
 	} else if(GamePad.isPressed(1)) {	// DOWN
-		morobot.moveAngle(2, 5, 1, false);
+		morobot.moveAngle(2, 2, 1, false);
+		currentLimitReached = false;
 	} else if(GamePad.isPressed(4)) {	// START
 		morobot.setZero();
 		Serial.println("Axes set zero!");
 	}
-	
+	if (morobot.getCurrent(2) > 25) {
+		Serial.println("Motor stopped due to current limit being reached");
+		currentLimitReached = true;
+	}
 }

@@ -53,7 +53,7 @@
 #include <morobot.h>
 
 //TODO: Document Kinematics
-//TODO: Try with ESP32
+//TODO: Implement second robot for ESP32
 
 /**
  *  \brief Constructor of morobot class
@@ -279,7 +279,7 @@ void morobotClass::moveToAngle(uint8_t servoId, long angle){
 	if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, _speedRPM);
 }
 
-void morobotClass::moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true){
+void morobotClass::moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity){
 	if (checkValidity == false) smartServos.moveTo(servoId+1, angle, speedRPM);
 	else if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, speedRPM);
 }
@@ -321,7 +321,7 @@ void morobotClass::moveAngle(uint8_t servoId, long angle){
 	if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, _speedRPM);
 }
 
-void morobotClass::moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true){
+void morobotClass::moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity){
 	if (checkValidity == false) smartServos.move(servoId+1, angle, speedRPM);
 	else if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, speedRPM);
 }
@@ -413,7 +413,7 @@ void morobotClass::printAngles(long angles[]){
 }
 
 /* PROTECTED */
-void morobotClass::autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25){
+void morobotClass::autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent){
 	while(true){
 		moveAngle(servoId, -2, 1, false);
 		if (getCurrent(servoId) > 25) break;

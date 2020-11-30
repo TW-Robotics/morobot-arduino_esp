@@ -104,7 +104,7 @@ class morobotClass {
 		 *  \details Virtual function. Defined individually for each robot type in the respective child classes.
 		 *  		 This information is necessary to calculate the inverse kinematics correctly.
 		 */
-		virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
+		virtual void setTCPoffset(float xOffset, float yOffset, float zOffset)=0;
 		
 		/**
 		 *  \brief Checks if a given angle can be reached by the joint. Each joint has a specific limit to protect the robot's mechanics.
@@ -114,7 +114,7 @@ class morobotClass {
 		 *  \return Returns true if the position is reachable; false if it is not.
 		 *  \details Virtual function. Defined individually for each robot type in the respective child classes.
 		 */
-		virtual bool checkIfAngleValid(uint8_t servoId, float angle);
+		virtual bool checkIfAngleValid(uint8_t servoId, float angle)=0;
 		
 		/* BREAKS */
 		/**
@@ -291,14 +291,14 @@ class morobotClass {
 		 *  		 This function does only calculate the angles of the motors and stores them internally.
 		 *  		 Use moveToPosition(x,y,z) to actually move the robot.
 		 */
-		virtual bool calculateAngles(float x, float y, float z);
+		virtual bool calculateAngles(float x, float y, float z)=0;
 
 		/**
 		 *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
 		 *  \details Virtual function. Defined individually for each robot type in the respective child classes.
 		 *  		 This function does calculate and store the TCP position depending on the current motor angles.
 		 */
-		virtual void updateCurrentXYZ();
+		virtual void updateCurrentXYZ()=0;
 		
 		/**
 		 *  \brief Calibrates a linear axis by increasing the angle until a current limit is reached

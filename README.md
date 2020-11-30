@@ -8,20 +8,20 @@ Download this library and install it in your Arduino IDE. See the [Arduino Help 
 ## Usage
 See the examples on how to use the library.
 ### Examples
-- calibrate_robot
-  Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.
-- base_importantFunctionCalls.ino
+- base_importantFunctionCalls\
   Bare minimum program and function calls for controlling a morobot Scara RRP. Just put control commands into the loop and look what happens.
-- driveAroundXYZ
+- calibrate_robot\
+  Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.
+- driveAroundXYZ\
   Control the robot with the dabble app and drive around giving x-y-z-coordinates
-- multiple_robots
+- multiple_robots\
   Control multiple robots (in this case 2x Scara RRP) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.
-- teach_robot
+- teach_robot\
   Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.
 ### Supported robot types
 - Scara RRP
 
-## Add a new robot
+## How to add a new robot
 The class morobotClass is an abstract base class implementing functions like moving the robot's joints. For each new robot type, a new child class with corresponding header- and cpp-file has to be implemented. Start with newRobotClass_Template and make the following changes:
 - Copy the newRobotClass_Template files and rename them. Include type and kinematics into name (e.g. Scara RRP = morobotScaraRRP)
 - Make the following changes in the **.h-file** (See TODOs in file):

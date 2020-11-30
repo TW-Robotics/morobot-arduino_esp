@@ -82,6 +82,17 @@ bool morobotScaraRRP::checkIfAnglesValid(float phi1, float phi2, float phi3){
 	return true;
 }
 
+/**
+ *  \brief Moves all motors to desired angles (Moves the whole robot) - absolute movement.
+ *  \param [in] phi1, phi2, phi3 Desired angles of all motors.
+ *  \details Waits until the robot is ready to use (no motor moves) before moving.
+ *  		 Checks if the angles are valid before moving.
+ */
+void morobotScaraRRP::moveToAngles(long phi1, long phi2, long phi3){
+	long angles[3] = {phi1, phi2, phi3};
+	moveToAngles(angles);
+}
+
 /* PROTECTED FUNCTIONS */
 /**
  *  \brief Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics).
@@ -145,7 +156,9 @@ void morobotScaraRRP::updateCurrentXYZ(){
 	_actPos[2] = actAngles[2]/gearRatio + _tcpOffset[2];
 	
 	Serial.print("Calculated Position: ");
-	Serial.println(_actPos[0]);
-	Serial.println(_actPos[1]);
+	Serial.print(_actPos[0]);
+	Serial.print(", ");
+	Serial.print(_actPos[1]);
+	Serial.print(", ");
 	Serial.println(_actPos[2]);
 }

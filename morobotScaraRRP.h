@@ -55,6 +55,15 @@ class morobotScaraRRP:public morobotClass {
 		 *  \details Just calls checkIfAngleValid for each motor times.
 		 */
 		bool checkIfAnglesValid(float phi1, float phi2, float phi3);
+		
+		using morobotClass::moveToAngles;	// Make other versions ov moveToAngles visible for compiler
+		/**
+		 *  \brief Moves all motors to desired angles (Moves the whole robot) - absolute movement.
+		 *  \param [in] phi1, phi2, phi3 Desired angles of all motors.
+		 *  \details Waits until the robot is ready to use (no motor moves) before moving.
+		 *  		 Checks if the angles are valid before moving.
+		 */
+		void moveToAngles(long phi1, long phi2, long phi3);
 
 	protected:
 		/**

@@ -30,11 +30,11 @@
 			float getCurrent(uint8_t servoId);
 			
 			void moveToAngle(uint8_t servoId, long angle);
-			void moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM);
+			void moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
 			void moveToAngles(long angles[]);
 			void moveToAngles(long angles[], uint8_t speedRPM);
 			void moveAngle(uint8_t servoId, long angle);
-			void moveAngle(uint8_t servoId, long angle, uint8_t speedRPM);
+			void moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
 			void moveAngles(long angles[]);
 			void moveAngles(long angles[], uint8_t speedRPM);
 			bool moveToPosition(float x, float y, float z);
@@ -206,10 +206,11 @@ class morobotClass {
 		 *  \param [in] servoId Number of motor (first motor has ID 0)
 		 *  \param [in] angle Desired goal angle in degrees.
 		 *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
-		 *  \details Checks if the angle is valid before moving.
+		 *  \param [in] checkValidity (Optional) Set this variable to "false" if you don't want to check if the angle value is valid (e.g. necessary for calibration)
+		 *  \details Checks if the angle is valid before moving if checkValidity is not given or true.
 		 */
 		void moveToAngle(uint8_t servoId, long angle);
-		void moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM);
+		void moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
 		
 		/**
 		 *  \brief Moves all motors to desired angles (Moves the whole robot) - absolute movement.
@@ -226,10 +227,11 @@ class morobotClass {
 		 *  \param [in] servoId Number of motor (first motor has ID 0)
 		 *  \param [in] angle Desired angle in degrees to move robot by.
 		 *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
-		 *  \details Checks if the goal angle is valid before moving.
+		 *  \param [in] checkValidity (Optional) Set this variable to "false" if you don't want to check if the angle value is valid (e.g. necessary for calibration)
+		 *  \details Checks if the goal angle is valid before moving if checkValidity is not given or true.
 		 */
 		void moveAngle(uint8_t servoId, long angle);
-		void moveAngle(uint8_t servoId, long angle, uint8_t speedRPM);
+		void moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
 		
 		/**
 		 *  \brief Moves all motors by desired angles (Moves the whole robot) - relative movement.

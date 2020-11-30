@@ -45,9 +45,9 @@ void loop() {
 	Dabble.processInput();
 	
 	if(GamePad.isPressed(0)) {			// UP
-		morobot.moveAngle(2, -5, 1);
+		morobot.moveAngle(2, -5, 1, false);
 	} else if(GamePad.isPressed(1)) {	// DOWN
-		morobot.moveAngle(2, 5, 1);
+		morobot.moveAngle(2, 5, 1, false);
 	} else if(GamePad.isPressed(4)) {	// START
 		morobot.setZero();
 		Serial.println("Axes set zero!");

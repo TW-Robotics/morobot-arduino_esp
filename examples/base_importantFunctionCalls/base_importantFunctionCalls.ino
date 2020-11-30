@@ -57,17 +57,22 @@ void loop() {
 	
 	Serial.println("Now you can move the robot with your hands");
 	morobot.releaseBreaks();
-	delay(5000);	
+	delay(5000);
 	
 	// Moving the robot around
 	// with absolute values
-	morobot.moveHome();	
+	Serial.println("Moving home and moving first axis to +60 and -60");
+	morobot.moveHome();
+	delay(1000);
 	morobot.moveToAngle(0, 60);			// Move motor 0 to 60 degrees
 	morobot.waitUntilIsReady();			// Wait until robot is there before sending next movement
-	morobot.moveToAngle(0, -60, 1);		// Move motor 0 to -60 degrees with smallest speed
+	delay(1000);
+	morobot.moveToAngle(0, -60, 15);		// Move motor 0 to -60 degrees with specific speed
 	while(1) if (morobot.checkIfMotorMoves(0) == false) break;		// Wait until motor 0 stops moving
 	delay(5000);
 
+	Serial.println("Moving all axes");
+	morobot.moveToAngles(-37, 59, 100);	// For the SCARA robot, just give 3 angle values in degrees
 	long angles[3] = {37, -59, 260};
 	morobot.moveToAngles(angles);		// Or you can define an array and send it to the robot
 	angles[1] = 59;
@@ -75,6 +80,7 @@ void loop() {
 	delay(5000);
 	
 	//with relative values
+	Serial.println("Moving axes relatively");
 	morobot.moveHome();	
 	morobot.moveAngle(1, 95);			// Move motor 1 by 95 degrees
 	morobot.waitUntilIsReady();			// Wait until robot is there before sending next movement
@@ -90,8 +96,10 @@ void loop() {
 	delay(5000);
 	
 	// in a coordinate system (all functions wait until robot stops moving before beginning)
+	Serial.println("Moving in a coordinate system");
 	morobot.moveToPosition(160.0, 45.3, 28.1);		// Move the robot to an x-y-z-position. Function returns False if the position is not reachable
 	morobot.moveXYZ(7, -10.1, -13.2);				// Move the robot relatively along the x-y-z-axes. Function returns False if the position is not reachable
-	morobot.moveInDirection('x', 7);				// Move the robot relatively along one axis. Function returns False if the position is not reachable
-	delay(15000);
+	morobot.moveInDirection('x', 17);				// Move the robot relatively along one axis. Function returns False if the position is not reachable
+	delay(5000);
+	
 }

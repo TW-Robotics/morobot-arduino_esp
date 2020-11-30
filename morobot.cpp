@@ -30,11 +30,11 @@
 			float getCurrent(uint8_t servoId);
 			
 			void moveToAngle(uint8_t servoId, long angle);
-			void moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM);
+			void moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
 			void moveToAngles(long angles[]);
 			void moveToAngles(long angles[], uint8_t speedRPM);
 			void moveAngle(uint8_t servoId, long angle);
-			void moveAngle(uint8_t servoId, long angle, uint8_t speedRPM);
+			void moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
 			void moveAngles(long angles[]);
 			void moveAngles(long angles[], uint8_t speedRPM);
 			bool moveToPosition(float x, float y, float z);
@@ -116,7 +116,8 @@ void morobotClass::setZero(){
  *  \details Only call this function after calibration (Setting a zero position for all motors using setZero())
  */
 void morobotClass::moveHome(){
-	for (uint8_t i=0; i<_numSmartServos; i++) smartServos.setInitAngle(i+1);
+	for (uint8_t i=0; i<_numSmartServos; i++) smartServos.setInitAngle(i+1, 0, 15);
+	waitUntilIsReady();
 }
 
 /**
@@ -178,6 +179,7 @@ void morobotClass::setIdle(){
  *  		 If a timeout occurs this is printed to the serial monitor.
  */
 void morobotClass::waitUntilIsReady(){
+	setBusy();
 	unsigned long startTime = millis();
 	while (true){
 		// Check if the robot is ready yet
@@ -199,7 +201,7 @@ void morobotClass::waitUntilIsReady(){
  */
 bool morobotClass::checkIfMotorMoves(uint8_t servoId){
 	long startPos = getActAngle(servoId);
-	delay(50);
+	delay(100);
 	if (startPos != getActAngle(servoId)) return true;
 	return false;
 }
@@ -272,14 +274,16 @@ float morobotClass::getCurrent(uint8_t servoId){
  *  \param [in] servoId Number of motor (first motor has ID 0)
  *  \param [in] angle Desired goal angle in degrees.
  *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
- *  \details Checks if the angle is valid before moving.
+ *  \param [in] checkValidity (Optional) Set this variable to "false" if you don't want to check if the angle value is valid (e.g. necessary for calibration)
+ *  \details Checks if the angle is valid before moving if checkValidity is not given or true.
  */
 void morobotClass::moveToAngle(uint8_t servoId, long angle){
 	if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, _speedRPM);
 }
 
-void morobotClass::moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM){
-	if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, speedRPM);
+void morobotClass::moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true){
+	if (checkValidity == false) smartServos.moveTo(servoId+1, angle, speedRPM);
+	else if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, speedRPM);
 }
 
 /**
@@ -312,14 +316,16 @@ void morobotClass::moveToAngles(long angles[], uint8_t speedRPM){
  *  \param [in] servoId Number of motor (first motor has ID 0)
  *  \param [in] angle Desired goal angle in degrees.
  *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
- *  \details Checks if the goal angle is valid before moving.
+ *  \param [in] checkValidity (Optional) Set this variable to "false" if you don't want to check if the angle value is valid (e.g. necessary for calibration)
+ *  \details Checks if the angle is valid before moving if checkValidity is not given or true.
  */
 void morobotClass::moveAngle(uint8_t servoId, long angle){
 	if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, _speedRPM);
 }
 
-void morobotClass::moveAngle(uint8_t servoId, long angle, uint8_t speedRPM){
-	if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, speedRPM);
+void morobotClass::moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true){
+	if (checkValidity == false) smartServos.move(servoId+1, angle, speedRPM);
+	else if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, speedRPM);
 }
 
 /**
@@ -335,7 +341,7 @@ void morobotClass::moveAngles(long angles[]){
 	Serial.print("Moving [deg]: ");
 	printAngles(angles);
 
-	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i+1, angles[i]);
+	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i, angles[i]);
 }
 
 void morobotClass::moveAngles(long angles[], uint8_t speedRPM){
@@ -344,7 +350,7 @@ void morobotClass::moveAngles(long angles[], uint8_t speedRPM){
 	Serial.print("Moving [deg]: ");
 	printAngles(angles);
 
-	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i+1, angles[i], speedRPM);
+	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i, angles[i], speedRPM);
 }
 
 /**
@@ -418,7 +424,7 @@ void morobotClass::printAngles(long angles[]){
 bool morobotClass::isReady(){
 	for (uint8_t i=0; i<_numSmartServos; i++) {
 		if (_angleReached[i] == false) {
-			if (checkIfMotorMoves(i+1) == false) continue;
+			if (checkIfMotorMoves(i) == false) continue;
 			return false;
 		}
 	}

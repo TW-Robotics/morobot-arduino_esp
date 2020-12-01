@@ -1,3 +1,5 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 # morobot software library for microcontrollers such as Arduino and ESP32
 
 This library can be used to control the UAS Technikum Wien morobots using an Arduino or ESP32 microcontroller.
@@ -35,3 +37,6 @@ The class morobotClass is an abstract base class implementing functions like mov
   - In 'calculateAngles()' implement the inverse kinematics of the robot
   - In 'updateCurrentXYZ' implement the forward kinematics of the robot
 - To use your robot type, simple add an include with your header file name into your file and create an instance of the robot object (see examples for existing robots)
+
+## License
+This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](https://github.com/TW-Robotics/morobot/edit/main/LICENSE) for more information.

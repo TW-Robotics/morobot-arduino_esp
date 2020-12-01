@@ -98,7 +98,7 @@ class morobotScaraRRP:public morobotClass {
 		float c = 72.79;			// Lenth from second axis to center of flange
 		float gearRatio = 16.25;	// Turn motor of linear axis by gearRatio degrees to move it 1 mm
 		float c_new;				// Recalculated length of last axis if the TCP is not at the center of the flange
-		float beta;					// Additional angle at last axis if the TCP is not at the center of the flange
+		float beta_new;				// Additional angle at last axis if the TCP is not at the center of the flange
 		float c_newSQ;				// Square of c_new (Precalculated for faster processing)
 		float bSQ;					// Square of b (Precalculated for faster processing)
 };

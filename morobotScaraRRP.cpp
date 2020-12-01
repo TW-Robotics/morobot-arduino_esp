@@ -33,7 +33,7 @@ void morobotScaraRRP::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	
 	// Calculate new length and angle of last axis (since eef is connected to it statically)
     c_new = sqrt(pow(_tcpOffset[1],2) + pow(c+_tcpOffset[0],2));
-    beta = asin(fabs(_tcpOffset[1]/c_new));
+    beta_new = asin(_tcpOffset[1]/c_new);
 	
 	// Precalculate squares of lengths for faster processing
 	c_newSQ = pow(c_new,2);
@@ -113,24 +113,26 @@ void morobotScaraRRP::moveZAxisIn(uint8_t maxMotorCurrent){
  *  		 Use moveToPosition(x,y,z) to actually move the robot.
  */
 bool morobotScaraRRP::calculateAngles(float x, float y, float z){
-    x = x-a;	// Base is in x-orientation --> Just subtract its length from x-coordinate
-	z = z-_tcpOffset[2];
-	
-	float xSQ = pow(x,2);
+	float xSQ = pow(x-a,2);	// Base is in x-orientation --> Just subtract base-length from x-coordinate
 	float ySQ = pow(y,2);
 	
 	// Calculate angle for 2nd axis
-	float phi2 = acos((xSQ + ySQ - bSQ - c_newSQ) / (2*b*c_new));
-	phi2 = (phi2 - beta) * 180/M_PI;
+	float phi2n = acos((xSQ + ySQ - bSQ - c_newSQ) / (2*b*c_new));
+	float phi2 = (phi2n - beta_new) * 180/M_PI;
 	
 	// Calculate angle for 1st axis
-	float gamma = atan2(y, x);
-	float phi1 = acos((xSQ + ySQ + bSQ - c_newSQ) / (2*b*sqrt(xSQ + ySQ)));
-	phi1 = gamma + phi1;
-    phi1 = phi1 * 180/M_PI;
+	float gamma = atan2(y, x-a);
+	float alpha = acos((xSQ + ySQ + bSQ - c_newSQ) / (2*b*sqrt(xSQ + ySQ)));
+	float phi1 = (gamma - alpha) * 180/M_PI;
+
+	// Recalculate angles if phi1 is out of range --> Not working properly yet
+	/*if (phi1 < _jointLimits[1][0] || phi1 > _jointLimits[1][1]){
+		phi2 = (phi2n + beta_new) * 180/M_PI;
+		phi1 = (gamma + alpha) * 180/M_PI;*/
 	
 	// Calculate angle for 3rd axis (z-direction)
-	float phi3 = z * gearRatio;
+	z = z - _tcpOffset[2];
+	float phi3 = -1 * z * gearRatio;	// Multiply by -1 since negative values mean that axis moves in
 	
 	// Check if angles are valid
 	if (!checkIfAnglesValid(phi1, phi2, phi3)) return false;
@@ -155,14 +157,12 @@ void morobotScaraRRP::updateCurrentXYZ(){
 	
 	float xnb = b*cos((float)actAngles[0]*M_PI/180);
     float ynb = b*sin((float)actAngles[0]*M_PI/180);
-    float delta = asin(xnb/b);
-    float phi2s = M_PI-delta-M_PI/2-((float)actAngles[1]*M_PI/180+beta);
-    float xncn = c_new*cos(phi2s);
-    float yncn = c_new*sin(phi2s);
+    float xncn = c_new*cos((float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + beta_new);
+    float yncn = c_new*sin((float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + beta_new);
     
 	_actPos[0] = a + xnb + xncn;
     _actPos[1] = ynb + yncn;
-	_actPos[2] = actAngles[2]/gearRatio + _tcpOffset[2];
+	_actPos[2] = -1 * actAngles[2]/gearRatio + _tcpOffset[2]; 	// Multiply by -1 since moving in positive z-axis means that the linear axis moves in
 	
 	Serial.print("Calculated Position: ");
 	Serial.print(_actPos[0]);

@@ -10,9 +10,11 @@
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 			bool checkIfAnglesValid(float phi1, float phi2, float phi3);
+			void moveToAngles(long phi1, long phi2, long phi3);
+			void moveZAxisIn(uint8_t maxMotorCurrent);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
-			virtual void updateCurrentXYZ();
+			virtual void updateTCPpose();
  */
  
 #include <morobotScaraRRP.h>
@@ -118,17 +120,18 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 	
 	// Calculate angle for 2nd axis
 	float phi2n = acos((xSQ + ySQ - bSQ - c_newSQ) / (2*b*c_new));
-	float phi2 = (phi2n - beta_new) * 180/M_PI;
+	float phi2 = (phi2n - fabs(beta_new)) * 180/M_PI;
 	
 	// Calculate angle for 1st axis
 	float gamma = atan2(y, x-a);
 	float alpha = acos((xSQ + ySQ + bSQ - c_newSQ) / (2*b*sqrt(xSQ + ySQ)));
-	float phi1 = (gamma - alpha) * 180/M_PI;
+	float phi1 = (gamma + alpha) * 180/M_PI;
 
 	// Recalculate angles if phi1 is out of range --> Not working properly yet
 	/*if (phi1 < _jointLimits[1][0] || phi1 > _jointLimits[1][1]){
 		phi2 = (phi2n + beta_new) * 180/M_PI;
-		phi1 = (gamma + alpha) * 180/M_PI;*/
+		phi1 = (gamma + alpha) * 180/M_PI;
+	}*/
 	
 	// Calculate angle for 3rd axis (z-direction)
 	z = z - _tcpOffset[2];
@@ -137,8 +140,8 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 	// Check if angles are valid
 	if (!checkIfAnglesValid(phi1, phi2, phi3)) return false;
 	
-	_goalAngles[0] = phi1;
-	_goalAngles[1] = phi2;
+	_goalAngles[0] = -phi1;		// Since motor 0 is installed in other direction
+	_goalAngles[1] = -phi2;
 	_goalAngles[2] = phi3;
 	
 	return true;
@@ -148,26 +151,37 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
  *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
  *  \details This function does calculate and store the TCP position depending on the current motor angles.
  */
-void morobotScaraRRP::updateCurrentXYZ(){
+void morobotScaraRRP::updateTCPpose(){
 	setBusy();
 	waitUntilIsReady();
 	
+	// Get anlges of all motors
 	long actAngles[_numSmartServos];
 	for (uint8_t i=0; i<_numSmartServos; i++) actAngles[i] = getActAngle(i);
 	
-	float xnb = b*cos((float)actAngles[0]*M_PI/180);
-    float ynb = b*sin((float)actAngles[0]*M_PI/180);
-    float xncn = c_new*cos((float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + beta_new);
-    float yncn = c_new*sin((float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + beta_new);
+	// Calculate lengths at each joint and sum up
+	float xnb = b*cos(-(float)actAngles[0]*M_PI/180);
+    float ynb = b*sin(-(float)actAngles[0]*M_PI/180);
+    float xncn = c_new*cos(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + fabs(beta_new));
+    float yncn = c_new*sin(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + fabs(beta_new));
     
 	_actPos[0] = a + xnb + xncn;
     _actPos[1] = ynb + yncn;
 	_actPos[2] = -1 * actAngles[2]/gearRatio + _tcpOffset[2]; 	// Multiply by -1 since moving in positive z-axis means that the linear axis moves in
+	
+	// Caculate orientation
+	_actOri[0] = 0;
+	_actOri[1] = 0;
+	_actOri[2] = -actAngles[0] + actAngles[1];
+	Serial.println(actAngles[0]);
+	Serial.println(actAngles[1]);
 	
 	Serial.print("Calculated Position: ");
 	Serial.print(_actPos[0]);
 	Serial.print(", ");
 	Serial.print(_actPos[1]);
 	Serial.print(", ");
-	Serial.println(_actPos[2]);
+	Serial.print(_actPos[2]);
+	Serial.print("; Orientation around z-axis [degrees]: ");
+	Serial.println(_actOri[2]);
 }

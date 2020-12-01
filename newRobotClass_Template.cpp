@@ -89,7 +89,7 @@ bool newRobotClass_Template::calculateAngles(float x, float y, float z){
  *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
  *  \details This function does calculate and store the TCP position depending on the current motor angles.
  */
-void newRobotClass_Template::updateCurrentXYZ(){
+void newRobotClass_Template::updateTCPpose(){
 	setBusy();
 	waitUntilIsReady();
 	

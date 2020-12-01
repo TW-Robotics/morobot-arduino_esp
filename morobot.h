@@ -44,7 +44,7 @@
 			void printAngles(long angles[]);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
-			virtual void updateCurrentXYZ();
+			virtual void updateTCPpose();
 			void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25);
 		private:
 			bool isReady();
@@ -298,7 +298,7 @@ class morobotClass {
 		 *  \details Virtual function. Defined individually for each robot type in the respective child classes.
 		 *  		 This function does calculate and store the TCP position depending on the current motor angles.
 		 */
-		virtual void updateCurrentXYZ()=0;
+		virtual void updateTCPpose()=0;
 		
 		/**
 		 *  \brief Calibrates a linear axis by increasing the angle until a current limit is reached
@@ -310,6 +310,7 @@ class morobotClass {
 		uint8_t _numSmartServos;			// Number of smart servos of robot
 		uint8_t _speedRPM;					// Default speed (used if movement-funtions to not provide specific speed)
 		float _actPos[3];					// Robot TCP position (in base frame)
+		float _actOri[3];					// Robot TCP orientation (rotation in degrees around base frame)
 		bool _angleReached[NUM_MAX_SERVOS];	// Variables that indicate if a motor is busy (is moving and has not reached final position)
 		float _goalAngles[NUM_MAX_SERVOS];	// Variable for inverse kinematics to store goal Angles of the motors
 		Stream* _port;						// Port used for communication with the robot (e.g. Serial1)

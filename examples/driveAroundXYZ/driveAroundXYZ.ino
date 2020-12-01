@@ -54,22 +54,22 @@ void loop() {
 	Dabble.processInput();
 	
 	if(GamePad.isPressed(2)) {			// Left
-		actPosTemp[1] = actPos[1] - step;
-	} else if(GamePad.isPressed(3)) {	// Right
 		actPosTemp[1] = actPos[1] + step;
+	} else if(GamePad.isPressed(3)) {	// Right
+		actPosTemp[1] = actPos[1] - step;
 	} else if(GamePad.isPressed(0)) {	// Up
 		actPosTemp[0] = actPos[0] + step;
 	} else if(GamePad.isPressed(1)) {	// Down
 		actPosTemp[0] = actPos[0] - step;
 	} else if(GamePad.isPressed(6)) {	// Triangle
-		actPosTemp[2] = actPos[2] - step/4;
-	} else if(GamePad.isPressed(8)) {   // X
 		actPosTemp[2] = actPos[2] + step/4;
+	} else if(GamePad.isPressed(8)) {   // X
+		actPosTemp[2] = actPos[2] - step/4;
 	} else if(GamePad.isPressed(7)) {	// O
 		morobot.moveHome();
 		initVars();
 	} else if(GamePad.isPressed(9)) {   // Square
-		morobot.releaseBreaks();
+		morobot.getActPosition('x');
 		initVars();
 	}
 	

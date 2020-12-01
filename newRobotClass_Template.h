@@ -73,7 +73,7 @@ class newRobotClass_Template:public morobotClass {
 		 *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
 		 *  \details This function does calculate and store the TCP position depending on the current motor angles.
 		 */
-		virtual void updateCurrentXYZ();
+		virtual void updateTCPpose();
 
 	private:
 		float _tcpOffset[3];	// Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis

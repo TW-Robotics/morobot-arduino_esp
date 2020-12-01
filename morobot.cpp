@@ -44,7 +44,7 @@
 			void printAngles(long angles[]);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
-			virtual void updateCurrentXYZ();
+			virtual void updateTCPpose();
 			void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25);
 		private:
 			bool isReady();
@@ -97,6 +97,7 @@ void morobotClass::begin(const char* stream){
 	
 	setTCPoffset(0, 0, 0);
 	setSpeedRPM(25);
+	updateTCPpose();
 
 	Serial.println("Connected to motors");
 }
@@ -221,7 +222,7 @@ long morobotClass::getActAngle(uint8_t servoId){
  *  \return Position of TCP in mm in given axis.
  */
 float morobotClass::getActPosition(char axis){
-	updateCurrentXYZ();
+	updateTCPpose();
 	
 	if (axis == 'x') return _actPos[0];
 	else if (axis == 'y') return _actPos[1];
@@ -360,6 +361,12 @@ void morobotClass::moveAngles(long angles[], uint8_t speedRPM){
  *  \details Calls child class to solve inverse kinematics and moves the robot to the position.
  */
 bool morobotClass::moveToPosition(float x, float y, float z){
+	Serial.print("Moving to [mm]: ");
+	Serial.print(x);
+	Serial.print(", ");
+	Serial.print(y);
+	Serial.print(", ");
+	Serial.println(z);
 	if (calculateAngles(x, y, z) == false) return false;
 	
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, _goalAngles[i]);
@@ -375,7 +382,7 @@ bool morobotClass::moveToPosition(float x, float y, float z){
  *  \details Calls child class to solve forward kinematics, adds values, solves inverse kinematics and moves the robot to the position.
  */
 bool morobotClass::moveXYZ(float xOffset, float yOffset, float zOffset){
-	updateCurrentXYZ();
+	updateTCPpose();
 	return moveToPosition(_actPos[0]+xOffset, _actPos[1]+yOffset, _actPos[2]+zOffset);
 }
 
@@ -387,7 +394,7 @@ bool morobotClass::moveXYZ(float xOffset, float yOffset, float zOffset){
  *  \details Calls child class to solve forward kinematics, adds values, solves inverse kinematics and moves the robot to the position.
  */
 bool morobotClass::moveInDirection(char axis, float value){
-	updateCurrentXYZ();
+	updateTCPpose();
 	float goalxyz[3];
 	goalxyz[0] = _actPos[0];
 	goalxyz[1] = _actPos[1];

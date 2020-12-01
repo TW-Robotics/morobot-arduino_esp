@@ -9,9 +9,12 @@
  *  		morobotScaraRRP() : morobotClass(3){};
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
+			bool checkIfAnglesValid(float phi1, float phi2, float phi3);
+			void moveToAngles(long phi1, long phi2, long phi3);
+			void moveZAxisIn(uint8_t maxMotorCurrent);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
-			virtual void updateCurrentXYZ();
+			virtual void updateTCPpose();
  */
  
 #ifndef MOROBOTSCARARRP_H
@@ -87,7 +90,7 @@ class morobotScaraRRP:public morobotClass {
 		 *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
 		 *  \details This function does calculate and store the TCP position depending on the current motor angles.
 		 */
-		virtual void updateCurrentXYZ();
+		virtual void updateTCPpose();
 
 	private:
 		float _tcpOffset[3];	// Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis

@@ -423,6 +423,15 @@ void morobotClass::printAngles(long angles[]){
 	}
 }
 
+/**
+ *  \brief Returns angle converted from rad into deg
+ *  \param [in] angle Angle to convert in radians
+ *  \return Returns angle in degree
+ */
+float morobotClass::convertToDegrees(float angle){
+	return angle*180/M_PI;
+}
+
 /* PROTECTED */
 void morobotClass::autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent){
 	while(true){

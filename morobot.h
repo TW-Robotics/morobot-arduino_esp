@@ -278,6 +278,13 @@ class morobotClass {
 		 */
 		void printAngles(long angles[]);
 		
+		/**
+		 *  \brief Returns angle converted from rad into deg
+		 *  \param [in] angle Angle to convert in radians
+		 *  \return Returns angle in degree
+		 */
+		float convertToDegrees(float angle);
+		
 		/* PUBLIC VARIABLES */
 		MakeblockSmartServo smartServos;	// Makeblock smartservo object
 	protected:

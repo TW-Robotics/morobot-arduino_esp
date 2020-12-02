@@ -120,7 +120,7 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 	
 	// Calculate angle for 2nd axis
 	float phi2n = acos((xSQ + ySQ - bSQ - c_newSQ) / (2*b*c_new));
-	float phi2 = (phi2n - fabs(beta_new)) * 180/M_PI;
+	float phi2 = (phi2n - beta_new) * 180/M_PI;
 	
 	// Calculate angle for 1st axis
 	float gamma = atan2(y, x-a);
@@ -162,8 +162,8 @@ void morobotScaraRRP::updateTCPpose(){
 	// Calculate lengths at each joint and sum up
 	float xnb = b*cos(-(float)actAngles[0]*M_PI/180);
     float ynb = b*sin(-(float)actAngles[0]*M_PI/180);
-    float xncn = c_new*cos(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + fabs(beta_new));
-    float yncn = c_new*sin(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + fabs(beta_new));
+    float xncn = c_new*cos(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + beta_new);
+    float yncn = c_new*sin(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + beta_new);
     
 	_actPos[0] = a + xnb + xncn;
     _actPos[1] = ynb + yncn;
@@ -173,8 +173,6 @@ void morobotScaraRRP::updateTCPpose(){
 	_actOri[0] = 0;
 	_actOri[1] = 0;
 	_actOri[2] = -actAngles[0] + actAngles[1];
-	Serial.println(actAngles[0]);
-	Serial.println(actAngles[1]);
 	
 	Serial.print("Calculated Position: ");
 	Serial.print(_actPos[0]);

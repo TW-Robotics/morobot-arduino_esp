@@ -23,13 +23,19 @@
  */
 
 #include <morobotScaraRRP.h>  	// If you are using another robot, change the name to the correct header file here
-#include <Dabble.h>
+#ifndef ESP32
+#include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
+#define DABBLE_PARAM 9600	// Set transmission speed
+#else
+#include <DabbleESP32.h>	// Include Dabble library for ESP32 board
+#define DABBLE_PARAM "MyEsp32" // Set bluetooth name
+#endif
 
 morobotScaraRRP morobot;			// And change the class-name here
 bool currentLimitReached = false;
 
 void setup() {
-	Dabble.begin(9600);
+	Dabble.begin(DABBLE_PARAM);
 	morobot.begin("Serial2");
 	
 	delay(500);

@@ -52,7 +52,6 @@
 
 #include <morobot.h>
 
-//TODO: Document Kinematics
 //TODO: Implement second robot for ESP32
 
 /**
@@ -85,8 +84,13 @@ void morobotClass::begin(const char* stream){
 		Serial2.begin(115200);
 		_port = &Serial2;
 	} else if (stream == "Serial3") {
+		#ifndef ESP32		// Check if compiling for ESP32 since this controller does not have Serial3
 		Serial3.begin(115200);
 		_port = &Serial3;
+		#endif
+		#ifdef ESP32
+		Serial.println("ERROR: Serial3 not implemented for ESP32 controller");
+		#endif
 	}
 	else Serial.println("ERROR: Serial-Parameter not valid");
 	

@@ -23,7 +23,13 @@
  */
 
 #include <morobotScaraRRP.h>
-#include <Dabble.h>
+#ifndef ESP32
+#include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
+#define DABBLE_PARAM 9600	// Set transmission speed
+#else
+#include <DabbleESP32.h>	// Include Dabble library for ESP32 board
+#define DABBLE_PARAM "MyEsp32" // Set bluetooth name
+#endif
 
 // Create morobot object and declare variables
 morobotScaraRRP morobot;
@@ -33,7 +39,7 @@ float actPos[3];
 float actPosTemp[3];
 
 void setup() {
-	Dabble.begin(9600);				// Start connection to Dabble
+	Dabble.begin(DABBLE_PARAM);		// Start connection to Dabble
 	morobot.begin("Serial2");		// The robot is connected to RX/TX2 -> Serial2
 	morobot.setSpeedRPM(50);
 	//morobot.setTCPoffset(4.92,-34.1,10); // If the robot has an endeffector set its position here

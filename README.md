@@ -38,5 +38,9 @@ The class morobotClass is an abstract base class implementing functions like mov
   - In 'updateCurrentXYZ' implement the forward kinematics of the robot
 - To use your robot type, simple add an include with your header file name into your file and create an instance of the robot object (see examples for existing robots)
 
+## Known issues
+- Example with multiple robots is not working for ESP32 controllers
+- Other TCP-Offset than 0/0/x for ScaraRRP leads to wrong kinematics somehow
+
 ## License
 This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](https://github.com/TW-Robotics/morobot/edit/main/LICENSE) for more information.

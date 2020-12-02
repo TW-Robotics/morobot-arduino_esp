@@ -29,7 +29,7 @@ void setup() {
 void loop() {
 	// Functions to define parameters
 	morobot.setSpeedRPM(5);				// Set the global speed for all motors here. This value can be overwritten temporarily if a function is called with a speed parameter explicitely.
-	morobot.setTCPoffset(10.2, -3.4, 9.2);	// If there is an endeffector connected to the last axis give its position with respect to the center of the flange here
+	//morobot.setTCPoffset(10.2, -3.4, 9.2);	// If there is an endeffector connected to the last axis give its position with respect to the center of the flange here
 	
 	// Functions to get the robot state
 	if (morobot.checkIfAngleValid(0, 45)) Serial.println("Motor 0 can drive to 45 degrees");

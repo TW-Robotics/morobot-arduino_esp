@@ -9,7 +9,6 @@
  *  		newRobotClass_Template() : morobotClass(PUT_NUM_SERVOS_HERE){};
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
-			bool checkIfAnglesValid(float phi1, float phi2, float phi3);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
 			virtual void updateCurrentXYZ();
@@ -46,16 +45,6 @@ class newRobotClass_Template:public morobotClass {
 		 *  \details The joint limits are predefined in the private variable _jointLimits
 		 */
 		virtual bool checkIfAngleValid(uint8_t servoId, float angle);
-		
-		/**
-		 *  \brief Checks if all robot motor angles are valid
-		 *  \param [in] phi1 Angle value for first joint
-		 *  \param [in] phi2 Angle value for second joint
-		 *  \param [in] phi3 Angle value for third joint
-		 *  \return Returns true if the position is reachable; false if it is not.
-		 *  \details Just calls checkIfAngleValid for each motor times.
-		 */
-		bool checkIfAnglesValid(float phi1, float phi2, float phi3);
 
 	protected:
 		/**

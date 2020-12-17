@@ -59,7 +59,7 @@ class morobotScaraRRP:public morobotClass {
 		 */
 		bool checkIfAnglesValid(float phi1, float phi2, float phi3);
 		
-		using morobotClass::moveToAngles;	// Make other versions ov moveToAngles visible for compiler
+		using morobotClass::moveToAngles;	// Make other versions of moveToAngles visible for compiler
 		/**
 		 *  \brief Moves all motors to desired angles (Moves the whole robot) - absolute movement.
 		 *  \param [in] phi1, phi2, phi3 Desired angles of all motors.

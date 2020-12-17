@@ -34,12 +34,12 @@ void morobotScaraRRP::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	_tcpOffset[2] = zOffset;
 	
 	// Calculate new length and angle of last axis (since eef is connected to it statically)
-    /*c_new = sqrt(pow(_tcpOffset[1],2) + pow(c+_tcpOffset[0],2));
-    beta_new = asin(_tcpOffset[1]/c_new);*/
+    c_new = sqrt(pow(_tcpOffset[1],2) + pow(c+_tcpOffset[0],2));
+    beta_new = asin(_tcpOffset[1]/c_new);
 	// At the moment, only x-offsets are valid!
-	if (yOffset != 0) Serial.println("Y-OFFSETS of TCP not implemented");
+	/*if (yOffset != 0) Serial.println("Y-OFFSETS of TCP not implemented");
 	c_new = c+_tcpOffset[0];
-	beta_new = 0;
+	beta_new = 0;*/
 	
 	// Precalculate squares of lengths for faster processing
 	c_newSQ = pow(c_new,2);
@@ -134,7 +134,7 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 	float phi1 = - (gamma + alpha) * 180/M_PI;
 
 	// Recalculate angles if phi1 is out of range
-	if (phi1 < _jointLimits[0][0] || phi1 > _jointLimits[0][1]){
+	if (phi1 < _jointLimits[0][0] || phi1 > _jointLimits[0][1] || phi2 < _jointLimits[1][0] || phi2 > _jointLimits[1][1]){
 		Serial.println("Switching to other configuration");
 		phi2 = - (phi2n + beta_new) * 180/M_PI;
 		phi1 = - (gamma - alpha) * 180/M_PI;

@@ -77,12 +77,12 @@ class morobotScaraRRR:public morobotClass {
 
 	private:
 		float _tcpOffset[3];	// Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
-		long _jointLimits[3][2] = {{-100, 100}, {-100, 100}, {180, -179}};		// Limits for all joints
+		long _jointLimits[3][2] = {{-100, 100}, {-100, 100}, {-180, 180}};		// Limits for all joints
 		
 		float a = 47.0;				// Length from mounting to first axis
 		float b = 92.9;				// Length from first axis to second axis
 		float c = 70.52;			// Lenth from second axis to third axis
-		float d = 0;				// Length from third axis to TCP (set by setTCPOffset
+		float d = 0;				// Length from third axis to TCP (set by setTCPOffset)
 		float bSQ;					// Square of b (Precalculated for faster processing)
 		float cSQ;					// Square of c (Precalculated for faster processing)
 		float dSQ;					// Square of d (Precalculated for faster processing)

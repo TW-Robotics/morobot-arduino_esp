@@ -34,12 +34,18 @@ void morobotScaraRRP::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	_tcpOffset[2] = zOffset;
 	
 	// Calculate new length and angle of last axis (since eef is connected to it statically)
-    c_new = sqrt(pow(_tcpOffset[1],2) + pow(c+_tcpOffset[0],2));
-    beta_new = asin(_tcpOffset[1]/c_new);
+    /*c_new = sqrt(pow(_tcpOffset[1],2) + pow(c+_tcpOffset[0],2));
+    beta_new = asin(_tcpOffset[1]/c_new);*/
+	// At the moment, only x-offsets are valid!
+	if (yOffset != 0) Serial.println("Y-OFFSETS of TCP not implemented");
+	c_new = c+_tcpOffset[0];
+	beta_new = 0;
 	
 	// Precalculate squares of lengths for faster processing
 	c_newSQ = pow(c_new,2);
 	bSQ = pow(b,2);
+	
+	updateTCPpose();
 }
 
 /**
@@ -119,19 +125,20 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 	float ySQ = pow(y,2);
 	
 	// Calculate angle for 2nd axis
-	float phi2n = acos((xSQ + ySQ - bSQ - c_newSQ) / (2*b*c_new));
+	float phi2n = - acos((xSQ + ySQ - bSQ - c_newSQ) / (2*b*c_new));		// Some terms are negative since motor1+2 are mounted in other direction
 	float phi2 = (phi2n - beta_new) * 180/M_PI;
 	
 	// Calculate angle for 1st axis
 	float gamma = atan2(y, x-a);
 	float alpha = acos((xSQ + ySQ + bSQ - c_newSQ) / (2*b*sqrt(xSQ + ySQ)));
-	float phi1 = (gamma + alpha) * 180/M_PI;
+	float phi1 = - (gamma + alpha) * 180/M_PI;
 
-	// Recalculate angles if phi1 is out of range --> Not working properly yet
-	/*if (phi1 < _jointLimits[1][0] || phi1 > _jointLimits[1][1]){
-		phi2 = (phi2n + beta_new) * 180/M_PI;
-		phi1 = (gamma + alpha) * 180/M_PI;
-	}*/
+	// Recalculate angles if phi1 is out of range
+	if (phi1 < _jointLimits[0][0] || phi1 > _jointLimits[0][1]){
+		Serial.println("Switching to other configuration");
+		phi2 = - (phi2n + beta_new) * 180/M_PI;
+		phi1 = - (gamma - alpha) * 180/M_PI;
+	}
 	
 	// Calculate angle for 3rd axis (z-direction)
 	z = z - _tcpOffset[2];
@@ -140,8 +147,8 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 	// Check if angles are valid
 	if (!checkIfAnglesValid(phi1, phi2, phi3)) return false;
 	
-	_goalAngles[0] = -phi1;		// Since motor 0 is installed in other direction
-	_goalAngles[1] = -phi2;
+	_goalAngles[0] = phi1;
+	_goalAngles[1] = phi2;
 	_goalAngles[2] = phi3;
 	
 	return true;

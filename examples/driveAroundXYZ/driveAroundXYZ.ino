@@ -42,7 +42,7 @@ void setup() {
 	Dabble.begin(DABBLE_PARAM);		// Start connection to Dabble
 	morobot.begin("Serial2");		// The robot is connected to RX/TX2 -> Serial2
 	morobot.setSpeedRPM(50);
-	//morobot.setTCPoffset(4.92,-34.1,10); // If the robot has an endeffector set its position here
+	//morobot.setTCPoffset(4.92,0,10); // If the robot has an endeffector set its position here (ONLY X and Z supported!)
 	morobot.moveHome();				// Move the robot into initial position
 	morobot.moveZAxisIn();			// Move the z-axis in (in case it is out more than one rotation of motor on startup)
 	morobot.setZero();				// Set the axes zero when move in

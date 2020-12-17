@@ -235,6 +235,20 @@ float morobotClass::getActPosition(char axis){
 }
 
 /**
+ *  \brief Returns orientation of TCP in degrees in given axis (in robot base frame).
+ *  \param [in] axis of rotation Possible parameters: 'x', 'y', 'z'
+ *  \return Orientation of TCP in degrees in given axis.
+ */
+float morobotClass::getActOrientation(char axis){
+	updateTCPpose();
+	
+	if (axis == 'x') return _actOri[0];
+	else if (axis == 'y') return _actOri[1];
+	else if (axis == 'z') return _actOri[2];
+	else Serial.println("ERROR! Invalid axis in getActOrientation();");
+}
+
+/**
  *  \brief Returns current speed of motor in RPM (rounds per minute).
  *  \param [in] servoId Number of motor (first motor has ID 0)
  *  \return Current speed of motor in RPM.

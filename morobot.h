@@ -24,6 +24,7 @@
 			
 			long getActAngle(uint8_t servoId);
 			float getActPosition(char axis);
+			float getActOrientation(char axis);
 			float getSpeed(uint8_t servoId);
 			float getTemp(uint8_t servoId);
 			float getVoltage(uint8_t servoId);
@@ -172,6 +173,13 @@ class morobotClass {
 		 *  \return Position of TCP in mm in given axis.
 		 */
 		float getActPosition(char axis);
+		
+		/**
+		 *  \brief Returns orientation of TCP in degrees in given axis (in robot base frame).
+		 *  \param [in] axis of rotation Possible parameters: 'x', 'y', 'z'
+		 *  \return Orientation of TCP in degrees in given axis.
+		 */
+		float getActOrientation(char axis);
 		
 		/**
 		 *  \brief Returns current speed of motor in RPM (rounds per minute).

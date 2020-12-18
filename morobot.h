@@ -29,6 +29,7 @@
 			float getTemp(uint8_t servoId);
 			float getVoltage(uint8_t servoId);
 			float getCurrent(uint8_t servoId);
+			uint8_t getNumSmartServos();
 			
 			void moveToAngle(uint8_t servoId, long angle);
 			void moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
@@ -208,6 +209,11 @@ class morobotClass {
 		 *  \return Current current consumption of motor in Ampere.
 		 */
 		float getCurrent(uint8_t servoId);
+		
+		/**
+		 * \brief Returns number of smart servos in robot. 
+		 */
+		uint8_t getNumSmartServos();
 		
 		/* MOVEMENTS */
 		/**

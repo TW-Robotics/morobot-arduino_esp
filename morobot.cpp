@@ -284,6 +284,12 @@ float morobotClass::getCurrent(uint8_t servoId){
 	return smartServos.getCurrentRequest(servoId+1);
 }
 
+/**
+ * \brief Returns number of smart servos in robot. 
+ */
+uint8_t morobotClass::getNumSmartServos(){
+	return _numSmartServos;
+}
 
 /* MOVEMENTS */
 /**

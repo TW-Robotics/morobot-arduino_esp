@@ -49,63 +49,41 @@ void setup() {
 	Dabble.begin(DABBLE_PARAM);
 	morobot.begin("Serial2");
 	gripper.begin();
+	gripper.setSpeed(50, 25);
+	
 	morobot.moveHome();
 	delay(500);
 	morobot.releaseBreaks();
 	morobot.setSpeedRPM(20);
 	
-	/*Serial.println("Waiting for Dabble to connect to smartphone. If you are already connected, press any app-key.");
+	Serial.println("Waiting for Dabble to connect to smartphone. If you are already connected, press any app-key.");
 	Dabble.waitForAppConnection();
-	Serial.println("Dabble connected!");*/
+	Serial.println("Dabble connected!");
 	
 }
 
 void loop() {
 	Dabble.processInput();
 	
-	/*Serial.println(gripper.getCurrentOpeningAngle());
-	gripper.morobot->smartServos.move(4, -5, 10);
-	delay(100);
-	Serial.println(gripper.getCurrentOpeningAngle());*/
-	gripper.autoCalibrate();
-	/*gripper.moveToAngle(-200, 10);
-	gripper.moveToAngle(-50, 10);
-	gripper.moveToAngle(-200, 10);
-	gripper.moveToAngle(-50, 10);*/
-	Serial.println(gripper.getCurrentOpeningAngle());
-	delay(100000);
-	
-	
-	/*if(GamePad.isPressed(0)) {			// Up
-		morobot.moveAngle(2, -20, 30);
+	if(GamePad.isPressed(0)) {			// Up
+		gripper.moveWidth(-5);		// Open gripper
 	} else if(GamePad.isPressed(1)) {   // Down
-		morobot.moveAngle(2, 20, 30);
+		gripper.moveWidth(5);		// Close gripper
 	} else if(GamePad.isPressed(2)) {	// Left
-
+		Serial.println(gripper.getCurrentOpeningAngle());	// Display opening angle and width
+		Serial.println(gripper.getCurrentOpeningWidth());
 		delay(delayDebounce);
-	} else if(GamePad.isPressed(3)) {   // Right
-
+	} else if(GamePad.isPressed(3)) {	// Right
+		gripper.autoCalibrate();	// Calibrate
 	} else if(GamePad.isPressed(7)) {	// O
-		morobot.moveHome();
+		gripper.open();
 	} else if(GamePad.isPressed(8)) {   // X
-		morobot.releaseBreaks();
+		gripper.close();
 	} else if(GamePad.isPressed(4)) {	// Start
-
+		gripper.closeToForce();
 	} else if(GamePad.isPressed(5)) {	// Select
-
-		delay(delayDebounce);	
-	} else if(GamePad.isPressed(6)) {	//Triangle
-		Serial.println(morobot.getCurrent(1));
-		Serial.println(morobot.getVoltage(1));
-		Serial.println(morobot.getTemp(1));
-		Serial.println(morobot.getSpeed(1));
-		delay(delayDebounce);
-	} else if(GamePad.isPressed(9)) {   // Square
-		Serial.println("START COPYING HERE");
-		
-		Serial.println("STOP COPYING HERE");
-		Serial.println("Just paste the code into the loop of the base_importantFunctionCalls-example (or make a new file with it).");
-	}*/
+		gripper.moveToWidth(120, 10);
+	} 
 }
 
 

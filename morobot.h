@@ -319,7 +319,7 @@ class morobotClass {
 		 *  \details Virtual function. Defined individually for each robot type in the respective child classes.
 		 *  		 This function does calculate and store the TCP position depending on the current motor angles.
 		 */
-		virtual void updateTCPpose()=0;
+		virtual void updateTCPpose(bool output = false)=0;
 		
 		/**
 		 *  \brief Calibrates a linear axis by increasing the angle until a current limit is reached

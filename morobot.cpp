@@ -44,7 +44,7 @@
 			void printAngles(long angles[]);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
-			virtual void updateTCPpose();
+			virtual void updateTCPpose(bool output);
 			void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25);
 		private:
 			bool isReady();
@@ -101,9 +101,8 @@ void morobotClass::begin(const char* stream){
 	
 	setTCPoffset(0, 0, 0);
 	setSpeedRPM(25);
-	updateTCPpose();
 
-	Serial.println("Connected to motors");
+	Serial.println("Morobot initialized. Connection to motors established");
 }
 
 /**

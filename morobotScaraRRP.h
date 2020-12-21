@@ -88,9 +88,10 @@ class morobotScaraRRP:public morobotClass {
 		
 		/**
 		 *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
+		 *  \param [in] output If output = true, the calculated position+orientation is printed to the terminal
 		 *  \details This function does calculate and store the TCP position depending on the current motor angles.
 		 */
-		virtual void updateTCPpose();
+		virtual void updateTCPpose(bool output = false);
 
 	private:
 		float _tcpOffset[3];	// Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis

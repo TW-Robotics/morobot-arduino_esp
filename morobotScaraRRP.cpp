@@ -156,9 +156,10 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 
 /**
  *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
+ *  \param [in] output If output = true, the calculated position+orientation is printed to the terminal
  *  \details This function does calculate and store the TCP position depending on the current motor angles.
  */
-void morobotScaraRRP::updateTCPpose(){
+void morobotScaraRRP::updateTCPpose(bool output){
 	setBusy();
 	waitUntilIsReady();
 	
@@ -181,12 +182,14 @@ void morobotScaraRRP::updateTCPpose(){
 	_actOri[1] = 0;
 	_actOri[2] = -actAngles[0] + actAngles[1];
 	
-	Serial.print("Calculated Position: ");
-	Serial.print(_actPos[0]);
-	Serial.print(", ");
-	Serial.print(_actPos[1]);
-	Serial.print(", ");
-	Serial.print(_actPos[2]);
-	Serial.print("; Orientation around z-axis [degrees]: ");
-	Serial.println(_actOri[2]);
+	if (output == true){
+		Serial.print("Calculated Position: ");
+		Serial.print(_actPos[0]);
+		Serial.print(", ");
+		Serial.print(_actPos[1]);
+		Serial.print(", ");
+		Serial.print(_actPos[2]);
+		Serial.print("; Orientation around z-axis [degrees]: ");
+		Serial.println(_actOri[2]);
+	}
 }

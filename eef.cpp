@@ -53,8 +53,11 @@ void gripper::begin(int8_t servoPin){
 	_servoID = -1;
 
 	setSpeed(50);
-	setParams(0, 90, 0, 100);
-	setTCPoffset(30, 0, -25);
+	setParams(75, 130, 50, 150, 0.722, 0);		//float degClosed, float degOpen, float degCloseLimit, float degOpenLimit; Values of servo
+	setTCPoffset(0, 0, -18);
+	
+	servo.attach(servoPin);
+	open();
 
 	Serial.println("Gripper connected to robot");
 }
@@ -72,6 +75,7 @@ bool gripper::autoCalibrate(){
 		}
 	} else {
 		returnValue = false;
+		functionNotImplementedError();
 	}
 	if (returnValue == false) {
 		Serial.println("ERROR: Calibration failed!");
@@ -119,13 +123,17 @@ void gripper::setTCPoffset(float xOffset, float yOffset, float zOffset){
 }
 
 void gripper::close(){
-	moveToAngle(_degClosed, _speed[1]);
+	float angle = _degClosed;
+	if (_gripperType == 1) angle = 0;
+	moveToAngle(angle, _speed[1]);
 	_isOpen = false;
 	_isClosed = true;
 }
 
 void gripper::open(){
-	moveToAngle(_degOpen, _speed[0]);
+	float angle = _degOpen;
+	if (_gripperType == 1) angle = 90;
+	moveToAngle(angle, _speed[0]);
 	_isOpen = true;
 	_isClosed = false;
 }
@@ -135,39 +143,46 @@ bool gripper::moveAngle(float angle, uint8_t speed){
 }
 
 bool gripper::moveToAngle(float angle, uint8_t speed){
-	if ((_closingDirectionIsPositive == true && (angle > _degCloseLimit || angle < _degOpenLimit)) || (_closingDirectionIsPositive == false && (angle < _degCloseLimit || angle > _degOpenLimit))){
-		Serial.println("ERROR: ANGLE OUT OF LIMIT");
-		Serial.println(angle);
-		return false;
-	}
 	if (_gripperType == 0){
+		if (checkIfAngleValid(angle) != true) return false;
 		float oldAngle = getCurrentOpeningAngle();
 		morobot->smartServos.moveTo(_servoID+1, angle, speed);
+		_currentAngle = getCurrentOpeningAngle();
 		if (abs(oldAngle-angle) > 10) return waitUntilFinished();
-		else return true;
 	} else if (_gripperType == 1) {
-		// TODO SERVO-CODE
-	}	
+		angle = angle * _gearRatio + _degClosed;
+		Serial.println(angle);
+		if (checkIfAngleValid(angle) != true) return false;
+		servo.write(angle);		// TODO make smooth with speed	setParams(65, 130, 45, 130, 0.722, 0);	//float degClosed, float degOpen, float degCloseLimit, float degOpenLimit
+		_currentAngle = angle / _gearRatio - _degClosed;
+		Serial.println(_currentAngle);
+	}
+	_isOpen = false;
+	_isClosed = false;
+	return true;
 }
 
 bool gripper::moveWidth(float width, uint8_t speed){
-	Serial.print("Move To");
-	Serial.println(getCurrentOpeningWidth() + width);
-	return moveToWidth(getCurrentOpeningWidth() + width, speed);
+	if (_gripperType == 0) return moveToWidth(getCurrentOpeningWidth() + width, speed);
+	else return functionNotImplementedError();
 }
 
 bool gripper::moveToWidth(float width, uint8_t speed){
-	int8_t positiveFactor = 1;
-	if (_closingDirectionIsPositive == true) positiveFactor = -1;
-	
-	float angle = positiveFactor * (width - _closingWidthOffset) * _gearRatio;
-	moveToAngle(angle, speed);	
+	if (_gripperType == 0){ 
+		int8_t positiveFactor = 1;
+		if (_closingDirectionIsPositive == true) positiveFactor = -1;
+		
+		float angle = positiveFactor * (width - _closingWidthOffset) * _gearRatio;
+		moveToAngle(angle, speed);
+	} else {
+		return functionNotImplementedError();
+	}
 }
 
 bool gripper::closeToForce(float maxCurrent){
-	float closingStep = -5;
-	if (_closingDirectionIsPositive == true) closingStep = closingStep * -1;
 	if (_gripperType == 0){
+		float closingStep = -5;
+		if (_closingDirectionIsPositive == true) closingStep = closingStep * -1;
 		unsigned long startTime = millis();
 		while(true){
 			morobot->smartServos.move(_servoID+1, closingStep, 20);
@@ -175,6 +190,9 @@ bool gripper::closeToForce(float maxCurrent){
 				delay(20);
 				if (morobot->smartServos.getCurrentRequest(_servoID+1) > maxCurrent) {
 					Serial.println("Grasped object");
+					_currentAngle = getCurrentOpeningAngle();
+					_isOpen = false;
+					_isClosed = true;
 					return true;	// If after 20ms there is still too much current - ausreisser
 				}
 			}
@@ -185,18 +203,21 @@ bool gripper::closeToForce(float maxCurrent){
 				return false;
 			}
 		}
+	} else {
+		return functionNotImplementedError();
 	}
 	return false;
 }
 
 float gripper::getCurrentOpeningAngle(){
-	return morobot->smartServos.getAngleRequest(_servoID+1);
-	// TODO: Solution for Servo
+	if (_gripperType == 0) return morobot->smartServos.getAngleRequest(_servoID+1);
+	else if (_gripperType == 1) return _currentAngle;
+	else return functionNotImplementedError();
 }
 
 float gripper::getCurrentOpeningWidth(){
 	if (_gripperType == 0) return _closingWidthOffset + abs(getCurrentOpeningAngle() / _gearRatio);
-	else return -1;
+	else return functionNotImplementedError();
 }
 
 bool gripper::isClosed(){
@@ -206,6 +227,15 @@ bool gripper::isOpen(){
 	return _isOpen;
 }
 
+bool gripper::checkIfAngleValid(float angle){
+	if ((_closingDirectionIsPositive == true && (angle > _degCloseLimit || angle < _degOpenLimit)) || (_closingDirectionIsPositive == false && (angle < _degCloseLimit || angle > _degOpenLimit))){
+		Serial.println("ERROR: ANGLE OUT OF LIMIT");
+		Serial.println(angle);
+		return false;
+	}
+	return true;
+}
+
 bool gripper::waitUntilFinished(){
 	unsigned long startTime = millis();
 	while (true){
@@ -213,11 +243,15 @@ bool gripper::waitUntilFinished(){
 		long startPos = getCurrentOpeningAngle();
 		delay(50);
 		if (startPos == getCurrentOpeningAngle()) return true;
-		//Serial.println(morobot->smartServos.getCurrentRequest(_servoID+1));
 		// Stop waiting if the gripper is not finished after a timeout occurs
 		if ((millis() - startTime) > TIMEOUT_DELAY_GRIPPER) {
 			Serial.println("TIMEOUT OCCURED WHILE WAITING FOR GRIPPER TO FINISH MOVEMENT!");
 			return false;
 		}
 	}
+}
+
+bool gripper::functionNotImplementedError(){
+	Serial.println("ERROR: Function not implemented for this gripper type");
+	return false;
 }

@@ -48,7 +48,7 @@ gripper gripper(&morobot);
 void setup() {
 	Dabble.begin(DABBLE_PARAM);
 	morobot.begin("Serial2");
-	gripper.begin();
+	gripper.begin(9);
 	gripper.setSpeed(50, 25);
 	
 	morobot.moveHome();
@@ -66,12 +66,12 @@ void loop() {
 	Dabble.processInput();
 	
 	if(GamePad.isPressed(0)) {			// Up
-		gripper.moveWidth(-5);		// Open gripper
+		gripper.moveAngle(-5);		// Open gripper
 	} else if(GamePad.isPressed(1)) {   // Down
-		gripper.moveWidth(5);		// Close gripper
+		gripper.moveAngle(5);		// Close gripper
 	} else if(GamePad.isPressed(2)) {	// Left
 		Serial.println(gripper.getCurrentOpeningAngle());	// Display opening angle and width
-		Serial.println(gripper.getCurrentOpeningWidth());
+		//Serial.println(gripper.getCurrentOpeningWidth());
 		delay(delayDebounce);
 	} else if(GamePad.isPressed(3)) {	// Right
 		gripper.autoCalibrate();	// Calibrate
@@ -82,7 +82,7 @@ void loop() {
 	} else if(GamePad.isPressed(4)) {	// Start
 		gripper.closeToForce();
 	} else if(GamePad.isPressed(5)) {	// Select
-		gripper.moveToWidth(120, 10);
+		gripper.moveToAngle(90, 10);
 	} 
 }
 

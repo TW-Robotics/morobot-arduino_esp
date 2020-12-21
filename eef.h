@@ -27,6 +27,7 @@
  */
 
 #include <morobot.h>
+#include <Servo.h>
 
 #ifndef EEF_H
 #define EEF_H
@@ -55,10 +56,14 @@ class gripper {
 		bool isClosed();
 		bool isOpen();
 		morobotClass* morobot;
+		Servo servo;
 	private:
+		bool checkIfAngleValid(float angle);
 		bool waitUntilFinished();
+		bool functionNotImplementedError();
 		bool _isClosed;
 		bool _isOpen;
+		float _currentAngle;
 		
 		uint8_t _gripperType;	// 0: smartServo, 1: normal servo
 		float _gearRatio;		// mm per degree 		only for parallel grippers

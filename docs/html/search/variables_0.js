@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['_5factori_173',['_actOri',['../classmorobot_class.html#a39f5ba5fdd389651f89f924cdf4b3916',1,'morobotClass']]],
+  ['_5factpos_174',['_actPos',['../classmorobot_class.html#aa6a964b130ad7416235cd6152beb9065',1,'morobotClass']]],
+  ['_5fanglereached_175',['_angleReached',['../classmorobot_class.html#a2806321bb2ec78d04625e022301301da',1,'morobotClass']]],
+  ['_5fclosingdirectionispositive_176',['_closingDirectionIsPositive',['../classgripper.html#a1ef8259a09fb782915ae504f03e69f8c',1,'gripper']]],
+  ['_5fclosingwidthoffset_177',['_closingWidthOffset',['../classgripper.html#ab75b9f0fdc2f6606748598eed1b9eeae',1,'gripper']]],
+  ['_5fcurrentangle_178',['_currentAngle',['../classgripper.html#ac539cd1c41a44ae5782ae147464cf159',1,'gripper']]],
+  ['_5fdegclosed_179',['_degClosed',['../classgripper.html#ae6916080fd6d929ccc3fe80e72393a30',1,'gripper']]],
+  ['_5fdegcloselimit_180',['_degCloseLimit',['../classgripper.html#a3d589a9261bd512780e62c9e3287e871',1,'gripper']]],
+  ['_5fdegopen_181',['_degOpen',['../classgripper.html#ace510b65d51a4b45fb36a4ac366482da',1,'gripper']]],
+  ['_5fdegopenlimit_182',['_degOpenLimit',['../classgripper.html#a6f56b7ee613652b188a4dcd3f1eaa549',1,'gripper']]],
+  ['_5fgearratio_183',['_gearRatio',['../classgripper.html#aa8631a055770b7cdacd31937ad49fd89',1,'gripper']]],
+  ['_5fgoalangles_184',['_goalAngles',['../classmorobot_class.html#a05161cb159d2d618686aea045f150fe6',1,'morobotClass']]],
+  ['_5fgrippertype_185',['_gripperType',['../classgripper.html#a45644af40759b98aa19054f64e4f2838',1,'gripper']]],
+  ['_5fisclosed_186',['_isClosed',['../classgripper.html#a77e04b609fbb1ecc3f2abf815a362758',1,'gripper']]],
+  ['_5fisopened_187',['_isOpened',['../classgripper.html#a66a6ab5508eb24fe8c57658e9f82913b',1,'gripper']]],
+  ['_5fjointlimits_188',['_jointLimits',['../classmorobot_scara_r_r_p.html#a9b6b8d69173cf6d662bf647e3469bd2f',1,'morobotScaraRRP::_jointLimits()'],['../classmorobot_scara_r_r_r.html#a3153e0d7f24eee35eb92cc53b24e6ba4',1,'morobotScaraRRR::_jointLimits()'],['../classnew_robot_class___template.html#a5dd9bd70b0c991c614b9be9d4c8f0cdc',1,'newRobotClass_Template::_jointLimits()']]],
+  ['_5fnumsmartservos_189',['_numSmartServos',['../classmorobot_class.html#a64d2f86e783f777ef6776f459b1e1da5',1,'morobotClass']]],
+  ['_5fport_190',['_port',['../classmorobot_class.html#a23d2b1912ac59c3701c15d281cd7146f',1,'morobotClass']]],
+  ['_5fservoid_191',['_servoID',['../classgripper.html#a5d7088f8d1a6097c35657b91d9e3b544',1,'gripper']]],
+  ['_5fspeed_192',['_speed',['../classgripper.html#ad18e2dc775c16e86c19a9b6844f9afa5',1,'gripper']]],
+  ['_5fspeedrpm_193',['_speedRPM',['../classmorobot_class.html#a259041b2d218239690bfe81762197eba',1,'morobotClass']]],
+  ['_5ftcpoffset_194',['_tcpOffset',['../classgripper.html#a9c76940804177867b34bccf6be5470cf',1,'gripper::_tcpOffset()'],['../classmorobot_scara_r_r_p.html#a67fb399fe2c4da5bb96b4b43240bf5f0',1,'morobotScaraRRP::_tcpOffset()'],['../classmorobot_scara_r_r_r.html#a910ab203e365a698a4df74641fb0e340',1,'morobotScaraRRR::_tcpOffset()'],['../classnew_robot_class___template.html#af518719c43d47cd63f2121bea0f7ca8e',1,'newRobotClass_Template::_tcpOffset()']]]
+];

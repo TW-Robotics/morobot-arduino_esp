@@ -32,7 +32,7 @@
 				bool functionNotImplementedError();
  *  	binaryEEF:
  *  		public:
- *  			binaryEEF(uint8_t pin);
+ *  			binaryEEF(int8_t pin);
  *  			void activate();
  *  			void deactivate();
  *  			bool isActivated();
@@ -41,10 +41,6 @@
  
 #include <eef.h>
 
-/**
- *  \brief Constructor of gripper class
- *  \param [in] morobotToAttachTo Pointer to morobot object the gripper is attached to (relevant for smart servo control)
- */
 gripper::gripper(morobotClass* morobotToAttachTo){
 	_isOpened = false;
 	_isClosed = false;
@@ -52,11 +48,6 @@ gripper::gripper(morobotClass* morobotToAttachTo){
 	morobot = morobotToAttachTo;
 }
 
-/**
- *  \brief Initialices all important variables for smartservo-gripper
- *  \details This function must be called in the setup-function of the code.
- *  This function changes the TCP-Position of the morobot
- */
 void gripper::begin(){
 	_gripperType = 0;
 	_servoID = morobot->getNumSmartServos();	// e.g. robot has 3 smart servos (ID 0,1,2) -> gripper gets id 3
@@ -68,12 +59,6 @@ void gripper::begin(){
 	Serial.println("Gripper connected to robot");
 }
 
-/**
- *  \brief Initialices all important variables for servo-gripper
- *  \param [in] servoPin The pin of the arduino the servo motor is connected to
- *  \details This function must be called in the setup-function of the code
- *  This function changes the TCP-Position of the morobot
- */
 void gripper::begin(int8_t servoPin){
 	_gripperType = 1;
 	_servoID = -1;
@@ -88,11 +73,6 @@ void gripper::begin(int8_t servoPin){
 	Serial.println("Gripper connected to robot");
 }
 
-/**
- *  \brief Autonomous calibration for smart servo gripper
- *  \return Returns true is calibration was successful
- *  \details Closes gripper until a defined force (current) appears (= closed position), sets the motor zero and adds the default values for an open gripper 
- */
 bool gripper::autoCalibrate(){
 	Serial.println("Autocalibrating Gripper");
 	bool returnValue = true;
@@ -127,15 +107,6 @@ bool gripper::autoCalibrate(){
 	return true;
 }
 
-/**
- *  \brief Sets all important parameters of the gripper
- *  \param [in] degClosed Degrees at which the gripper is closed (used when calling close())
- *  \param [in] degOpen Degrees at which the gripper is opened (used when calling open())
- *  \param [in] degCloseLimit Gripper will not close above this limit (would harm hardware)
- *  \param [in] degOpenLimit Gripper will not open above this limit (would harm hardware)
- *  \param [in] gearRatio The gearRatio defines how many mm (or degrees) the gripper moves per degree motor movement
- *  \param [in] closingWidthOffset Opening width of the gripper when it is completely closed (for parallel grippers only
- */
 void gripper::setParams(float degClosed, float degOpen, float degCloseLimit, float degOpenLimit, float gearRatio=7.87, float closingWidthOffset=101.2){
 	_degClosed = degClosed;
 	_degOpen = degOpen;
@@ -153,30 +124,15 @@ void gripper::setParams(float degClosed, float degOpen, float degCloseLimit, flo
 	Serial.println(_degOpen);	
 }
 
-/**
- *  \brief Sets the opening and closing speed of the gripper
- *  \param [in] speed Opening and closing speed in RPM (max. 50)
- */
 void gripper::setSpeed(uint8_t speed){
 	setSpeed(speed, speed);
 }
 
-/**
- *  \brief Sets the opening and closing speed of the gripper independently
- *  \param [in] speedOpening Opening speed in RPM (max. 50)
- *  \param [in] speedClosing Closing speed in RPM (max. 50)
- */
 void gripper::setSpeed(uint8_t speedOpening, uint8_t speedClosing){
 	_speed[0] = speedOpening;
 	_speed[1] = speedClosing;
 }
 
-/**
- *  \brief Sets the TCP-Offset of the gripper and therefore also of the morobot
- *  \param [in] xOffset Offset in direction x
- *  \param [in] yOffset Offset in direction y
- *  \param [in] zOffset Offset in direction z
- */
 void gripper::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	_tcpOffset[0] = xOffset;
 	_tcpOffset[1] = yOffset;
@@ -184,9 +140,6 @@ void gripper::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	morobot->setTCPoffset(_tcpOffset[0], _tcpOffset[1], _tcpOffset[2]);
 }
 
-/**
- *  \brief Moves the gripper to its closing position (defined by _degClosed in setParams())
- */
 void gripper::close(){
 	float angle = _degClosed;
 	if (_gripperType == 1) angle = 0;
@@ -195,9 +148,6 @@ void gripper::close(){
 	_isClosed = true;
 }
 
-/**
- *  \brief Moves the gripper to its opening position (defined by _degOpened in setParams())
- */
 void gripper::open(){
 	float angle = _degOpen;
 	if (_gripperType == 1) angle = _degOpen / _gearRatio - _degClosed;	// Calculate from real degrees into motor degrees
@@ -206,22 +156,10 @@ void gripper::open(){
 	_isClosed = false;
 }
 
-/**
- *  \brief Moves the gripper relatively by a defined angle
- *  \param [in] angleInc Angle to move the gripper by
- *  \param [in] speed Speed to use for movement (Default: maximum speed)
- *  \return Returns true if movement has been successful
- */
 bool gripper::moveAngle(float angle, uint8_t speed){
 	return moveToAngle(getCurrentOpeningAngle() + angle, speed);
 }
 
-/**
- *  \brief Moves the gripper to a defined angle (absolute)
- *  \param [in] angle Angle to move the gripper to
- *  \param [in] speed Speed to use for movement (Default: maximum speed)
- *  \return Returns true if movement has been successful
- */
 bool gripper::moveToAngle(float angle, uint8_t speed){
 	if (_gripperType == 0){
 		if (checkIfAngleValid(angle) != true) return false;			// Check if angle is valid
@@ -258,23 +196,11 @@ bool gripper::moveToAngle(float angle, uint8_t speed){
 	return true;
 }
 
-/**
- *  \brief Moves the gripper relatively by a defined width
- *  \param [in] width Width to move the gripper by
- *  \param [in] speed Speed to use for movement (Default: maximum speed)
- *  \return Returns true if movement has been successful
- */
 bool gripper::moveWidth(float width, uint8_t speed){
 	if (_gripperType == 0) return moveToWidth(getCurrentOpeningWidth() + width, speed);
 	else return functionNotImplementedError();
 }
 
-/**
- *  \brief Moves the gripper to a defined width (absolute)
- *  \param [in] width Width to move the gripper to
- *  \param [in] speed Speed to use for movement (Default: maximum speed)
- *  \return Returns true if movement has been successful
- */
 bool gripper::moveToWidth(float width, uint8_t speed){
 	if (_gripperType == 0){ 
 		int8_t positiveFactor = 1;
@@ -287,11 +213,6 @@ bool gripper::moveToWidth(float width, uint8_t speed){
 	}
 }
 
-/**
- *  \brief Closes the gripper until a defined fore (current) is reached
- *  \param [in] maxCurrent Current at which the movement should stop
- *  \return Returns true if movement has been successful
- */
 bool gripper::closeToForce(float maxCurrent){
 	if (_gripperType == 0){
 		float closingStep = -5;
@@ -322,10 +243,6 @@ bool gripper::closeToForce(float maxCurrent){
 	return false;
 }
 
-/**
- *  \brief Calculates and return current opening angle of the gripper
- *  \return Current opening angle of the gripper
- */
 float gripper::getCurrentOpeningAngle(){
 	if (_gripperType == 0) {
 		_currentAngle = morobot->smartServos.getAngleRequest(_servoID+1);
@@ -336,36 +253,19 @@ float gripper::getCurrentOpeningAngle(){
 	return functionNotImplementedError();
 }
 
-/**
- *  \brief Calculates and return current opening width of the gripper. Only implemented for smart-servo (parallel-gripper).
- *  \return Current opening width of the gripper
- */
 float gripper::getCurrentOpeningWidth(){
 	if (_gripperType == 0) return _closingWidthOffset + abs(getCurrentOpeningAngle() / _gearRatio);
 	else return functionNotImplementedError();
 }
 
-/**
- *  \brief Checks if the gripper is closed
- *  \return True if gripper is closed, false otherwise
- */
 bool gripper::isClosed(){
 	return _isClosed;
 }
 
-/**
- *  \brief Checks if the gripper is opened
- *  \return True if gripper is opened, false otherwise
- */
 bool gripper::isOpened(){
 	return _isOpened;
 }
 
-/**
- *  \brief Checks if a given angle can be reached
- *  \param [in] angle Angle to drive to
- *  \return True if angle can be reached, false otherwise
- */
 bool gripper::checkIfAngleValid(float angle){
 	if ((_closingDirectionIsPositive == true && (angle > _degCloseLimit || angle < _degOpenLimit)) || (_closingDirectionIsPositive == false && (angle < _degCloseLimit || angle > _degOpenLimit))){
 		Serial.println("ERROR: ANGLE OUT OF LIMIT");
@@ -375,10 +275,6 @@ bool gripper::checkIfAngleValid(float angle){
 	return true;
 }
 
-/**
- *  \brief Makes sure the program does not continue until smart-servo-gripper has stopped moving
- *  \return True is the gripper reached the target position, false otherwise
- */
 bool gripper::waitUntilFinished(){
 	unsigned long startTime = millis();
 	while (true){
@@ -393,10 +289,6 @@ bool gripper::waitUntilFinished(){
 	}
 }
 
-/**
- *  \brief Prints a message and return false if the function is not implemented for this gripper-type
- *  \return Returns false if the function is not implemented for this gripper-type
- */
 bool gripper::functionNotImplementedError(){
 	Serial.println("ERROR: Function not implemented for this gripper type");
 	return false;

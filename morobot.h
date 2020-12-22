@@ -58,12 +58,15 @@
 #ifndef MOROBOT_H
 #define MOROBOT_H
 
-#define BREAK_LOOSE  1
-#define BREAK_BRAKED 0
-#define NUM_MAX_SERVOS 10
-#define TIMEOUT_DELAY 15000
+#define BREAK_LOOSE  1			//!< Defines if a break of a smart-servo is loose
+#define BREAK_BRAKED 0			//!< Defines if a break of a smart-servo is set
+#define NUM_MAX_SERVOS 10		//!< Maximum number of smart servos usable in one robot object
+#define TIMEOUT_DELAY 15000		//!< Delaytime until the robot stops waiting for motors to finish their movement
 
 class morobotClass {
+	/**
+	 *  \todo Implement multiple robots for ESP32
+	 */
 	public:
 		/**
 		 *  \brief Constructor of morobot class
@@ -73,7 +76,7 @@ class morobotClass {
 		
 		/**
 		 *  \brief Starts the communication with the smartservos of the robot
-		 *  \param [in] stream Name of serial port (e.g. "Serial1")
+		 *  \param [in] stream Name of serial port (e.g. "Serial1").
 		 *  \details The names of the Serial ports for Arduino controllers can be found here: https://www.arduino.cc/reference/en/language/functions/communication/serial/
 		 */
 		void begin(const char* stream);
@@ -92,29 +95,28 @@ class morobotClass {
 		
 		/**
 		 *  \brief Sets the speed in RPM (rounds per minute) for all motors. Does not move a motor.
+					Use this function to set a default speed for all motors so you do not have to give a speed every time the robot should move.
+					If a different speed is given in a movement-function, this speed will be used only for this movement.
 		 *  \param [in] speed Desired velocity of the motors in RPM (rounds per minute). Values accepted between 1 and 50.
-		 *  \details Use this function to set a default speed for all motors so you do not have to give a speed every time the robot should move.
-		 *  		 If a different speed is given in a movement-function, this speed will be used only for this movement.
 		 */
 		void setSpeedRPM(uint8_t speed);
 		
 		/**
 		 *  \brief Sets the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.
+					Virtual function. Defined individually for each robot type in the respective child classes.
+					This information is necessary to calculate the inverse kinematics correctly.
 		 *  \param [in] xOffset Offset in x-direction
 		 *  \param [in] yOffset Offset in y-direction
 		 *  \param [in] zOffset Offset in z-direction
-		 *  \details Virtual function. Defined individually for each robot type in the respective child classes.
-		 *  		 This information is necessary to calculate the inverse kinematics correctly.
 		 */
 		virtual void setTCPoffset(float xOffset, float yOffset, float zOffset)=0;
 		
 		/**
 		 *  \brief Checks if a given angle can be reached by the joint. Each joint has a specific limit to protect the robot's mechanics.
-		 *  
+		 *  		Virtual function. Defined individually for each robot type in the respective child classes.
 		 *  \param [in] servoId Number of motor to move (first motor has ID 0)
 		 *  \param [in] angle Angle to move the robot to in degrees
 		 *  \return Returns true if the position is reachable; false if it is not.
-		 *  \details Virtual function. Defined individually for each robot type in the respective child classes.
 		 */
 		virtual bool checkIfAngleValid(uint8_t servoId, float angle)=0;
 		
@@ -155,6 +157,7 @@ class morobotClass {
 		
 		/**
 		 *  \brief Check if a given smart servo is moving at the moment.
+		 *  		Function stores current angle of motor, waits some time and compares the angle before and after waiting.
 		 *  \param [in] servoId Number of motor to check (first motor has ID 0)
 		 *  \return Returns True if motor is moving; False if motor is not moving.
 		 */
@@ -211,65 +214,95 @@ class morobotClass {
 		float getCurrent(uint8_t servoId);
 		
 		/**
-		 * \brief Returns number of smart servos in robot. 
+		 * \brief Returns number of smart servos in robot 
+		 * \return Returns number of smart servos in robot
 		 */
 		uint8_t getNumSmartServos();
 		
 		/* MOVEMENTS */
 		/**
 		 *  \brief Moves a motor to a desired angle (absolute movement).
+		 *  		Checks if the angle is valid before moving if checkValidity is not given or true.
 		 *  \param [in] servoId Number of motor (first motor has ID 0)
 		 *  \param [in] angle Desired goal angle in degrees.
-		 *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
-		 *  \param [in] checkValidity (Optional) Set this variable to "false" if you don't want to check if the angle value is valid (e.g. necessary for calibration)
-		 *  \details Checks if the angle is valid before moving if checkValidity is not given or true.
 		 */
 		void moveToAngle(uint8_t servoId, long angle);
+		
+		/**
+		 *  \brief Moves a motor to a desired angle (absolute movement).
+		 *  		Checks if the angle is valid before moving if checkValidity is not given or true.
+		 *  \param [in] servoId Number of motor (first motor has ID 0)
+		 *  \param [in] angle Desired goal angle in degrees.
+		 *  \param [in] speedRPM Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
+		 *  \param [in] checkValidity (Optional) Set this variable to "false" if you don't want to check if the angle value is valid (e.g. necessary for calibration)
+		 */
 		void moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
 		
 		/**
 		 *  \brief Moves all motors to desired angles (Moves the whole robot) - absolute movement.
+					Waits until the robot is ready to use (no motor moves) before moving.
+					Checks if the angles are valid before moving.
 		 *  \param [in] angles[] Desired goal angles in degrees.
-		 *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
-		 *  \details Waits until the robot is ready to use (no motor moves) before moving.
-		 *  		 Checks if the angles are valid before moving.
 		 */
 		void moveToAngles(long angles[]);
+
+		/**
+		 *  \brief Moves all motors to desired angles (Moves the whole robot) - absolute movement.
+					Waits until the robot is ready to use (no motor moves) before moving.
+					Checks if the angles are valid before moving.
+		 *  \param [in] angles[] Desired goal angles in degrees.
+		 *  \param [in] speedRPM Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
+		 */
 		void moveToAngles(long angles[], uint8_t speedRPM);
 
 		/**
 		 *  \brief Moves a motor by a desired angle (relative movement).
+		 *  		Checks if the goal angle is valid before moving if checkValidity is not given or true.
 		 *  \param [in] servoId Number of motor (first motor has ID 0)
 		 *  \param [in] angle Desired angle in degrees to move robot by.
-		 *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
-		 *  \param [in] checkValidity (Optional) Set this variable to "false" if you don't want to check if the angle value is valid (e.g. necessary for calibration)
-		 *  \details Checks if the goal angle is valid before moving if checkValidity is not given or true.
 		 */
 		void moveAngle(uint8_t servoId, long angle);
+		
+		/**
+		 *  \brief Moves a motor by a desired angle (relative movement).
+		 *  		Checks if the goal angle is valid before moving if checkValidity is not given or true.
+		 *  \param [in] servoId Number of motor (first motor has ID 0)
+		 *  \param [in] angle Desired angle in degrees to move robot by.
+		 *  \param [in] speedRPM Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
+		 *  \param [in] checkValidity (Optional) Set this variable to "false" if you don't want to check if the angle value is valid (e.g. necessary for calibration)
+		 */
 		void moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
 		
 		/**
 		 *  \brief Moves all motors by desired angles (Moves the whole robot) - relative movement.
+					Waits until the robot is ready to use (no motor moves) before moving.
+		 *  		Checks if the angles are valid before moving.
 		 *  \param [in] angles[] Desired angles in degrees to move robot by.
-		 *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
-		 *  \details Waits until the robot is ready to use (no motor moves) before moving.
-		 *  		 Checks if the angles are valid before moving.
 		 */
 		void moveAngles(long angles[]);
+		
+		/**
+		 *  \brief Moves all motors by desired angles (Moves the whole robot) - relative movement.
+					Waits until the robot is ready to use (no motor moves) before moving.
+		 *  		Checks if the angles are valid before moving.
+		 *  \param [in] angles[] Desired angles in degrees to move robot by.
+		 *  \param [in] speedRPM Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
+		 */
 		void moveAngles(long angles[], uint8_t speedRPM);
 		
 		/**
 		 *  \brief Moves the TCP (tool center point) of the robot to a desired position.
+		 * 			Calls child class to solve inverse kinematics and moves the robot to the position.
 		 *  \param [in] x Desired x-coordinate of the TCP in mm (in base frame)
 		 *  \param [in] y Desired y-coordinate of the TCP in mm (in base frame)
 		 *  \param [in] z Desired z-coordinate of the TCP in mm (in base frame)
 		 *  \return Returns true if the position is reachable; false if it is not.
-		 *  \details Calls child class to solve inverse kinematics and moves the robot to the position.
 		 */
 		bool moveToPosition(float x, float y, float z);
 		
 		/**
 		 *  \brief Moves the TCP (tool center point) of the robot by given axis-values.
+		 *  		Calls child class to solve forward kinematics, adds values, solves inverse kinematics and moves the robot to the position.
 		 *  \param [in] xOffset Desired x-value to move the TCP by in mm
 		 *  \param [in] yOffset Desired y-value to move the TCP by in mm
 		 *  \param [in] zOffset Desired z-value to move the TCP by in mm
@@ -279,6 +312,7 @@ class morobotClass {
 		
 		/**
 		 *  \brief Moves the TCP (tool center point) of the robot by given value in one axis.
+		 *  		Calls child class to solve forward kinematics, adds values, solves inverse kinematics and moves the robot to the position.
 		 *  \param [in] axis Axis to move the robot in. Possible parameters: 'x', 'y', 'z'
 		 *  \param [in] value Value by which the robot should be moved in mm
 		 *  \return Returns true if the position is reachable; false if it is not.
@@ -300,24 +334,24 @@ class morobotClass {
 		float convertToDegrees(float angle);
 		
 		/* PUBLIC VARIABLES */
-		MakeblockSmartServo smartServos;	// Makeblock smartservo object
+		MakeblockSmartServo smartServos;	//!< Makeblock smartservo object
 	protected:
 		/**
 		 *  \brief Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics).
+		 *  		Virtual function. Defined individually for each robot type in the respective child classes.
+		 *  		This function does only calculate the angles of the motors and stores them internally.
+		 *  		Use moveToPosition(x,y,z) to actually move the robot.
 		 *  \param [in] x Desired x-position of TCP
 		 *  \param [in] y Desired x-position of TCP
 		 *  \param [in] z Desired x-position of TCP
 		 *  \return Returns true if the position is reachable; false if it is not.
-		 *  \details Virtual function. Defined individually for each robot type in the respective child classes.
-		 *  		 This function does only calculate the angles of the motors and stores them internally.
-		 *  		 Use moveToPosition(x,y,z) to actually move the robot.
 		 */
 		virtual bool calculateAngles(float x, float y, float z)=0;
 
 		/**
 		 *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
-		 *  \details Virtual function. Defined individually for each robot type in the respective child classes.
-		 *  		 This function does calculate and store the TCP position depending on the current motor angles.
+		 *  		Virtual function. Defined individually for each robot type in the respective child classes.
+		 *  		This function does calculate and store the TCP position depending on the current motor angles.
 		 */
 		virtual void updateTCPpose(bool output = false)=0;
 		
@@ -328,16 +362,18 @@ class morobotClass {
 		 */
 		void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25);
 	
-		uint8_t _numSmartServos;			// Number of smart servos of robot
-		uint8_t _speedRPM;					// Default speed (used if movement-funtions to not provide specific speed)
-		float _actPos[3];					// Robot TCP position (in base frame)
-		float _actOri[3];					// Robot TCP orientation (rotation in degrees around base frame)
-		bool _angleReached[NUM_MAX_SERVOS];	// Variables that indicate if a motor is busy (is moving and has not reached final position)
-		float _goalAngles[NUM_MAX_SERVOS];	// Variable for inverse kinematics to store goal Angles of the motors
-		Stream* _port;						// Port used for communication with the robot (e.g. Serial1)
+		uint8_t _numSmartServos;			//!< Number of smart servos of robot
+		uint8_t _speedRPM;					//!< Default speed (used if movement-funtions to not provide specific speed)
+		float _actPos[3];					//!< Robot TCP position (in base frame)
+		float _actOri[3];					//!< Robot TCP orientation (rotation in degrees around base frame)
+		bool _angleReached[NUM_MAX_SERVOS];	//!< Variables that indicate if a motor is busy (is moving and has not reached final position)
+		float _goalAngles[NUM_MAX_SERVOS];	//!< Variable for inverse kinematics to store goal Angles of the motors
+		Stream* _port;						//!< Port used for communication with the robot (e.g. Serial1)
 	private:
 		/**
 		 *  \brief Checks if the robot is busy or idle.
+		 *  		Checks if internal variables indicate the robot is idle.
+		 *  		If a motor is not already set idle, it checks if the motor is still moving.
 		 *  \return Returns true if the robot is idle; false if the robot is busy
 		 */
 		bool isReady();

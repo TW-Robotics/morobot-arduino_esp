@@ -43,6 +43,7 @@
  * Mark Yan         2016/08/23     1.0.0            Build the new.
  * Jakob Hoerbst    2020/01/28     1.0.0			edited
  * Johannes Rauer	2020/11/24	   1.0.0			Adapted for morobot implementation.
+ * </pre>
  */
 
 #include <stdlib.h>

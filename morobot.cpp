@@ -52,12 +52,6 @@
 
 #include <morobot.h>
 
-//TODO: Implement second robot for ESP32
-
-/**
- *  \brief Constructor of morobot class
- *  \param [in] numSmartServos Number of smart servos of the robot
- */
 morobotClass::morobotClass(uint8_t numSmartServos){
 	if (numSmartServos > NUM_MAX_SERVOS){
 		Serial.print("Too many motors! Maximum number of motors: ");
@@ -66,14 +60,6 @@ morobotClass::morobotClass(uint8_t numSmartServos){
 	_numSmartServos = numSmartServos;
 }
 
-/**
- *  \brief Starts the communication with the smartservos of the robot
- *  
- *  \param [in] stream Name of serial port (e.g. "Serial1").
- *  \return None
- *  
- *  \details The names of the Serial ports for Arduino controllers can be found here: https://www.arduino.cc/reference/en/language/functions/communication/serial/
- */
 void morobotClass::begin(const char* stream){
 	Serial.begin(115200);
 	
@@ -105,29 +91,15 @@ void morobotClass::begin(const char* stream){
 	Serial.println("Morobot initialized. Connection to motors established");
 }
 
-/**
- *  \brief Sets the current position as origin (zero position)
- *  \details Call this function after bringing the motors into their initial (zero position) to store it permanently as 0 degrees
- */
 void morobotClass::setZero(){
 	for (uint8_t i=0; i<_numSmartServos; i++) smartServos.setZero(i+1);
 }
 
-/**
- *  \brief Moves all motors to their origin (zero position)
- *  \details Only call this function after calibration (Setting a zero position for all motors using setZero())
- */
 void morobotClass::moveHome(){
 	for (uint8_t i=0; i<_numSmartServos; i++) smartServos.setInitAngle(i+1, 0, 15);
 	waitUntilIsReady();
 }
 
-/**
- *  \brief Set the speed in RPM (rounds per minute) for all motors
- *  \param [in] speed Desired velocity of the motors in RPM (rounds per minute). Values accepted between 1 and 50.
- *  \details Use this function to set a default speed for all motors so you do not have to give a speed every time the robot should move.
- *  		 If a different speed is given in a movement-function, this speed will be used only for this movement.
- */
 void morobotClass::setSpeedRPM(uint8_t speed){
 	_speedRPM = speed;
 	
@@ -139,47 +111,24 @@ void morobotClass::setSpeedRPM(uint8_t speed){
 
 
 /* BREAKS */
-/**
- *  \brief Sets the breaks of all motors. Axes cannot be moved after calling this function.
- *  \details After moving a motor with a movement-function, the motor is breaked at final position automatically. 
- */
 void morobotClass::setBreaks(){
 	for (uint8_t i=0; i<_numSmartServos; i++) smartServos.setBreak(i+1, BREAK_BRAKED);
 }
 
-/**
- *  \brief Releases the breaks of all motors. Axes can be moved freely after calling this function.
- *  \details After moving a motor with a movement-function, the motor is breaked at final position automatically.
- *  		 Use this function to release breaks to move the motor with your hands.
- */
 void morobotClass::releaseBreaks(){
 	for (uint8_t i=0; i<_numSmartServos; i++) smartServos.setBreak(i+1, BREAK_LOOSE);
 }
 
 
 /* ROBOT STATUS */
-/**
- *  \brief Sets internal variables which indicate, that the robot should not be moved at the moment.
- *  \details Use setIdle() to indicate, that the robot can be moved.
- *  		 Use waitUntilIsReady() to wait until the robot is idle (no motor moves) before continuing.
- */
 void morobotClass::setBusy(){
 	for (uint8_t i=0; i<_numSmartServos; i++) _angleReached[i] = false;
 }
 
-/**
- *  \brief Sets internal variables which indicate, that the robot can be moved.
- *  \details Use setBusy() to indicate, that the robot should not be moved.
- */
 void morobotClass::setIdle(){
 	for (uint8_t i=0; i<_numSmartServos; i++) _angleReached[i] = true;
 }
 
-/**
- *  \brief Waits until the robot is ready for new commants (all motors have stopped moving) or a timeout occurs.
- *  \details Function sets the robot idle only when all motors have stopped moving or a timeout occurs.
- *  		 If a timeout occurs this is printed to the serial monitor.
- */
 void morobotClass::waitUntilIsReady(){
 	setBusy();
 	unsigned long startTime = millis();
@@ -194,13 +143,7 @@ void morobotClass::waitUntilIsReady(){
 	}
 	setIdle();
 }
-		
-/**
- *  \brief Check if a given smart servo is moving at the moment.
- *  \param [in] servoId Number of motor to check (first motor has ID 0)
- *  \return Returns True if motor is moving; False if motor is not moving.
- *  \details Function stores current angle of motor, waits some time and compares the angle before and after waiting.
- */
+
 bool morobotClass::checkIfMotorMoves(uint8_t servoId){
 	long startPos = getActAngle(servoId);
 	delay(100);
@@ -210,20 +153,10 @@ bool morobotClass::checkIfMotorMoves(uint8_t servoId){
 
 
 /* GETTERS */
-/**
- *  \brief Returns angle-position of motor in degrees.
- *  \param [in] servoId Number of motor (first motor has ID 0)
- *  \return Angle-positon in degrees.
- */
 long morobotClass::getActAngle(uint8_t servoId){
 	return smartServos.getAngleRequest(servoId+1);
 }
 
-/**
- *  \brief Returns position of TCP in mm in given axis (in robot base frame).
- *  \param [in] axis Possible parameters: 'x', 'y', 'z'
- *  \return Position of TCP in mm in given axis.
- */
 float morobotClass::getActPosition(char axis){
 	updateTCPpose();
 	
@@ -233,11 +166,6 @@ float morobotClass::getActPosition(char axis){
 	else Serial.println("ERROR! Invalid axis in getActPosition();");
 }
 
-/**
- *  \brief Returns orientation of TCP in degrees in given axis (in robot base frame).
- *  \param [in] axis of rotation Possible parameters: 'x', 'y', 'z'
- *  \return Orientation of TCP in degrees in given axis.
- */
 float morobotClass::getActOrientation(char axis){
 	updateTCPpose();
 	
@@ -247,58 +175,27 @@ float morobotClass::getActOrientation(char axis){
 	else Serial.println("ERROR! Invalid axis in getActOrientation();");
 }
 
-/**
- *  \brief Returns current speed of motor in RPM (rounds per minute).
- *  \param [in] servoId Number of motor (first motor has ID 0)
- *  \return Current speed of motor in RPM.
- */
 float morobotClass::getSpeed(uint8_t servoId){
 	return smartServos.getSpeedRequest(servoId+1);
 }
 
-/**
- *  \brief Returns current temperature of motor in degrees Celsius.
- *  \param [in] servoId Number of motor (first motor has ID 0)
- *  \return Current temperature of motor in degrees Celsius.
- */
 float morobotClass::getTemp(uint8_t servoId){
 	return smartServos.getTempRequest(servoId+1);
 }
 
-/**
- *  \brief Returns current voltage of motor.
- *  \param [in] servoId Number of motor (first motor has ID 0)
- *  \return Current voltage of motor.
- */
 float morobotClass::getVoltage(uint8_t servoId){
 	return smartServos.getVoltageRequest(servoId+1);
 }
 
-/**
- *  \brief Returns current current consumption of motor in Ampere.
- *  \param [in] servoId Number of motor (first motor has ID 0)
- *  \return Current current consumption of motor in Ampere.
- */
 float morobotClass::getCurrent(uint8_t servoId){
 	return smartServos.getCurrentRequest(servoId+1);
 }
 
-/**
- * \brief Returns number of smart servos in robot. 
- */
 uint8_t morobotClass::getNumSmartServos(){
 	return _numSmartServos;
 }
 
 /* MOVEMENTS */
-/**
- *  \brief Moves a motor to a desired angle (absolute movement).
- *  \param [in] servoId Number of motor (first motor has ID 0)
- *  \param [in] angle Desired goal angle in degrees.
- *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
- *  \param [in] checkValidity (Optional) Set this variable to "false" if you don't want to check if the angle value is valid (e.g. necessary for calibration)
- *  \details Checks if the angle is valid before moving if checkValidity is not given or true.
- */
 void morobotClass::moveToAngle(uint8_t servoId, long angle){
 	if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, _speedRPM);
 }
@@ -308,13 +205,6 @@ void morobotClass::moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bo
 	else if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, speedRPM);
 }
 
-/**
- *  \brief Moves all motors to desired angles (Moves the whole robot) - absolute movement.
- *  \param [in] angles[] Desired goal angles in degrees.
- *  \param [in] speedRPM Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
- *  \details Waits until the robot is ready to use (no motor moves) before moving.
- *  		 Checks if the angles are valid before moving.
- */
 void morobotClass::moveToAngles(long angles[]){
 	waitUntilIsReady();
 	setBusy();
@@ -333,14 +223,6 @@ void morobotClass::moveToAngles(long angles[], uint8_t speedRPM){
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, angles[i], speedRPM);
 }
 
-/**
- *  \brief Moves a motor by a desired angle (relative movement).
- *  \param [in] servoId Number of motor (first motor has ID 0)
- *  \param [in] angle Desired goal angle in degrees.
- *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
- *  \param [in] checkValidity (Optional) Set this variable to "false" if you don't want to check if the angle value is valid (e.g. necessary for calibration)
- *  \details Checks if the angle is valid before moving if checkValidity is not given or true.
- */
 void morobotClass::moveAngle(uint8_t servoId, long angle){
 	if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, _speedRPM);
 }
@@ -350,13 +232,6 @@ void morobotClass::moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool
 	else if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, speedRPM);
 }
 
-/**
- *  \brief Moves all motors by desired angles (Moves the whole robot) - relative movement.
- *  \param [in] angles[] Desired angles in degrees to move robot by.
- *  \param [in] speedRPM (Optional) Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used.
- *  \details Waits until the robot is ready to use (no motor moves) before moving.
- *  		 Checks if the angles are valid before moving.
- */
 void morobotClass::moveAngles(long angles[]){
 	waitUntilIsReady();
 	setBusy();
@@ -375,14 +250,6 @@ void morobotClass::moveAngles(long angles[], uint8_t speedRPM){
 	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i, angles[i], speedRPM);
 }
 
-/**
- *  \brief Moves the TCP (tool center point) of the robot to a desired position.
- *  \param [in] x Desired x-coordinate of the TCP (in base frame)
- *  \param [in] y Desired y-coordinate of the TCP (in base frame)
- *  \param [in] z Desired z-coordinate of the TCP (in base frame)
- *  \return Returns true if the position is reachable; false if it is not.
- *  \details Calls child class to solve inverse kinematics and moves the robot to the position.
- */
 bool morobotClass::moveToPosition(float x, float y, float z){
 	Serial.print("Moving to [mm]: ");
 	Serial.print(x);
@@ -396,26 +263,11 @@ bool morobotClass::moveToPosition(float x, float y, float z){
 	return true;
 }
 
-/**
- *  \brief Moves the TCP (tool center point) of the robot by given axis-values.
- *  \param [in] xOffset Desired x-value to move the TCP by in mm
- *  \param [in] yOffset Desired y-value to move the TCP by in mm
- *  \param [in] zOffset Desired z-value to move the TCP by in mm
- *  \return Returns true if the position is reachable; false if it is not.
- *  \details Calls child class to solve forward kinematics, adds values, solves inverse kinematics and moves the robot to the position.
- */
 bool morobotClass::moveXYZ(float xOffset, float yOffset, float zOffset){
 	updateTCPpose();
 	return moveToPosition(_actPos[0]+xOffset, _actPos[1]+yOffset, _actPos[2]+zOffset);
 }
 
-/**
- *  \brief Moves the TCP (tool center point) of the robot by given value in one axis.
- *  \param [in] axis Axis to move the robot in. Possible parameters: 'x', 'y', 'z'
- *  \param [in] value Value by which the robot should be moved in mm
- *  \return Returns true if the position is reachable; false if it is not.
- *  \details Calls child class to solve forward kinematics, adds values, solves inverse kinematics and moves the robot to the position.
- */
 bool morobotClass::moveInDirection(char axis, float value){
 	updateTCPpose();
 	float goalxyz[3];
@@ -429,11 +281,7 @@ bool morobotClass::moveInDirection(char axis, float value){
 	return moveToPosition(goalxyz[0], goalxyz[1], goalxyz[2]);
 }
 
-/* HELPER */    
-/**
- *  \brief Prints an array of angles to the servial monitor.
- *  \param [in] angles[] Angle values to print.
- */
+/* HELPER */
 void morobotClass::printAngles(long angles[]){
 	for (uint8_t i=0; i<_numSmartServos; i++) {
 		Serial.print(angles[i]);
@@ -442,11 +290,6 @@ void morobotClass::printAngles(long angles[]){
 	}
 }
 
-/**
- *  \brief Returns angle converted from rad into deg
- *  \param [in] angle Angle to convert in radians
- *  \return Returns angle in degree
- */
 float morobotClass::convertToDegrees(float angle){
 	return angle*180/M_PI;
 }
@@ -462,12 +305,6 @@ void morobotClass::autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurr
 }
 
 /* ROBOT STATUS PRIVATE */
-/**
- *  \brief Checks if the robot is busy or idle.
- *  \return Returns true if the robot is idle; false if the robot is busy
- *  \details Checks if internal variables indicate the robot is idle.
- *  		 If a motor is not already set idle, it checks if the motor is still moving.
- */
 bool morobotClass::isReady(){
 	for (uint8_t i=0; i<_numSmartServos; i++) {
 		if (_angleReached[i] == false) {

@@ -29,44 +29,45 @@ class newRobotClass_Template:public morobotClass {
 		
 		/**
 		 *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.
+		 *  		This information is necessary to calculate the inverse kinematics correctly.
+		 *  		The function stores the TCP-Offset and recalculates the length and angle of the last axis.
+		 *  		Internally the length and angle of the last axis is stored as if it would be a straigth axis directly to the TCP.
 		 *  \param [in] xOffset Offset in x-direction
 		 *  \param [in] yOffset Offset in y-direction
 		 *  \param [in] zOffset Offset in z-direction
-		 *  \details This information is necessary to calculate the inverse kinematics correctly.
 		 */
 		virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 		
 		/**
 		 *  \brief Checks if a given angle can be reached by the joint. Each joint has a specific limit to protect the robot's mechanics.
-		 *  
+		 *  		The joint limits are predefined in the private variable _jointLimits
 		 *  \param [in] servoId Number of motor to move (first motor has ID 0)
 		 *  \param [in] angle Angle to move the robot to in degrees
 		 *  \return Returns true if the position is reachable; false if it is not.
-		 *  \details The joint limits are predefined in the private variable _jointLimits
 		 */
 		virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 
 	protected:
 		/**
 		 *  \brief Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics).
+		 *			This function does only calculate the angles of the motors and stores them internally.
+		 *  		Use moveToPosition(x,y,z) to actually move the robot.
 		 *  \param [in] x Desired x-position of TCP
 		 *  \param [in] y Desired x-position of TCP
 		 *  \param [in] z Desired x-position of TCP
 		 *  \return Returns true if the position is reachable; false if it is not.
-		 *  \details This function does only calculate the angles of the motors and stores them internally.
-		 *  		 Use moveToPosition(x,y,z) to actually move the robot.
 		 */
 		virtual bool calculateAngles(float x, float y, float z);
 		
 		/**
 		 *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
-		 *  \details This function does calculate and store the TCP position depending on the current motor angles.
+		 *  		This function does calculate and store the TCP position depending on the current motor angles.
 		 */
 		virtual void updateTCPpose();
 
 	private:
-		float _tcpOffset[3];	// Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
-		long _jointLimits[3][2] = {{-100, 100}, {-100, 100}, {0, 780}};		// Limits for all joints
+		float _tcpOffset[3];	//!< Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
+		long _jointLimits[3][2] = {{-100, 100}, {-100, 100}, {0, 780}};		//!< Limits for all joints
 				// TODO: CHANGE THE NUMBER OF SERVOS AND THE LIMITS HERE
 		
 		//TODO: PUT VARIABLES FOR INVERSE KINEMATICS HERE

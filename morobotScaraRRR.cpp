@@ -1,12 +1,12 @@
 /**
- *  \class 	newRobotClass
+ *  \class 	morobotScaraRRP
  *  \brief 	morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32
- *  @file 	newRobotClass.h
+ *  @file 	morobotScaraRRR.cpp
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
  *  \par Method List:
  *  	public:
- *  		newRobotClass() : morobotClass(PUT_NUM_SERVOS_HERE){};
+ *  		morobotScaraRRR() : morobotClass(PUT_NUM_SERVOS_HERE){}
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 			bool checkIfAnglesValid(float phi1, float phi2, float phi3);
@@ -17,15 +17,6 @@
  
 #include <morobotScaraRRR.h>
 
-/**
- *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.
- *  \param [in] xOffset Offset in x-direction
- *  \param [in] yOffset Offset in y-direction
- *  \param [in] zOffset Offset in z-direction
- *  \details This information is necessary to calculate the inverse kinematics correctly.
- *  		 The function stores the TCP-Offset and recalculates the length and angle of the last axis.
- *  		 Internally the length and angle of the last axis is stored as if it would be a straigth axis directly to the TCP.
- */
 void morobotScaraRRR::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	_tcpOffset[0] = xOffset;
 	_tcpOffset[1] = yOffset;
@@ -41,13 +32,6 @@ void morobotScaraRRR::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	updateTCPpose();
 }
 
-/**
- *  \brief Checks if a given angle can be reached by the joint. Each joint has a specific limit to protect the robot's mechanics.
- *  
- *  \param [in] servoId Number of motor to move (first motor has ID 0)
- *  \param [in] angle Angle to move the robot to in degrees
- *  \return Returns true if the position is reachable; false if it is not.
- */
 bool morobotScaraRRR::checkIfAngleValid(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
 	if(isnan(angle)){
@@ -69,13 +53,6 @@ bool morobotScaraRRR::checkIfAngleValid(uint8_t servoId, float angle){
 	return true;
 }
 
-/**
- *  \brief Checks if all robot motor angles are valid
- *  \param [in] phi1 Angle value for first joint
- *  \param [in] phi2 Angle value for second joint
- *  \param [in] phi3 Angle value for third joint
- *  \return Returns true if the position is reachable; false if it is not.
- */
 bool morobotScaraRRR::checkIfAnglesValid(float phi1, float phi2, float phi3){
 	float angles[3] = {phi1, phi2, phi3};
 	
@@ -84,15 +61,6 @@ bool morobotScaraRRR::checkIfAnglesValid(float phi1, float phi2, float phi3){
 }
 
 /* PROTECTED FUNCTIONS */
-/**
- *  \brief Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics).
- *  \param [in] x Desired x-position of TCP
- *  \param [in] y Desired x-position of TCP
- *  \param [in] z Desired x-position of TCP
- *  \return Returns true if the position is reachable; false if it is not.
- *  \details This function does only calculate the angles of the motors and stores them internally.
- *  		 Use moveToPosition(x,y,z) to actually move the robot.
- */
 bool morobotScaraRRR::calculateAngles(float x, float y, float rotZ){
 	rotZ = rotZ * M_PI/180;			// Transform rotation into radians
 	x = x-a;							// Base is in x-orientation --> Just subtract base-length from x-coordinate
@@ -133,11 +101,6 @@ bool morobotScaraRRR::calculateAngles(float x, float y, float rotZ){
 	return true;
 }
 
-/**
- *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
- *  \param [in] output If output = true, the calculated position+orientation is printed to the terminal
- *  \details This function does calculate and store the TCP position depending on the current motor angles.
- */
 void morobotScaraRRR::updateTCPpose(bool output){
 	setBusy();
 	waitUntilIsReady();

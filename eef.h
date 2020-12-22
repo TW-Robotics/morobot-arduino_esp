@@ -45,7 +45,7 @@
 #ifndef EEF_H
 #define EEF_H
 
-#define TIMEOUT_DELAY_GRIPPER 25000
+#define TIMEOUT_DELAY_GRIPPER 25000		//!< Delay after which the gripper stops moving when closeToForce() is used
 
 class gripper {
 	public:
@@ -152,7 +152,7 @@ class gripper {
 		bool moveToWidth(float width, uint8_t speed=50);
 		
 		/**
-		 *  \brief Closes the gripper until a defined fore (current) is reached. Only implemented for smart-servo.
+		 *  \brief Closes the gripper until a defined force (current) is reached. Only implemented for smart-servo.
 		 *  \param [in] maxCurrent Current at which the movement should stop
 		 *  \return Returns true if movement has been successful
 		 */
@@ -182,8 +182,8 @@ class gripper {
 		 */
 		bool isOpened();
 		
-		morobotClass* morobot;		// Pointer to morobot object (for tcp-offset definition and smart-servo-control)
-		Servo servo;				// Servo-object if a servo-motor is defined
+		morobotClass* morobot;		//!< Pointer to morobot object (for tcp-offset definition and smart-servo-control)
+		Servo servo;				//!< Servo-object if a servo-motor is defined
 	private:
 		/**
 		 *  \brief Checks if a given angle can be reached
@@ -204,24 +204,27 @@ class gripper {
 		 */
 		bool functionNotImplementedError();
 		
-		bool _isClosed;			// True if gripper is closed
-		bool _isOpened;			// True if gripper is opened
-		float _currentAngle;	// Stores current angle position
+		bool _isClosed;			//!< True if gripper is closed
+		bool _isOpened;			//!< True if gripper is opened
+		float _currentAngle;	//!< Stores current angle position
 		
-		uint8_t _gripperType;	// 0: smartServo parallel gripper, 1: normal servo
-		float _gearRatio;		// mm per degree for parallel grippers, real-degrees per motor-degree for other grippers
-		bool _closingDirectionIsPositive;	// Defines if the motor-angle of the closing angle is bigger than the opening angle (necessary to move the gripper in the correct direction)
-		uint8_t _speed[2];		// opening-speed, closing-speed
-		float _degOpen;			// Angle at which the gripper is open (motor-angle)
-		float _degClosed;		// Angle at which the gripper is closed (motor-angle)
-		float _degOpenLimit;	// Angle to maximum move the gripper to (motor-angle)
-		float _degCloseLimit;	// Angle to maximum move the gripper to (motor-angle)
-		float _closingWidthOffset;	// If gripper is completely closed, it has this gripping width
-		float _tcpOffset[3];	// Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
-		int8_t _servoID;		// ID of the smart-servo
+		uint8_t _gripperType;	//!< 0: smartServo parallel gripper, 1: normal servo
+		float _gearRatio;		//!< mm per degree for parallel grippers, real-degrees per motor-degree for other grippers
+		bool _closingDirectionIsPositive;	//!< Defines if the motor-angle of the closing angle is bigger than the opening angle (necessary to move the gripper in the correct direction)
+		uint8_t _speed[2];		//!< opening-speed, closing-speed
+		float _degOpen;			//!< Angle at which the gripper is open (motor-angle)
+		float _degClosed;		//!< Angle at which the gripper is closed (motor-angle)
+		float _degOpenLimit;	//!< Angle to maximum move the gripper to (motor-angle)
+		float _degCloseLimit;	//!< Angle to maximum move the gripper to (motor-angle)
+		float _closingWidthOffset;	//!< If gripper is completely closed, it has this gripping width
+		float _tcpOffset[3];	//!< Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
+		int8_t _servoID;		//!< ID of the smart-servo
 };
 
 class binaryEEF {
+	/**
+	 *  \todo Implement binary grippers (electro-magnets, sucker-cups, ...)
+	 */
 	public:
 		binaryEEF(int8_t pin);
 		void activate();

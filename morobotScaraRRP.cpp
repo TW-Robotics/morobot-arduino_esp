@@ -19,15 +19,6 @@
  
 #include <morobotScaraRRP.h>
 
-/**
- *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.
- *  \param [in] xOffset Offset in x-direction
- *  \param [in] yOffset Offset in y-direction
- *  \param [in] zOffset Offset in z-direction
- *  \details This information is necessary to calculate the inverse kinematics correctly.
- *  		 The function stores the TCP-Offset and recalculates the length and angle of the last axis.
- *  		 Internally the length and angle of the last axis is stored as if it would be a straigth axis directly to the TCP.
- */
 void morobotScaraRRP::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	_tcpOffset[0] = xOffset;
 	_tcpOffset[1] = yOffset;
@@ -48,13 +39,6 @@ void morobotScaraRRP::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	updateTCPpose();
 }
 
-/**
- *  \brief Checks if a given angle can be reached by the joint. Each joint has a specific limit to protect the robot's mechanics.
- *  
- *  \param [in] servoId Number of motor to move (first motor has ID 0)
- *  \param [in] angle Angle to move the robot to in degrees
- *  \return Returns true if the position is reachable; false if it is not.
- */
 bool morobotScaraRRP::checkIfAngleValid(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
 	if(isnan(angle)){
@@ -76,13 +60,6 @@ bool morobotScaraRRP::checkIfAngleValid(uint8_t servoId, float angle){
 	return true;
 }
 
-/**
- *  \brief Checks if all robot motor angles are valid
- *  \param [in] phi1 Angle value for first joint
- *  \param [in] phi2 Angle value for second joint
- *  \param [in] phi3 Angle value for third joint
- *  \return Returns true if the position is reachable; false if it is not.
- */
 bool morobotScaraRRP::checkIfAnglesValid(float phi1, float phi2, float phi3){
 	float angles[3] = {phi1, phi2, phi3};
 	
@@ -90,36 +67,17 @@ bool morobotScaraRRP::checkIfAnglesValid(float phi1, float phi2, float phi3){
 	return true;
 }
 
-/**
- *  \brief Moves all motors to desired angles (Moves the whole robot) - absolute movement.
- *  \param [in] phi1, phi2, phi3 Desired angles of all motors.
- *  \details Waits until the robot is ready to use (no motor moves) before moving.
- *  		 Checks if the angles are valid before moving.
- */
 void morobotScaraRRP::moveToAngles(long phi1, long phi2, long phi3){
 	long angles[3] = {phi1, phi2, phi3};
 	moveToAngles(angles);
 }
 
-/**
- *  \brief Calibrates the linear axis by increasing the angle until a current limit is reached
- *  \param [in] maxMotorCurrent (Optional) Current limit at which zero position is reached an calibration stops
- */
 void morobotScaraRRP::moveZAxisIn(uint8_t maxMotorCurrent){
 	autoCalibrateLinearAxis(2, maxMotorCurrent);
 	waitUntilIsReady();
 }
 
 /* PROTECTED FUNCTIONS */
-/**
- *  \brief Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics).
- *  \param [in] x Desired x-position of TCP
- *  \param [in] y Desired x-position of TCP
- *  \param [in] z Desired x-position of TCP
- *  \return Returns true if the position is reachable; false if it is not.
- *  \details This function does only calculate the angles of the motors and stores them internally.
- *  		 Use moveToPosition(x,y,z) to actually move the robot.
- */
 bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 	float xSQ = pow(x-a,2);	// Base is in x-orientation --> Just subtract base-length from x-coordinate
 	float ySQ = pow(y,2);
@@ -154,11 +112,6 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 	return true;
 }
 
-/**
- *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
- *  \param [in] output If output = true, the calculated position+orientation is printed to the terminal
- *  \details This function does calculate and store the TCP position depending on the current motor angles.
- */
 void morobotScaraRRP::updateTCPpose(bool output){
 	setBusy();
 	waitUntilIsReady();

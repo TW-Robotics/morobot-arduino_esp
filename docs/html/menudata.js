@@ -70,9 +70,4 @@ var menudata={children:[
 {text:"d",url:"functions_vars.html#index_d"},
 {text:"g",url:"functions_vars.html#index_g"},
 {text:"m",url:"functions_vars.html#index_m"},
-{text:"s",url:"functions_vars.html#index_s"}]}]}]},
-{text:"Files",url:"files.html",children:[
-{text:"File List",url:"files.html"},
-{text:"File Members",url:"globals.html",children:[
-{text:"All",url:"globals.html"},
-{text:"Macros",url:"globals_defs.html"}]}]}]}
+{text:"s",url:"functions_vars.html#index_s"}]}]}]}]}

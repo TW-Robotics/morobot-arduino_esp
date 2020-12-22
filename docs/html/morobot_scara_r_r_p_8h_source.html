@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>morobot-arduino_esp: C:/Users/Johannes Rauer/Documents/Arduino/libraries/morobot/morobotScaraRRP.h Source File</title>
+<title>morobot-arduino_esp: morobotScaraRRP.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,14 +83,14 @@ $(document).ready(function(){initNavTree('morobot_scara_r_r_p_8h_source.html',''
 
 <div class="header">
   <div class="headertitle">
-<div class="title">C:/Users/Johannes Rauer/Documents/Arduino/libraries/morobot/morobotScaraRRP.h</div>  </div>
+<div class="title">morobotScaraRRP.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="morobot_scara_r_r_p_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef MOROBOTSCARARRP_H</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define MOROBOTSCARARRP_H</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="morobot_8h.html">morobot.h</a>&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;morobot.h&gt;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classmorobot_scara_r_r_p.html">   25</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmorobot_scara_r_r_p.html">morobotScaraRRP</a>:<span class="keyword">public</span> <a class="code" href="classmorobot_class.html">morobotClass</a> {</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">public</span>:</div>
@@ -147,14 +147,13 @@ $(document).ready(function(){initNavTree('morobot_scara_r_r_p_8h_source.html',''
 <div class="ttc" id="aclassmorobot_class_html_a698227270f1ac05e390fd86c01a19604"><div class="ttname"><a href="classmorobot_class.html#a698227270f1ac05e390fd86c01a19604">morobotClass::moveToAngles</a></div><div class="ttdeci">void moveToAngles(long angles[])</div><div class="ttdoc">Moves all motors to desired angles (Moves the whole robot) - absolute movement. Waits until the robot...</div><div class="ttdef"><b>Definition:</b> morobot.cpp:208</div></div>
 <div class="ttc" id="aclassmorobot_scara_r_r_p_html_a71ce07413dadb55c85a7936f7c7b10c8"><div class="ttname"><a href="classmorobot_scara_r_r_p.html#a71ce07413dadb55c85a7936f7c7b10c8">morobotScaraRRP::updateTCPpose</a></div><div class="ttdeci">virtual void updateTCPpose(bool output=false)</div><div class="ttdoc">Re-calculates the internally stored robot TCP position (Solves forward kinematics)....</div><div class="ttdef"><b>Definition:</b> morobotScaraRRP.cpp:115</div></div>
 <div class="ttc" id="aclassmorobot_scara_r_r_p_html_a46c129c8b3560cf2a19592aa38ef7c0a"><div class="ttname"><a href="classmorobot_scara_r_r_p.html#a46c129c8b3560cf2a19592aa38ef7c0a">morobotScaraRRP::moveZAxisIn</a></div><div class="ttdeci">void moveZAxisIn(uint8_t maxMotorCurrent=25)</div><div class="ttdoc">Calibrates the linear axis by increasing the angle until a current limit is reached.</div><div class="ttdef"><b>Definition:</b> morobotScaraRRP.cpp:75</div></div>
-<div class="ttc" id="amorobot_8h_html"><div class="ttname"><a href="morobot_8h.html">morobot.h</a></div></div>
 <div class="ttc" id="aclassmorobot_class_html"><div class="ttname"><a href="classmorobot_class.html">morobotClass</a></div><div class="ttdoc">morobot base class for microcontrollers such as Arduino or ESP32</div><div class="ttdef"><b>Definition:</b> morobot.h:66</div></div>
 <div class="ttc" id="aclassmorobot_scara_r_r_p_html_ad4a6130c6bd2b5cae9c55aea8c0f3b6f"><div class="ttname"><a href="classmorobot_scara_r_r_p.html#ad4a6130c6bd2b5cae9c55aea8c0f3b6f">morobotScaraRRP::gearRatio</a></div><div class="ttdeci">float gearRatio</div><div class="ttdoc">Turn motor of linear axis by gearRatio degrees to move it 1 mm.</div><div class="ttdef"><b>Definition:</b> morobotScaraRRP.h:106</div></div>
 <div class="ttc" id="aclassmorobot_scara_r_r_p_html_ae4ae513098cb30119093cdfd6d83f00c"><div class="ttname"><a href="classmorobot_scara_r_r_p.html#ae4ae513098cb30119093cdfd6d83f00c">morobotScaraRRP::checkIfAngleValid</a></div><div class="ttdeci">virtual bool checkIfAngleValid(uint8_t servoId, float angle)</div><div class="ttdoc">Checks if a given angle can be reached by the joint. Each joint has a specific limit to protect the r...</div><div class="ttdef"><b>Definition:</b> morobotScaraRRP.cpp:42</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="morobot_scara_r_r_p_8h.html">morobotScaraRRP.h</a></li>
+    <li class="navelem"><b>morobotScaraRRP.h</b></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

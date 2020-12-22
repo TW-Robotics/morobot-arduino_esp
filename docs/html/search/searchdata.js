@@ -1,33 +1,27 @@
 var indexSectionsWithContent =
 {
-  0: "_abcdefgimnoprstuw",
+  0: "_abcdfgimnoprstuw",
   1: "bgmn",
-  2: "emn",
-  3: "abcfgimnoprsuw",
-  4: "_abcdgms",
-  5: "bnt",
-  6: "t"
+  2: "abcfgimnoprsuw",
+  3: "_abcdgms",
+  4: "t"
 };
 
 var indexSectionNames =
 {
   0: "all",
   1: "classes",
-  2: "files",
-  3: "functions",
-  4: "variables",
-  5: "defines",
-  6: "pages"
+  2: "functions",
+  3: "variables",
+  4: "pages"
 };
 
 var indexSectionLabels =
 {
   0: "All",
   1: "Classes",
-  2: "Files",
-  3: "Functions",
-  4: "Variables",
-  5: "Macros",
-  6: "Pages"
+  2: "Functions",
+  3: "Variables",
+  4: "Pages"
 };
 

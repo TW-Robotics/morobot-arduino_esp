@@ -89,7 +89,8 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="textblock"><p><a class="anchor" id="md_C__Users_Johannes_Rauer_Documents_Arduino_libraries_morobot_README"></a><a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3" style="pointer-events: none;" class="inline"/></a></p>
 <h1><a class="anchor" id="autotoc_md0"></a>
 morobot software library for microcontrollers such as Arduino and ESP32</h1>
-<p>This library can be used to control the UAS Technikum Wien morobots using an Arduino or ESP32 microcontroller.</p>
+<p>This library can be used to control the UAS Technikum Wien morobots using an Arduino or ESP32 microcontroller.<br  />
+ Visit <a href="https://tw-robotics.github.io/morobot-arduino_esp/">https://tw-robotics.github.io/morobot-arduino_esp/</a> to read the documentation,</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Installation</h2>
 <p>Download this library and install it in your Arduino IDE. See the <a href="https://www.arduino.cc/en/guide/libraries#toc4">Arduino Help Page</a> for more information.</p>
@@ -99,13 +100,20 @@ Usage</h2>
 <h3><a class="anchor" id="autotoc_md3"></a>
 Examples</h3>
 <ul>
-<li>base_importantFunctionCalls\ Bare minimum program and function calls for controlling a morobot Scara RRP. Just put control commands into the loop and look what happens.</li>
-<li>calibrate_robot\ Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.</li>
-<li>driveAroundXYZ\ Control the RRP robot with the dabble app and drive around giving x-y-z-coordinates</li>
-<li>driveAroundXYZ_RRR\ Control the RRR robot with the dabble app and drive around giving x-y-z-coordinates</li>
-<li>multiple_robots\ Control multiple robots (in this case 2x Scara RRP) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.</li>
-<li>teach_robot\ Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.</li>
-<li>endeffector\ Use the different grippers in combination with the robots. </li>
+<li>base_importantFunctionCalls<br  />
+ Bare minimum program and function calls for controlling a morobot Scara RRP. Just put control commands into the loop and look what happens.</li>
+<li>calibrate_robot<br  />
+ Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.</li>
+<li>driveAroundXYZ<br  />
+ Control the RRP robot with the dabble app and drive around giving x-y-z-coordinates</li>
+<li>driveAroundXYZ_RRR<br  />
+ Control the RRR robot with the dabble app and drive around giving x-y-z-coordinates</li>
+<li>multiple_robots<br  />
+ Control multiple robots (in this case 2x Scara RRP) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.</li>
+<li>teach_robot<br  />
+ Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.</li>
+<li>endeffector<br  />
+ Use the different grippers in combination with the robots. </li>
 </ul>
 <h3><a class="anchor" id="autotoc_md4"></a>
 Supported robot types</h3>

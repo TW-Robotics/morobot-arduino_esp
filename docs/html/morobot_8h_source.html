@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>morobot-arduino_esp: C:/Users/Johannes Rauer/Documents/Arduino/libraries/morobot/morobot.h Source File</title>
+<title>morobot-arduino_esp: morobot.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,20 +83,20 @@ $(document).ready(function(){initNavTree('morobot_8h_source.html',''); initResiz
 
 <div class="header">
   <div class="headertitle">
-<div class="title">C:/Users/Johannes Rauer/Documents/Arduino/libraries/morobot/morobot.h</div>  </div>
+<div class="title">morobot.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="morobot_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#include &lt;MakeblockSmartServo.h&gt;</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#ifndef MOROBOT_H</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#define MOROBOT_H</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="morobot_8h.html#a12a2de84be86ac9ea458c9ceb2301950">   61</a></span>&#160;<span class="preprocessor">#define BREAK_LOOSE  1          </span></div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="morobot_8h.html#a991904b5ac26f152aef4f2e7232cdc87">   62</a></span>&#160;<span class="preprocessor">#define BREAK_BRAKED 0          </span></div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="morobot_8h.html#a2b984e56e3936cda8e11281c011187f3">   63</a></span>&#160;<span class="preprocessor">#define NUM_MAX_SERVOS 10       </span></div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="morobot_8h.html#a8032a941e3dca02cdfade5cc3cfe1dc6">   64</a></span>&#160;<span class="preprocessor">#define TIMEOUT_DELAY 15000     </span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#define BREAK_LOOSE  1          </span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#define BREAK_BRAKED 0          </span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define NUM_MAX_SERVOS 10       </span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#define TIMEOUT_DELAY 15000     </span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor"></span> </div>
 <div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classmorobot_class.html">   66</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmorobot_class.html">morobotClass</a> {</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">public</span>:</div>
@@ -186,8 +186,8 @@ $(document).ready(function(){initNavTree('morobot_8h_source.html',''); initResiz
 <div class="line"><a name="l00366"></a><span class="lineno"><a class="line" href="classmorobot_class.html#a259041b2d218239690bfe81762197eba">  366</a></span>&#160;        uint8_t <a class="code" href="classmorobot_class.html#a259041b2d218239690bfe81762197eba">_speedRPM</a>;                  </div>
 <div class="line"><a name="l00367"></a><span class="lineno"><a class="line" href="classmorobot_class.html#aa6a964b130ad7416235cd6152beb9065">  367</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="classmorobot_class.html#aa6a964b130ad7416235cd6152beb9065">_actPos</a>[3];                   </div>
 <div class="line"><a name="l00368"></a><span class="lineno"><a class="line" href="classmorobot_class.html#a39f5ba5fdd389651f89f924cdf4b3916">  368</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="classmorobot_class.html#a39f5ba5fdd389651f89f924cdf4b3916">_actOri</a>[3];                   </div>
-<div class="line"><a name="l00369"></a><span class="lineno"><a class="line" href="classmorobot_class.html#a2806321bb2ec78d04625e022301301da">  369</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classmorobot_class.html#a2806321bb2ec78d04625e022301301da">_angleReached</a>[<a class="code" href="morobot_8h.html#a2b984e56e3936cda8e11281c011187f3">NUM_MAX_SERVOS</a>]; </div>
-<div class="line"><a name="l00370"></a><span class="lineno"><a class="line" href="classmorobot_class.html#a05161cb159d2d618686aea045f150fe6">  370</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="classmorobot_class.html#a05161cb159d2d618686aea045f150fe6">_goalAngles</a>[<a class="code" href="morobot_8h.html#a2b984e56e3936cda8e11281c011187f3">NUM_MAX_SERVOS</a>];  </div>
+<div class="line"><a name="l00369"></a><span class="lineno"><a class="line" href="classmorobot_class.html#a2806321bb2ec78d04625e022301301da">  369</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classmorobot_class.html#a2806321bb2ec78d04625e022301301da">_angleReached</a>[NUM_MAX_SERVOS]; </div>
+<div class="line"><a name="l00370"></a><span class="lineno"><a class="line" href="classmorobot_class.html#a05161cb159d2d618686aea045f150fe6">  370</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="classmorobot_class.html#a05161cb159d2d618686aea045f150fe6">_goalAngles</a>[NUM_MAX_SERVOS];  </div>
 <div class="line"><a name="l00371"></a><span class="lineno"><a class="line" href="classmorobot_class.html#a23d2b1912ac59c3701c15d281cd7146f">  371</a></span>&#160;        Stream* <a class="code" href="classmorobot_class.html#a23d2b1912ac59c3701c15d281cd7146f">_port</a>;                      </div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classmorobot_class.html#a2bbc2703e19a260505e4bfe0428b26cf">isReady</a>();</div>
@@ -199,7 +199,6 @@ $(document).ready(function(){initNavTree('morobot_8h_source.html',''); initResiz
 <div class="ttc" id="aclassmorobot_class_html_a3015eee73834b71b5778bb266469ff08"><div class="ttname"><a href="classmorobot_class.html#a3015eee73834b71b5778bb266469ff08">morobotClass::updateTCPpose</a></div><div class="ttdeci">virtual void updateTCPpose(bool output=false)=0</div><div class="ttdoc">Re-calculates the internally stored robot TCP position (Solves forward kinematics)....</div></div>
 <div class="ttc" id="aclassmorobot_class_html_a5af70aa9e701312f288d96d3cb7ad2c5"><div class="ttname"><a href="classmorobot_class.html#a5af70aa9e701312f288d96d3cb7ad2c5">morobotClass::waitUntilIsReady</a></div><div class="ttdeci">void waitUntilIsReady()</div><div class="ttdoc">Waits until the robot is ready for new commants (all motors have stopped moving) or a timeout occurs.</div><div class="ttdef"><b>Definition:</b> morobot.cpp:132</div></div>
 <div class="ttc" id="aclassmorobot_class_html_a7b04041d7ca49df3082ce10b9b5dc306"><div class="ttname"><a href="classmorobot_class.html#a7b04041d7ca49df3082ce10b9b5dc306">morobotClass::setZero</a></div><div class="ttdeci">void setZero()</div><div class="ttdoc">Sets the current position as origin (zero position)</div><div class="ttdef"><b>Definition:</b> morobot.cpp:94</div></div>
-<div class="ttc" id="amorobot_8h_html_a2b984e56e3936cda8e11281c011187f3"><div class="ttname"><a href="morobot_8h.html#a2b984e56e3936cda8e11281c011187f3">NUM_MAX_SERVOS</a></div><div class="ttdeci">#define NUM_MAX_SERVOS</div><div class="ttdoc">Maximum number of smart servos usable in one robot object.</div><div class="ttdef"><b>Definition:</b> morobot.h:63</div></div>
 <div class="ttc" id="aclassmorobot_class_html_a9f9a5595eecf9e54b5288d95833b5340"><div class="ttname"><a href="classmorobot_class.html#a9f9a5595eecf9e54b5288d95833b5340">morobotClass::getSpeed</a></div><div class="ttdeci">float getSpeed(uint8_t servoId)</div><div class="ttdoc">Returns current speed of motor in RPM (rounds per minute).</div><div class="ttdef"><b>Definition:</b> morobot.cpp:178</div></div>
 <div class="ttc" id="aclassmorobot_class_html_a08602ed9bb6da1a8790a817c4c6d779b"><div class="ttname"><a href="classmorobot_class.html#a08602ed9bb6da1a8790a817c4c6d779b">morobotClass::moveToAngle</a></div><div class="ttdeci">void moveToAngle(uint8_t servoId, long angle)</div><div class="ttdoc">Moves a motor to a desired angle (absolute movement). Checks if the angle is valid before moving if c...</div><div class="ttdef"><b>Definition:</b> morobot.cpp:199</div></div>
 <div class="ttc" id="aclassmorobot_class_html_ab8607a28d827c933d89d46781ec22298"><div class="ttname"><a href="classmorobot_class.html#ab8607a28d827c933d89d46781ec22298">morobotClass::getCurrent</a></div><div class="ttdeci">float getCurrent(uint8_t servoId)</div><div class="ttdoc">Returns current current consumption of motor in Ampere.</div><div class="ttdef"><b>Definition:</b> morobot.cpp:190</div></div>
@@ -243,7 +242,7 @@ $(document).ready(function(){initNavTree('morobot_8h_source.html',''); initResiz
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="morobot_8h.html">morobot.h</a></li>
+    <li class="navelem"><b>morobot.h</b></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

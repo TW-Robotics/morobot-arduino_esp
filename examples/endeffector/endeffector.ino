@@ -66,9 +66,11 @@ void loop() {
 	Dabble.processInput();
 	
 	if(GamePad.isPressed(0)) {			// Up
-		gripper.moveAngle(-5);		// Open gripper
+		gripper.moveAngle(-10);		// Open gripper
+		delay(delayDebounce/5);
 	} else if(GamePad.isPressed(1)) {   // Down
-		gripper.moveAngle(5);		// Close gripper
+		gripper.moveAngle(10);		// Close gripper
+		delay(delayDebounce/5);
 	} else if(GamePad.isPressed(2)) {	// Left
 		Serial.println(gripper.getCurrentOpeningAngle());	// Display opening angle and width
 		//Serial.println(gripper.getCurrentOpeningWidth());

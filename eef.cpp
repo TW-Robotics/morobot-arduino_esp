@@ -53,7 +53,7 @@ void gripper::begin(int8_t servoPin){
 	_servoID = -1;
 
 	setSpeed(50);
-	setParams(75, 130, 50, 150, 0.722, 0);		//float degClosed, float degOpen, float degCloseLimit, float degOpenLimit; Values of servo
+	setParams(65, 140, 50, 155, 1.0, 0);		//values for servomotor -> degClosed = 0 degrees in operation. float degClosed, float degOpen, float degCloseLimit, float degOpenLimit; Values of servo
 	setTCPoffset(0, 0, -18);
 	
 	servo.attach(servoPin);
@@ -132,7 +132,7 @@ void gripper::close(){
 
 void gripper::open(){
 	float angle = _degOpen;
-	if (_gripperType == 1) angle = 90;
+	if (_gripperType == 1) angle = _degOpen / _gearRatio - _degClosed;
 	moveToAngle(angle, _speed[0]);
 	_isOpen = true;
 	_isClosed = false;
@@ -151,11 +151,26 @@ bool gripper::moveToAngle(float angle, uint8_t speed){
 		if (abs(oldAngle-angle) > 10) return waitUntilFinished();
 	} else if (_gripperType == 1) {
 		angle = angle * _gearRatio + _degClosed;
-		Serial.println(angle);
 		if (checkIfAngleValid(angle) != true) return false;
-		servo.write(angle);		// TODO make smooth with speed	setParams(65, 130, 45, 130, 0.722, 0);	//float degClosed, float degOpen, float degCloseLimit, float degOpenLimit
+		
+		float timeForOneDegree = 60 / (float)speed / 360;
+		float angleStep = 1;
+		float angleTemp = getCurrentOpeningAngle() * _gearRatio + _degClosed;
+		bool goalIsBiggerThanCurrent = true;
+		if (angle <= angleTemp) goalIsBiggerThanCurrent = false;
+		
+		while(1){
+			if (goalIsBiggerThanCurrent == true){
+				angleTemp = angleTemp + angleStep;
+				if (angleTemp > angle) break;
+			} else if (goalIsBiggerThanCurrent == false){
+				angleTemp = angleTemp - angleStep;
+				if (angleTemp < angle) break;
+			}
+			servo.write(angleTemp);
+			delay(timeForOneDegree * angleStep * 1000);
+		}
 		_currentAngle = angle / _gearRatio - _degClosed;
-		Serial.println(_currentAngle);
 	}
 	_isOpen = false;
 	_isClosed = false;

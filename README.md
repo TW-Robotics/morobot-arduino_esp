@@ -2,7 +2,8 @@
 
 # morobot software library for microcontrollers such as Arduino and ESP32
 
-This library can be used to control the UAS Technikum Wien morobots using an Arduino or ESP32 microcontroller.
+This library can be used to control the UAS Technikum Wien morobots using an Arduino or ESP32 microcontroller.<br>
+Visit https://tw-robotics.github.io/morobot-arduino_esp/ to read the documentation,
 
 ## Installation
 Download this library and install it in your Arduino IDE. See the [Arduino Help Page](https://www.arduino.cc/en/guide/libraries#toc4) for more information.
@@ -10,19 +11,19 @@ Download this library and install it in your Arduino IDE. See the [Arduino Help 
 ## Usage
 See the examples on how to use the library.
 ### Examples
-- base_importantFunctionCalls\
+- base_importantFunctionCalls<br>
   Bare minimum program and function calls for controlling a morobot Scara RRP. Just put control commands into the loop and look what happens.
-- calibrate_robot\
+- calibrate_robot<br>
   Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.
-- driveAroundXYZ\
+- driveAroundXYZ<br>
   Control the RRP robot with the dabble app and drive around giving x-y-z-coordinates
-- driveAroundXYZ_RRR\
+- driveAroundXYZ_RRR<br>
   Control the RRR robot with the dabble app and drive around giving x-y-z-coordinates
-- multiple_robots\
+- multiple_robots<br>
   Control multiple robots (in this case 2x Scara RRP) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.
-- teach_robot\
+- teach_robot<br>
   Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.
-- endeffector\
+- endeffector<br>
   Use the different grippers in combination with the robots.
 ### Supported robot types
 - Scara RRP

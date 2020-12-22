@@ -2,7 +2,7 @@
  *  \file endeffecotr.ino
  *  \brief TODO
  *  @author	Johannes Rauer FHTW
- *  @date	2020/12/18
+ *  @date	2020/12/22
  *  
  *  Hardware: 		- Arduino Mega (or similar microcontroller)
  *  				- HC-05 bluetooth controller (or similar)
@@ -33,14 +33,7 @@
 
 #include <eef.h>
 
-#define MAX_NUM_POS 20
-#define NUM_SERVOS 3
-
-long motorAngles[NUM_SERVOS][MAX_NUM_POS];
-int delayTime = 1500;
-int delayDebounce = 500;
-int posId = 0;
-int idxPlayback = -1;
+int delayDebounce = 100;
 
 morobotScaraRRR morobot;
 gripper gripper(&morobot);
@@ -48,8 +41,12 @@ gripper gripper(&morobot);
 void setup() {
 	Dabble.begin(DABBLE_PARAM);
 	morobot.begin("Serial2");
-	gripper.begin(9);
-	gripper.setSpeed(50, 25);
+	//gripper.begin(9);			// For normal servo gripper
+	gripper.begin();			// For smart servo gripper
+	gripper.setSpeed(50, 25);	// Set speed for opening and closing the gripper
+	//gripper.setParams(65, 140, 50, 155, 1.0, 0);	// Call this function with the correct parameters only if you are using a non-standard gripper
+													// Parameters: degClosed, degOpen, degCloseLimit, degOpenLimit, gearRatio, openWidthOffset; values for servomotor -> degClosed is defined as 0 degrees in real angles. 
+	//setTCPoffset(0, 0, -18);	// Call this function with the correct parameters only if you are using a non-standard gripper
 	
 	morobot.moveHome();
 	delay(500);
@@ -65,26 +62,35 @@ void setup() {
 void loop() {
 	Dabble.processInput();
 	
-	if(GamePad.isPressed(0)) {			// Up
-		gripper.moveAngle(-10);		// Open gripper
-		delay(delayDebounce/5);
-	} else if(GamePad.isPressed(1)) {   // Down
-		gripper.moveAngle(10);		// Close gripper
-		delay(delayDebounce/5);
+	if(GamePad.isPressed(0)) {			// Up - Open gripper a little bit
+		gripper.moveWidth(5);			// For smart servo control width or angle
+		//gripper.moveAngle(10);		// For normal servo control angle
+		delay(delayDebounce);
+	} else if(GamePad.isPressed(1)) {   // Down - Close gripper a little bit
+		gripper.moveWidth(-5);			// For smart servo control width or angle
+		//gripper.moveAngle(-10);		// For normal servo control angle
+		delay(delayDebounce);
 	} else if(GamePad.isPressed(2)) {	// Left
 		Serial.println(gripper.getCurrentOpeningAngle());	// Display opening angle and width
-		//Serial.println(gripper.getCurrentOpeningWidth());
-		delay(delayDebounce);
+		Serial.println(gripper.getCurrentOpeningWidth());
+		delay(delayDebounce*5);
 	} else if(GamePad.isPressed(3)) {	// Right
-		gripper.autoCalibrate();	// Calibrate
+		gripper.autoCalibrate();		// Calibrate (Only for smart-servo gripper)
 	} else if(GamePad.isPressed(7)) {	// O
 		gripper.open();
 	} else if(GamePad.isPressed(8)) {   // X
 		gripper.close();
 	} else if(GamePad.isPressed(4)) {	// Start
 		gripper.closeToForce();
+		delay(delayDebounce);
 	} else if(GamePad.isPressed(5)) {	// Select
 		gripper.moveToAngle(90, 10);
+		gripper.moveToAngle(-15, 1);
+		gripper.moveToAngle(20, 15);
+		gripper.moveToAngle(90);
+		gripper.moveToWidth(105);		// Only for smart-servo gripper
+		gripper.moveToWidth(150, 15);	// Only for smart-servo gripper
+		gripper.closeToForce();			// Only for smart-servo gripper
 	} 
 }
 

@@ -60,7 +60,7 @@ bool newRobotClass_Template::calculateAngles(float x, float y, float z){
 	return true;
 }
 
-void newRobotClass_Template::updateTCPpose(){
+void newRobotClass_Template::updateTCPpose(bool output){
 	setBusy();
 	waitUntilIsReady();
 	
@@ -69,8 +69,14 @@ void newRobotClass_Template::updateTCPpose(){
 	//TODO: STORE THE POSITION FOR ALL AXES E.G.:
 	//_actPos[0] = a + xnb + xncn;
 	
-	Serial.print("Calculated Position: ");
-	Serial.println(_actPos[0]);
-	Serial.println(_actPos[1]);
-	Serial.println(_actPos[2]);
+	if (output == true){
+		Serial.print("Calculated Position: ");
+		Serial.print(_actPos[0]);
+		Serial.print(", ");
+		Serial.print(_actPos[1]);
+		Serial.print(", ");
+		Serial.print(_actPos[2]);
+		Serial.print("; Orientation around z-axis [degrees]: ");
+		Serial.println(_actOri[2]);
+	}
 }

@@ -14,8 +14,8 @@
 			virtual void updateCurrentXYZ();
  */
 
-#ifndef MOROBOTSCARARRP_H
-#define MOROBOTSCARARRP_H
+#ifndef NEWROBOTCLASS_TEMPLATE_H
+#define NEWROBOTCLASS_TEMPLATE_H
 
 #include <morobot.h>
 
@@ -63,7 +63,7 @@ class newRobotClass_Template:public morobotClass {
 		 *  \brief Re-calculates the internally stored robot TCP position (Solves forward kinematics).
 		 *  		This function does calculate and store the TCP position depending on the current motor angles.
 		 */
-		virtual void updateTCPpose();
+		virtual void updateTCPpose(bool output = false);
 
 	private:
 		float _tcpOffset[3];	//!< Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis

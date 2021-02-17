@@ -46,7 +46,7 @@
 			void printAngles(long angles[]);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
-			virtual void updateTCPpose();
+			virtual void updateTCPpose(bool output);
 			void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25);
 		private:
 			bool isReady();

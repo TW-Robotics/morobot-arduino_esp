@@ -24,10 +24,12 @@
 			
 			long getActAngle(uint8_t servoId);
 			float getActPosition(char axis);
+			float getActOrientation(char axis);
 			float getSpeed(uint8_t servoId);
 			float getTemp(uint8_t servoId);
 			float getVoltage(uint8_t servoId);
 			float getCurrent(uint8_t servoId);
+			uint8_t getNumSmartServos();
 			
 			void moveToAngle(uint8_t servoId, long angle);
 			void moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);

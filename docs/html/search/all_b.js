@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['printangles_76',['printAngles',['../classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726',1,'morobotClass']]]
+  ['open_80',['open',['../classgripper.html#aa657acaf435a523eaae557b17ac2b48c',1,'gripper']]]
 ];

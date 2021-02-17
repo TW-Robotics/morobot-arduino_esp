@@ -15,11 +15,11 @@ var searchData=
   ['_5fgrippertype_12',['_gripperType',['../classgripper.html#a45644af40759b98aa19054f64e4f2838',1,'gripper']]],
   ['_5fisclosed_13',['_isClosed',['../classgripper.html#a77e04b609fbb1ecc3f2abf815a362758',1,'gripper']]],
   ['_5fisopened_14',['_isOpened',['../classgripper.html#a66a6ab5508eb24fe8c57658e9f82913b',1,'gripper']]],
-  ['_5fjointlimits_15',['_jointLimits',['../classmorobot_scara_r_r_p.html#a9b6b8d69173cf6d662bf647e3469bd2f',1,'morobotScaraRRP::_jointLimits()'],['../classmorobot_scara_r_r_r.html#a3153e0d7f24eee35eb92cc53b24e6ba4',1,'morobotScaraRRR::_jointLimits()'],['../classnew_robot_class___template.html#a5dd9bd70b0c991c614b9be9d4c8f0cdc',1,'newRobotClass_Template::_jointLimits()']]],
+  ['_5fjointlimits_15',['_jointLimits',['../classmorobot__2d.html#ad767fe78825bdb5eadbe3eddde707a39',1,'morobot_2d::_jointLimits()'],['../classmorobot_scara_r_r_p.html#a9b6b8d69173cf6d662bf647e3469bd2f',1,'morobotScaraRRP::_jointLimits()'],['../classmorobot_scara_r_r_r.html#a3153e0d7f24eee35eb92cc53b24e6ba4',1,'morobotScaraRRR::_jointLimits()'],['../classnew_robot_class___template.html#a5dd9bd70b0c991c614b9be9d4c8f0cdc',1,'newRobotClass_Template::_jointLimits()']]],
   ['_5fnumsmartservos_16',['_numSmartServos',['../classmorobot_class.html#a64d2f86e783f777ef6776f459b1e1da5',1,'morobotClass']]],
   ['_5fport_17',['_port',['../classmorobot_class.html#a23d2b1912ac59c3701c15d281cd7146f',1,'morobotClass']]],
   ['_5fservoid_18',['_servoID',['../classgripper.html#a5d7088f8d1a6097c35657b91d9e3b544',1,'gripper']]],
   ['_5fspeed_19',['_speed',['../classgripper.html#ad18e2dc775c16e86c19a9b6844f9afa5',1,'gripper']]],
   ['_5fspeedrpm_20',['_speedRPM',['../classmorobot_class.html#a259041b2d218239690bfe81762197eba',1,'morobotClass']]],
-  ['_5ftcpoffset_21',['_tcpOffset',['../classgripper.html#a9c76940804177867b34bccf6be5470cf',1,'gripper::_tcpOffset()'],['../classmorobot_scara_r_r_p.html#a67fb399fe2c4da5bb96b4b43240bf5f0',1,'morobotScaraRRP::_tcpOffset()'],['../classmorobot_scara_r_r_r.html#a910ab203e365a698a4df74641fb0e340',1,'morobotScaraRRR::_tcpOffset()'],['../classnew_robot_class___template.html#af518719c43d47cd63f2121bea0f7ca8e',1,'newRobotClass_Template::_tcpOffset()']]]
+  ['_5ftcpoffset_21',['_tcpOffset',['../classgripper.html#a9c76940804177867b34bccf6be5470cf',1,'gripper::_tcpOffset()'],['../classmorobot__2d.html#a22ebfc3774e1c320677051a8840665c6',1,'morobot_2d::_tcpOffset()'],['../classmorobot_scara_r_r_p.html#a67fb399fe2c4da5bb96b4b43240bf5f0',1,'morobotScaraRRP::_tcpOffset()'],['../classmorobot_scara_r_r_r.html#a910ab203e365a698a4df74641fb0e340',1,'morobotScaraRRR::_tcpOffset()'],['../classnew_robot_class___template.html#af518719c43d47cd63f2121bea0f7ca8e',1,'newRobotClass_Template::_tcpOffset()']]]
 ];

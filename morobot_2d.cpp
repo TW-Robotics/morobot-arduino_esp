@@ -1,6 +1,6 @@
 /**
  *  \class 	morobot_2d
- *  \brief 	morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32
+ *  \brief 	morobot child class for morobot-2d for microcontrollers such as Arduino or ESP32
  *  @file 	morobot_2d.h
  *  @author	Johannes Rauer FHTW
  *  @date	2021/02/17

@@ -1,6 +1,6 @@
 /**
  *  \class 	morobot_2d
- *  \brief 	morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32
+ *  \brief 	morobot child class for morobot-2d for microcontrollers such as Arduino or ESP32
  *  @file 	morobot_2d.h
  *  @author	Johannes Rauer FHTW
  *  @date	2021/02/17
@@ -23,15 +23,13 @@ class morobot_2d:public morobotClass {
 	public:
 		/**
 		 *  \brief Constructor of morobot_2d class
-		 *  \details The value in brakets defines that the robot consists of three smartservos
+		 *  \details The value in brakets defines that the robot consists of two smartservos
 		 */
 		morobot_2d() : morobotClass(2){};
 		
 		/**
 		 *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.
 		 *  		This information is necessary to calculate the inverse kinematics correctly.
-		 *  		The function stores the TCP-Offset and recalculates the length and angle of the last axis.
-		 *  		Internally the length and angle of the last axis is stored as if it would be a straigth axis directly to the TCP.
 		 *  \param [in] xOffset Offset in x-direction
 		 *  \param [in] yOffset Offset in y-direction
 		 *  \param [in] zOffset Offset in z-direction

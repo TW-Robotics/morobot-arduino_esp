@@ -108,6 +108,8 @@ Examples</h3>
  Control the RRP robot with the dabble app and drive around giving x-y-z-coordinates</li>
 <li>driveAroundXYZ_RRR<br  />
  Control the RRR robot with the dabble app and drive around giving x-y-z-coordinates</li>
+<li>driveAroundXYZ_morobot-2d<br  />
+ Control the morobot-2d with the dabble app and drive around giving x-y-z-coordinates</li>
 <li>multiple_robots<br  />
  Control multiple robots (in this case 2x Scara RRP) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.</li>
 <li>teach_robot<br  />
@@ -118,14 +120,15 @@ Examples</h3>
 <h3><a class="anchor" id="autotoc_md4"></a>
 Supported robot types</h3>
 <ul>
-<li>Scara RRP</li>
-<li>Scara RRR </li>
+<li>morobot-s (rrp)</li>
+<li>morobot-s (rrr)</li>
+<li>morobot-2d </li>
 </ul>
 <h3><a class="anchor" id="autotoc_md5"></a>
 Supported grippers</h3>
 <ul>
 <li>Smart-Servo Parallel-Gripper</li>
-<li>Micro-Servo Gripper</li>
+<li>Micro-Servo Angular-Gripper</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md6"></a>
 How to add a new robot</h2>
@@ -151,7 +154,7 @@ How to add a new robot</h2>
 Known issues</h2>
 <ul>
 <li>Example with multiple robots is not working for ESP32 controllers</li>
-<li>Other TCP-Offset than x/0/x for ScaraRRP and Scara RRR is not implemented (necessary?)</li>
+<li>Other TCP-Offset than x/0/x for morobot-s (rrp and rrr) is not implemented (necessary?)</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md8"></a>
 License</h2>

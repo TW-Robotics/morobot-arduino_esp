@@ -19,6 +19,8 @@ See the examples on how to use the library.
   Control the RRP robot with the dabble app and drive around giving x-y-z-coordinates
 - driveAroundXYZ_RRR<br>
   Control the RRR robot with the dabble app and drive around giving x-y-z-coordinates
+- driveAroundXYZ_morobot-2d<br>
+  Control the morobot-2d with the dabble app and drive around giving x-y-z-coordinates
 - multiple_robots<br>
   Control multiple robots (in this case 2x Scara RRP) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.
 - teach_robot<br>
@@ -26,11 +28,12 @@ See the examples on how to use the library.
 - endeffector<br>
   Use the different grippers in combination with the robots.
 ### Supported robot types
-- Scara RRP
-- Scara RRR
+- morobot-s (rrp)
+- morobot-s (rrr)
+- morobot-2d
 ### Supported grippers
 - Smart-Servo Parallel-Gripper
-- Micro-Servo Gripper
+- Micro-Servo Angular-Gripper
 
 ## How to add a new robot
 The class morobotClass is an abstract base class implementing functions like moving the robot's joints. For each new robot type, a new child class with corresponding header- and cpp-file has to be implemented. Start with newRobotClass_Template and make the following changes:
@@ -49,7 +52,7 @@ The class morobotClass is an abstract base class implementing functions like mov
 
 ## Known issues
 - Example with multiple robots is not working for ESP32 controllers
-- Other TCP-Offset than x/0/x for ScaraRRP and Scara RRR is not implemented (necessary?)
+- Other TCP-Offset than x/0/x for morobot-s (rrp and rrr) is not implemented (necessary?)
 
 ## License
 This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](https://github.com/TW-Robotics/morobot/edit/main/LICENSE) for more information.

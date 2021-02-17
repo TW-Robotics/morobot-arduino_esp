@@ -105,9 +105,9 @@ Inheritance diagram for morobotClass:</div>
   <img src="classmorobot_class.png" usemap="#morobotClass_map" alt=""/>
   <map id="morobotClass_map" name="morobotClass_map">
 <area href="classmorobot__2d.html" title="morobot child class for morobot-2d for microcontrollers such as Arduino or ESP32" alt="morobot_2d" shape="rect" coords="0,56,155,80"/>
-<area href="classmorobot_scara_r_r_p.html" title="morobot child class for Scara-RRP-Robot for microcontrollers such as Arduino or ESP32" alt="morobotScaraRRP" shape="rect" coords="165,56,320,80"/>
-<area href="classmorobot_scara_r_r_r.html" title="morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32" alt="morobotScaraRRR" shape="rect" coords="330,56,485,80"/>
-<area href="classnew_robot_class___template.html" title="morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32" alt="newRobotClass_Template" shape="rect" coords="495,56,650,80"/>
+<area href="classmorobot__s__rrp.html" title="morobot child class for morobot-s (rrp) for microcontrollers such as Arduino or ESP32" alt="morobot_s_rrp" shape="rect" coords="165,56,320,80"/>
+<area href="classmorobot__s__rrr.html" title="morobot child class for morobot-s (rrr) for microcontrollers such as Arduino or ESP32" alt="morobot_s_rrr" shape="rect" coords="330,56,485,80"/>
+<area href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32" alt="newRobotClass_Template" shape="rect" coords="495,56,650,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -210,8 +210,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a3eddf0b7874580786e1b1d34bda667ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the TCP (tool center point) of the robot by given value in one axis. Calls child class to solve forward kinematics, adds values, solves inverse kinematics and moves the robot to the position.  <a href="classmorobot_class.html#a3eddf0b7874580786e1b1d34bda667ea">More...</a><br /></td></tr>
 <tr class="separator:a3eddf0b7874580786e1b1d34bda667ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45dfa974c79a4ec2ab9529e9d5590726"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726">printAngles</a> (long angles[])</td></tr>
-<tr class="memdesc:a45dfa974c79a4ec2ab9529e9d5590726"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints an array of angles to the servial monitor.  <a href="classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726">More...</a><br /></td></tr>
+<tr class="memdesc:a45dfa974c79a4ec2ab9529e9d5590726"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints an array of angles to the serial monitor.  <a href="classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726">More...</a><br /></td></tr>
 <tr class="separator:a45dfa974c79a4ec2ab9529e9d5590726"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e73627ff0045c333ea468ecee552827"><td class="memItemLeft" align="right" valign="top"><a id="a9e73627ff0045c333ea468ecee552827"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#a9e73627ff0045c333ea468ecee552827">printTCPpose</a> ()</td></tr>
+<tr class="memdesc:a9e73627ff0045c333ea468ecee552827"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints an the TCP-pose to the serial monitor. <br /></td></tr>
+<tr class="separator:a9e73627ff0045c333ea468ecee552827"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5863022ede07fe03051869c25a3c27c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#ac5863022ede07fe03051869c25a3c27c">convertToDegrees</a> (float angle)</td></tr>
 <tr class="memdesc:ac5863022ede07fe03051869c25a3c27c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns angle converted from rad into deg.  <a href="classmorobot_class.html#ac5863022ede07fe03051869c25a3c27c">More...</a><br /></td></tr>
 <tr class="separator:ac5863022ede07fe03051869c25a3c27c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -426,7 +430,7 @@ Private Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns true if the position is reachable; false if it is not. </dd></dl>
 
-<p>Implemented in <a class="el" href="classnew_robot_class___template.html#a90ac36cac787d8311a66cf95aad0c83c">newRobotClass_Template</a>, <a class="el" href="classmorobot_scara_r_r_p.html#ac5548e3ce4a021cddb38bee05a8937bf">morobotScaraRRP</a>, <a class="el" href="classmorobot__2d.html#ad35805d85426264fa806dbff1b1b0cb9">morobot_2d</a>, and <a class="el" href="classmorobot_scara_r_r_r.html#a2fb6a2385ef42cd6c4f6531f3d2bb4bb">morobotScaraRRR</a>.</p>
+<p>Implemented in <a class="el" href="classnew_robot_class___template.html#a90ac36cac787d8311a66cf95aad0c83c">newRobotClass_Template</a>, <a class="el" href="classmorobot__s__rrp.html#a891931bc6964eafa32fcbc450ff86f25">morobot_s_rrp</a>, <a class="el" href="classmorobot__2d.html#ad35805d85426264fa806dbff1b1b0cb9">morobot_2d</a>, and <a class="el" href="classmorobot__s__rrr.html#afe3567cdcb3f0d9951d1ad17ed54fc9c">morobot_s_rrr</a>.</p>
 
 </div>
 </div>
@@ -474,7 +478,7 @@ Private Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns true if the position is reachable; false if it is not. </dd></dl>
 
-<p>Implemented in <a class="el" href="classnew_robot_class___template.html#a48f86f4751ee4c76e6dafac9e2f76395">newRobotClass_Template</a>, <a class="el" href="classmorobot_scara_r_r_r.html#a1129745035bbf8c20a96856f02dcc437">morobotScaraRRR</a>, <a class="el" href="classmorobot_scara_r_r_p.html#ae4ae513098cb30119093cdfd6d83f00c">morobotScaraRRP</a>, and <a class="el" href="classmorobot__2d.html#ae5cdc4e13a2a334bc0c94f0eb33f4bc2">morobot_2d</a>.</p>
+<p>Implemented in <a class="el" href="classnew_robot_class___template.html#a48f86f4751ee4c76e6dafac9e2f76395">newRobotClass_Template</a>, <a class="el" href="classmorobot__s__rrr.html#a8be76ecdda83554e50a9be2fcdaa8d06">morobot_s_rrr</a>, <a class="el" href="classmorobot__s__rrp.html#a3d19b2dbbc75c0882473400566ed17dc">morobot_s_rrp</a>, and <a class="el" href="classmorobot__2d.html#ae5cdc4e13a2a334bc0c94f0eb33f4bc2">morobot_2d</a>.</p>
 
 </div>
 </div>
@@ -1235,7 +1239,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Prints an array of angles to the servial monitor. </p>
+<p>Prints an array of angles to the serial monitor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">angles[]</td><td>Angle values to print. </td></tr>
@@ -1401,7 +1405,7 @@ Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classnew_robot_class___template.html#a39a2b84c304821aa037ef03a8d5e9836">newRobotClass_Template</a>, <a class="el" href="classmorobot_scara_r_r_r.html#a1519477d6dbb071b16edc355d6197a79">morobotScaraRRR</a>, <a class="el" href="classmorobot_scara_r_r_p.html#a7140e89233766fa07ff5632b60cadbe4">morobotScaraRRP</a>, and <a class="el" href="classmorobot__2d.html#a29689078441ab46abf33dbdbe085d61b">morobot_2d</a>.</p>
+<p>Implemented in <a class="el" href="classnew_robot_class___template.html#a39a2b84c304821aa037ef03a8d5e9836">newRobotClass_Template</a>, <a class="el" href="classmorobot__s__rrr.html#a965c93f616ed27d418951f94b58d81da">morobot_s_rrr</a>, <a class="el" href="classmorobot__s__rrp.html#a88e4408c35f229091d35c84998efd35d">morobot_s_rrp</a>, and <a class="el" href="classmorobot__2d.html#a29689078441ab46abf33dbdbe085d61b">morobot_2d</a>.</p>
 
 </div>
 </div>

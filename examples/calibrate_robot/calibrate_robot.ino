@@ -22,7 +22,7 @@
  *  Install the Dabble-App on your smartphone or tablet
  */
 
-#include <morobotScaraRRP.h>  	// If you are using another robot, change the name to the correct header file here
+#include <morobot_s_rrp.h>  	// If you are using another robot, change the name to the correct header file here
 #ifndef ESP32
 #include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
 #define DABBLE_PARAM 9600	// Set transmission speed
@@ -31,7 +31,7 @@
 #define DABBLE_PARAM "MyEsp32" // Set bluetooth name
 #endif
 
-morobotScaraRRP morobot;			// And change the class-name here
+morobot_s_rrp morobot;			// And change the class-name here
 bool currentLimitReached = false;
 
 void setup() {

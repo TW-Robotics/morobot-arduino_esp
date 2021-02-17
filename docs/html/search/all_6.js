@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gearratio_44',['gearRatio',['../classmorobot_scara_r_r_p.html#ad4a6130c6bd2b5cae9c55aea8c0f3b6f',1,'morobotScaraRRP']]],
+  ['gearratio_44',['gearRatio',['../classmorobot__s__rrp.html#a1110bd78d391361108ded9cbd0870d15',1,'morobot_s_rrp']]],
   ['getactangle_45',['getActAngle',['../classmorobot_class.html#aaca7763c55813c4b84e1b25e4e89bd51',1,'morobotClass']]],
   ['getactorientation_46',['getActOrientation',['../classmorobot_class.html#a517e7ddc43e2a79f0177e7a352e2bf86',1,'morobotClass']]],
   ['getactposition_47',['getActPosition',['../classmorobot_class.html#a6973a8bb1a06da5dcf9cad652f498138',1,'morobotClass']]],

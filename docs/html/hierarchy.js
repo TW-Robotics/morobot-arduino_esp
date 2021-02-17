@@ -4,8 +4,8 @@ var hierarchy =
     [ "gripper", "classgripper.html", null ],
     [ "morobotClass", "classmorobot_class.html", [
       [ "morobot_2d", "classmorobot__2d.html", null ],
-      [ "morobotScaraRRP", "classmorobot_scara_r_r_p.html", null ],
-      [ "morobotScaraRRR", "classmorobot_scara_r_r_r.html", null ],
+      [ "morobot_s_rrp", "classmorobot__s__rrp.html", null ],
+      [ "morobot_s_rrr", "classmorobot__s__rrr.html", null ],
       [ "newRobotClass_Template", "classnew_robot_class___template.html", null ]
     ] ]
 ];

@@ -12,17 +12,17 @@ Download this library and install it in your Arduino IDE. See the [Arduino Help 
 See the examples on how to use the library.
 ### Examples
 - base_importantFunctionCalls<br>
-  Bare minimum program and function calls for controlling a morobot Scara RRP. Just put control commands into the loop and look what happens.
+  Bare minimum program and function calls for controlling a morobot-s rrp. Just put control commands into the loop and look what happens.
 - calibrate_robot<br>
   Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.
-- driveAroundXYZ<br>
-  Control the RRP robot with the dabble app and drive around giving x-y-z-coordinates
-- driveAroundXYZ_RRR<br>
-  Control the RRR robot with the dabble app and drive around giving x-y-z-coordinates
+- driveAroundXYZ_morobot-s(rrp)<br>
+  Control the morobot-s (rrp) with the dabble app and drive around giving x-y-z-coordinates
+- driveAroundXYZ_morobot-s(rrp)<br>
+  Control the morobot-s (rrr) with the dabble app and drive around giving x-y-z-coordinates
 - driveAroundXYZ_morobot-2d<br>
   Control the morobot-2d with the dabble app and drive around giving x-y-z-coordinates
 - multiple_robots<br>
-  Control multiple robots (in this case 2x Scara RRP) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.
+  Control multiple robots (in this case 2x morobot-s) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.
 - teach_robot<br>
   Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.
 - endeffector<br>
@@ -37,7 +37,7 @@ See the examples on how to use the library.
 
 ## How to add a new robot
 The class morobotClass is an abstract base class implementing functions like moving the robot's joints. For each new robot type, a new child class with corresponding header- and cpp-file has to be implemented. Start with newRobotClass_Template and make the following changes:
-- Copy the newRobotClass_Template files and rename them. Include type and kinematics into name (e.g. Scara RRP = morobotScaraRRP)
+- Copy the newRobotClass_Template files and rename them. Include type and kinematics into name
 - Make the following changes in the **.h-file** (See TODOs in file):
   - Search for 'newRobotClass_Template' and replace all instances with your class name (same name as .h and .cpp file)
   - Change the number of servos of the robot in the call of the morobotClass constructor
@@ -53,6 +53,7 @@ The class morobotClass is an abstract base class implementing functions like mov
 ## Known issues
 - Example with multiple robots is not working for ESP32 controllers
 - Other TCP-Offset than x/0/x for morobot-s (rrp and rrr) is not implemented (necessary?)
+- Other EEF-types (e.g. pumps with relais) not implemented yet
 
 ## License
 This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](https://github.com/TW-Robotics/morobot/edit/main/LICENSE) for more information.

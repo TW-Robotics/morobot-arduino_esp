@@ -1,12 +1,12 @@
 /**
- *  \class 	morobotScaraRRP
+ *  \class 	morobot_s_rrr
  *  \brief 	morobot child class for morobot-s (rrr) for microcontrollers such as Arduino or ESP32
- *  @file 	morobotScaraRRR.cpp
+ *  @file 	morobot_s_rrr.cpp
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
  *  \par Method List:
  *  	public:
- *  		morobotScaraRRR() : morobotClass(PUT_NUM_SERVOS_HERE){}
+ *  		morobot_s_rrr() : morobotClass(PUT_NUM_SERVOS_HERE){}
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 			bool checkIfAnglesValid(float phi1, float phi2, float phi3);
@@ -15,9 +15,9 @@
 			virtual void updateCurrentXYZ();
  */
  
-#include <morobotScaraRRR.h>
+#include <morobot_s_rrr.h>
 
-void morobotScaraRRR::setTCPoffset(float xOffset, float yOffset, float zOffset){
+void morobot_s_rrr::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	_tcpOffset[0] = xOffset;
 	_tcpOffset[1] = yOffset;
 	_tcpOffset[2] = zOffset;
@@ -32,7 +32,7 @@ void morobotScaraRRR::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	updateTCPpose();
 }
 
-bool morobotScaraRRR::checkIfAngleValid(uint8_t servoId, float angle){
+bool morobot_s_rrr::checkIfAngleValid(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
 	if(isnan(angle)){
 		Serial.print("Angle for motor ");
@@ -53,7 +53,7 @@ bool morobotScaraRRR::checkIfAngleValid(uint8_t servoId, float angle){
 	return true;
 }
 
-bool morobotScaraRRR::checkIfAnglesValid(float phi1, float phi2, float phi3){
+bool morobot_s_rrr::checkIfAnglesValid(float phi1, float phi2, float phi3){
 	float angles[3] = {phi1, phi2, phi3};
 	
 	for (uint8_t i = 0; i < _numSmartServos; i++) if(checkIfAngleValid(i, angles[i]) == false) return false;
@@ -61,7 +61,7 @@ bool morobotScaraRRR::checkIfAnglesValid(float phi1, float phi2, float phi3){
 }
 
 /* PROTECTED FUNCTIONS */
-bool morobotScaraRRR::calculateAngles(float x, float y, float rotZ){
+bool morobot_s_rrr::calculateAngles(float x, float y, float rotZ){
 	rotZ = rotZ * M_PI/180;			// Transform rotation into radians
 	x = x-a;							// Base is in x-orientation --> Just subtract base-length from x-coordinate
 	
@@ -101,7 +101,7 @@ bool morobotScaraRRR::calculateAngles(float x, float y, float rotZ){
 	return true;
 }
 
-void morobotScaraRRR::updateTCPpose(bool output){
+void morobot_s_rrr::updateTCPpose(bool output){
 	setBusy();
 	waitUntilIsReady();
 	

@@ -101,17 +101,17 @@ Usage</h2>
 Examples</h3>
 <ul>
 <li>base_importantFunctionCalls<br  />
- Bare minimum program and function calls for controlling a morobot Scara RRP. Just put control commands into the loop and look what happens.</li>
+ Bare minimum program and function calls for controlling a morobot-s rrp. Just put control commands into the loop and look what happens.</li>
 <li>calibrate_robot<br  />
  Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.</li>
-<li>driveAroundXYZ<br  />
- Control the RRP robot with the dabble app and drive around giving x-y-z-coordinates</li>
-<li>driveAroundXYZ_RRR<br  />
- Control the RRR robot with the dabble app and drive around giving x-y-z-coordinates</li>
+<li>driveAroundXYZ_morobot-s(rrp)<br  />
+ Control the morobot-s (rrp) with the dabble app and drive around giving x-y-z-coordinates</li>
+<li>driveAroundXYZ_morobot-s(rrp)<br  />
+ Control the morobot-s (rrr) with the dabble app and drive around giving x-y-z-coordinates</li>
 <li>driveAroundXYZ_morobot-2d<br  />
  Control the morobot-2d with the dabble app and drive around giving x-y-z-coordinates</li>
 <li>multiple_robots<br  />
- Control multiple robots (in this case 2x Scara RRP) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.</li>
+ Control multiple robots (in this case 2x morobot-s) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.</li>
 <li>teach_robot<br  />
  Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.</li>
 <li>endeffector<br  />
@@ -132,17 +132,17 @@ Supported grippers</h3>
 </ul>
 <h2><a class="anchor" id="autotoc_md6"></a>
 How to add a new robot</h2>
-<p>The class <a class="el" href="classmorobot_class.html" title="morobot base class for microcontrollers such as Arduino or ESP32">morobotClass</a> is an abstract base class implementing functions like moving the robot's joints. For each new robot type, a new child class with corresponding header- and cpp-file has to be implemented. Start with <a class="el" href="classnew_robot_class___template.html" title="morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> and make the following changes:</p><ul>
-<li>Copy the <a class="el" href="classnew_robot_class___template.html" title="morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> files and rename them. Include type and kinematics into name (e.g. Scara RRP = <a class="el" href="classmorobot_scara_r_r_p.html" title="morobot child class for Scara-RRP-Robot for microcontrollers such as Arduino or ESP32">morobotScaraRRP</a>)</li>
+<p>The class <a class="el" href="classmorobot_class.html" title="morobot base class for microcontrollers such as Arduino or ESP32">morobotClass</a> is an abstract base class implementing functions like moving the robot's joints. For each new robot type, a new child class with corresponding header- and cpp-file has to be implemented. Start with <a class="el" href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> and make the following changes:</p><ul>
+<li>Copy the <a class="el" href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> files and rename them. Include type and kinematics into name</li>
 <li>Make the following changes in the **.h-file** (See TODOs in file):<ul>
-<li>Search for '<a class="el" href="classnew_robot_class___template.html" title="morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a>' and replace all instances with your class name (same name as .h and .cpp file)</li>
+<li>Search for '<a class="el" href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a>' and replace all instances with your class name (same name as .h and .cpp file)</li>
 <li>Change the number of servos of the robot in the call of the <a class="el" href="classmorobot_class.html" title="morobot base class for microcontrollers such as Arduino or ESP32">morobotClass</a> constructor</li>
 <li>Change the Number of servos and the joint limits in the variable '_jointLimits[][]'</li>
 <li>Add variables necessary to solve the inverse kinematics (e.g. lengths of the axes)</li>
 </ul>
 </li>
 <li>Make the following changes in the **.cpp-file** (See TODOs in file):<ul>
-<li>Search for '<a class="el" href="classnew_robot_class___template.html" title="morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a>' and replace all instances with your class name (same name as .h and .cpp file)</li>
+<li>Search for '<a class="el" href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a>' and replace all instances with your class name (same name as .h and .cpp file)</li>
 <li>In 'setTCPoffset()' add your code to calculate the new lengths of the last axis including the EEF-offsets</li>
 <li>In 'calculateAngles()' implement the inverse kinematics of the robot</li>
 <li>In 'updateCurrentXYZ' implement the forward kinematics of the robot</li>
@@ -155,6 +155,7 @@ Known issues</h2>
 <ul>
 <li>Example with multiple robots is not working for ESP32 controllers</li>
 <li>Other TCP-Offset than x/0/x for morobot-s (rrp and rrr) is not implemented (necessary?)</li>
+<li>Other EEF-types (e.g. pumps with relais) not implemented yet</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md8"></a>
 License</h2>

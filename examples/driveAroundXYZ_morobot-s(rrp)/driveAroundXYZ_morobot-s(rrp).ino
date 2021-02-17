@@ -1,12 +1,12 @@
 /**
- *  \file driveAroundXYZ_RRR.ino
- *  \brief Control the robot with the dabble app and drive around giving x-y-z-coordinates
+ *  \file driveAroundXYZ_morobot-s(rrp).ino
+ *  \brief Control the morobot-s(rrp) with the dabble app and drive around giving x-y-z-coordinates
  *  @author	Johannes Rauer FHTW
- *  @date	2020/12/17
+ *  @date	2020/11/27
  *  
  *  Hardware: 		- Arduino Mega (or similar microcontroller)
  *  				- HC-05 bluetooth controller (or similar)
- *  				- Calibrated morobot RRR
+ *  				- Calibrated morobot-s (rrp)
  *  				- Powersupply 12V 5A (or more)
  *  Connections:	- Powersupply to Arduino hollow connector
  *  				- First smart servo of robot to Arduino:
@@ -22,7 +22,7 @@
  *  Install the Dabble-App on your smartphone or tablet
  */
 
-#include <morobotScaraRRR.h>
+#include <morobot_s_rrp.h>
 #ifndef ESP32
 #include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
 #define DABBLE_PARAM 9600	// Set transmission speed
@@ -32,7 +32,7 @@
 #endif
 
 // Create morobot object and declare variables
-morobotScaraRRR morobot;
+morobot_s_rrp morobot;
 float step = 1.0;
 int delayDebounce = 250;
 float actPos[3];
@@ -42,8 +42,9 @@ void setup() {
 	Dabble.begin(DABBLE_PARAM);		// Start connection to Dabble
 	morobot.begin("Serial2");		// The robot is connected to RX/TX2 -> Serial2
 	morobot.setSpeedRPM(50);
-	morobot.setTCPoffset(20, 0, 10); // If the robot has an endeffector set its position here (y-coordinate not supported)
+	//morobot.setTCPoffset(4.92,34.1,10); // If the robot has an endeffector set its position here (e.g. Pen-Holder)
 	morobot.moveHome();				// Move the robot into initial position
+	morobot.moveZAxisIn();			// Move the z-axis in (in case it is out more than one rotation of motor on startup)
 	morobot.setZero();				// Set the axes zero when move in
 	delay(200);
 	initVars();
@@ -51,7 +52,7 @@ void setup() {
 	Serial.println("Waiting for Dabble to connect to smartphone. If you are already connected, press any app-key.");
 	Dabble.waitForAppConnection();
 	Serial.println("Dabble connected!");
-	Serial.println("Use the gamepad to drive the robot around. Triangle and X buttons control last axis.");
+	Serial.println("Use the gamepad to drive the robot around. Triangle and X buttons control vertical axis.");
 }
 
 void loop() {
@@ -59,17 +60,17 @@ void loop() {
 	Dabble.processInput();
 	
 	if(GamePad.isPressed(2)) {			// Left
-		actPosTemp[1] = actPos[1] + step;
-	} else if(GamePad.isPressed(3)) {	// Right
 		actPosTemp[1] = actPos[1] - step;
+	} else if(GamePad.isPressed(3)) {	// Right
+		actPosTemp[1] = actPos[1] + step;
 	} else if(GamePad.isPressed(0)) {	// Up
-		actPosTemp[0] = actPos[0] + step;
-	} else if(GamePad.isPressed(1)) {	// Down
 		actPosTemp[0] = actPos[0] - step;
+	} else if(GamePad.isPressed(1)) {	// Down
+		actPosTemp[0] = actPos[0] + step;
 	} else if(GamePad.isPressed(6)) {	// Triangle
-		actPosTemp[2] = actPos[2] + step;
+		actPosTemp[2] = actPos[2] + step/4;
 	} else if(GamePad.isPressed(8)) {   // X
-		actPosTemp[2] = actPos[2] - step;
+		actPosTemp[2] = actPos[2] - step/4;
 	} else if(GamePad.isPressed(7)) {	// O
 		morobot.moveHome();
 		initVars();
@@ -92,6 +93,6 @@ void loop() {
 void initVars(){
 	actPos[0] = morobot.getActPosition('x');
 	actPos[1] = morobot.getActPosition('y');
-	actPos[2] = morobot.getActOrientation('z');
+	actPos[2] = morobot.getActPosition('z');
 	for (uint8_t i=0; i<3; i++) actPosTemp[i] = actPos[i];
 }

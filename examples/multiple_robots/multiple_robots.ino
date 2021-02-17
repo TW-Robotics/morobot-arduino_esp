@@ -1,6 +1,6 @@
 /**
  *  \file multiple_robots.ino
- *  \brief Control multiple robots (in this case 2x Scara RRP) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.
+ *  \brief Control multiple robots (in this case 2x morobot-s (rrp)) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
  *  
@@ -27,16 +27,16 @@
  *  Install the Dabble-App on your smartphone or tablet
  */
 
-#include <morobotScaraRRP.h>
+#include <morobot_s_rrp.h>
 #include <Dabble.h>		// THIS EXAMPLE DOES NOT WORK FOR ESP32 YET
 
 int delayDebounce = 250;
 int angleStep = 6;
 int angleVertStep = 20;
 
-morobotScaraRRP morobot1;
-morobotScaraRRP morobot2;
-morobotScaraRRP* actMorobot;	// Pointer to store which robot is active at the moment
+morobot_s_rrp morobot1;
+morobot_s_rrp morobot2;
+morobot_s_rrp* actMorobot;	// Pointer to store which robot is active at the moment
 
 void setup() {
 	Dabble.begin(9600);

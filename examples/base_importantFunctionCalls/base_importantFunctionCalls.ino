@@ -1,6 +1,6 @@
 /**
  *  \file base_importantFunctionCalls.ino
- *  \brief Bare minimum program and function calls for controlling a morobot Scara RRP. Just put control commands into the loop and look what happens.
+ *  \brief Bare minimum program and function calls for controlling a morobot-s (rrp). Just put control commands into the loop and look what happens.
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
  *  
@@ -15,9 +15,9 @@
  *  					- White calbe to pin 17 (RX2)
  */
 
-#include <morobotScaraRRP.h>  	// If you are using another robot, change the name to the correct header file here
+#include <morobot_s_rrp.h>  	// If you are using another robot, change the name to the correct header file here
 
-morobotScaraRRP morobot;		// And change the class-name here
+morobot_s_rrp morobot;		// And change the class-name here
 
 void setup() {
 	morobot.begin("Serial2");
@@ -75,7 +75,7 @@ void loop() {
 	delay(5000);
 
 	Serial.println("Moving all axes");
-	morobot.moveToAngles(-37, 59, 100);	// For the SCARA robot, just give 3 angle values in degrees
+	morobot.moveToAngles(-37, 59, 100);	// For the morobot-s, just give 3 angle values in degrees
 	long angles[3] = {37, -59, 260};
 	morobot.moveToAngles(angles);		// Or you can define an array and send it to the robot
 	angles[1] = 59;

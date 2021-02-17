@@ -22,7 +22,7 @@
  *  Install the Dabble-App on your smartphone or tablet
  */
 
-#include <morobotScaraRRR.h>  	// If you are using another robot, change the name to the correct header file here
+#include <morobot_s_rrr.h>  	// If you are using another robot, change the name to the correct header file here
 #ifndef ESP32
 #include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
 #define DABBLE_PARAM 9600	// Set transmission speed
@@ -35,7 +35,7 @@
 
 int delayDebounce = 100;
 
-morobotScaraRRR morobot;
+morobot_s_rrr morobot;
 gripper gripper(&morobot);
 
 void setup() {

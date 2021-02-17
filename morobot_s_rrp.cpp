@@ -1,12 +1,12 @@
 /**
- *  \class 	morobotScaraRRP
+ *  \class 	morobot_s_rrp
  *  \brief 	morobot child class for morobot-s (rrp) for microcontrollers such as Arduino or ESP32
- *  @file 	morobotScaraRRP.cpp
+ *  @file 	morobot_s_rrp.cpp
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
  *  \par Method List:
  *  	public:
- *  		morobotScaraRRP() : morobotClass(3){};
+ *  		morobot_s_rrp() : morobotClass(3){};
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 			bool checkIfAnglesValid(float phi1, float phi2, float phi3);
@@ -17,9 +17,9 @@
 			virtual void updateTCPpose();
  */
  
-#include <morobotScaraRRP.h>
+#include <morobot_s_rrp.h>
 
-void morobotScaraRRP::setTCPoffset(float xOffset, float yOffset, float zOffset){
+void morobot_s_rrp::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	_tcpOffset[0] = xOffset;
 	_tcpOffset[1] = yOffset;
 	_tcpOffset[2] = zOffset;
@@ -39,7 +39,7 @@ void morobotScaraRRP::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	updateTCPpose();
 }
 
-bool morobotScaraRRP::checkIfAngleValid(uint8_t servoId, float angle){
+bool morobot_s_rrp::checkIfAngleValid(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
 	if(isnan(angle)){
 		Serial.print("Angle for motor ");
@@ -60,25 +60,25 @@ bool morobotScaraRRP::checkIfAngleValid(uint8_t servoId, float angle){
 	return true;
 }
 
-bool morobotScaraRRP::checkIfAnglesValid(float phi1, float phi2, float phi3){
+bool morobot_s_rrp::checkIfAnglesValid(float phi1, float phi2, float phi3){
 	float angles[3] = {phi1, phi2, phi3};
 	
 	for (uint8_t i = 0; i < _numSmartServos; i++) if(checkIfAngleValid(i, angles[i]) == false) return false;
 	return true;
 }
 
-void morobotScaraRRP::moveToAngles(long phi1, long phi2, long phi3){
+void morobot_s_rrp::moveToAngles(long phi1, long phi2, long phi3){
 	long angles[3] = {phi1, phi2, phi3};
 	moveToAngles(angles);
 }
 
-void morobotScaraRRP::moveZAxisIn(uint8_t maxMotorCurrent){
+void morobot_s_rrp::moveZAxisIn(uint8_t maxMotorCurrent){
 	autoCalibrateLinearAxis(2, maxMotorCurrent);
 	waitUntilIsReady();
 }
 
 /* PROTECTED FUNCTIONS */
-bool morobotScaraRRP::calculateAngles(float x, float y, float z){
+bool morobot_s_rrp::calculateAngles(float x, float y, float z){
 	float xSQ = pow(x-a,2);	// Base is in x-orientation --> Just subtract base-length from x-coordinate
 	float ySQ = pow(y,2);
 	
@@ -112,7 +112,7 @@ bool morobotScaraRRP::calculateAngles(float x, float y, float z){
 	return true;
 }
 
-void morobotScaraRRP::updateTCPpose(bool output){
+void morobot_s_rrp::updateTCPpose(bool output){
 	setBusy();
 	waitUntilIsReady();
 	

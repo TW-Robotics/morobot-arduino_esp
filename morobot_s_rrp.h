@@ -1,12 +1,12 @@
 /**
- *  \class 	morobotScaraRRP
- *  \brief 	morobot child class for Scara-RRP-Robot for microcontrollers such as Arduino or ESP32
- *  @file 	morobotScaraRRP.h
+ *  \class 	morobot_s_rrp
+ *  \brief 	morobot child class for morobot-s (rrp) for microcontrollers such as Arduino or ESP32
+ *  @file 	morobot_s_rrp.h
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
  *  \par Method List:
  *  	public:
- *  		morobotScaraRRP() : morobotClass(3){};
+ *  		morobot_s_rrp() : morobotClass(3){};
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 			bool checkIfAnglesValid(float phi1, float phi2, float phi3);
@@ -17,18 +17,18 @@
 			virtual void updateTCPpose();
  */
  
-#ifndef MOROBOTSCARARRP_H
-#define MOROBOTSCARARRP_H
+#ifndef MOROBOTS_S_RRP_H
+#define MOROBOTS_S_RRP_H
 
 #include <morobot.h>
 
-class morobotScaraRRP:public morobotClass {
+class morobot_s_rrp:public morobotClass {
 	public:
 		/**
-		 *  \brief Constructor of morobotScaraRRP class
+		 *  \brief Constructor of morobot_s_rrp class
 		 *  \details The value in brakets defines that the robot consists of three smartservos
 		 */
-		morobotScaraRRP() : morobotClass(3){};
+		morobot_s_rrp() : morobotClass(3){};
 		
 		/**
 		 *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.

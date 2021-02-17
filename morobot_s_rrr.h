@@ -1,12 +1,12 @@
 /**
- *  \class 	morobotScaraRRR
+ *  \class 	morobot_s_rrr
  *  \brief 	morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32
- *  @file 	morobotScaraRRR.h
+ *  @file 	morobot_s_rrr.h
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
  *  \par Method List:
  *  	public:
- *  		morobotScaraRRR() : morobotClass(PUT_NUM_SERVOS_HERE){};
+ *  		morobot_s_rrr() : morobotClass(PUT_NUM_SERVOS_HERE){};
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 			bool checkIfAnglesValid(float phi1, float phi2, float phi3);
@@ -15,18 +15,18 @@
 			virtual void updateCurrentXYZ();
  */
 
-#ifndef MOROBOTSCARARRP_H
-#define MOROBOTSCARARRP_H
+#ifndef MOROBOT_S_RRR_H
+#define MOROBOT_S_RRR_H
 
 #include <morobot.h>
 
-class morobotScaraRRR:public morobotClass {
+class morobot_s_rrr:public morobotClass {
 	public:
 		/**
-		 *  \brief Constructor of morobotScaraRRR class
+		 *  \brief Constructor of morobot_s_rrr class
 		 *  \details The value in brakets defines that the robot consists of three smartservos
 		 */
-		morobotScaraRRR() : morobotClass(3){};
+		morobot_s_rrr() : morobotClass(3){};
 		
 		/**
 		 *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.

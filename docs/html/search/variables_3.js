@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['c_190',['c',['../classmorobot_scara_r_r_p.html#a9cdb1f8aa4d7a20610f60ea536cf45a8',1,'morobotScaraRRP::c()'],['../classmorobot_scara_r_r_r.html#acea353b3545744cd6f92b65935ed3bf4',1,'morobotScaraRRR::c()']]],
-  ['c_5fnew_191',['c_new',['../classmorobot_scara_r_r_p.html#a129731c81427760a5e8f8dba5e9de728',1,'morobotScaraRRP']]],
-  ['c_5fnewsq_192',['c_newSQ',['../classmorobot_scara_r_r_p.html#acc35113f100afd6672c191e079506161',1,'morobotScaraRRP']]],
-  ['csq_193',['cSQ',['../classmorobot_scara_r_r_r.html#aa4c0c00c4b1ec2bc5a5236cdc47c1f30',1,'morobotScaraRRR']]]
+  ['c_192',['c',['../classmorobot__s__rrp.html#af260b07f1431aef58fd73147d7831483',1,'morobot_s_rrp::c()'],['../classmorobot__s__rrr.html#abe71fae79efb960999f0decaf3bb4059',1,'morobot_s_rrr::c()']]],
+  ['c_5fnew_193',['c_new',['../classmorobot__s__rrp.html#a2ac798109fb8a0baa7350be369c4ad7b',1,'morobot_s_rrp']]],
+  ['c_5fnewsq_194',['c_newSQ',['../classmorobot__s__rrp.html#ac4e85877ec8071ad326f20d555f18e5e',1,'morobot_s_rrp']]],
+  ['csq_195',['cSQ',['../classmorobot__s__rrr.html#ad86f916a0dfca1390ea6254ba094f112',1,'morobot_s_rrr']]]
 ];

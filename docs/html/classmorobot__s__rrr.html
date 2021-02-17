@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>morobot-arduino_esp: morobotScaraRRP Class Reference</title>
+<title>morobot-arduino_esp: morobot_s_rrr Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classmorobot_scara_r_r_p.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classmorobot__s__rrr.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -86,52 +86,40 @@ $(document).ready(function(){initNavTree('classmorobot_scara_r_r_p.html',''); in
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
-<a href="classmorobot_scara_r_r_p-members.html">List of all members</a>  </div>
+<a href="classmorobot__s__rrr-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">morobotScaraRRP Class Reference</div>  </div>
+<div class="title">morobot_s_rrr Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>morobot child class for Scara-RRP-Robot for microcontrollers such as Arduino or ESP32  
- <a href="classmorobot_scara_r_r_p.html#details">More...</a></p>
+<p>morobot child class for morobot-s (rrr) for microcontrollers such as Arduino or ESP32  
+ <a href="classmorobot__s__rrr.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="morobot_scara_r_r_p_8h_source.html">morobotScaraRRP.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="morobot__s__rrr_8h_source.html">morobot_s_rrr.h</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for morobotScaraRRP:</div>
+Inheritance diagram for morobot_s_rrr:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classmorobot_scara_r_r_p.png" usemap="#morobotScaraRRP_map" alt=""/>
-  <map id="morobotScaraRRP_map" name="morobotScaraRRP_map">
-<area href="classmorobot_class.html" title="morobot base class for microcontrollers such as Arduino or ESP32" alt="morobotClass" shape="rect" coords="0,0,115,24"/>
+  <img src="classmorobot__s__rrr.png" usemap="#morobot_5Fs_5Frrr_map" alt=""/>
+  <map id="morobot_5Fs_5Frrr_map" name="morobot_5Fs_5Frrr_map">
+<area href="classmorobot_class.html" title="morobot base class for microcontrollers such as Arduino or ESP32" alt="morobotClass" shape="rect" coords="0,0,92,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a242ebcc2067b6839a4dd17e39cd1a7ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a242ebcc2067b6839a4dd17e39cd1a7ff">morobotScaraRRP</a> ()</td></tr>
-<tr class="memdesc:a242ebcc2067b6839a4dd17e39cd1a7ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classmorobot_scara_r_r_p.html" title="morobot child class for Scara-RRP-Robot for microcontrollers such as Arduino or ESP32">morobotScaraRRP</a> class.  <a href="classmorobot_scara_r_r_p.html#a242ebcc2067b6839a4dd17e39cd1a7ff">More...</a><br /></td></tr>
-<tr class="separator:a242ebcc2067b6839a4dd17e39cd1a7ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7140e89233766fa07ff5632b60cadbe4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a7140e89233766fa07ff5632b60cadbe4">setTCPoffset</a> (float xOffset, float yOffset, float zOffset)</td></tr>
-<tr class="memdesc:a7140e89233766fa07ff5632b60cadbe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis. This information is necessary to calculate the inverse kinematics correctly. The function stores the TCP-Offset and recalculates the length and angle of the last axis. Internally the length and angle of the last axis is stored as if it would be a straigth axis directly to the TCP.  <a href="classmorobot_scara_r_r_p.html#a7140e89233766fa07ff5632b60cadbe4">More...</a><br /></td></tr>
-<tr class="separator:a7140e89233766fa07ff5632b60cadbe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4ae513098cb30119093cdfd6d83f00c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#ae4ae513098cb30119093cdfd6d83f00c">checkIfAngleValid</a> (uint8_t servoId, float angle)</td></tr>
-<tr class="memdesc:ae4ae513098cb30119093cdfd6d83f00c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a given angle can be reached by the joint. Each joint has a specific limit to protect the robot's mechanics. The joint limits are predefined in the private variable _jointLimits.  <a href="classmorobot_scara_r_r_p.html#ae4ae513098cb30119093cdfd6d83f00c">More...</a><br /></td></tr>
-<tr class="separator:ae4ae513098cb30119093cdfd6d83f00c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af22029e0272e6ba22c6d152e9ad6a40b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#af22029e0272e6ba22c6d152e9ad6a40b">checkIfAnglesValid</a> (float phi1, float phi2, float phi3)</td></tr>
-<tr class="memdesc:af22029e0272e6ba22c6d152e9ad6a40b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if all robot motor angles are valid.  <a href="classmorobot_scara_r_r_p.html#af22029e0272e6ba22c6d152e9ad6a40b">More...</a><br /></td></tr>
-<tr class="separator:af22029e0272e6ba22c6d152e9ad6a40b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3e4b783912c477545dfc20e7e175838"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#ae3e4b783912c477545dfc20e7e175838">moveToAngles</a> (long phi1, long phi2, long phi3)</td></tr>
-<tr class="memdesc:ae3e4b783912c477545dfc20e7e175838"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves all motors to desired angles (Moves the whole robot) - absolute movement. Waits until the robot is ready to use (no motor moves) before moving. Checks if the angles are valid before moving.  <a href="classmorobot_scara_r_r_p.html#ae3e4b783912c477545dfc20e7e175838">More...</a><br /></td></tr>
-<tr class="separator:ae3e4b783912c477545dfc20e7e175838"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46c129c8b3560cf2a19592aa38ef7c0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a46c129c8b3560cf2a19592aa38ef7c0a">moveZAxisIn</a> (uint8_t maxMotorCurrent=25)</td></tr>
-<tr class="memdesc:a46c129c8b3560cf2a19592aa38ef7c0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calibrates the linear axis by increasing the angle until a current limit is reached.  <a href="classmorobot_scara_r_r_p.html#a46c129c8b3560cf2a19592aa38ef7c0a">More...</a><br /></td></tr>
-<tr class="separator:a46c129c8b3560cf2a19592aa38ef7c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a698227270f1ac05e390fd86c01a19604"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a698227270f1ac05e390fd86c01a19604">moveToAngles</a> (long angles[])</td></tr>
-<tr class="memdesc:a698227270f1ac05e390fd86c01a19604"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves all motors to desired angles (Moves the whole robot) - absolute movement. Waits until the robot is ready to use (no motor moves) before moving. Checks if the angles are valid before moving.  <a href="classmorobot_scara_r_r_p.html#a698227270f1ac05e390fd86c01a19604">More...</a><br /></td></tr>
-<tr class="separator:a698227270f1ac05e390fd86c01a19604"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31319a1e06a472ccabaa840aef79d386"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a31319a1e06a472ccabaa840aef79d386">moveToAngles</a> (long angles[], uint8_t speedRPM)</td></tr>
-<tr class="memdesc:a31319a1e06a472ccabaa840aef79d386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves all motors to desired angles (Moves the whole robot) - absolute movement. Waits until the robot is ready to use (no motor moves) before moving. Checks if the angles are valid before moving.  <a href="classmorobot_scara_r_r_p.html#a31319a1e06a472ccabaa840aef79d386">More...</a><br /></td></tr>
-<tr class="separator:a31319a1e06a472ccabaa840aef79d386"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf18fea11c3820f6f61b4b19a8a3ebae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#acf18fea11c3820f6f61b4b19a8a3ebae">morobot_s_rrr</a> ()</td></tr>
+<tr class="memdesc:acf18fea11c3820f6f61b4b19a8a3ebae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classmorobot__s__rrr.html" title="morobot child class for morobot-s (rrr) for microcontrollers such as Arduino or ESP32">morobot_s_rrr</a> class.  <a href="classmorobot__s__rrr.html#acf18fea11c3820f6f61b4b19a8a3ebae">More...</a><br /></td></tr>
+<tr class="separator:acf18fea11c3820f6f61b4b19a8a3ebae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a965c93f616ed27d418951f94b58d81da"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#a965c93f616ed27d418951f94b58d81da">setTCPoffset</a> (float xOffset, float yOffset, float zOffset)</td></tr>
+<tr class="memdesc:a965c93f616ed27d418951f94b58d81da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis. This information is necessary to calculate the inverse kinematics correctly. The function stores the TCP-Offset and recalculates the length and angle of the last axis. Internally the length and angle of the last axis is stored as if it would be a straigth axis directly to the TCP.  <a href="classmorobot__s__rrr.html#a965c93f616ed27d418951f94b58d81da">More...</a><br /></td></tr>
+<tr class="separator:a965c93f616ed27d418951f94b58d81da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8be76ecdda83554e50a9be2fcdaa8d06"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#a8be76ecdda83554e50a9be2fcdaa8d06">checkIfAngleValid</a> (uint8_t servoId, float angle)</td></tr>
+<tr class="memdesc:a8be76ecdda83554e50a9be2fcdaa8d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a given angle can be reached by the joint. Each joint has a specific limit to protect the robot's mechanics. The joint limits are predefined in the private variable _jointLimits.  <a href="classmorobot__s__rrr.html#a8be76ecdda83554e50a9be2fcdaa8d06">More...</a><br /></td></tr>
+<tr class="separator:a8be76ecdda83554e50a9be2fcdaa8d06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9365276347a091e439c4b8df1aaed491"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#a9365276347a091e439c4b8df1aaed491">checkIfAnglesValid</a> (float phi1, float phi2, float phi3)</td></tr>
+<tr class="memdesc:a9365276347a091e439c4b8df1aaed491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if all robot motor angles are valid. Just calls checkIfAngleValid for each motor times.  <a href="classmorobot__s__rrr.html#a9365276347a091e439c4b8df1aaed491">More...</a><br /></td></tr>
+<tr class="separator:a9365276347a091e439c4b8df1aaed491"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmorobot_class"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmorobot_class')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmorobot_class.html">morobotClass</a></td></tr>
 <tr class="memitem:a48396b733476ad4d729811f48eb171b0 inherit pub_methods_classmorobot_class"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#a48396b733476ad4d729811f48eb171b0">morobotClass</a> (uint8_t numSmartServos)</td></tr>
 <tr class="memdesc:a48396b733476ad4d729811f48eb171b0 inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of morobot class.  <a href="classmorobot_class.html#a48396b733476ad4d729811f48eb171b0">More...</a><br /></td></tr>
@@ -224,20 +212,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a3eddf0b7874580786e1b1d34bda667ea inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the TCP (tool center point) of the robot by given value in one axis. Calls child class to solve forward kinematics, adds values, solves inverse kinematics and moves the robot to the position.  <a href="classmorobot_class.html#a3eddf0b7874580786e1b1d34bda667ea">More...</a><br /></td></tr>
 <tr class="separator:a3eddf0b7874580786e1b1d34bda667ea inherit pub_methods_classmorobot_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45dfa974c79a4ec2ab9529e9d5590726 inherit pub_methods_classmorobot_class"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726">printAngles</a> (long angles[])</td></tr>
-<tr class="memdesc:a45dfa974c79a4ec2ab9529e9d5590726 inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints an array of angles to the servial monitor.  <a href="classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726">More...</a><br /></td></tr>
+<tr class="memdesc:a45dfa974c79a4ec2ab9529e9d5590726 inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints an array of angles to the serial monitor.  <a href="classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726">More...</a><br /></td></tr>
 <tr class="separator:a45dfa974c79a4ec2ab9529e9d5590726 inherit pub_methods_classmorobot_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e73627ff0045c333ea468ecee552827 inherit pub_methods_classmorobot_class"><td class="memItemLeft" align="right" valign="top"><a id="a9e73627ff0045c333ea468ecee552827"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#a9e73627ff0045c333ea468ecee552827">printTCPpose</a> ()</td></tr>
+<tr class="memdesc:a9e73627ff0045c333ea468ecee552827 inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints an the TCP-pose to the serial monitor. <br /></td></tr>
+<tr class="separator:a9e73627ff0045c333ea468ecee552827 inherit pub_methods_classmorobot_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5863022ede07fe03051869c25a3c27c inherit pub_methods_classmorobot_class"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#ac5863022ede07fe03051869c25a3c27c">convertToDegrees</a> (float angle)</td></tr>
 <tr class="memdesc:ac5863022ede07fe03051869c25a3c27c inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns angle converted from rad into deg.  <a href="classmorobot_class.html#ac5863022ede07fe03051869c25a3c27c">More...</a><br /></td></tr>
 <tr class="separator:ac5863022ede07fe03051869c25a3c27c inherit pub_methods_classmorobot_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ac5548e3ce4a021cddb38bee05a8937bf"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#ac5548e3ce4a021cddb38bee05a8937bf">calculateAngles</a> (float x, float y, float z)</td></tr>
-<tr class="memdesc:ac5548e3ce4a021cddb38bee05a8937bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics). This function does only calculate the angles of the motors and stores them internally. Use moveToPosition(x,y,z) to actually move the robot.  <a href="classmorobot_scara_r_r_p.html#ac5548e3ce4a021cddb38bee05a8937bf">More...</a><br /></td></tr>
-<tr class="separator:ac5548e3ce4a021cddb38bee05a8937bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71ce07413dadb55c85a7936f7c7b10c8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a71ce07413dadb55c85a7936f7c7b10c8">updateTCPpose</a> (bool output=false)</td></tr>
-<tr class="memdesc:a71ce07413dadb55c85a7936f7c7b10c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-calculates the internally stored robot TCP position (Solves forward kinematics). This function does calculate and store the TCP position depending on the current motor angles.  <a href="classmorobot_scara_r_r_p.html#a71ce07413dadb55c85a7936f7c7b10c8">More...</a><br /></td></tr>
-<tr class="separator:a71ce07413dadb55c85a7936f7c7b10c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe3567cdcb3f0d9951d1ad17ed54fc9c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#afe3567cdcb3f0d9951d1ad17ed54fc9c">calculateAngles</a> (float x, float y, float rotZ)</td></tr>
+<tr class="memdesc:afe3567cdcb3f0d9951d1ad17ed54fc9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics). This function does only calculate the angles of the motors and stores them internally. Use moveToPosition(x,y,z) to actually move the robot.  <a href="classmorobot__s__rrr.html#afe3567cdcb3f0d9951d1ad17ed54fc9c">More...</a><br /></td></tr>
+<tr class="separator:afe3567cdcb3f0d9951d1ad17ed54fc9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e726abb3359eb0b3ddd8e25f4067036"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#a7e726abb3359eb0b3ddd8e25f4067036">updateTCPpose</a> (bool output=false)</td></tr>
+<tr class="memdesc:a7e726abb3359eb0b3ddd8e25f4067036"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-calculates the internally stored robot TCP position (Solves forward kinematics). This function does calculate and store the TCP position depending on the current motor angles.  <a href="classmorobot__s__rrr.html#a7e726abb3359eb0b3ddd8e25f4067036">More...</a><br /></td></tr>
+<tr class="separator:a7e726abb3359eb0b3ddd8e25f4067036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classmorobot_class"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classmorobot_class')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classmorobot_class.html">morobotClass</a></td></tr>
 <tr class="memitem:aabee97d39e1d796707f109887534742e inherit pro_methods_classmorobot_class"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#aabee97d39e1d796707f109887534742e">autoCalibrateLinearAxis</a> (uint8_t servoId, uint8_t maxMotorCurrent=25)</td></tr>
 <tr class="memdesc:aabee97d39e1d796707f109887534742e inherit pro_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calibrates a linear axis by increasing the angle until a current limit is reached.  <a href="classmorobot_class.html#aabee97d39e1d796707f109887534742e">More...</a><br /></td></tr>
@@ -245,46 +237,42 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a67fb399fe2c4da5bb96b4b43240bf5f0"><td class="memItemLeft" align="right" valign="top"><a id="a67fb399fe2c4da5bb96b4b43240bf5f0"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a67fb399fe2c4da5bb96b4b43240bf5f0">_tcpOffset</a> [3]</td></tr>
-<tr class="memdesc:a67fb399fe2c4da5bb96b4b43240bf5f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis. <br /></td></tr>
-<tr class="separator:a67fb399fe2c4da5bb96b4b43240bf5f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b6b8d69173cf6d662bf647e3469bd2f"><td class="memItemLeft" align="right" valign="top"><a id="a9b6b8d69173cf6d662bf647e3469bd2f"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a9b6b8d69173cf6d662bf647e3469bd2f">_jointLimits</a> [3][2] = {{-100, 100}, {-100, 100}, {0, 780}}</td></tr>
-<tr class="memdesc:a9b6b8d69173cf6d662bf647e3469bd2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limits for all joints. <br /></td></tr>
-<tr class="separator:a9b6b8d69173cf6d662bf647e3469bd2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afebd2a8a09b760e07db3b8dac327baa3"><td class="memItemLeft" align="right" valign="top"><a id="afebd2a8a09b760e07db3b8dac327baa3"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#afebd2a8a09b760e07db3b8dac327baa3">a</a> = 47.0</td></tr>
-<tr class="memdesc:afebd2a8a09b760e07db3b8dac327baa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length from mounting to first axis. <br /></td></tr>
-<tr class="separator:afebd2a8a09b760e07db3b8dac327baa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a354125b3bcaf974491ce944be6cc9a08"><td class="memItemLeft" align="right" valign="top"><a id="a354125b3bcaf974491ce944be6cc9a08"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a354125b3bcaf974491ce944be6cc9a08">b</a> = 92.9</td></tr>
-<tr class="memdesc:a354125b3bcaf974491ce944be6cc9a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length from first axis to second axis. <br /></td></tr>
-<tr class="separator:a354125b3bcaf974491ce944be6cc9a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cdb1f8aa4d7a20610f60ea536cf45a8"><td class="memItemLeft" align="right" valign="top"><a id="a9cdb1f8aa4d7a20610f60ea536cf45a8"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a9cdb1f8aa4d7a20610f60ea536cf45a8">c</a> = 72.79</td></tr>
-<tr class="memdesc:a9cdb1f8aa4d7a20610f60ea536cf45a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lenth from second axis to center of flange. <br /></td></tr>
-<tr class="separator:a9cdb1f8aa4d7a20610f60ea536cf45a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4a6130c6bd2b5cae9c55aea8c0f3b6f"><td class="memItemLeft" align="right" valign="top"><a id="ad4a6130c6bd2b5cae9c55aea8c0f3b6f"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#ad4a6130c6bd2b5cae9c55aea8c0f3b6f">gearRatio</a> = 16.25</td></tr>
-<tr class="memdesc:ad4a6130c6bd2b5cae9c55aea8c0f3b6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn motor of linear axis by gearRatio degrees to move it 1 mm. <br /></td></tr>
-<tr class="separator:ad4a6130c6bd2b5cae9c55aea8c0f3b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a129731c81427760a5e8f8dba5e9de728"><td class="memItemLeft" align="right" valign="top"><a id="a129731c81427760a5e8f8dba5e9de728"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a129731c81427760a5e8f8dba5e9de728">c_new</a></td></tr>
-<tr class="memdesc:a129731c81427760a5e8f8dba5e9de728"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recalculated length of last axis if the TCP is not at the center of the flange. <br /></td></tr>
-<tr class="separator:a129731c81427760a5e8f8dba5e9de728"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff52cd23d8048fb1a46918b3f890b1f0"><td class="memItemLeft" align="right" valign="top"><a id="aff52cd23d8048fb1a46918b3f890b1f0"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#aff52cd23d8048fb1a46918b3f890b1f0">beta_new</a></td></tr>
-<tr class="memdesc:aff52cd23d8048fb1a46918b3f890b1f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Additional angle at last axis if the TCP is not at the center of the flange. <br /></td></tr>
-<tr class="separator:aff52cd23d8048fb1a46918b3f890b1f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc35113f100afd6672c191e079506161"><td class="memItemLeft" align="right" valign="top"><a id="acc35113f100afd6672c191e079506161"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#acc35113f100afd6672c191e079506161">c_newSQ</a></td></tr>
-<tr class="memdesc:acc35113f100afd6672c191e079506161"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of c_new (Precalculated for faster processing) <br /></td></tr>
-<tr class="separator:acc35113f100afd6672c191e079506161"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a084be817335913b773a2e8c94a1ea455"><td class="memItemLeft" align="right" valign="top"><a id="a084be817335913b773a2e8c94a1ea455"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_scara_r_r_p.html#a084be817335913b773a2e8c94a1ea455">bSQ</a></td></tr>
-<tr class="memdesc:a084be817335913b773a2e8c94a1ea455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of b (Precalculated for faster processing) <br /></td></tr>
-<tr class="separator:a084be817335913b773a2e8c94a1ea455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc66ca05715e35d24cc13d64d4db47c2"><td class="memItemLeft" align="right" valign="top"><a id="acc66ca05715e35d24cc13d64d4db47c2"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#acc66ca05715e35d24cc13d64d4db47c2">_tcpOffset</a> [3]</td></tr>
+<tr class="memdesc:acc66ca05715e35d24cc13d64d4db47c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis. <br /></td></tr>
+<tr class="separator:acc66ca05715e35d24cc13d64d4db47c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88d7f19da65eb9f5fc07154ce0556be2"><td class="memItemLeft" align="right" valign="top"><a id="a88d7f19da65eb9f5fc07154ce0556be2"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#a88d7f19da65eb9f5fc07154ce0556be2">_jointLimits</a> [3][2] = {{-100, 100}, {-100, 100}, {-180, 180}}</td></tr>
+<tr class="memdesc:a88d7f19da65eb9f5fc07154ce0556be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limits for all joints. <br /></td></tr>
+<tr class="separator:a88d7f19da65eb9f5fc07154ce0556be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4345ecd2bb0b6d11dc0ac66f33cd7783"><td class="memItemLeft" align="right" valign="top"><a id="a4345ecd2bb0b6d11dc0ac66f33cd7783"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#a4345ecd2bb0b6d11dc0ac66f33cd7783">a</a> = 47.0</td></tr>
+<tr class="memdesc:a4345ecd2bb0b6d11dc0ac66f33cd7783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length from mounting to first axis. <br /></td></tr>
+<tr class="separator:a4345ecd2bb0b6d11dc0ac66f33cd7783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a618ab3552708c3119beeee8e6fc36761"><td class="memItemLeft" align="right" valign="top"><a id="a618ab3552708c3119beeee8e6fc36761"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#a618ab3552708c3119beeee8e6fc36761">b</a> = 92.9</td></tr>
+<tr class="memdesc:a618ab3552708c3119beeee8e6fc36761"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length from first axis to second axis. <br /></td></tr>
+<tr class="separator:a618ab3552708c3119beeee8e6fc36761"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe71fae79efb960999f0decaf3bb4059"><td class="memItemLeft" align="right" valign="top"><a id="abe71fae79efb960999f0decaf3bb4059"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#abe71fae79efb960999f0decaf3bb4059">c</a> = 70.52</td></tr>
+<tr class="memdesc:abe71fae79efb960999f0decaf3bb4059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lenth from second axis to third axis. <br /></td></tr>
+<tr class="separator:abe71fae79efb960999f0decaf3bb4059"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4527723fe8bbe5eca3cd82f547af93c"><td class="memItemLeft" align="right" valign="top"><a id="af4527723fe8bbe5eca3cd82f547af93c"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#af4527723fe8bbe5eca3cd82f547af93c">d</a> = 0</td></tr>
+<tr class="memdesc:af4527723fe8bbe5eca3cd82f547af93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length from third axis to TCP (set by setTCPOffset) <br /></td></tr>
+<tr class="separator:af4527723fe8bbe5eca3cd82f547af93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a424a40648df6ac7346e2cc8da74dda9c"><td class="memItemLeft" align="right" valign="top"><a id="a424a40648df6ac7346e2cc8da74dda9c"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#a424a40648df6ac7346e2cc8da74dda9c">bSQ</a></td></tr>
+<tr class="memdesc:a424a40648df6ac7346e2cc8da74dda9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of b (Precalculated for faster processing) <br /></td></tr>
+<tr class="separator:a424a40648df6ac7346e2cc8da74dda9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad86f916a0dfca1390ea6254ba094f112"><td class="memItemLeft" align="right" valign="top"><a id="ad86f916a0dfca1390ea6254ba094f112"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#ad86f916a0dfca1390ea6254ba094f112">cSQ</a></td></tr>
+<tr class="memdesc:ad86f916a0dfca1390ea6254ba094f112"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of c (Precalculated for faster processing) <br /></td></tr>
+<tr class="separator:ad86f916a0dfca1390ea6254ba094f112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a718f973cf81527ba437944d83aa6c3bc"><td class="memItemLeft" align="right" valign="top"><a id="a718f973cf81527ba437944d83aa6c3bc"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot__s__rrr.html#a718f973cf81527ba437944d83aa6c3bc">dSQ</a></td></tr>
+<tr class="memdesc:a718f973cf81527ba437944d83aa6c3bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square of d (Precalculated for faster processing) <br /></td></tr>
+<tr class="separator:a718f973cf81527ba437944d83aa6c3bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -324,11 +312,11 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="separator:a23d2b1912ac59c3701c15d281cd7146f inherit pro_attribs_classmorobot_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>morobot child class for Scara-RRP-Robot for microcontrollers such as Arduino or ESP32 </p>
+<div class="textblock"><p>morobot child class for morobot-s (rrr) for microcontrollers such as Arduino or ESP32 </p>
 <p>morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32 </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a242ebcc2067b6839a4dd17e39cd1a7ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a242ebcc2067b6839a4dd17e39cd1a7ff">&#9670;&nbsp;</a></span>morobotScaraRRP()</h2>
+<a id="acf18fea11c3820f6f61b4b19a8a3ebae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf18fea11c3820f6f61b4b19a8a3ebae">&#9670;&nbsp;</a></span>morobot_s_rrr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -337,7 +325,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">morobotScaraRRP::morobotScaraRRP </td>
+          <td class="memname">morobot_s_rrr::morobot_s_rrr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -350,14 +338,14 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </table>
 </div><div class="memdoc">
 
-<p>Constructor of <a class="el" href="classmorobot_scara_r_r_p.html" title="morobot child class for Scara-RRP-Robot for microcontrollers such as Arduino or ESP32">morobotScaraRRP</a> class. </p>
+<p>Constructor of <a class="el" href="classmorobot__s__rrr.html" title="morobot child class for morobot-s (rrr) for microcontrollers such as Arduino or ESP32">morobot_s_rrr</a> class. </p>
 <p>The value in brakets defines that the robot consists of three smartservos </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac5548e3ce4a021cddb38bee05a8937bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5548e3ce4a021cddb38bee05a8937bf">&#9670;&nbsp;</a></span>calculateAngles()</h2>
+<a id="afe3567cdcb3f0d9951d1ad17ed54fc9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe3567cdcb3f0d9951d1ad17ed54fc9c">&#9670;&nbsp;</a></span>calculateAngles()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +354,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool morobotScaraRRP::calculateAngles </td>
+          <td class="memname">bool morobot_s_rrr::calculateAngles </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>x</em>, </td>
@@ -381,7 +369,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>z</em>&#160;</td>
+          <td class="paramname"><em>rotZ</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -400,8 +388,8 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>Desired x-position of TCP </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>Desired x-position of TCP </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">z</td><td>Desired x-position of TCP </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">y</td><td>Desired y-position of TCP </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rotZ</td><td>Desired rotation of TCP around z-axis </td></tr>
   </table>
   </dd>
 </dl>
@@ -411,14 +399,14 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
-<a id="af22029e0272e6ba22c6d152e9ad6a40b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af22029e0272e6ba22c6d152e9ad6a40b">&#9670;&nbsp;</a></span>checkIfAnglesValid()</h2>
+<a id="a9365276347a091e439c4b8df1aaed491"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9365276347a091e439c4b8df1aaed491">&#9670;&nbsp;</a></span>checkIfAnglesValid()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool morobotScaraRRP::checkIfAnglesValid </td>
+          <td class="memname">bool morobot_s_rrr::checkIfAnglesValid </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>phi1</em>, </td>
@@ -443,7 +431,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
       </table>
 </div><div class="memdoc">
 
-<p>Checks if all robot motor angles are valid. </p>
+<p>Checks if all robot motor angles are valid. Just calls checkIfAngleValid for each motor times. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">phi1</td><td>Angle value for first joint </td></tr>
@@ -452,12 +440,12 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns true if the position is reachable; false if it is not.  Just calls checkIfAngleValid for each motor times. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the position is reachable; false if it is not. </dd></dl>
 
 </div>
 </div>
-<a id="ae4ae513098cb30119093cdfd6d83f00c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4ae513098cb30119093cdfd6d83f00c">&#9670;&nbsp;</a></span>checkIfAngleValid()</h2>
+<a id="a8be76ecdda83554e50a9be2fcdaa8d06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8be76ecdda83554e50a9be2fcdaa8d06">&#9670;&nbsp;</a></span>checkIfAngleValid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -466,7 +454,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool morobotScaraRRP::checkIfAngleValid </td>
+          <td class="memname">bool morobot_s_rrr::checkIfAngleValid </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>servoId</em>, </td>
@@ -504,123 +492,8 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
-<a id="a698227270f1ac05e390fd86c01a19604"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a698227270f1ac05e390fd86c01a19604">&#9670;&nbsp;</a></span>moveToAngles() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void morobotClass::moveToAngles</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Moves all motors to desired angles (Moves the whole robot) - absolute movement. Waits until the robot is ready to use (no motor moves) before moving. Checks if the angles are valid before moving. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">angles[]</td><td>Desired goal angles in degrees. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a31319a1e06a472ccabaa840aef79d386"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31319a1e06a472ccabaa840aef79d386">&#9670;&nbsp;</a></span>moveToAngles() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void morobotClass::moveToAngles</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Moves all motors to desired angles (Moves the whole robot) - absolute movement. Waits until the robot is ready to use (no motor moves) before moving. Checks if the angles are valid before moving. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">angles[]</td><td>Desired goal angles in degrees. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">speedRPM</td><td>Desired velocity of the motor in RPM (rounds per minute). Values accepted between 1 and 50. If no speed is given, the preset default speed is used. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ae3e4b783912c477545dfc20e7e175838"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3e4b783912c477545dfc20e7e175838">&#9670;&nbsp;</a></span>moveToAngles() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void morobotScaraRRP::moveToAngles </td>
-          <td>(</td>
-          <td class="paramtype">long&#160;</td>
-          <td class="paramname"><em>phi1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">long&#160;</td>
-          <td class="paramname"><em>phi2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">long&#160;</td>
-          <td class="paramname"><em>phi3</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Moves all motors to desired angles (Moves the whole robot) - absolute movement. Waits until the robot is ready to use (no motor moves) before moving. Checks if the angles are valid before moving. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">phi1</td><td>Angle value for first joint </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">phi2</td><td>Angle value for second joint </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">phi3</td><td>Angle value for third joint </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a46c129c8b3560cf2a19592aa38ef7c0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46c129c8b3560cf2a19592aa38ef7c0a">&#9670;&nbsp;</a></span>moveZAxisIn()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void morobotScaraRRP::moveZAxisIn </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>maxMotorCurrent</em> = <code>25</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calibrates the linear axis by increasing the angle until a current limit is reached. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxMotorCurrent</td><td>(Optional) Current limit at which zero position is reached an calibration stops </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a7140e89233766fa07ff5632b60cadbe4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7140e89233766fa07ff5632b60cadbe4">&#9670;&nbsp;</a></span>setTCPoffset()</h2>
+<a id="a965c93f616ed27d418951f94b58d81da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a965c93f616ed27d418951f94b58d81da">&#9670;&nbsp;</a></span>setTCPoffset()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -629,7 +502,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void morobotScaraRRP::setTCPoffset </td>
+          <td class="memname">void morobot_s_rrr::setTCPoffset </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>xOffset</em>, </td>
@@ -673,8 +546,8 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
-<a id="a71ce07413dadb55c85a7936f7c7b10c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71ce07413dadb55c85a7936f7c7b10c8">&#9670;&nbsp;</a></span>updateTCPpose()</h2>
+<a id="a7e726abb3359eb0b3ddd8e25f4067036"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e726abb3359eb0b3ddd8e25f4067036">&#9670;&nbsp;</a></span>updateTCPpose()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -683,7 +556,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void morobotScaraRRP::updateTCPpose </td>
+          <td class="memname">void morobot_s_rrr::updateTCPpose </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>output</em> = <code>false</code></td><td>)</td>
@@ -710,15 +583,15 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="morobot_scara_r_r_p_8h_source.html">morobotScaraRRP.h</a></li>
-<li>morobotScaraRRP.cpp</li>
+<li><a class="el" href="morobot__s__rrr_8h_source.html">morobot_s_rrr.h</a></li>
+<li>morobot_s_rrr.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classmorobot_scara_r_r_p.html">morobotScaraRRP</a></li>
+    <li class="navelem"><a class="el" href="classmorobot__s__rrr.html">morobot_s_rrr</a></li>
     <li class="footer">Generated by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>

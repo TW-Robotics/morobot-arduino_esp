@@ -92,7 +92,7 @@ $(document).ready(function(){initNavTree('classnew_robot_class___template.html',
 </div><!--header-->
 <div class="contents">
 
-<p>morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32  
+<p>morobot child class for <a class="el" href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> for microcontrollers such as Arduino or ESP32  
  <a href="classnew_robot_class___template.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="new_robot_class___template_8h_source.html">newRobotClass_Template.h</a>&gt;</code></p>
@@ -109,7 +109,7 @@ Inheritance diagram for newRobotClass_Template:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4fa6dfb875dfb7cf91e891851d42877b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_robot_class___template.html#a4fa6dfb875dfb7cf91e891851d42877b">newRobotClass_Template</a> ()</td></tr>
-<tr class="memdesc:a4fa6dfb875dfb7cf91e891851d42877b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classnew_robot_class___template.html" title="morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> class.  <a href="classnew_robot_class___template.html#a4fa6dfb875dfb7cf91e891851d42877b">More...</a><br /></td></tr>
+<tr class="memdesc:a4fa6dfb875dfb7cf91e891851d42877b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> class.  <a href="classnew_robot_class___template.html#a4fa6dfb875dfb7cf91e891851d42877b">More...</a><br /></td></tr>
 <tr class="separator:a4fa6dfb875dfb7cf91e891851d42877b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39a2b84c304821aa037ef03a8d5e9836"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnew_robot_class___template.html#a39a2b84c304821aa037ef03a8d5e9836">setTCPoffset</a> (float xOffset, float yOffset, float zOffset)</td></tr>
 <tr class="memdesc:a39a2b84c304821aa037ef03a8d5e9836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis. This information is necessary to calculate the inverse kinematics correctly. The function stores the TCP-Offset and recalculates the length and angle of the last axis. Internally the length and angle of the last axis is stored as if it would be a straigth axis directly to the TCP.  <a href="classnew_robot_class___template.html#a39a2b84c304821aa037ef03a8d5e9836">More...</a><br /></td></tr>
@@ -209,8 +209,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a3eddf0b7874580786e1b1d34bda667ea inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the TCP (tool center point) of the robot by given value in one axis. Calls child class to solve forward kinematics, adds values, solves inverse kinematics and moves the robot to the position.  <a href="classmorobot_class.html#a3eddf0b7874580786e1b1d34bda667ea">More...</a><br /></td></tr>
 <tr class="separator:a3eddf0b7874580786e1b1d34bda667ea inherit pub_methods_classmorobot_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45dfa974c79a4ec2ab9529e9d5590726 inherit pub_methods_classmorobot_class"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726">printAngles</a> (long angles[])</td></tr>
-<tr class="memdesc:a45dfa974c79a4ec2ab9529e9d5590726 inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints an array of angles to the servial monitor.  <a href="classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726">More...</a><br /></td></tr>
+<tr class="memdesc:a45dfa974c79a4ec2ab9529e9d5590726 inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints an array of angles to the serial monitor.  <a href="classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726">More...</a><br /></td></tr>
 <tr class="separator:a45dfa974c79a4ec2ab9529e9d5590726 inherit pub_methods_classmorobot_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e73627ff0045c333ea468ecee552827 inherit pub_methods_classmorobot_class"><td class="memItemLeft" align="right" valign="top"><a id="a9e73627ff0045c333ea468ecee552827"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#a9e73627ff0045c333ea468ecee552827">printTCPpose</a> ()</td></tr>
+<tr class="memdesc:a9e73627ff0045c333ea468ecee552827 inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints an the TCP-pose to the serial monitor. <br /></td></tr>
+<tr class="separator:a9e73627ff0045c333ea468ecee552827 inherit pub_methods_classmorobot_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5863022ede07fe03051869c25a3c27c inherit pub_methods_classmorobot_class"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmorobot_class.html#ac5863022ede07fe03051869c25a3c27c">convertToDegrees</a> (float angle)</td></tr>
 <tr class="memdesc:ac5863022ede07fe03051869c25a3c27c inherit pub_methods_classmorobot_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns angle converted from rad into deg.  <a href="classmorobot_class.html#ac5863022ede07fe03051869c25a3c27c">More...</a><br /></td></tr>
 <tr class="separator:ac5863022ede07fe03051869c25a3c27c inherit pub_methods_classmorobot_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -278,7 +282,8 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="separator:a23d2b1912ac59c3701c15d281cd7146f inherit pro_attribs_classmorobot_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32 </p>
+<div class="textblock"><p>morobot child class for <a class="el" href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> for microcontrollers such as Arduino or ESP32 </p>
+<p>morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32 </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4fa6dfb875dfb7cf91e891851d42877b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4fa6dfb875dfb7cf91e891851d42877b">&#9670;&nbsp;</a></span>newRobotClass_Template()</h2>
@@ -303,7 +308,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </table>
 </div><div class="memdoc">
 
-<p>Constructor of <a class="el" href="classnew_robot_class___template.html" title="morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> class. </p>
+<p>Constructor of <a class="el" href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> class. </p>
 <p>The value in brakets defines that the robot consists of three smartservos </p>
 
 </div>

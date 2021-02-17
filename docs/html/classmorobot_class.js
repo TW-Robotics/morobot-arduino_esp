@@ -29,6 +29,7 @@ var classmorobot_class =
     [ "moveToPosition", "classmorobot_class.html#a659ccd33500b5ef118ee1cf9646b887d", null ],
     [ "moveXYZ", "classmorobot_class.html#aabed924aed54a828f4c405cd47010bf5", null ],
     [ "printAngles", "classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726", null ],
+    [ "printTCPpose", "classmorobot_class.html#a9e73627ff0045c333ea468ecee552827", null ],
     [ "releaseBreaks", "classmorobot_class.html#a98d333362df23d98fa76dc35f9a9ff30", null ],
     [ "setBreaks", "classmorobot_class.html#a910e351d26ba8f6ab4d586a2c211873d", null ],
     [ "setBusy", "classmorobot_class.html#a284b81783802b75f2533e5e189c6a9fc", null ],

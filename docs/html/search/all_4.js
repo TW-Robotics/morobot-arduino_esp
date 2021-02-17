@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['d_41',['d',['../classmorobot_scara_r_r_r.html#a2a814250d872083d1483909c78845395',1,'morobotScaraRRR']]],
-  ['dsq_42',['dSQ',['../classmorobot_scara_r_r_r.html#a16b6a7c9ffab53656682e28ae12c00f4',1,'morobotScaraRRR']]]
+  ['d_41',['d',['../classmorobot__s__rrr.html#af4527723fe8bbe5eca3cd82f547af93c',1,'morobot_s_rrr']]],
+  ['dsq_42',['dSQ',['../classmorobot__s__rrr.html#a718f973cf81527ba437944d83aa6c3bc',1,'morobot_s_rrr']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gearratio_196',['gearRatio',['../classmorobot_scara_r_r_p.html#ad4a6130c6bd2b5cae9c55aea8c0f3b6f',1,'morobotScaraRRP']]]
+  ['gearratio_198',['gearRatio',['../classmorobot__s__rrp.html#a1110bd78d391361108ded9cbd0870d15',1,'morobot_s_rrp']]]
 ];

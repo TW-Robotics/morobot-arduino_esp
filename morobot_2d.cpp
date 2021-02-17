@@ -106,13 +106,6 @@ void morobot_2d::updateTCPpose(bool output){
 	_actPos[2] = Az + L2 * sin(gamma) + _tcpOffset[2];
 	
 	if (output == true){
-		Serial.print("Calculated Position: ");
-		Serial.print(_actPos[0]);
-		Serial.print(", ");
-		Serial.print(_actPos[1]);
-		Serial.print(", ");
-		Serial.print(_actPos[2]);
-		Serial.print("; Orientation around z-axis [degrees]: ");
-		Serial.println(_actOri[2]);
+		printTCPpose();
 	}
 }

@@ -44,6 +44,8 @@
 			bool moveInDirection(char axis, float value);
 			
 			void printAngles(long angles[]);
+			void printTCPpose();
+			float convertToDegrees(float angle);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
 			virtual void updateTCPpose(bool output);
@@ -290,6 +292,17 @@ void morobotClass::printAngles(long angles[]){
 		if (i != _numSmartServos-1) Serial.print(", ");
 		else Serial.println(" ");
 	}
+}
+
+void morobotClass::printTCPpose(){
+	Serial.print("TCP-Pose x, y, z [mm]: ");
+	Serial.print(_actPos[0]);
+	Serial.print(", ");
+	Serial.print(_actPos[1]);
+	Serial.print(", ");
+	Serial.print(_actPos[2]);
+	Serial.print("; Orientation around z-axis [degrees]: ");
+	Serial.println(_actOri[2]);
 }
 
 float morobotClass::convertToDegrees(float angle){

@@ -1,6 +1,6 @@
 /**
  *  \class 	morobotScaraRRP
- *  \brief 	morobot child class for Scara-RRP-Robot for microcontrollers such as Arduino or ESP32
+ *  \brief 	morobot child class for morobot-s (rrp) for microcontrollers such as Arduino or ESP32
  *  @file 	morobotScaraRRP.cpp
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
@@ -136,13 +136,6 @@ void morobotScaraRRP::updateTCPpose(bool output){
 	_actOri[2] = -actAngles[0] + actAngles[1];
 	
 	if (output == true){
-		Serial.print("Calculated Position: ");
-		Serial.print(_actPos[0]);
-		Serial.print(", ");
-		Serial.print(_actPos[1]);
-		Serial.print(", ");
-		Serial.print(_actPos[2]);
-		Serial.print("; Orientation around z-axis [degrees]: ");
-		Serial.println(_actOri[2]);
+		printTCPpose();
 	}
 }

@@ -1,6 +1,6 @@
 /**
  *  \class 	newRobotClass_Template
- *  \brief 	morobot child class for ADD ROBOT TYPE for microcontrollers such as Arduino or ESP32
+ *  \brief 	morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32
  *  @file 	newRobotClass.h
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
@@ -70,13 +70,6 @@ void newRobotClass_Template::updateTCPpose(bool output){
 	//_actPos[0] = a + xnb + xncn;
 	
 	if (output == true){
-		Serial.print("Calculated Position: ");
-		Serial.print(_actPos[0]);
-		Serial.print(", ");
-		Serial.print(_actPos[1]);
-		Serial.print(", ");
-		Serial.print(_actPos[2]);
-		Serial.print("; Orientation around z-axis [degrees]: ");
-		Serial.println(_actOri[2]);
+		printTCPpose();
 	}
 }

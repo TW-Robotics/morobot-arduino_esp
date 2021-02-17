@@ -44,6 +44,8 @@
 			bool moveInDirection(char axis, float value);
 			
 			void printAngles(long angles[]);
+			void printTCPpose();
+			float convertToDegrees(float angle);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
 			virtual void updateTCPpose(bool output);
@@ -321,10 +323,15 @@ class morobotClass {
 		
 		/* HELPER */
 		/**
-		 *  \brief Prints an array of angles to the servial monitor.
+		 *  \brief Prints an array of angles to the serial monitor.
 		 *  \param [in] angles[] Angle values to print.
 		 */
 		void printAngles(long angles[]);
+		
+		/**
+		 *  \brief Prints an the TCP-pose to the serial monitor.
+		 */
+		void printTCPpose();
 		
 		/**
 		 *  \brief Returns angle converted from rad into deg

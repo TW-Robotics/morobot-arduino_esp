@@ -33,6 +33,7 @@ See the examples on how to use the library.
 - morobot-s (rrp)
 - morobot-s (rrr)
 - morobot-2d
+- morobot-3d
 ### Supported grippers
 - Smart-Servo Parallel-Gripper
 - Micro-Servo Angular-Gripper

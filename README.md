@@ -15,6 +15,8 @@ See the examples on how to use the library.
   Bare minimum program and function calls for controlling a morobot-s rrp. Just put control commands into the loop and look what happens.
 - calibrate_robot<br>
   Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.
+- driveAroundAxes<br>
+  Control all morobot with the dabble app and drive around giving angular values
 - driveAroundXYZ_morobot-s(rrp)<br>
   Control the morobot-s (rrp) with the dabble app and drive around giving x-y-z-coordinates
 - driveAroundXYZ_morobot-s(rrp)<br>

@@ -104,7 +104,12 @@ void morobot_2d::updateTCPpose(bool output){
 	_actPos[0] = Ax + L2 * cos(gamma) + L3/2 + _tcpOffset[0];
 	_actPos[1] = _tcpOffset[1];
 	_actPos[2] = Az + L2 * sin(gamma) + _tcpOffset[2];
-	
+
+	// Store orientation
+	_actOri[0] = 0;
+	_actOri[1] = 0;
+	_actOri[2] = 0;
+
 	if (output == true){
 		printTCPpose();
 	}

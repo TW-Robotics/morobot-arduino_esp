@@ -47,6 +47,11 @@ bool morobot_3d::checkIfAngleValid(uint8_t servoId, float angle){
 
 /* PROTECTED FUNCTIONS */
 bool morobot_3d::calculateAngles(float x, float y, float z){
+	// Subtract offset
+	x = x - _tcpOffset[0];
+	y = y - _tcpOffset[1];
+	z = z - _tcpOffset[2];	
+	
 	x = -x;		//TODO: CHECK IF ORIENTATIONS ARE CORRECT (+/-) *************************************************************************
 	y = -y;
 	z = -z;
@@ -141,10 +146,15 @@ void morobot_3d::updateTCPpose(bool output){
 	if (d < 0) {
 		Serial.println("ERROR: Something went wrong. The calculated TCP pose is no valid point");
 	} else {
-		_actPos[2] = -1*(-(float)0.5*(b+sqrt(d))/a);		//TODO: CHECK IF ORIENTATIONS ARE CORRECT (+/-) ***************************
-		_actPos[0] = -1*((a1*_actPos[2] + b1)/dnm);
-		_actPos[1] = -1*((a2*_actPos[2] + b2)/dnm);
-	
+		_actPos[2] = -1*(-(float)0.5*(b+sqrt(d))/a) + _tcpOffset[2];		//TODO: CHECK IF ORIENTATIONS ARE CORRECT (+/-) ***************************
+		_actPos[0] = -1*((a1*_actPos[2] + b1)/dnm) + _tcpOffset[0];
+		_actPos[1] = -1*((a2*_actPos[2] + b2)/dnm) + _tcpOffset[1];
+
+		// Store orientation
+		_actOri[0] = 0;
+		_actOri[1] = 0;
+		_actOri[2] = 0;
+
 		if (output == true){
 			printTCPpose();
 		}

@@ -1,12 +1,12 @@
 /**
  *  \class 	newRobotClass_Template
  *  \brief 	morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32
- *  @file 	newRobotClass.h
+ *  @file 	newRobotClass_Template.h
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
  *  \par Method List:
  *  	public:
- *  		newRobotClass() : morobotClass(PUT_NUM_SERVOS_HERE){};
+ *  		newRobotClass_Template() : morobotClass(PUT_NUM_SERVOS_HERE){};
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 		protected:

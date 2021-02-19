@@ -22,7 +22,7 @@
  *  Install the Dabble-App on your smartphone or tablet
  */
 
-#include <morobot_2d.h>
+#include <morobot_p.h>
 #ifndef ESP32
 #include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
 #define DABBLE_PARAM 9600	// Set transmission speed
@@ -32,7 +32,7 @@
 #endif
 
 // Create morobot object and declare variables
-morobot_2d morobot;
+morobot_p morobot;
 float step = 3.0;
 int delayDebounce = 0;
 
@@ -77,7 +77,7 @@ void loop() {
 	} else if(GamePad.isPressed(7)) {	// O
 		morobot.moveHome();
 	} else if(GamePad.isPressed(9)) {   // Square
-		morobot.getActPosition('x');
+		morobot.printTCPpose();
 		Serial.println(morobot.getActAngle(0));
 		Serial.println(morobot.getActAngle(1));
 		Serial.println(morobot.getActAngle(2));

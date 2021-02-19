@@ -295,6 +295,7 @@ void morobotClass::printAngles(long angles[]){
 }
 
 void morobotClass::printTCPpose(){
+	updateTCPpose();
 	Serial.print("TCP-Pose x, y, z [mm]: ");
 	Serial.print(_actPos[0]);
 	Serial.print(", ");

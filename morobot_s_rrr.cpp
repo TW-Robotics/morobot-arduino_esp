@@ -29,7 +29,7 @@ void morobot_s_rrr::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	bSQ = pow(b,2);
 	cSQ = pow(c,2);
 	
-	updateTCPpose();
+	_tcpPoseIsValid = false;
 }
 
 bool morobot_s_rrr::checkIfAngleValid(uint8_t servoId, float angle){
@@ -38,6 +38,7 @@ bool morobot_s_rrr::checkIfAngleValid(uint8_t servoId, float angle){
 		Serial.print("Angle for motor ");
 		Serial.print(servoId);
 		Serial.println(" is NAN!");
+		_tcpPoseIsValid = false;
 		return false;
 	}
 	
@@ -48,6 +49,7 @@ bool morobot_s_rrr::checkIfAngleValid(uint8_t servoId, float angle){
 		Serial.print(" is invalid! (");
 		Serial.print(angle);
 		Serial.println(" degrees).");
+		_tcpPoseIsValid = false;
 		return false;
 	}
 	return true;
@@ -102,7 +104,8 @@ bool morobot_s_rrr::calculateAngles(float x, float y, float rotZ){
 }
 
 void morobot_s_rrr::updateTCPpose(bool output){
-	setBusy();
+	if (_tcpPoseIsValid) return;
+	
 	waitUntilIsReady();
 	
 	// Get anlges of all motors
@@ -129,4 +132,6 @@ void morobot_s_rrr::updateTCPpose(bool output){
 	if (output == true){
 		printTCPpose();
 	}
+	
+	_tcpPoseIsValid = true;
 }

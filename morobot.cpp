@@ -138,6 +138,11 @@ void morobotClass::setIdle(){
 }
 
 void morobotClass::waitUntilIsReady(){
+	if (!waitAfterEachMove) {
+		setIdle();
+		return;
+	}
+	setBusy();
 	unsigned long startTime = millis();
 	while (true){
 		// Check if the robot is ready yet
@@ -148,7 +153,6 @@ void morobotClass::waitUntilIsReady(){
 			break;
 		}
 	}
-	setIdle();
 }
 
 bool morobotClass::checkIfMotorMoves(uint8_t servoId){
@@ -222,22 +226,18 @@ void morobotClass::moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bo
 
 void morobotClass::moveToAngles(long angles[]){
 	waitUntilIsReady();
-	setBusy();
 	Serial.print("Moving to [deg]: ");
 	printAngles(angles);
 	
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, angles[i]);
-	setIdle();
 }
 
 void morobotClass::moveToAngles(long angles[], uint8_t speedRPM){
 	waitUntilIsReady();
-	setBusy();
 	Serial.print("Moving to [deg]: ");
 	printAngles(angles);
 	
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, angles[i], speedRPM);
-	setIdle();
 }
 
 void morobotClass::moveAngle(uint8_t servoId, long angle){
@@ -259,25 +259,22 @@ void morobotClass::moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool
 
 void morobotClass::moveAngles(long angles[]){
 	waitUntilIsReady();
-	setBusy();
 	Serial.print("Moving [deg]: ");
 	printAngles(angles);
 
 	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i, angles[i]);
-	setIdle();
 }
 
 void morobotClass::moveAngles(long angles[], uint8_t speedRPM){
 	waitUntilIsReady();
-	setBusy();
 	Serial.print("Moving [deg]: ");
 	printAngles(angles);
 
 	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i, angles[i], speedRPM);
-	setIdle();
 }
 
 bool morobotClass::moveToPosition(float x, float y, float z){
+	waitUntilIsReady();
 	Serial.print("Moving to [mm]: ");
 	Serial.print(x);
 	Serial.print(", ");

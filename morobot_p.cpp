@@ -117,10 +117,9 @@ bool morobot_p::calculateAngles(float x, float y, float z){
 }
 
 void morobot_p::updateTCPpose(bool output){
-	setBusy();
-	waitUntilIsReady();
-	
 	if (_tcpPoseIsValid) return;
+	
+	waitUntilIsReady();
 	
 	// Get motor angles
 	float theta1 = getActAngle(0);

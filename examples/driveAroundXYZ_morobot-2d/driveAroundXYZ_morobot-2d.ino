@@ -42,6 +42,7 @@ void setup() {
 	Dabble.begin(DABBLE_PARAM);		// Start connection to Dabble
 	morobot.begin("Serial2");		// The robot is connected to RX/TX2 -> Serial2
 	morobot.setSpeedRPM(50);
+	morobot.waitAfterEachMove = false;
 	morobot.moveHome();				// Move the robot into initial position
 	delay(200);
 	initVars();
@@ -65,10 +66,12 @@ void loop() {
 	} else if(GamePad.isPressed(1)) {	// Down
 		actPosTemp[2] = actPos[2] + step;
 	} else if(GamePad.isPressed(7)) {	// O
+		morobot.waitAfterEachMove = true;
 		morobot.moveHome();
+		morobot.waitAfterEachMove = false;
 		initVars();
 	} else if(GamePad.isPressed(9)) {   // Square
-		morobot.getActPosition('x');
+		morobot.printTCPpose();
 		initVars();
 	}
 	

@@ -41,7 +41,8 @@ float actPosTemp[3];
 void setup() {
 	Dabble.begin(DABBLE_PARAM);		// Start connection to Dabble
 	morobot.begin("Serial2");		// The robot is connected to RX/TX2 -> Serial2
-	morobot.setSpeedRPM(50);
+	morobot.setSpeedRPM(2);
+	morobot.waitAfterEachMove = false;
 	//morobot.setTCPoffset(4.92,34.1,10); // If the robot has an endeffector set its position here (e.g. Pen-Holder)
 	morobot.moveHome();				// Move the robot into initial position
 	morobot.moveZAxisIn();			// Move the z-axis in (in case it is out more than one rotation of motor on startup)
@@ -72,10 +73,12 @@ void loop() {
 	} else if(GamePad.isPressed(8)) {   // X
 		actPosTemp[2] = actPos[2] - step/4;
 	} else if(GamePad.isPressed(7)) {	// O
+		morobot.waitAfterEachMove = true;
 		morobot.moveHome();
+		morobot.waitAfterEachMove = false;
 		initVars();
 	} else if(GamePad.isPressed(9)) {   // Square
-		morobot.getActPosition('x');
+		morobot.printTCPpose();
 		initVars();
 	}
 	

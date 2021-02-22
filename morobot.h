@@ -373,7 +373,6 @@ class morobotClass {
 		uint8_t _speedRPM;					//!< Default speed (used if movement-funtions to not provide specific speed)
 		float _actPos[3];					//!< Robot TCP position (in base frame)
 		float _actOri[3];					//!< Robot TCP orientation (rotation in degrees around base frame)
-		bool _tcpPoseIsValid = false;		//!< Status of TCP-pose: When the robot is moved without updating pose, it is set to false;
 		bool _angleReached[NUM_MAX_SERVOS];	//!< Variables that indicate if a motor is busy (is moving and has not reached final position)
 		float _goalAngles[NUM_MAX_SERVOS];	//!< Variable for inverse kinematics to store goal Angles of the motors
 		Stream* _port;						//!< Port used for communication with the robot (e.g. Serial1)

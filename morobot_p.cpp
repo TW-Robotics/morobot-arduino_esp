@@ -30,7 +30,6 @@ bool morobot_p::checkIfAngleValid(uint8_t servoId, float angle){
 		Serial.print("Angle for motor ");
 		Serial.print(servoId);
 		Serial.println(" is NAN!");
-		_tcpPoseIsValid = false;
 		return false;
 	}
 	
@@ -41,7 +40,6 @@ bool morobot_p::checkIfAngleValid(uint8_t servoId, float angle){
 		Serial.print(" is invalid! (");
 		Serial.print(angle);
 		Serial.println(" degrees).");
-		_tcpPoseIsValid = false;
 		return false;
 	}
 	
@@ -60,13 +58,11 @@ bool morobot_p::checkIfAngleValid(uint8_t servoId, float angle){
 bool morobot_p::checkIfAngleDiffValid(float servo1Angle, float servo2Angle){
 	if (90 - servo1Angle - servo2Angle < 20){
 		Serial.println("Difference between motor2 and motor3 too small - could harm mechanics");
-		_tcpPoseIsValid = false;
 		return false;
 	}
 	
 	if (90 - servo1Angle - servo2Angle > 135){
 		Serial.println("Difference between motor2 and motor3 too big - could harm mechanics");
-		_tcpPoseIsValid = false;
 		return false;		
 	}
 	
@@ -120,8 +116,6 @@ void morobot_p::updateTCPpose(bool output){
 	setBusy();
 	waitUntilIsReady();
 	
-	if (_tcpPoseIsValid) return;
-	
 	// Get motor angles
 	float theta1 = getActAngle(0);
 	float theta2 = getActAngle(1);
@@ -150,6 +144,4 @@ void morobot_p::updateTCPpose(bool output){
 	if (output == true){
 		printTCPpose();
 	}
-	
-	_tcpPoseIsValid = true;
 }

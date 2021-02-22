@@ -91,20 +91,17 @@ void morobotClass::begin(const char* stream){
 	
 	setTCPoffset(0, 0, 0);
 	setSpeedRPM(25);
-	updateTCPpose();
 
 	Serial.println("Morobot initialized. Connection to motors established");
 }
 
 void morobotClass::setZero(){
 	for (uint8_t i=0; i<_numSmartServos; i++) smartServos.setZero(i+1);
-	_tcpPoseIsValid = false;
 }
 
 void morobotClass::moveHome(){
 	for (uint8_t i=0; i<_numSmartServos; i++) smartServos.setInitAngle(i+1, 0, 15);
 	waitUntilIsReady();
-	_tcpPoseIsValid = false;
 }
 
 void morobotClass::setSpeedRPM(uint8_t speed){
@@ -124,7 +121,6 @@ void morobotClass::setBreaks(){
 
 void morobotClass::releaseBreaks(){
 	for (uint8_t i=0; i<_numSmartServos; i++) smartServos.setBreak(i+1, BREAK_LOOSE);
-	_tcpPoseIsValid = false;
 }
 
 
@@ -138,6 +134,7 @@ void morobotClass::setIdle(){
 }
 
 void morobotClass::waitUntilIsReady(){
+	setBusy();
 	unsigned long startTime = millis();
 	while (true){
 		// Check if the robot is ready yet
@@ -153,7 +150,7 @@ void morobotClass::waitUntilIsReady(){
 
 bool morobotClass::checkIfMotorMoves(uint8_t servoId){
 	long startPos = getActAngle(servoId);
-	delay(150);
+	delay(100);
 	if (startPos != getActAngle(servoId)) return true;
 	return false;
 }
@@ -204,20 +201,12 @@ uint8_t morobotClass::getNumSmartServos(){
 
 /* MOVEMENTS */
 void morobotClass::moveToAngle(uint8_t servoId, long angle){
-	if (checkIfAngleValid(servoId, angle) == true) {
-		smartServos.moveTo(servoId+1, angle, _speedRPM);
-		_tcpPoseIsValid = false;
-	}
+	if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, _speedRPM);
 }
 
 void morobotClass::moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity){
-	if (checkValidity == false) {
-		smartServos.moveTo(servoId+1, angle, speedRPM);
-		_tcpPoseIsValid = false;
-	} else if (checkIfAngleValid(servoId, angle) == true) {
-		smartServos.moveTo(servoId+1, angle, speedRPM);
-		_tcpPoseIsValid = false;
-	}
+	if (checkValidity == false) smartServos.moveTo(servoId+1, angle, speedRPM);
+	else if (checkIfAngleValid(servoId, angle) == true) smartServos.moveTo(servoId+1, angle, speedRPM);
 }
 
 void morobotClass::moveToAngles(long angles[]){
@@ -227,7 +216,6 @@ void morobotClass::moveToAngles(long angles[]){
 	printAngles(angles);
 	
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, angles[i]);
-	setIdle();
 }
 
 void morobotClass::moveToAngles(long angles[], uint8_t speedRPM){
@@ -237,24 +225,15 @@ void morobotClass::moveToAngles(long angles[], uint8_t speedRPM){
 	printAngles(angles);
 	
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, angles[i], speedRPM);
-	setIdle();
 }
 
 void morobotClass::moveAngle(uint8_t servoId, long angle){
-	if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) {
-		smartServos.move(servoId+1, angle, _speedRPM);
-		_tcpPoseIsValid = false;
-	}
+	if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, _speedRPM);
 }
 
 void morobotClass::moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity){
-	if (checkValidity == false) {
-		smartServos.move(servoId+1, angle, speedRPM);
-		_tcpPoseIsValid = false;
-	} else if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) {
-		smartServos.move(servoId+1, angle, speedRPM);
-		_tcpPoseIsValid = false;
-	}
+	if (checkValidity == false) smartServos.move(servoId+1, angle, speedRPM);
+	else if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) smartServos.move(servoId+1, angle, speedRPM);
 }
 
 void morobotClass::moveAngles(long angles[]){
@@ -264,7 +243,6 @@ void morobotClass::moveAngles(long angles[]){
 	printAngles(angles);
 
 	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i, angles[i]);
-	setIdle();
 }
 
 void morobotClass::moveAngles(long angles[], uint8_t speedRPM){
@@ -274,7 +252,6 @@ void morobotClass::moveAngles(long angles[], uint8_t speedRPM){
 	printAngles(angles);
 
 	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i, angles[i], speedRPM);
-	setIdle();
 }
 
 bool morobotClass::moveToPosition(float x, float y, float z){
@@ -286,16 +263,7 @@ bool morobotClass::moveToPosition(float x, float y, float z){
 	Serial.println(z);
 	if (calculateAngles(x, y, z) == false) return false;
 	
-	updateTCPpose();
-	
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, _goalAngles[i]);
-	
-	// Update TCP-Pose
-	_actPos[0] = x;
-	_actPos[1] = y;
-	_actPos[2] = z;
-	_tcpPoseIsValid = true;
-	
 	return true;
 }
 

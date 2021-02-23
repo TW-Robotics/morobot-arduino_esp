@@ -6,5 +6,5 @@ var searchData=
   ['checkifmotormoves_116',['checkIfMotorMoves',['../classmorobot_class.html#a3aa3b06daee8255d145bf962a477cfcf',1,'morobotClass']]],
   ['close_117',['close',['../classgripper.html#a4bb930e1549087e5847ff722f9911468',1,'gripper']]],
   ['closetoforce_118',['closeToForce',['../classgripper.html#a69780d22c0cebb3bb392c4a575440fc7',1,'gripper']]],
-  ['converttodegrees_119',['convertToDegrees',['../classmorobot_class.html#ac5863022ede07fe03051869c25a3c27c',1,'morobotClass']]]
+  ['convertToDeg_119',['convertToDeg',['../classmorobot_class.html#ac5863022ede07fe03051869c25a3c27c',1,'morobotClass']]]
 ];

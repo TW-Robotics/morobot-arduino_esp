@@ -109,9 +109,9 @@ void morobot_3d::updateTCPpose(bool output){
 	float theta1 = getActAngle(0);	//TODO: CHECK IF ORIENTATIONS ARE CORRECT (+/-) ************************************************
 	float theta2 = getActAngle(1);
 	float theta3 = getActAngle(2);
-	theta1 = theta1 * M_PI/180;
-	theta2 = theta2 * M_PI/180;
-	theta3 = theta3 * M_PI/180;
+	theta1 = convertToRad(theta1);
+	theta2 = convertToRad(theta2);
+	theta3 = convertToRad(theta3);
 	
 	float t = (f-e)*tan30/2;
 

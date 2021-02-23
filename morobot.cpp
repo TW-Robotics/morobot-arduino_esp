@@ -45,7 +45,7 @@
 			
 			void printAngles(long angles[]);
 			void printTCPpose();
-			float convertToDegrees(float angle);
+			float convertToDeg(float angle);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
 			virtual void updateTCPpose(bool output);
@@ -335,8 +335,12 @@ void morobotClass::printTCPpose(){
 	Serial.println(_actOri[2]);
 }
 
-float morobotClass::convertToDegrees(float angle){
+float morobotClass::convertToDeg(float angle){
 	return angle*180/M_PI;
+}
+
+float morobotClass::convertToRad(float angle){
+	return angle*M_PI/180;
 }
 
 /* PROTECTED */

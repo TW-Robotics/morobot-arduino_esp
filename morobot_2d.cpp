@@ -68,8 +68,8 @@ bool morobot_2d::calculateAngles(float x, float y, float z){
 	float phi2 = beta - delta;
 	
 	// Recalculate for motor mounting orientations in robot
-	phi1 = -phi1 * 180/M_PI + 90;
-	phi2 = phi2 * 180/M_PI - 90;
+	phi1 = -1 * convertToDeg(phi1) + 90;
+	phi2 = convertToDeg(phi2) - 90;
 	
 	// Check if angles are valid
 	if(checkIfAngleValid(0, phi1) == false) return false;
@@ -89,8 +89,8 @@ void morobot_2d::updateTCPpose(bool output){
 	// Recalculate angles because of motor mounting orientations
 	float phi1 = - (getActAngle(0) - 90);
 	float phi2 = getActAngle(1) + 90;
-	phi1 = phi1 * M_PI/180;
-	phi2 = phi2 * M_PI/180;
+	phi1 = convertToRad(phi1);
+	phi2 = convertToRad(phi2);
 	
 	// Calculate positions of rotation axes
 	float Ax = -L1 * sin(phi1);

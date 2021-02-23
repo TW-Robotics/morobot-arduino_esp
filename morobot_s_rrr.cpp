@@ -64,7 +64,7 @@ bool morobot_s_rrr::checkIfAnglesValid(float phi1, float phi2, float phi3){
 
 /* PROTECTED FUNCTIONS */
 bool morobot_s_rrr::calculateAngles(float x, float y, float rotZ){
-	rotZ = rotZ * M_PI/180;			// Transform rotation into radians
+	rotZ = convertToRad(rotZ);			// Transform rotation into radians
 	x = x-a;							// Base is in x-orientation --> Just subtract base-length from x-coordinate
 	
 	// Calculate position for center of rotation of last axis
@@ -79,9 +79,9 @@ bool morobot_s_rrr::calculateAngles(float x, float y, float rotZ){
 	float phi1 = - (alpha - gamma);
 	float phi3 = - (rotZ - (phi2 - phi1));
 	
-	phi1 = convertToDegrees(phi1);
-	phi2 = convertToDegrees(phi2);
-	phi3 = convertToDegrees(phi3);
+	phi1 = convertToDeg(phi1);
+	phi2 = convertToDeg(phi2);
+	phi3 = convertToDeg(phi3);
 	
 	// Check if angles are valid
 	if (!checkIfAnglesValid(phi1, phi2, phi3)){
@@ -91,9 +91,9 @@ bool morobot_s_rrr::calculateAngles(float x, float y, float rotZ){
 		phi3 = - (-phi3 + 2*(phi2-gamma));
 		phi2 = - phi2;
 		
-		phi1 = convertToDegrees(phi1);
-		phi2 = convertToDegrees(phi2);
-		phi3 = convertToDegrees(phi3);
+		phi1 = convertToDeg(phi1);
+		phi2 = convertToDeg(phi2);
+		phi3 = convertToDeg(phi3);
 		if (!checkIfAnglesValid(phi1, phi2, phi3)) return false;
 	}
 	_goalAngles[0] = phi1;		// Since motor 0 is installed in other direction
@@ -109,16 +109,19 @@ void morobot_s_rrr::updateTCPpose(bool output){
 	waitUntilIsReady();
 	
 	// Get anlges of all motors
-	long actAngles[_numSmartServos];
-	for (uint8_t i=0; i<_numSmartServos; i++) actAngles[i] = getActAngle(i);
+	float actAngles[_numSmartServos];
+	for (uint8_t i=0; i<_numSmartServos; i++) actAngles[i] = convertToRad(getActAngle(i));
+	
+	// Change orientation or angle because of motor mounting orientation
+	actAngles[0] = -actAngles[0];
 	
 	// Calculate lengths at each joint and sum up
-	float xnb = b*cos(-(float)actAngles[0]*M_PI/180);
-    float ynb = b*sin(-(float)actAngles[0]*M_PI/180);
-    float xnc = c*cos(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180);
-    float ync = c*sin(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180);
-    float xnd = d*cos(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 - (float)actAngles[2]*M_PI/180);
-    float ynd = d*sin(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 - (float)actAngles[2]*M_PI/180);
+	float xnb = b*cos(actAngles[0]);
+    float ynb = b*sin(actAngles[0]);
+    float xnc = c*cos(actAngles[0] + actAngles[1]);
+    float ync = c*sin(actAngles[0] + actAngles[1]);
+    float xnd = d*cos(actAngles[0] + actAngles[1] - actAngles[2]);
+    float ynd = d*sin(actAngles[0] + actAngles[1] - actAngles[2]);
     
 	_actPos[0] = a + xnb + xnc + xnd;
     _actPos[1] = ynb + ync + ynd;
@@ -127,7 +130,7 @@ void morobot_s_rrr::updateTCPpose(bool output){
 	// Caculate orientation
 	_actOri[0] = 0;
 	_actOri[1] = 0;
-	_actOri[2] = -actAngles[0] + actAngles[1] - actAngles[2];
+	_actOri[2] = convertToDeg(actAngles[0] + actAngles[1] - actAngles[2]);
 	
 	if (output == true){
 		printTCPpose();

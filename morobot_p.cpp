@@ -99,9 +99,9 @@ bool morobot_p::calculateAngles(float x, float y, float z){
 	float theta3 = acos((a1_sq - s_sq + a2_sq) / (2 * a1 * a2));
 	
 	// Change to degrees
-	theta1 = theta1*180/M_PI;
-	theta3 = -1 * ((theta3 + theta2 - M_PI/2)*180/M_PI);
-	theta2 = theta2*180/M_PI;
+	theta1 = convertToDeg(theta1);
+	theta3 = -1 * convertToDeg(theta3 + theta2 - M_PI/2);
+	theta2 = convertToDeg(theta2);
 	
 	//Check if angles are valid
 	if(checkIfAngleValid(0, theta1) == false) return false;
@@ -128,9 +128,9 @@ void morobot_p::updateTCPpose(bool output){
 	
 	// Recalculate angles and convert to radians
     theta3 = theta3 - 90 - theta2;
- 	theta1 = theta1 * M_PI/180;
-	theta2 = theta2 * M_PI/180;
-	theta3 = theta3 * M_PI/180;
+ 	theta1 = convertToRad(theta1);
+	theta2 = convertToRad(theta2);
+	theta3 = convertToRad(theta3);
 	
 	float x = a1 * cos(theta1) * cos(theta2) + a2 * cos(theta1) * cos(theta2 + theta3) + a3 * cos(theta1);
 	float y = a1 * sin(theta1) * cos(theta2) + a2 * sin(theta1) * cos(theta2 + theta3) + a3 * sin(theta1);
@@ -144,7 +144,7 @@ void morobot_p::updateTCPpose(bool output){
 	// Caculate orientation
 	_actOri[0] = 0;
 	_actOri[1] = 0;
-	_actOri[2] = theta1 * 180/M_PI;
+	_actOri[2] = convertToDeg(theta1);
 	
 	if (output == true){
 		printTCPpose();

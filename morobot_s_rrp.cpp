@@ -88,18 +88,18 @@ bool morobot_s_rrp::calculateAngles(float x, float y, float z){
 	
 	// Calculate angle for 2nd axis
 	float phi2n = - acos((xSQ + ySQ - bSQ - c_newSQ) / (2*b*c_new));		// Some terms are negative since motor1+2 are mounted in other direction
-	float phi2 = (phi2n - beta_new) * 180/M_PI;
+	float phi2 = convertToDeg(phi2n - beta_new);
 	
 	// Calculate angle for 1st axis
 	float gamma = atan2(y, x-a);
 	float alpha = acos((xSQ + ySQ + bSQ - c_newSQ) / (2*b*sqrt(xSQ + ySQ)));
-	float phi1 = - (gamma + alpha) * 180/M_PI;
+	float phi1 = - convertToDeg(gamma + alpha);
 
 	// Recalculate angles if phi1 is out of range
 	if (phi1 < _jointLimits[0][0] || phi1 > _jointLimits[0][1] || phi2 < _jointLimits[1][0] || phi2 > _jointLimits[1][1]){
 		Serial.println("Switching to other configuration");
-		phi2 = - (phi2n + beta_new) * 180/M_PI;
-		phi1 = - (gamma - alpha) * 180/M_PI;
+		phi2 = - convertToDeg(phi2n + beta_new);
+		phi1 = - convertToDeg(gamma - alpha);
 	}
 	
 	// Calculate angle for 3rd axis (z-direction)
@@ -122,23 +122,26 @@ void morobot_s_rrp::updateTCPpose(bool output){
 	waitUntilIsReady();
 	
 	// Get anlges of all motors
-	long actAngles[_numSmartServos];
-	for (uint8_t i=0; i<_numSmartServos; i++) actAngles[i] = getActAngle(i);
-	
+	float actAngles[_numSmartServos];
+	for (uint8_t i=0; i<_numSmartServos; i++) actAngles[i] = convertToRad(getActAngle(i));
+
+	// Change orientation or angle because of motor mounting orientation
+	actAngles[0] = -actAngles[0];
+
 	// Calculate lengths at each joint and sum up
-	float xnb = b*cos(-(float)actAngles[0]*M_PI/180);
-    float ynb = b*sin(-(float)actAngles[0]*M_PI/180);
-    float xncn = c_new*cos(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + beta_new);
-    float yncn = c_new*sin(-(float)actAngles[0]*M_PI/180 + (float)actAngles[1]*M_PI/180 + beta_new);
+	float xnb = b*cos(actAngles[0]);
+    float ynb = b*sin(actAngles[0]);
+    float xncn = c_new*cos(actAngles[0] + actAngles[1] + beta_new);
+    float yncn = c_new*sin(actAngles[0] + actAngles[1] + beta_new);
     
 	_actPos[0] = a + xnb + xncn;
     _actPos[1] = ynb + yncn;
-	_actPos[2] = -1 * actAngles[2]/gearRatio + _tcpOffset[2]; 	// Multiply by -1 since moving in positive z-axis means that the linear axis moves in
+	_actPos[2] = -1 * convertToDeg(actAngles[2])/gearRatio + _tcpOffset[2]; 	// Multiply by -1 since moving in positive z-axis means that the linear axis moves in
 	
 	// Caculate orientation
 	_actOri[0] = 0;
 	_actOri[1] = 0;
-	_actOri[2] = -actAngles[0] + actAngles[1];
+	_actOri[2] = convertToDeg(actAngles[0] + actAngles[1]);
 	
 	if (output == true){
 		printTCPpose();

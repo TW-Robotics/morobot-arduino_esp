@@ -6,7 +6,7 @@ var classmorobot_class =
     [ "calculateAngles", "classmorobot_class.html#a73c73747e79f1b85c85486a4d49a67ed", null ],
     [ "checkIfAngleValid", "classmorobot_class.html#aed018357fac777be95b8ca8a8e974e66", null ],
     [ "checkIfMotorMoves", "classmorobot_class.html#a3aa3b06daee8255d145bf962a477cfcf", null ],
-    [ "convertToDegrees", "classmorobot_class.html#ac5863022ede07fe03051869c25a3c27c", null ],
+    [ "convertToDeg", "classmorobot_class.html#ac5863022ede07fe03051869c25a3c27c", null ],
     [ "getActAngle", "classmorobot_class.html#aaca7763c55813c4b84e1b25e4e89bd51", null ],
     [ "getActOrientation", "classmorobot_class.html#a517e7ddc43e2a79f0177e7a352e2bf86", null ],
     [ "getActPosition", "classmorobot_class.html#a6973a8bb1a06da5dcf9cad652f498138", null ],

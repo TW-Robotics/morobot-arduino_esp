@@ -22,35 +22,24 @@ morobot_p morobot;		// And change the class-name here
 void setup() {
 	morobot.begin("Serial2");
 	morobot.moveHome();				// Move the robot into initial position
-	morobot.setSpeedRPM(2);				// Set the global speed for all motors here. This value can be overwritten temporarily if a function is called with a speed parameter explicitely.
+	morobot.setSpeedRPM(1);				// Set the global speed for all motors here. This value can be overwritten temporarily if a function is called with a speed parameter explicitely.
 }
 
 void loop() {
-	morobot.moveToPosition(-80, 80, 30);
+	morobot.moveToPosition(-100, 100, 30);
 	morobot.moveInDirection('z', -25);
 	delay(1000);
 	morobot.moveInDirection('z', 25);
 	delay(500);
-	morobot.moveToAngle(0, 0);
-	morobot.moveToAngle(1 , 75);
-	morobot.moveToAngle(2, -25);
+	morobot.moveHome();
 	delay(500);
 	morobot.moveToPosition(160, -80, 100);
-	morobot.setSpeedRPM(2);
-	morobot.waitUntilIsReady();
 	morobot.moveXYZ(60, -60, 0);
-	morobot.waitUntilIsReady();
-	//morobot.moveInDirection('z', -25);
+	morobot.moveInDirection('z', -25);
 	delay(2000);
-	//morobot.moveInDirection('z', 25);
-	morobot.waitUntilIsReady();
-	morobot.moveXYZ(-60, 60, 0);
-	morobot.waitUntilIsReady();
-	morobot.setSpeedRPM(2);
+	morobot.moveInDirection('z', 25);
+	morobot.moveToAngle(0, -90);
 	delay(2000);
-	morobot.moveToAngle(0, 0);
-	morobot.moveToAngle(1 , 75);
-	morobot.moveToAngle(2, -25);
+	morobot.moveHome();
 	delay(5000);
-	
 }

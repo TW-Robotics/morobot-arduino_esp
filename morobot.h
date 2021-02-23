@@ -45,7 +45,7 @@
 			
 			void printAngles(long angles[]);
 			void printTCPpose();
-			float convertToDegrees(float angle);
+			float convertToDeg(float angle);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
 			virtual void updateTCPpose(bool output);
@@ -338,7 +338,14 @@ class morobotClass {
 		 *  \param [in] angle Angle to convert in radians
 		 *  \return Returns angle in degree
 		 */
-		float convertToDegrees(float angle);
+		float convertToDeg(float angle);
+		
+		/**
+		 *  \brief Returns angle converted from deg into rad
+		 *  \param [in] angle Angle to convert in degrees
+		 *  \return Returns angle in radians
+		 */
+		float convertToRad(float angle);
 		
 		/* PUBLIC VARIABLES */
 		MakeblockSmartServo smartServos;	//!< Makeblock smartservo object

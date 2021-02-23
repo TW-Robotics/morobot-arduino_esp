@@ -20,6 +20,7 @@ void newRobotClass_Template::setTCPoffset(float xOffset, float yOffset, float zO
 	_tcpOffset[0] = xOffset;
 	_tcpOffset[1] = yOffset;
 	_tcpOffset[2] = zOffset;
+	_tcpPoseIsValid = false;
 	
 	// Calculate new length and angle of last axis (since eef is connected to it statically)
 	//TODO: PUT YOUR CODE TO RE-CALCULATE LENGTHS OF ROBOT HERE 
@@ -27,22 +28,14 @@ void newRobotClass_Template::setTCPoffset(float xOffset, float yOffset, float zO
 
 bool newRobotClass_Template::checkIfAngleValid(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
-	if(isnan(angle)){
-		Serial.print("Angle for motor ");
-		Serial.print(servoId);
-		Serial.println(" is NAN!");
+	if(checkForNANerror(servoId, angle)) return false;
+	
+	// Moving the motors out of the joint limits may harm the robot's mechanics
+	if(angle < _jointLimits[servoId][0] || angle > _jointLimits[servoId][1]){
+		printInvalidAngleError(servoId, angle);
 		return false;
 	}
 	
-	// Moving the motors out of the joint limits may harm the robot's mechanics
-	if(angle < _jointLimits[servoId][0] || angle > _jointLimits[servoId][1]) {
-		Serial.print("Angle for motor ");
-		Serial.print(servoId);
-		Serial.print(" is invalid! (");
-		Serial.print(angle);
-		Serial.println(" degrees).");
-		return false;
-	}
 	return true;
 }
 
@@ -61,7 +54,8 @@ bool newRobotClass_Template::calculateAngles(float x, float y, float z){
 }
 
 void newRobotClass_Template::updateTCPpose(bool output){
-	setBusy();
+	if (_tcpPoseIsValid) return;
+	
 	waitUntilIsReady();
 	
 	//TODO: SOLVE FORWARD KINEMATICS TO GET TCP POSITION
@@ -69,7 +63,8 @@ void newRobotClass_Template::updateTCPpose(bool output){
 	//TODO: STORE THE POSITION FOR ALL AXES E.G.:
 	//_actPos[0] = a + xnb + xncn;
 	
-	if (output == true){
-		printTCPpose();
-	}
+	//TODO: STORE THE ORIENTATION OF THE TCP
+	//_actOri[0] = 0;
+	
+	if (output == true) printTCPpose();
 }

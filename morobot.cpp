@@ -240,6 +240,11 @@ void morobotClass::moveToAngles(long angles[], uint8_t speedRPM){
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, angles[i], speedRPM);
 }
 
+void morobotClass::moveToAngles(long phi0, long phi1, long phi2){
+	long angles[3] = {phi0, phi1, phi2};
+	moveToAngles(angles);
+}
+
 void morobotClass::moveAngle(uint8_t servoId, long angle){
 	if (checkIfAngleValid(servoId, getActAngle(servoId)+angle) == true) {
 		smartServos.move(servoId+1, angle, _speedRPM);

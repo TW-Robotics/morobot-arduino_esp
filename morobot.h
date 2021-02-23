@@ -258,6 +258,16 @@ class morobotClass {
 		void moveToAngles(long angles[], uint8_t speedRPM);
 
 		/**
+		 *  \brief Moves all motors to desired angles (Moves the whole robot) - absolute movement. Since most morobots have three motors, this works without an array
+					Waits until the robot is ready to use (no motor moves) before moving.
+					Checks if the angles are valid before moving.
+		 *  \param [in] phi0 Desired goal angle for motor 0
+		 *  \param [in] phi1 Desired goal angle for motor 1
+		 *  \param [in] phi2 Desired goal angle for motor 2
+		 */
+		void moveToAngles(long phi0, long phi1, long phi2);
+
+		/**
 		 *  \brief Moves a motor by a desired angle (relative movement).
 		 *  		Checks if the goal angle is valid before moving if checkValidity is not given or true.
 		 *  \param [in] servoId Number of motor (first motor has ID 0)

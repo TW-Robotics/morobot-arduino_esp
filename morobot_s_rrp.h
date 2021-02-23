@@ -10,7 +10,6 @@
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 			bool checkIfAnglesValid(float phi1, float phi2, float phi3);
-			void moveToAngles(long phi1, long phi2, long phi3);
 			void moveZAxisIn(uint8_t maxMotorCurrent);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
@@ -59,17 +58,6 @@ class morobot_s_rrp:public morobotClass {
 		 *  \details Just calls checkIfAngleValid for each motor times.
 		 */
 		bool checkIfAnglesValid(float phi1, float phi2, float phi3);
-		
-		using morobotClass::moveToAngles;	// Make other versions of moveToAngles visible for compiler
-		/**
-		 *  \brief Moves all motors to desired angles (Moves the whole robot) - absolute movement.
-		 *  		Waits until the robot is ready to use (no motor moves) before moving.
-		 *  		Checks if the angles are valid before moving.
-		 *  \param [in] phi1 Angle value for first joint
-		 *  \param [in] phi2 Angle value for second joint
-		 *  \param [in] phi3 Angle value for third joint
-		 */
-		void moveToAngles(long phi1, long phi2, long phi3);
 		
 		/**
 		 *  \brief Calibrates the linear axis by increasing the angle until a current limit is reached

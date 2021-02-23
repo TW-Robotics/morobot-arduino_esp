@@ -10,7 +10,6 @@
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 			bool checkIfAnglesValid(float phi1, float phi2, float phi3);
-			void moveToAngles(long phi1, long phi2, long phi3);
 			void moveZAxisIn(uint8_t maxMotorCurrent);
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
@@ -57,12 +56,6 @@ bool morobot_s_rrp::checkIfAnglesValid(float phi1, float phi2, float phi3){
 	
 	for (uint8_t i = 0; i < _numSmartServos; i++) if(checkIfAngleValid(i, angles[i]) == false) return false;
 	return true;
-}
-
-void morobot_s_rrp::moveToAngles(long phi1, long phi2, long phi3){
-	long angles[3] = {phi1, phi2, phi3};
-	moveToAngles(angles);
-	_tcpPoseIsValid = false;
 }
 
 void morobot_s_rrp::moveZAxisIn(uint8_t maxMotorCurrent){

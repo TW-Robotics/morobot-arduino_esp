@@ -130,7 +130,7 @@ void morobot_p::updateTCPpose(bool output){
 	_actPos[1] = y + _tcpOffset[1];
 	_actPos[2] = z + _tcpOffset[2];
 	
-	// Caculate orientation
+	// Calculate orientation
 	_actOri[0] = 0;
 	_actOri[1] = 0;
 	_actOri[2] = convertToDeg(theta1);

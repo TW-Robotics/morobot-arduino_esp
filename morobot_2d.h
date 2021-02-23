@@ -44,7 +44,8 @@ class morobot_2d:public morobotClass {
 		 *  \return Returns true if the position is reachable; false if it is not.
 		 */
 		virtual bool checkIfAngleValid(uint8_t servoId, float angle);
-
+		const String type = "morobot_2d";		//!< Type of morobot
+		
 	protected:
 		/**
 		 *  \brief Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics).

@@ -14,15 +14,9 @@ See the examples on how to use the library.
 - base_importantFunctionCalls<br>
   Bare minimum program and function calls for controlling a morobot-s rrp. Just put control commands into the loop and look what happens.
 - calibrate_robot<br>
-  Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.
-- driveAroundAxes<br>
-  Control all morobot with the dabble app and drive around giving angular values
-- driveAroundXYZ_morobot-s(rrp)<br>
-  Control the morobot-s (rrp) with the dabble app and drive around giving x-y-z-coordinates
-- driveAroundXYZ_morobot-s(rrp)<br>
-  Control the morobot-s (rrr) with the dabble app and drive around giving x-y-z-coordinates
-- driveAroundXYZ_morobot-2d<br>
-  Control the morobot-2d with the dabble app and drive around giving x-y-z-coordinates
+  Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot. Check the robot-info for details on the zero-positions of the motors.
+- driveAround<br>
+  Control all morobots with the dabble app and drive around giving angular values or x-y-z-coordinates.
 - multiple_robots<br>
   Control multiple robots (in this case 2x morobot-s) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.
 - teach_robot<br>
@@ -34,6 +28,7 @@ See the examples on how to use the library.
 - morobot-s (rrr)
 - morobot-2d
 - morobot-3d
+- morobot-p
 ### Supported grippers
 - Smart-Servo Parallel-Gripper
 - Micro-Servo Angular-Gripper
@@ -55,7 +50,7 @@ The class morobotClass is an abstract base class implementing functions like mov
 
 ## Known issues
 - Example with multiple robots is not working for ESP32 controllers
-- Other TCP-Offset than x/0/x for morobot-s (rrp and rrr) is not implemented (necessary?)
+- TCP-Offsets in y-directions not implemented for morobot-p and morobot-s (rrp and rrr)
 - Other EEF-types (e.g. pumps with relais) not implemented yet
 
 ## License

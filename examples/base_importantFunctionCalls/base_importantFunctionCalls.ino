@@ -100,7 +100,7 @@ void loop() {
 	
 	// in a coordinate system (all functions wait until robot stops moving before beginning)
 	Serial.println("Moving in a coordinate system");
-	morobot.moveToPosition(160.0, 45.3, 28.1);		// Move the robot to an x-y-z-position. Function returns False if the position is not reachable
+	morobot.moveToPose(160.0, 45.3, 28.1);		// Move the robot to an x-y-z-position. Function returns False if the position is not reachable
 	morobot.moveXYZ(7, -10.1, -13.2);				// Move the robot relatively along the x-y-z-axes. Function returns False if the position is not reachable
 	morobot.moveInDirection('x', 17);				// Move the robot relatively along one axis. Function returns False if the position is not reachable
 	delay(5000);

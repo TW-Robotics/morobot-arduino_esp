@@ -64,7 +64,7 @@ class morobot_p:public morobotClass {
 		/**
 		 *  \brief Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics).
 		 *			This function does only calculate the angles of the motors and stores them internally.
-		 *  		Use moveToPosition(x,y,z) to actually move the robot.
+		 *  		Use moveToPose(x,y,z) to actually move the robot.
 		 *  \param [in] x Desired x-position of TCP
 		 *  \param [in] y Desired x-position of TCP
 		 *  \param [in] z Desired x-position of TCP

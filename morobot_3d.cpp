@@ -149,9 +149,7 @@ void morobot_3d::updateTCPpose(bool output){
 		_actOri[1] = 0;
 		_actOri[2] = 0;
 
-		if (output == true){
-			printTCPpose();
-		}
+		if (output == true)	printTCPpose();
 	}
 	_tcpPoseIsValid = true;
 }

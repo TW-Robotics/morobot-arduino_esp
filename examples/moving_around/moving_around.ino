@@ -26,14 +26,14 @@ void setup() {
 }
 
 void loop() {
-	morobot.moveToPosition(-100, 100, 30);
+	morobot.moveToPose(-100, 100, 30);
 	morobot.moveInDirection('z', -25);
 	delay(1000);
 	morobot.moveInDirection('z', 25);
 	delay(500);
 	morobot.moveHome();
 	delay(500);
-	morobot.moveToPosition(160, -80, 100);
+	morobot.moveToPose(160, -80, 100);
 	morobot.moveXYZ(60, -60, 0);
 	morobot.moveInDirection('z', -25);
 	delay(2000);

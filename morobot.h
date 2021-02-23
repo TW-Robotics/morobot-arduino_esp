@@ -39,7 +39,7 @@
 			void moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
 			void moveAngles(long angles[]);
 			void moveAngles(long angles[], uint8_t speedRPM);
-			bool moveToPosition(float x, float y, float z);
+			bool moveToPose(float x, float y, float z);
 			bool moveXYZ(float xOffset, float yOffset, float zOffset);
 			bool moveInDirection(char axis, float value);
 			
@@ -305,12 +305,13 @@ class morobotClass {
 		/**
 		 *  \brief Moves the TCP (tool center point) of the robot to a desired position.
 		 * 			Calls child class to solve inverse kinematics and moves the robot to the position.
+		 *			For morobot-s (rrp) the parameter "z" is not the z-position but the rotation around the z-axis in degrees!
 		 *  \param [in] x Desired x-coordinate of the TCP in mm (in base frame)
 		 *  \param [in] y Desired y-coordinate of the TCP in mm (in base frame)
 		 *  \param [in] z Desired z-coordinate of the TCP in mm (in base frame)
 		 *  \return Returns true if the position is reachable; false if it is not.
 		 */
-		bool moveToPosition(float x, float y, float z);
+		bool moveToPose(float x, float y, float z);
 		
 		/**
 		 *  \brief Moves the TCP (tool center point) of the robot by given axis-values.
@@ -365,7 +366,7 @@ class morobotClass {
 		 *  \brief Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics).
 		 *  		Virtual function. Defined individually for each robot type in the respective child classes.
 		 *  		This function does only calculate the angles of the motors and stores them internally.
-		 *  		Use moveToPosition(x,y,z) to actually move the robot.
+		 *  		Use moveToPose(x,y,z) to actually move the robot.
 		 *  \param [in] x Desired x-position of TCP
 		 *  \param [in] y Desired x-position of TCP
 		 *  \param [in] z Desired x-position of TCP

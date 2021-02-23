@@ -77,7 +77,7 @@ void loop() {
 	
 	// If a movement comment has been given, move the robot
 	if (actPosTemp[0] != actPos[0] || actPosTemp[1] != actPos[1] || actPosTemp[2] != actPos[2]){
-		if (morobot.moveToPosition(actPosTemp[0], actPosTemp[1], actPosTemp[2]) == false){
+		if (morobot.moveToPose(actPosTemp[0], actPosTemp[1], actPosTemp[2]) == false){
 			delay(delayDebounce);
 			for (uint8_t i=0; i<3; i++) actPosTemp[i] = actPos[i];
 		} else {

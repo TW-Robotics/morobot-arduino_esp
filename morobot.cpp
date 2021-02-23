@@ -39,7 +39,7 @@
 			void moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool checkValidity=true);
 			void moveAngles(long angles[]);
 			void moveAngles(long angles[], uint8_t speedRPM);
-			bool moveToPosition(float x, float y, float z);
+			bool moveToPose(float x, float y, float z);
 			bool moveXYZ(float xOffset, float yOffset, float zOffset);
 			bool moveInDirection(char axis, float value);
 			
@@ -278,7 +278,7 @@ void morobotClass::moveAngles(long angles[], uint8_t speedRPM){
 	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i, angles[i], speedRPM);
 }
 
-bool morobotClass::moveToPosition(float x, float y, float z){
+bool morobotClass::moveToPose(float x, float y, float z){
 	waitUntilIsReady();
 	Serial.print("Moving to [mm]: ");
 	Serial.print(x);
@@ -303,7 +303,7 @@ bool morobotClass::moveToPosition(float x, float y, float z){
 
 bool morobotClass::moveXYZ(float xOffset, float yOffset, float zOffset){
 	updateTCPpose();
-	return moveToPosition(_actPos[0]+xOffset, _actPos[1]+yOffset, _actPos[2]+zOffset);
+	return moveToPose(_actPos[0]+xOffset, _actPos[1]+yOffset, _actPos[2]+zOffset);
 }
 
 bool morobotClass::moveInDirection(char axis, float value){
@@ -316,7 +316,7 @@ bool morobotClass::moveInDirection(char axis, float value){
 	if (axis == 'x') goalxyz[0] = goalxyz[0]+value;
 	else if (axis == 'y') goalxyz[1] = goalxyz[1]+value;
 	else if (axis == 'z') goalxyz[2] = goalxyz[2]+value;
-	return moveToPosition(goalxyz[0], goalxyz[1], goalxyz[2]);
+	return moveToPose(goalxyz[0], goalxyz[1], goalxyz[2]);
 }
 
 /* HELPER */

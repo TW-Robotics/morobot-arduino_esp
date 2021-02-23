@@ -126,9 +126,7 @@ void morobot_s_rrp::updateTCPpose(bool output){
 	_actOri[1] = 0;
 	_actOri[2] = convertToDeg(actAngles[0] + actAngles[1]);
 	
-	if (output == true){
-		printTCPpose();
-	}
+	if (output == true)	printTCPpose();
 	
 	_tcpPoseIsValid = true;
 }

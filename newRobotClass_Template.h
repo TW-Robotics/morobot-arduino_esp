@@ -6,7 +6,7 @@
  *  @date	2020/11/27
  *  \par Method List:
  *  	public:
- *  		newRobotClass_Template() : morobotClass(PUT_NUM_SERVOS_HERE){};
+ *  		newRobotClass_Template() : morobotClass(NUM_SERVOS){};
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 		protected:
@@ -23,7 +23,7 @@ class newRobotClass_Template:public morobotClass {
 	public:
 		/**
 		 *  \brief Constructor of newRobotClass_Template class
-		 *  \details The value in brakets defines that the robot consists of three smartservos
+		 *  \details The value in brakets defines the number of smart servo motors
 		 */
 		newRobotClass_Template() : morobotClass(3){};	// TODO: PUT THE NUMBER OF SERVOS HERE
 		
@@ -51,7 +51,7 @@ class newRobotClass_Template:public morobotClass {
 		/**
 		 *  \brief Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics).
 		 *			This function does only calculate the angles of the motors and stores them internally.
-		 *  		Use moveToPosition(x,y,z) to actually move the robot.
+		 *  		Use moveToPose(x,y,z) to actually move the robot.
 		 *  \param [in] x Desired x-position of TCP
 		 *  \param [in] y Desired x-position of TCP
 		 *  \param [in] z Desired x-position of TCP

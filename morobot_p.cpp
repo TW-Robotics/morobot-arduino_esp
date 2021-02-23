@@ -18,10 +18,11 @@
 #include <morobot_p.h>
 
 void morobot_p::setTCPoffset(float xOffset, float yOffset, float zOffset){
-	_tcpOffset[0] = x_def_offset;
+	// Instead of using the tcp-offset in x-direction, make the last link longer (but store the offset just to be sure)
+	_tcpOffset[0] = xOffset;
 	a3 = a3 + xOffset;
 	_tcpOffset[1] = yOffset;
-	_tcpOffset[2] = zOffset - z_def_offset;
+	_tcpOffset[2] = zOffset;
 }
 
 bool morobot_p::checkIfAngleValid(uint8_t servoId, float angle){
@@ -62,6 +63,7 @@ bool morobot_p::checkIfAngleDiffValid(float servo1Angle, float servo2Angle){
 	return true;
 }
 
+// Alternate home position which is not in minus-z-direction
 void morobot_p::moveHome(){
 	moveToAngle(0, 0);
 	moveToAngle(1, 75);
@@ -72,9 +74,9 @@ void morobot_p::moveHome(){
 /* PROTECTED FUNCTIONS */
 bool morobot_p::calculateAngles(float x, float y, float z){
 	// Subtract offset
-	x = x - _tcpOffset[0];
+	x = x - x_def_offset;	// Don't use x-offset because this is already in link a3 included;
 	y = y - _tcpOffset[1];
-	z = z - _tcpOffset[2];
+	z = z - _tcpOffset[2] + z_def_offset;
 	
 	// Helper calculations
 	float a1_sq = pow(a1, 2);
@@ -126,18 +128,16 @@ void morobot_p::updateTCPpose(bool output){
     float z = d1 + a1 * sin(theta2) + a2 * sin(theta2 + theta3);
     
 	// Store position
-	_actPos[0] = x + _tcpOffset[0];
+	_actPos[0] = x + x_def_offset;		// Don't use x-offset because this is already in link a3 included;
 	_actPos[1] = y + _tcpOffset[1];
-	_actPos[2] = z + _tcpOffset[2];
+	_actPos[2] = z + _tcpOffset[2] - z_def_offset;
 	
 	// Calculate orientation
 	_actOri[0] = 0;
 	_actOri[1] = 0;
 	_actOri[2] = convertToDeg(theta1);
 	
-	if (output == true){
-		printTCPpose();
-	}
+	if (output == true)	printTCPpose();
 	
 	_tcpPoseIsValid = true;
 }

@@ -6,7 +6,7 @@
  *  @date	2020/11/27
  *  \par Method List:
  *  	public:
- *  		newRobotClass_Template() : morobotClass(PUT_NUM_SERVOS_HERE){};
+ *  		newRobotClass_Template() : morobotClass(NUM_SERVOS){};
 			virtual void setTCPoffset(float xOffset, float yOffset, float zOffset);
 			virtual bool checkIfAngleValid(uint8_t servoId, float angle);
 		protected:

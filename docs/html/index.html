@@ -103,13 +103,9 @@ Examples</h3>
 <li>base_importantFunctionCalls<br  />
  Bare minimum program and function calls for controlling a morobot-s rrp. Just put control commands into the loop and look what happens.</li>
 <li>calibrate_robot<br  />
- Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot.</li>
-<li>driveAroundXYZ_morobot-s(rrp)<br  />
- Control the morobot-s (rrp) with the dabble app and drive around giving x-y-z-coordinates</li>
-<li>driveAroundXYZ_morobot-s(rrp)<br  />
- Control the morobot-s (rrr) with the dabble app and drive around giving x-y-z-coordinates</li>
-<li>driveAroundXYZ_morobot-2d<br  />
- Control the morobot-2d with the dabble app and drive around giving x-y-z-coordinates</li>
+ Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot. Check the robot-info for details on the zero-positions of the motors.</li>
+<li>driveAround<br  />
+ Control all morobots with the dabble app and drive around giving angular values or x-y-z-coordinates.</li>
 <li>multiple_robots<br  />
  Control multiple robots (in this case 2x morobot-s) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.</li>
 <li>teach_robot<br  />
@@ -122,7 +118,9 @@ Supported robot types</h3>
 <ul>
 <li>morobot-s (rrp)</li>
 <li>morobot-s (rrr)</li>
-<li>morobot-2d </li>
+<li>morobot-2d</li>
+<li>morobot-3d</li>
+<li>morobot-p </li>
 </ul>
 <h3><a class="anchor" id="autotoc_md5"></a>
 Supported grippers</h3>
@@ -154,7 +152,7 @@ How to add a new robot</h2>
 Known issues</h2>
 <ul>
 <li>Example with multiple robots is not working for ESP32 controllers</li>
-<li>Other TCP-Offset than x/0/x for morobot-s (rrp and rrr) is not implemented (necessary?)</li>
+<li>TCP-Offsets in y-directions not implemented for morobot-p and morobot-s (rrp and rrr)</li>
 <li>Other EEF-types (e.g. pumps with relais) not implemented yet</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md8"></a>

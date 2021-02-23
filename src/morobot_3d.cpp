@@ -1,7 +1,7 @@
 /**
  *  \class 	morobot_3d
  *  \brief 	morobot child class for morobot_3d for microcontrollers such as Arduino or ESP32
- *  @file 	newRobotClass.h
+ *  @file 	morobot_3d.cpp
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
  *  \par Method List:

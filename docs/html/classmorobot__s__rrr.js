@@ -14,5 +14,6 @@ var classmorobot__s__rrr =
     [ "c", "classmorobot__s__rrr.html#abe71fae79efb960999f0decaf3bb4059", null ],
     [ "cSQ", "classmorobot__s__rrr.html#ad86f916a0dfca1390ea6254ba094f112", null ],
     [ "d", "classmorobot__s__rrr.html#af4527723fe8bbe5eca3cd82f547af93c", null ],
-    [ "dSQ", "classmorobot__s__rrr.html#a718f973cf81527ba437944d83aa6c3bc", null ]
+    [ "dSQ", "classmorobot__s__rrr.html#a718f973cf81527ba437944d83aa6c3bc", null ],
+    [ "type", "classmorobot__s__rrr.html#a7dc26b7bdc02fd2ea7982b13d70a757f", null ]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['morobot_203',['morobot',['../classgripper.html#a52a8af8029009e6aad6dd25ba666d3c7',1,'gripper']]]
+  ['gearratio_297',['gearRatio',['../classmorobot__s__rrp.html#a1110bd78d391361108ded9cbd0870d15',1,'morobot_s_rrp']]]
 ];

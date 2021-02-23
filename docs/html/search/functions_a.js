@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['releasebreaks_154',['releaseBreaks',['../classmorobot_class.html#a98d333362df23d98fa76dc35f9a9ff30',1,'morobotClass']]]
+  ['open_227',['open',['../classgripper.html#aa657acaf435a523eaae557b17ac2b48c',1,'gripper']]]
 ];

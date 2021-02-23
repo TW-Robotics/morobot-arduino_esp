@@ -1,6 +1,20 @@
 var searchData=
 [
-  ['isclosed_56',['isClosed',['../classgripper.html#a4cb715ac0e06ce764e605563411c44c9',1,'gripper']]],
-  ['isopened_57',['isOpened',['../classgripper.html#a560662e6ffe7cf86317ff1b777ba98d1',1,'gripper']]],
-  ['isready_58',['isReady',['../classmorobot_class.html#a2bbc2703e19a260505e4bfe0428b26cf',1,'morobotClass']]]
+  ['gearratio_60',['gearRatio',['../classmorobot__s__rrp.html#a1110bd78d391361108ded9cbd0870d15',1,'morobot_s_rrp']]],
+  ['getactangle_61',['getActAngle',['../classmorobot_class.html#aaca7763c55813c4b84e1b25e4e89bd51',1,'morobotClass']]],
+  ['getactorientation_62',['getActOrientation',['../classmorobot_class.html#a517e7ddc43e2a79f0177e7a352e2bf86',1,'morobotClass']]],
+  ['getactposition_63',['getActPosition',['../classmorobot_class.html#a6973a8bb1a06da5dcf9cad652f498138',1,'morobotClass']]],
+  ['getanglerequest_64',['getAngleRequest',['../class_makeblock_smart_servo.html#a93402b83b0c55770bf5baae05c03732d',1,'MakeblockSmartServo']]],
+  ['getcurrent_65',['getCurrent',['../classmorobot_class.html#ab8607a28d827c933d89d46781ec22298',1,'morobotClass']]],
+  ['getcurrentopeningangle_66',['getCurrentOpeningAngle',['../classgripper.html#a22b9a971405d5c33a809949af0fe1089',1,'gripper']]],
+  ['getcurrentopeningwidth_67',['getCurrentOpeningWidth',['../classgripper.html#a2ab37be09554b7399e4681977b057814',1,'gripper']]],
+  ['getcurrentrequest_68',['getCurrentRequest',['../class_makeblock_smart_servo.html#a8a4f9802c24c5b4276aa845e056544a0',1,'MakeblockSmartServo']]],
+  ['getnumsmartservos_69',['getNumSmartServos',['../classmorobot_class.html#a9de9c09bce3b31ef9be5d4ea9f3e2e90',1,'morobotClass']]],
+  ['getspeed_70',['getSpeed',['../classmorobot_class.html#a9f9a5595eecf9e54b5288d95833b5340',1,'morobotClass']]],
+  ['getspeedrequest_71',['getSpeedRequest',['../class_makeblock_smart_servo.html#a6a9592a655fdeefd6c49219d6816d8df',1,'MakeblockSmartServo']]],
+  ['gettemp_72',['getTemp',['../classmorobot_class.html#ae30f13b6773a644e966e1072cdcb33f0',1,'morobotClass']]],
+  ['gettemprequest_73',['getTempRequest',['../class_makeblock_smart_servo.html#ae3eb8f84bef9a8d7e19cb124cbababb9',1,'MakeblockSmartServo']]],
+  ['getvoltage_74',['getVoltage',['../classmorobot_class.html#aebaa053ce29eb32422c442256e3bf6e3',1,'morobotClass']]],
+  ['getvoltagerequest_75',['getVoltageRequest',['../class_makeblock_smart_servo.html#a6fdfe006ebd9a046d9af2161e8e7678d',1,'MakeblockSmartServo']]],
+  ['gripper_76',['gripper',['../classgripper.html',1,'gripper'],['../classgripper.html#a0b4f841bf88dc4d9b8d84b71e1ccc5e9',1,'gripper::gripper()']]]
 ];

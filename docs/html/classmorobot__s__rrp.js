@@ -4,9 +4,6 @@ var classmorobot__s__rrp =
     [ "calculateAngles", "classmorobot__s__rrp.html#a891931bc6964eafa32fcbc450ff86f25", null ],
     [ "checkIfAnglesValid", "classmorobot__s__rrp.html#a89199daa4ce8c9ba10711fdc63ca79d5", null ],
     [ "checkIfAngleValid", "classmorobot__s__rrp.html#a3d19b2dbbc75c0882473400566ed17dc", null ],
-    [ "moveToAngles", "classmorobot__s__rrp.html#a698227270f1ac05e390fd86c01a19604", null ],
-    [ "moveToAngles", "classmorobot__s__rrp.html#a31319a1e06a472ccabaa840aef79d386", null ],
-    [ "moveToAngles", "classmorobot__s__rrp.html#af51f9d748b8119441dee514766a7af92", null ],
     [ "moveZAxisIn", "classmorobot__s__rrp.html#a4ccec64ebaa6d7b8427ff3b35c43ba3d", null ],
     [ "setTCPoffset", "classmorobot__s__rrp.html#a88e4408c35f229091d35c84998efd35d", null ],
     [ "updateTCPpose", "classmorobot__s__rrp.html#a9a2f675a08dcda614b85e376eea9524e", null ],
@@ -19,5 +16,6 @@ var classmorobot__s__rrp =
     [ "c", "classmorobot__s__rrp.html#af260b07f1431aef58fd73147d7831483", null ],
     [ "c_new", "classmorobot__s__rrp.html#a2ac798109fb8a0baa7350be369c4ad7b", null ],
     [ "c_newSQ", "classmorobot__s__rrp.html#ac4e85877ec8071ad326f20d555f18e5e", null ],
-    [ "gearRatio", "classmorobot__s__rrp.html#a1110bd78d391361108ded9cbd0870d15", null ]
+    [ "gearRatio", "classmorobot__s__rrp.html#a1110bd78d391361108ded9cbd0870d15", null ],
+    [ "type", "classmorobot__s__rrp.html#a88e48101b4304223c8ecd262460e20a4", null ]
 ];

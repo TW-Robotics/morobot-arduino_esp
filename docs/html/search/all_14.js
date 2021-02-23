@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['z_5fdef_5foffset_5fbottom_100',['z_def_offset_bottom',['../classmorobot__2d.html#a5881131b6421fad809b1d654cfeb9c45',1,'morobot_2d']]],
-  ['z_5fdef_5foffset_5ftop_101',['z_def_offset_top',['../classmorobot__2d.html#a758251bdd5473c0fb4b7d306fc124540',1,'morobot_2d']]]
+  ['x_5fdef_5foffset_148',['x_def_offset',['../classmorobot__2d.html#ab4277c65d3d7b0c161a5f4d266cfca73',1,'morobot_2d::x_def_offset()'],['../classmorobot__p.html#a342acca89edac4711cbdc2b057242210',1,'morobot_p::x_def_offset()']]]
 ];

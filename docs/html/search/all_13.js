@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['y_5fdef_5foffset_99',['y_def_offset',['../classmorobot__2d.html#a43353d4f97ad69b2a7c8f19021038690',1,'morobot_2d']]]
+  ['waitaftereachmove_145',['waitAfterEachMove',['../classmorobot_class.html#a85137f2bf5488f4d4d3e24be1b35adbe',1,'morobotClass']]],
+  ['waituntilfinished_146',['waitUntilFinished',['../classgripper.html#a05037b5211ef6274b3c13926465b7bb7',1,'gripper']]],
+  ['waituntilisready_147',['waitUntilIsReady',['../classmorobot_class.html#a5af70aa9e701312f288d96d3cb7ad2c5',1,'morobotClass']]]
 ];

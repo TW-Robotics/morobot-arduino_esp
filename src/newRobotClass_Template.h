@@ -46,7 +46,7 @@ class newRobotClass_Template:public morobotClass {
 		 *  \return Returns true if the position is reachable; false if it is not.
 		 */
 		virtual bool checkIfAngleValid(uint8_t servoId, float angle);
-		const String type = "newRobotClass_Template";		//TODO: PUT CORRECT NUMBER OF STRING CHARACTERS IN BRAKETS!
+		const String type = "newRobotClass_Template";		//!< Type of morobot
 
 	protected:
 		/**

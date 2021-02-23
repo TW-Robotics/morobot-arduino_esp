@@ -1,7 +1,7 @@
 /**
  *  \class 	newRobotClass_Template
  *  \brief 	morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32
- *  @file 	newRobotClass_Template.h
+ *  @file 	newRobotClass_Template.cpp
  *  @author	Johannes Rauer FHTW
  *  @date	2020/11/27
  *  \par Method List:

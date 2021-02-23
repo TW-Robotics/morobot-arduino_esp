@@ -353,6 +353,28 @@ void morobotClass::autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurr
 	Serial.println("Linear axis set zero!");
 }
 
+bool morobotClass::checkForNANerror(uint8_t servoId, float angle){
+	// The values are NAN if the inverse kinematics does not provide a solution
+	if(isnan(angle)){
+		Serial.print("Angle for motor ");
+		Serial.print(servoId);
+		Serial.println(" is NAN!");
+		_tcpPoseIsValid = false;
+		return false;
+	}
+	return true;
+}
+
+void morobotClass::printInvalidAngleError(uint8_t servoId, float angle){
+	// Moving the motors out of the joint limits may harm the robot's mechanics
+	Serial.print("Angle for motor ");
+	Serial.print(servoId);
+	Serial.print(" is invalid! (");
+	Serial.print(angle);
+	Serial.println(" degrees).");
+	_tcpPoseIsValid = false;
+}
+
 /* ROBOT STATUS PRIVATE */
 bool morobotClass::isReady(){
 	for (uint8_t i=0; i<_numSmartServos; i++) {

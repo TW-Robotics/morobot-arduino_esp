@@ -26,24 +26,14 @@ void morobot_3d::setTCPoffset(float xOffset, float yOffset, float zOffset){
 
 bool morobot_3d::checkIfAngleValid(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
-	if(isnan(angle)){
-		Serial.print("Angle for motor ");
-		Serial.print(servoId);
-		Serial.println(" is NAN!");
-		_tcpPoseIsValid = false;
+	if(checkForNANerror(servoId, angle)) return false;
+	
+	// Moving the motors out of the joint limits may harm the robot's mechanics
+	if(angle < _jointLimits[servoId][0] || angle > _jointLimits[servoId][1]){
+		printInvalidAngleError(servoId, angle);
 		return false;
 	}
 	
-	// Moving the motors out of the joint limits may harm the robot's mechanics
-	if(angle < _jointLimits[servoId][0] || angle > _jointLimits[servoId][1]) {
-		Serial.print("Angle for motor ");
-		Serial.print(servoId);
-		Serial.print(" is invalid! (");
-		Serial.print(angle);
-		Serial.println(" degrees).");
-		_tcpPoseIsValid = false;
-		return false;
-	}
 	return true;
 }
 

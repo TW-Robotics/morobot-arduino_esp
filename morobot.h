@@ -376,7 +376,22 @@ class morobotClass {
 		 *  \param [in] maxMotorCurrent (Optional) Current limit at which zero position is reached an calibration stops
 		 */
 		void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25);
-	
+
+		/**
+		 *  \brief Checks if a given angle is NAN-value and prints an error message. The values are NAN if the inverse kinematics does not provide a solution.
+		 *  \param [in] servoId Number of motor the angle is for (first motor has ID 0)
+		 *  \param [in] angle Value to check for NAN
+		 *  \return Returns true if the value is valid; false if it is not.
+		 */
+		bool checkForNANerror(uint8_t servoId, float angle);
+		
+		/**
+		 *  \brief Prints an error message to the console when trying to move a motor out of its valid range
+		 *  \param [in] servoId Number of motor which is to be moved (first motor has ID 0)
+		 *  \param [in] angle Angle to move the motor to
+		 */
+		void printInvalidAngleError(uint8_t servoId, float angle);
+
 		uint8_t _numSmartServos;			//!< Number of smart servos of robot
 		uint8_t _speedRPM;					//!< Default speed (used if movement-funtions to not provide specific speed)
 		float _actPos[3];					//!< Robot TCP position (in base frame)

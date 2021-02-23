@@ -6,7 +6,7 @@
  *  
  *  Hardware: 		- Arduino Mega (or similar microcontroller)
  *  				- HC-05 bluetooth controller (or similar)
- *  				- morobot RRP
+ *  				- morobot
  *  				- Powersupply 12V 5A (or more)
  *  Connections:	- Powersupply to Arduino hollow connector
  *  				- First smart servo of robot to Arduino:
@@ -22,7 +22,17 @@
  *  Install the Dabble-App on your smartphone or tablet
  */
 
-#include <morobot_s_rrp.h>  	// If you are using another robot, change the name to the correct header file here
+// **********************************************************************
+// ********************* CHANGE THIS LINES ******************************
+// **********************************************************************
+#define MOROBOT_TYPE 	morobot_s_rrr		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+
+#include <morobot_s_rrr.h>
+#include <morobot_s_rrp.h>
+#include <morobot_2d.h>
+#include <morobot_3d.h>
+#include <morobot_p.h>
+
 #ifndef ESP32
 #include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
 #define DABBLE_PARAM 9600	// Set transmission speed
@@ -40,7 +50,7 @@ int delayDebounce = 500;
 int posId = 0;
 int idxPlayback = -1;
 
-morobot_s_rrp morobot;
+MOROBOT_TYPE morobot;
 
 void setup() {
 	Dabble.begin(DABBLE_PARAM);
@@ -48,7 +58,7 @@ void setup() {
 	morobot.moveHome();	
 	delay(500);
 	morobot.releaseBreaks();
-	morobot.setSpeedRPM(20);
+	morobot.setSpeedRPM(2);
 	
 	Serial.println("Waiting for Dabble to connect to smartphone. If you are already connected, press any app-key.");
 	Dabble.waitForAppConnection();
@@ -65,12 +75,16 @@ void setup() {
 
 void loop() {
 	Dabble.processInput();
+
+	if (morobot.type == "morobot_s_rrp"){	
+		if(GamePad.isPressed(0)) {			// Up
+			morobot.moveAngle(2, -20, 30);
+		} else if(GamePad.isPressed(1)) {   // Down
+			morobot.moveAngle(2, 20, 30);
+		}
+	}
 	
-	if(GamePad.isPressed(0)) {			// Up
-		morobot.moveAngle(2, -20, 30);
-	} else if(GamePad.isPressed(1)) {   // Down
-		morobot.moveAngle(2, 20, 30);
-	} else if(GamePad.isPressed(2)) {	// Left
+	if(GamePad.isPressed(2)) {	// Left
 		if (idxPlayback == -1){
 			Serial.println("Store positions before going back");
 		} else {

@@ -6,7 +6,7 @@
  *  
  *  Hardware: 		- Arduino Mega (or similar microcontroller)
  *  				- HC-05 bluetooth controller (or similar)
- *  				- morobot RRP
+ *  				- Calibrated morobot
  *  				- Powersupply 12V 5A (or more)
  *  Connections:	- Powersupply to Arduino hollow connector
  *  				- First smart servo of robot to Arduino:
@@ -22,7 +22,17 @@
  *  Install the Dabble-App on your smartphone or tablet
  */
 
-#include <morobot_s_rrp.h>  	// If you are using another robot, change the name to the correct header file here
+// **********************************************************************
+// ********************* CHANGE THIS LINES ******************************
+// **********************************************************************
+#define MOROBOT_TYPE 	morobot_s_rrr		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+
+#include <morobot_s_rrr.h>
+#include <morobot_s_rrp.h>
+#include <morobot_2d.h>
+#include <morobot_3d.h>
+#include <morobot_p.h>
+
 #ifndef ESP32
 #include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
 #define DABBLE_PARAM 9600	// Set transmission speed
@@ -31,7 +41,7 @@
 #define DABBLE_PARAM "MyEsp32" // Set bluetooth name
 #endif
 
-morobot_s_rrp morobot;			// And change the class-name here
+MOROBOT_TYPE morobot;			// And change the class-name here
 bool currentLimitReached = false;
 
 void setup() {
@@ -45,23 +55,28 @@ void setup() {
 	Dabble.waitForAppConnection();
 	Serial.println("Dabble connected!");
 	Serial.println("Bring the robot into zero position and press the start-button.");
-	Serial.println("Move the first two axes with your hands and use the gamepad to drive the linar axis completely in.");
+	Serial.println("Use the gamepad (up/down) to drive the linear axis. Move the other axes with your hands to zero position.");
 }
 
 void loop() {
 	Dabble.processInput();
 	
-	if(GamePad.isPressed(0) && currentLimitReached == false) {			// UP
-		morobot.moveAngle(2, -2, 1, false);
-	} else if(GamePad.isPressed(1)) {	// DOWN
-		morobot.moveAngle(2, 2, 1, false);
-		currentLimitReached = false;
-	} else if(GamePad.isPressed(4)) {	// START
+	if (morobot.type == "morobot_s_rrp") {
+		if (GamePad.isPressed(0) && currentLimitReached == false) {			// UP
+			morobot.moveAngle(2, -2, 1, false);
+		} else if(GamePad.isPressed(1)) {									// DOWN
+			morobot.moveAngle(2, 2, 1, false);
+			currentLimitReached = false;
+		}
+		if (morobot.getCurrent(2) > 25) {
+			Serial.println("Motor stopped due to current limit being reached");
+			currentLimitReached = true;
+		}
+	}
+	
+	if(GamePad.isPressed(4)) {											// START
 		morobot.setZero();
 		Serial.println("Axes set zero!");
-	}
-	if (morobot.getCurrent(2) > 25) {
-		Serial.println("Motor stopped due to current limit being reached");
-		currentLimitReached = true;
+		delay(500);
 	}
 }

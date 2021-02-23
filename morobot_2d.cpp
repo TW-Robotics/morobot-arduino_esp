@@ -18,15 +18,15 @@
 
 void morobot_2d::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	// Add given tcp-offset and default offsets
-	_tcpOffset[0] = xOffset + x_def_offset;
-	_tcpOffset[1] = yOffset + y_def_offset;
-	_tcpOffset[2] = zOffset + z_def_offset_bottom + z_def_offset_top;
+	_tcpOffset[0] = xOffset;
+	_tcpOffset[1] = yOffset;
+	_tcpOffset[2] = zOffset;
 	_tcpPoseIsValid = false;
 }
 
 bool morobot_2d::checkIfAngleValid(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
-	if(checkForNANerror(servoId, angle)) return false;
+	if(!checkForNANerror(servoId, angle)) return false;
 	
 	// Moving the motors out of the joint limits may harm the robot's mechanics
 	if(angle < _jointLimits[servoId][0] || angle > _jointLimits[servoId][1]){
@@ -41,9 +41,9 @@ bool morobot_2d::checkIfAngleValid(uint8_t servoId, float angle){
 /* PROTECTED FUNCTIONS */
 bool morobot_2d::calculateAngles(float x, float y, float z){
 	// Subtract offset
-	x = x - _tcpOffset[0];
-	y = y - _tcpOffset[1];
-	z = z - _tcpOffset[2];
+	x = x - _tcpOffset[0] - x_def_offset;
+	y = y - _tcpOffset[1] - y_def_offset;
+	z = z - _tcpOffset[2] - z_def_offset_bottom - z_def_offset_top;
 	
 	// Calculate phi1
 	float L_M1_sq = pow(z,2) + pow(x,2);
@@ -95,9 +95,9 @@ void morobot_2d::updateTCPpose(bool output){
 	float gamma = alpha + beta;
 	
 	// Calculate and store position
-	_actPos[0] = Ax + L2 * cos(gamma) + L3/2 + _tcpOffset[0];
-	_actPos[1] = _tcpOffset[1];
-	_actPos[2] = Az + L2 * sin(gamma) + _tcpOffset[2];
+	_actPos[0] = Ax + L2 * cos(gamma) + L3/2 + _tcpOffset[0] + x_def_offset;
+	_actPos[1] = _tcpOffset[1] + y_def_offset;
+	_actPos[2] = Az + L2 * sin(gamma) + _tcpOffset[2] + z_def_offset_bottom + z_def_offset_top;
 
 	// Store orientation
 	_actOri[0] = 0;

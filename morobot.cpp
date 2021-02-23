@@ -286,9 +286,9 @@ bool morobotClass::moveToPose(float x, float y, float z){
 	Serial.print(y);
 	Serial.print(", ");
 	Serial.println(z);
-	if (calculateAngles(x, y, z) == false) return false;
 	
 	updateTCPpose();
+	if (calculateAngles(x, y, z) == false) return false;
 	
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, _goalAngles[i]);
 	

@@ -23,11 +23,16 @@ void morobot_p::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	a3 = a3 + xOffset;
 	_tcpOffset[1] = yOffset;
 	_tcpOffset[2] = zOffset;
+	_tcpPoseIsValid = false;
+	
+	// At the moment, only x/z-offsets are valid!
+	if (yOffset != 0) Serial.println(" ********************************** WARNING: Y-OFFSETS OF TCP ARE NOT SUPPORTED! **********************************");
+	_tcpOffset[1] = 0;
 }
 
 bool morobot_p::checkIfAngleValid(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
-	if(checkForNANerror(servoId, angle)) return false;
+	if(!checkForNANerror(servoId, angle)) return false;
 	
 	// Moving the motors out of the joint limits may harm the robot's mechanics
 	if(angle < _jointLimits[servoId][0] || angle > _jointLimits[servoId][1]){

@@ -26,10 +26,14 @@ void morobot_s_rrp::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	// Calculate new length and angle of last axis (since eef is connected to it statically)
     c_new = sqrt(pow(_tcpOffset[1],2) + pow(c+_tcpOffset[0],2));
     beta_new = asin(_tcpOffset[1]/c_new);
-	// At the moment, only x-offsets are valid!
-	/*if (yOffset != 0) Serial.println("Y-OFFSETS of TCP not implemented");
-	c_new = c+_tcpOffset[0];
-	beta_new = 0;*/
+	
+	/*// At the moment, only x/z-offsets are valid!
+	if (yOffset != 0) {
+		Serial.println(" ********************************** WARNING: Y-OFFSETS OF TCP ARE NOT SUPPORTED! **********************************");
+		_tcpOffset[1] = 0;
+		c_new = c+_tcpOffset[0];
+		beta_new = 0;
+	}*/
 	
 	// Precalculate squares of lengths for faster processing
 	c_newSQ = pow(c_new,2);
@@ -40,7 +44,7 @@ void morobot_s_rrp::setTCPoffset(float xOffset, float yOffset, float zOffset){
 
 bool morobot_s_rrp::checkIfAngleValid(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
-	if(checkForNANerror(servoId, angle)) return false;
+	if(!checkForNANerror(servoId, angle)) return false;
 	
 	// Moving the motors out of the joint limits may harm the robot's mechanics
 	if(angle < _jointLimits[servoId][0] || angle > _jointLimits[servoId][1]){
@@ -121,7 +125,7 @@ void morobot_s_rrp::updateTCPpose(bool output){
     _actPos[1] = ynb + yncn;
 	_actPos[2] = -1 * convertToDeg(actAngles[2])/gearRatio + _tcpOffset[2]; 	// Multiply by -1 since moving in positive z-axis means that the linear axis moves in
 	
-	// Caculate orientation
+	// Calculate orientation
 	_actOri[0] = 0;
 	_actOri[1] = 0;
 	_actOri[2] = convertToDeg(actAngles[0] + actAngles[1]);

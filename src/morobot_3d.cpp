@@ -28,6 +28,9 @@ bool morobot_3d::checkIfAngleValid(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
 	if(!checkForNANerror(servoId, angle)) return false;
 	
+	// Make sure to not get stuck at -0.00 degrees
+	if (angle < 0.1 && angle > -0.1) angle = 1;
+	
 	// Moving the motors out of the joint limits may harm the robot's mechanics
 	if(angle < _jointLimits[servoId][0] || angle > _jointLimits[servoId][1]){
 		printInvalidAngleError(servoId, angle);
@@ -37,7 +40,6 @@ bool morobot_3d::checkIfAngleValid(uint8_t servoId, float angle){
 	return true;
 }
 
-
 /* PROTECTED FUNCTIONS */
 bool morobot_3d::calculateAngles(float x, float y, float z){
 	// Subtract offset
@@ -45,7 +47,7 @@ bool morobot_3d::calculateAngles(float x, float y, float z){
 	y = y - _tcpOffset[1];
 	z = z - _tcpOffset[2] - z_def_offset_bottom - z_def_offset_top;
 	
-	x = -x;		//TODO: CHECK IF ORIENTATIONS ARE CORRECT (+/-) *************************************************************************
+	x = x;
 	y = -y;
 	z = -z;
 
@@ -61,6 +63,10 @@ bool morobot_3d::calculateAngles(float x, float y, float z){
 		Serial.println("ERROR calculating motor angles. The given point is invalid");
 		return false;
 	}
+	
+	theta1 = theta1;
+	theta2 = theta2;
+	theta3 = theta3;
 	
 	//Check if angles are valid
 	if(checkIfAngleValid(0, theta1) == false) return false;
@@ -96,7 +102,7 @@ void morobot_3d::updateTCPpose(bool output){
 	waitUntilIsReady();
 	
 	// Recalculate angles because of motor mounting orientations
-	float theta1 = getActAngle(0);	//TODO: CHECK IF ORIENTATIONS ARE CORRECT (+/-) ************************************************
+	float theta1 = getActAngle(0);
 	float theta2 = getActAngle(1);
 	float theta3 = getActAngle(2);
 	theta1 = convertToRad(theta1);
@@ -140,9 +146,13 @@ void morobot_3d::updateTCPpose(bool output){
 	if (d < 0) {
 		Serial.println("ERROR: Something went wrong. The calculated TCP pose is no valid point");
 	} else {
-		_actPos[2] = -1*(-(float)0.5*(b+sqrt(d))/a) + _tcpOffset[2] + z_def_offset_bottom + z_def_offset_top;		//TODO: CHECK IF ORIENTATIONS ARE CORRECT (+/-) ***************************
-		_actPos[0] = -1*((a1*_actPos[2] + b1)/dnm) + _tcpOffset[0];
-		_actPos[1] = -1*((a2*_actPos[2] + b2)/dnm) + _tcpOffset[1];
+		_actPos[2] = -(float)0.5*(b+sqrt(d))/a;
+		_actPos[0] = (a1*_actPos[2] + b1)/dnm;
+		_actPos[1] = (a2*_actPos[2] + b2)/dnm;
+	
+		_actPos[0] =   _actPos[0] + _tcpOffset[0];
+		_actPos[1] = -_actPos[1] + _tcpOffset[1];
+		_actPos[2] = -_actPos[2] + z_def_offset_bottom + z_def_offset_top + _tcpOffset[2];
 
 		// Store orientation
 		_actOri[0] = 0;

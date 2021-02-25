@@ -79,10 +79,9 @@ class morobot_3d:public morobotClass {
 
 	private:
 		float _tcpOffset[3];	//!< Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
-		long _jointLimits[3][2] = {{0, 90}, {0, 90}, {0, 90}};		//!< Limits for all joints
-		//TODO Vorzeichen korrekt? ******************************************************************************************************************************************************************
+		long _jointLimits[3][2] = {{0, 85}, {0, 85}, {0, 85}};		//!< Limits for all joints
 
-		float z_def_offset_top = 16.9;			//!< Default offset from top side of robot to motor axes
+		float z_def_offset_top = 24.0;			//!< Default offset from top side of robot to motor axes
 		float z_def_offset_bottom = 10.0;		//!< Default offset from bottom side of end effector triangle to rotation axis of last joint
 
 		float e = 69.82;      //!< Length of side of end effector triangle 

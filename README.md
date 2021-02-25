@@ -9,7 +9,11 @@ Visit https://tw-robotics.github.io/morobot-arduino_esp/ to read the documentati
 Download this library and install it in your Arduino IDE. See the [Arduino Help Page](https://www.arduino.cc/en/guide/libraries#toc4) for more information.
 
 ## Usage
-See the examples on how to use the library.
+1. **Connect your robot**: Connect your morobot to the microcontroller and the power supply as shown in the picture below. Note the order in which you have to connect the motors (see the [robot info](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/calibration-pose_coordinate-frames/))!
+2. **Calibrate your robot**: Run the example [calibrate_robot](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/examples/calibrate_robot/calibrate_robot.ino). You have to change the 'MOROBOT_TYPE' to match your robot model. Move the joints of the robot into their calibration position, which is shown on the graphics in the see the [robot info folder](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/calibration-pose_coordinate-frames/). This ensures that in the future the joints can only move within a permitted range, which prevents the robot from being damaged. In addition, the kinematics can only be calculated correctly for calibrated robots.
+3. **Have fun**: See the other [examples](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/examples/) to learn how to move the robot around and teach positions. You can use the robots e.g. in combination with the Dabble-App and Bluetooth-Module to control them with your smartphone.
+4. **Using endeffectors**: To use a smartservo-gripper, just connect it to the last robot-servo. To use a normal servo just connect it to the microcontroller and see the [endeffector-example](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/examples/endeffector/endeffector.ino) on using it.
+
 ### Examples
 - base_importantFunctionCalls<br>
   Bare minimum program and function calls for controlling a morobot-s rrp. Just put control commands into the loop and look what happens.
@@ -54,4 +58,4 @@ The class morobotClass is an abstract base class implementing functions like mov
 - Other EEF-types (e.g. pumps with relais) not implemented yet
 
 ## License
-This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](https://github.com/TW-Robotics/morobot/edit/main/LICENSE) for more information.
+This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/LICENSE) for more information.

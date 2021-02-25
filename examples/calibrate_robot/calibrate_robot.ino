@@ -25,7 +25,8 @@
 // **********************************************************************
 // ********************* CHANGE THIS LINES ******************************
 // **********************************************************************
-#define MOROBOT_TYPE 	morobot_s_rrr		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define MOROBOT_TYPE 	morobot_3d		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define USE_DABBLE		0				// Necessary for all robots with linear axes! 0 - don't use dabble app; 1 - use dabble app
 
 #include <morobot_s_rrr.h>
 #include <morobot_s_rrp.h>
@@ -33,50 +34,61 @@
 #include <morobot_3d.h>
 #include <morobot_p.h>
 
-#ifndef ESP32
-#include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
-#define DABBLE_PARAM 9600	// Set transmission speed
-#else
-#include <DabbleESP32.h>	// Include Dabble library for ESP32 board
-#define DABBLE_PARAM "MyEsp32" // Set bluetooth name
+#if USE_DABBLE != 0
+	#ifndef ESP32
+	#include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
+	#define DABBLE_PARAM 9600	// Set transmission speed
+	#else
+	#include <DabbleESP32.h>	// Include Dabble library for ESP32 board
+	#define DABBLE_PARAM "MyEsp32" // Set bluetooth name
+	#endif
 #endif
 
 MOROBOT_TYPE morobot;			// And change the class-name here
 bool currentLimitReached = false;
 
 void setup() {
-	Dabble.begin(DABBLE_PARAM);
-	morobot.begin("Serial2");
-	
+	morobot.begin("Serial2");	
 	delay(500);
 	morobot.releaseBreaks();
 	
-	Serial.println("Waiting for Dabble to connect to smartphone. If you are already connected, press any app-key.");
-	Dabble.waitForAppConnection();
-	Serial.println("Dabble connected!");
-	Serial.println("Bring the robot into zero position and press the start-button.");
-	Serial.println("Use the gamepad (up/down) to drive the linear axis. Move the other axes with your hands to zero position.");
+	#if USE_DABBLE != 0
+		Dabble.begin(DABBLE_PARAM);	
+		Serial.println("Waiting for Dabble to connect to smartphone. If you are already connected, press any app-key.");
+		Dabble.waitForAppConnection();
+		Serial.println("Dabble connected!");
+		Serial.println("Bring the robot into zero position and press the start-button.");
+		Serial.println("Use the gamepad (up/down) to drive the linear axis. Move the other axes with your hands to zero position.");
+	#else
+		Serial.println("Bring the robot into zero position and wait. If you miss the moment, just reset the microcontroller.");
+		Serial.println("All motors are set zero in 5 seconds");
+		delay(5000);
+		morobot.setZero();
+		Serial.println("Axes set zero!");
+	#endif
 }
 
 void loop() {
-	Dabble.processInput();
-	
-	if (morobot.type == "morobot_s_rrp") {
-		if (GamePad.isPressed(0) && currentLimitReached == false) {			// UP
-			morobot.moveAngle(2, -2, 1, false);
-		} else if(GamePad.isPressed(1)) {									// DOWN
-			morobot.moveAngle(2, 2, 1, false);
-			currentLimitReached = false;
+	#if USE_DABBLE != 0
+		Dabble.processInput();
+		
+		if (morobot.type == "morobot_s_rrp") {
+			if (GamePad.isPressed(0) && currentLimitReached == false) {			// UP
+				morobot.moveAngle(2, -2, 1, false);
+			} else if(GamePad.isPressed(1)) {									// DOWN
+				morobot.moveAngle(2, 2, 1, false);
+				currentLimitReached = false;
+			}
+			if (morobot.getCurrent(2) > 25) {
+				Serial.println("Motor stopped due to current limit being reached");
+				currentLimitReached = true;
+			}
 		}
-		if (morobot.getCurrent(2) > 25) {
-			Serial.println("Motor stopped due to current limit being reached");
-			currentLimitReached = true;
+		
+		if(GamePad.isPressed(4)) {											// START
+			morobot.setZero();
+			Serial.println("Axes set zero!");
+			delay(500);
 		}
-	}
-	
-	if(GamePad.isPressed(4)) {											// START
-		morobot.setZero();
-		Serial.println("Axes set zero!");
-		delay(500);
-	}
+	#endif
 }

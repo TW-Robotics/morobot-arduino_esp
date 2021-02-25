@@ -25,7 +25,7 @@
 // **********************************************************************
 // ********************* CHANGE THIS LINES ******************************
 // **********************************************************************
-#define MOROBOT_TYPE 	morobot_s_rrp		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define MOROBOT_TYPE 	morobot_3d		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
 
 #include <morobot_s_rrr.h>
 #include <morobot_s_rrp.h>
@@ -44,7 +44,7 @@
 // Create morobot object and declare variables
 MOROBOT_TYPE morobot;
 String drive_type = "xyz";				// xyz, angular
-float step = 4.0;
+float step = 2.0;
 int delayDebounce = 250;
 float actPos[3];
 float actPosTemp[3];
@@ -54,7 +54,7 @@ void setup() {
 	morobot.begin("Serial2");		// The robot is connected to RX/TX2 -> Serial2
 	morobot.waitAfterEachMove = false;	// Make sure the robot moves without waiting
 	morobot.setSpeedRPM(1);
-	morobot.setTCPoffset(20, 50, -50); // If the robot has an endeffector set its position here (e.g. Pen-Holder)
+	//morobot.setTCPoffset(20, 50, 50); // If the robot has an endeffector set its position here (e.g. Pen-Holder)
 	morobot.moveHome();				// Move the robot into initial position
 	delay(200);
 	initVars();

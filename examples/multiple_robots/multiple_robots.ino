@@ -7,17 +7,17 @@
  *  Hardware: 		- Arduino Mega (or similar microcontroller)
  *  				- HC-05 bluetooth controller (or similar)
  *  				- 2x calibrated morobot RRP
- *  				- Powersupply 12V 5A (or more)
+ *  				- Powersupply 9-12V 5A (or more)
  *  Connections:	- Powersupply to Arduino hollow connector
  *  				- First smart servo of robot 1 to Arduino:
  *  					- Red cable to Vin
  *  					- Black cable to GND
- *  					- Yellow cable to pin 16 (TX2)
+ *  					- Yellow cable to pin 16 (TX2) (Serial2)
  *  					- White calbe to pin 17 (RX2)
   *  				- First smart servo of robot 2 to Arduino:
  *  					- Red cable to Vin
  *  					- Black cable to GND
- *  					- Yellow cable to pin 18 (TX1)
+ *  					- Yellow cable to pin 18 (TX1) (Serial1)
  *  					- White calbe to pin 19 (RX1)
  *  				- HC-05 to Arduino (Configuration to work with Dabble):
  *  					- 5V to 5V
@@ -27,21 +27,40 @@
  *  Install the Dabble-App on your smartphone or tablet
  */
 
+#include <morobot_s_rrr.h>
 #include <morobot_s_rrp.h>
-#include <Dabble.h>		// THIS EXAMPLE DOES NOT WORK FOR ESP32 YET
+#include <morobot_2d.h>
+#include <morobot_3d.h>
+#include <morobot_p.h>
+
+#ifndef ESP32
+#include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
+#define DABBLE_PARAM 9600	// Set transmission speed
+#else
+#include <DabbleESP32.h>	// Include Dabble library for ESP32 board
+#define DABBLE_PARAM "MyEsp32" // Set bluetooth name
+#endif
 
 int delayDebounce = 250;
 int angleStep = 6;
 int angleVertStep = 20;
 
-morobot_s_rrp morobot1;
-morobot_s_rrp morobot2;
-morobot_s_rrp* actMorobot;	// Pointer to store which robot is active at the moment
+// **********************************************************************
+// *************** CHANGE THE ROBOT TYPES HERE **************************
+// **********************************************************************
+morobot_3d morobot1;
+morobot_p morobot2;
+
+morobotClass* actMorobot;	// Pointer to store which robot is active at the moment
 
 void setup() {
-	Dabble.begin(9600);
+	Dabble.begin(DABBLE_PARAM);
+	// **********************************************************************
+	// *************** CHANGE THE SERIAL PORTS HERE *************************
+	// **********************************************************************
 	morobot1.begin("Serial2");
 	morobot2.begin("Serial1");
+	delay(500);
 	morobot1.moveHome();
 	morobot2.moveHome();
 	delay(500);

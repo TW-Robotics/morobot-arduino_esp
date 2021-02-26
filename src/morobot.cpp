@@ -66,9 +66,17 @@ morobotClass::morobotClass(uint8_t numSmartServos){
 
 void morobotClass::begin(const char* stream){
 	Serial.begin(115200);
-	
+
+	/*if (stream == "Serial") {
+		Serial.begin(115200);
+		_port = &Serial;
+	} else*/
 	if (stream == "Serial1") {
+		#ifndef ESP32
 		Serial1.begin(115200);
+		#else
+		Serial1.begin(115200, SERIAL_8N1, 22, 23);		// Put the Serial pins to different pins since 9/10 are not mapped
+		#endif		
 		_port = &Serial1;
 	} else if (stream == "Serial2") {
 		Serial2.begin(115200);

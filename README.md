@@ -3,13 +3,16 @@
 # morobot software library for microcontrollers such as Arduino and ESP32
 
 This library can be used to control the UAS Technikum Wien morobots using an Arduino or ESP32 microcontroller.<br>
-Visit https://tw-robotics.github.io/morobot-arduino_esp/ to read the documentation,
+Visit https://tw-robotics.github.io/morobot-arduino_esp/ to read the documentation.
+
+![](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/morobot_types.png)
 
 ## Installation
 Download this library and install it in your Arduino IDE. See the [Arduino Help Page](https://www.arduino.cc/en/guide/libraries#toc4) for more information.
 
 ## Usage
-1. **Connect your robot**: Connect your morobot to the microcontroller and the power supply as shown in the picture below. Note the order in which you have to connect the motors (see the [robot info](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/calibration-pose_coordinate-frames/))!
+1. **Connect your robot**: Connect your morobot to the microcontroller and the power supply as shown in the picture below. Note the order in which you have to connect the motors (see the [robot info](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/calibration-pose_coordinate-frames/))! The library is tested on Arduino Mega and ESP32 boards.
+![](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/morobot_connection.png)
 2. **Calibrate your robot**: Run the example [calibrate_robot](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/examples/calibrate_robot/calibrate_robot.ino). You have to change the 'MOROBOT_TYPE' to match your robot model. Move the joints of the robot into their calibration position, which is shown on the graphics in the see the [robot info folder](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/calibration-pose_coordinate-frames/). This ensures that in the future the joints can only move within a permitted range, which prevents the robot from being damaged. In addition, the kinematics can only be calculated correctly for calibrated robots.
 3. **Have fun**: See the other [examples](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/examples/) to learn how to move the robot around and teach positions. You can use the robots e.g. in combination with the Dabble-App and Bluetooth-Module to control them with your smartphone.
 4. **Using endeffectors**: To use a smartservo-gripper, just connect it to the last robot-servo. To use a normal servo just connect it to the microcontroller and see the [endeffector-example](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/examples/endeffector/endeffector.ino) on using it.
@@ -27,6 +30,9 @@ Download this library and install it in your Arduino IDE. See the [Arduino Help 
   Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.
 - endeffector<br>
   Use the different grippers in combination with the robots.
+### Supported microcontrollers
+- Arduino Mega
+- ESP32
 ### Supported robot types
 - morobot-s (rrp)
 - morobot-s (rrr)
@@ -53,9 +59,8 @@ The class morobotClass is an abstract base class implementing functions like mov
 - To use your robot type, simple add an include with your header file name into your file and create an instance of the robot object (see examples for existing robots)
 
 ## Known issues
-- Example with multiple robots is not working for ESP32 controllers
 - TCP-Offsets in y-directions not implemented for morobot-p and morobot-s (rrp and rrr)
-- Other EEF-types (e.g. pumps with relais) not implemented yet
+- Other EEF-types (e.g. pumps with relais) are not implemented yet
 
 ## License
 This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/LICENSE) for more information.

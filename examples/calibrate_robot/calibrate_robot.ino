@@ -7,7 +7,7 @@
  *  Hardware: 		- Arduino Mega (or similar microcontroller)
  *  				- HC-05 bluetooth controller (or similar)
  *  				- Calibrated morobot
- *  				- Powersupply 12V 5A (or more)
+ *  				- Powersupply 9-12V 5A (or more)
  *  Connections:	- Powersupply to Arduino hollow connector
  *  				- First smart servo of robot to Arduino:
  *  					- Red cable to Vin

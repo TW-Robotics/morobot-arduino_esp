@@ -107,7 +107,7 @@ bool gripper::autoCalibrate(){
 	return true;
 }
 
-void gripper::setParams(float degClosed, float degOpen, float degCloseLimit, float degOpenLimit, float gearRatio=7.87, float closingWidthOffset=101.2){
+void gripper::setParams(float degClosed, float degOpen, float degCloseLimit, float degOpenLimit, float gearRatio, float closingWidthOffset){
 	_degClosed = degClosed;
 	_degOpen = degOpen;
 	_degCloseLimit = degCloseLimit;

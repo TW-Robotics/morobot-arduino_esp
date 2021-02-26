@@ -40,7 +40,12 @@
  */
 
 #include <morobot.h>
+#ifndef ESP32
 #include <Servo.h>
+#else
+#include <ESP32Servo.h>
+#endif
+
 
 #ifndef EEF_H
 #define EEF_H

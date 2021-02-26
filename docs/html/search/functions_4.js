@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['functionnotimplementederror_186',['functionNotImplementedError',['../classgripper.html#ae2ed204d8fe3c1f4181d8cafa4bab3b5',1,'gripper']]]
+  ['errorcodecheckresponse_192',['errorCodeCheckResponse',['../class_makeblock_smart_servo.html#ade890163279626f70683fb24093ae400',1,'MakeblockSmartServo']]]
 ];

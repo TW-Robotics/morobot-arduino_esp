@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['readbyte_232',['readByte',['../class_makeblock_smart_servo.html#a2c5451a694fe703042c0f3d1d9effb07',1,'MakeblockSmartServo']]],
-  ['readfloat_233',['readFloat',['../class_makeblock_smart_servo.html#a0a25d6bde483c68e2e942c20ba54d3b3',1,'MakeblockSmartServo']]],
-  ['readlong_234',['readLong',['../class_makeblock_smart_servo.html#a259010a6f9c2761e2ed720310d22d534',1,'MakeblockSmartServo']]],
-  ['readshort_235',['readShort',['../class_makeblock_smart_servo.html#a972e8a33842af84f14b510fa358dd73d',1,'MakeblockSmartServo']]],
-  ['releasebreaks_236',['releaseBreaks',['../classmorobot_class.html#a98d333362df23d98fa76dc35f9a9ff30',1,'morobotClass']]]
+  ['printangles_237',['printAngles',['../classmorobot_class.html#a45dfa974c79a4ec2ab9529e9d5590726',1,'morobotClass']]],
+  ['printinvalidangleerror_238',['printInvalidAngleError',['../classmorobot_class.html#aae319ca1eda5da7987113ddc534f46d4',1,'morobotClass']]],
+  ['printtcppose_239',['printTCPpose',['../classmorobot_class.html#a9e73627ff0045c333ea468ecee552827',1,'morobotClass']]],
+  ['processsysexmessage_240',['processSysexMessage',['../class_makeblock_smart_servo.html#a81714d67c465189c12760ca1b2a624b0',1,'MakeblockSmartServo']]]
 ];

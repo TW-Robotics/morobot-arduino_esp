@@ -293,3 +293,29 @@ bool gripper::functionNotImplementedError(){
 	Serial.println("ERROR: Function not implemented for this gripper type");
 	return false;
 }
+
+/* ************************************************************************************************************************************************************ */
+
+binaryEEF::binaryEEF(int8_t pin){
+	pinMode(pin, OUTPUT);
+	_pin = pin;
+	_isActive = false;
+}
+
+void binaryEEF::activate(){
+	digitalWrite(_pin, HIGH);
+	_isActive = true;
+}
+void binaryEEF::deactivate(){
+	digitalWrite(_pin, LOW);
+	_isActive = false;
+}
+
+bool binaryEEF::isActivated(){
+	return _isActive;
+}
+
+bool binaryEEF::isDeactivated(){
+	return !_isActive;
+}
+

@@ -227,17 +227,37 @@ class gripper {
 };
 
 class binaryEEF {
-	/**
-	 *  \todo Implement binary grippers (electro-magnets, sucker-cups, ...)
-	 */
 	public:
+		/**
+		 *  \brief Constructor for binary endeffectors (electro-magnets, sucker-cups, ...)
+		 *  \param [in] pin Pin to which the endeffector (relais) is connected to
+		 */
 		binaryEEF(int8_t pin);
+		
+		/**
+		 *  \brief Activates the endeffector
+		 */
 		void activate();
+
+		/**
+		 *  \brief Deactivates the endeffector
+		 */
 		void deactivate();
+		
+		/**
+		 *  \brief Checks the state of the endeffector
+		 *  \return Returns true if the eef is activate, false otherwise
+		 */
 		bool isActivated();
+		
+		/**
+		 *  \brief Checks the state of the endeffector
+		 *  \return Returns false if the eef is activate, true otherwise
+		 */
 		bool isDeactivated();
 	private:
-		int8_t _pin;
+		int8_t _pin;					//!< Pin to which the endeffector (relais) is connected to
+		bool _isActive = false;			//!< True if eef is activated, false otherwise
 };
 
 #endif

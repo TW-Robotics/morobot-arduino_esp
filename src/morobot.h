@@ -66,9 +66,6 @@
 #define TIMEOUT_DELAY 15000		//!< Delaytime until the robot stops waiting for motors to finish their movement
 
 class morobotClass {
-	/**
-	 *  \todo Implement multiple robots for ESP32
-	 */
 	public:
 		/**
 		 *  \brief Constructor of morobot class

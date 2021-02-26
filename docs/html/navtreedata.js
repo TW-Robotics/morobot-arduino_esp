@@ -29,14 +29,14 @@ var NAVTREE =
       [ "Installation", "index.html#autotoc_md1", null ],
       [ "Usage", "index.html#autotoc_md2", [
         [ "Examples", "index.html#autotoc_md3", null ],
-        [ "Supported robot types", "index.html#autotoc_md4", null ],
-        [ "Supported grippers", "index.html#autotoc_md5", null ]
+        [ "Supported microcontrollers", "index.html#autotoc_md4", null ],
+        [ "Supported robot types", "index.html#autotoc_md5", null ],
+        [ "Supported grippers", "index.html#autotoc_md6", null ]
       ] ],
-      [ "How to add a new robot", "index.html#autotoc_md6", null ],
-      [ "Known issues", "index.html#autotoc_md7", null ],
-      [ "License", "index.html#autotoc_md8", null ]
+      [ "How to add a new robot", "index.html#autotoc_md7", null ],
+      [ "Known issues", "index.html#autotoc_md8", null ],
+      [ "License", "index.html#autotoc_md9", null ]
     ] ],
-    [ "Todo List", "todo.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -53,7 +53,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"functions_g.html"
+"functions_func.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

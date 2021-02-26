@@ -1,5 +1,5 @@
 /**
- *  \file endeffecotr.ino
+ *  \file endeffector.ino
  *  \brief TODO
  *  @author	Johannes Rauer FHTW
  *  @date	2020/12/22
@@ -37,6 +37,7 @@ int delayDebounce = 100;
 
 morobot_s_rrr morobot;
 gripper gripper(&morobot);
+binaryEEF magnet(26);		// Binary endeffector and pin it is connected to
 
 void setup() {
 	Dabble.begin(DABBLE_PARAM);
@@ -73,13 +74,19 @@ void loop() {
 	} else if(GamePad.isPressed(2)) {	// Left
 		Serial.println(gripper.getCurrentOpeningAngle());	// Display opening angle and width
 		Serial.println(gripper.getCurrentOpeningWidth());
+		if (magnet.isActivated() == true) Serial.println("Magnet is activated");
+		else Serial.println("Magnet is deactivated");
 		delay(delayDebounce*5);
 	} else if(GamePad.isPressed(3)) {	// Right
 		gripper.autoCalibrate();		// Calibrate (Only for smart-servo gripper)
 	} else if(GamePad.isPressed(7)) {	// O
 		gripper.open();
+		magnet.deactivate();
+		delay(delayDebounce);
 	} else if(GamePad.isPressed(8)) {   // X
 		gripper.close();
+		magnet.activate();
+		delay(delayDebounce);
 	} else if(GamePad.isPressed(4)) {	// Start
 		gripper.closeToForce();
 		delay(delayDebounce);

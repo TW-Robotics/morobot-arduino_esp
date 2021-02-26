@@ -31,8 +31,8 @@ Download this library and install it in your Arduino IDE. See the [Arduino Help 
 - endeffector<br>
   Use the different grippers in combination with the robots.
 ### Supported microcontrollers
-- Arduino Mega
-- ESP32
+- Arduino Mega - Control up to 3 morobots
+- ESP32 - Control up to 2 morobots
 ### Supported robot types
 - morobot-s (rrp)
 - morobot-s (rrr)
@@ -42,6 +42,7 @@ Download this library and install it in your Arduino IDE. See the [Arduino Help 
 ### Supported grippers
 - Smart-Servo Parallel-Gripper
 - Micro-Servo Angular-Gripper
+- Binary Endeffectors (Pumps, Electromagnets, Motors, ...) - Connected directly or via relais
 
 ## How to add a new robot
 The class morobotClass is an abstract base class implementing functions like moving the robot's joints. For each new robot type, a new child class with corresponding header- and cpp-file has to be implemented. Start with newRobotClass_Template and make the following changes:
@@ -60,7 +61,6 @@ The class morobotClass is an abstract base class implementing functions like mov
 
 ## Known issues
 - TCP-Offsets in y-directions not implemented for morobot-p and morobot-s (rrp and rrr)
-- Other EEF-types (e.g. pumps with relais) are not implemented yet
 
 ## License
 This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/LICENSE) for more information.

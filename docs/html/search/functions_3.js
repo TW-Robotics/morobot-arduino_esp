@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['errorcodecheckresponse_185',['errorCodeCheckResponse',['../class_makeblock_smart_servo.html#ade890163279626f70683fb24093ae400',1,'MakeblockSmartServo']]]
+  ['deactivate_191',['deactivate',['../classbinary_e_e_f.html#ab026ab861bb8470e6da4140d6be035e5',1,'binaryEEF']]]
 ];

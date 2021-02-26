@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['isclosed_204',['isClosed',['../classgripper.html#a4cb715ac0e06ce764e605563411c44c9',1,'gripper']]],
-  ['isopened_205',['isOpened',['../classgripper.html#a560662e6ffe7cf86317ff1b777ba98d1',1,'gripper']]],
-  ['isready_206',['isReady',['../classmorobot_class.html#a2bbc2703e19a260505e4bfe0428b26cf',1,'morobotClass']]]
+  ['handsharke_210',['handSharke',['../class_makeblock_smart_servo.html#ae6f40b288aced46627a5c5e851cc2a0d',1,'MakeblockSmartServo']]]
 ];

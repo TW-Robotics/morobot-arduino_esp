@@ -58,8 +58,8 @@ void setup() {
 	// **********************************************************************
 	// *************** CHANGE THE SERIAL PORTS HERE *************************
 	// **********************************************************************
-	morobot1.begin("Serial2");
-	morobot2.begin("Serial1");
+	morobot1.begin("Serial1");
+	morobot2.begin("Serial2");
 	delay(500);
 	morobot1.moveHome();
 	morobot2.moveHome();

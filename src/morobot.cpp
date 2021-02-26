@@ -65,32 +65,45 @@ morobotClass::morobotClass(uint8_t numSmartServos){
 }
 
 void morobotClass::begin(const char* stream){
-	Serial.begin(115200);
-
+	bool serialComEstablished = false;
+	bool parametersValid = false;
+	
 	/*if (stream == "Serial") {
 		Serial.begin(115200);
 		_port = &Serial;
-	} else*/
-	if (stream == "Serial1") {
+		serialComEstablished = true;
+		parametersValid = true;
+	} else*/ if (stream == "Serial1") {
 		#ifndef ESP32
 		Serial1.begin(115200);
 		#else
-		Serial1.begin(115200, SERIAL_8N1, 22, 23);		// Put the Serial pins to different pins since 9/10 are not mapped
+		Serial1.begin(115200, SERIAL_8N1, 22, 23);		// Map the serial pins to different pins since 9/10 are not mapped
 		#endif		
 		_port = &Serial1;
+		parametersValid = true;
 	} else if (stream == "Serial2") {
 		Serial2.begin(115200);
 		_port = &Serial2;
+		parametersValid = true;
 	} else if (stream == "Serial3") {
 		#ifndef ESP32		// Check if compiling for ESP32 since this controller does not have Serial3
 		Serial3.begin(115200);
 		_port = &Serial3;
 		#endif
 		#ifdef ESP32
+		Serial.begin(115200);
+		serialComEstablished = true;
 		Serial.println("ERROR: Serial3 not implemented for ESP32 controller");
+		/*Serial.begin(115200, SERIAL_8N1, 18, 19);		// Remap Serial (UART0) to pin 18/19 -> But works only without Serial-Prints
+		_port = &Serial;
+		serialComEstablished = true;
+		Serial.println("WARNING: Serial3 on ESP is connected to the USB-Controller, so you may get strange bytestings in the serial monitor!");*/
 		#endif
+		parametersValid = true;
 	}
-	else Serial.println("ERROR: Serial-Parameter not valid");
+	
+	if (serialComEstablished == false) Serial.begin(115200);
+	if (parametersValid == false) Serial.println("ERROR: Serial-Parameter not valid");
 	
     smartServos.beginSerial(_port);
 	delay(5);

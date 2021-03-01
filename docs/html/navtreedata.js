@@ -25,11 +25,11 @@
 var NAVTREE =
 [
   [ "morobot-arduino_esp", "index.html", [
-    [ "morobot software library for microcontrollers such as Arduino and ESP32", "index.html#autotoc_md0", [
+    [ "morobot software library for microcontrollers Arduino and ESP", "index.html#autotoc_md0", [
       [ "Installation", "index.html#autotoc_md1", null ],
       [ "Usage", "index.html#autotoc_md2", [
         [ "Examples", "index.html#autotoc_md3", null ],
-        [ "Supported microcontrollers", "index.html#autotoc_md4", null ],
+        [ "Supported microcontrollers and ports", "index.html#autotoc_md4", null ],
         [ "Supported robot types", "index.html#autotoc_md5", null ],
         [ "Supported grippers", "index.html#autotoc_md6", null ]
       ] ],

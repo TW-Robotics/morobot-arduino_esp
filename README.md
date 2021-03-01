@@ -30,7 +30,7 @@ Download this library and install it in your Arduino IDE. See the [Arduino Help 
   Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.
 - **endeffector**<br>
   Use the different grippers in combination with the robots.
-### Supported microcontrollers
+### Supported microcontrollers and ports
 - Arduino **Mega** - Control up to 4 morobots (Serial1, Serial2, Serial3, (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!))
 - Arduino **Uno** - Control 1 morobot (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!)
 - **ESP32** - Control up to 3 morobots (Serial1, Serial2, (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!))
@@ -42,6 +42,10 @@ Download this library and install it in your Arduino IDE. See the [Arduino Help 
   - Arduino **Micro** (Serial1)
   - Arduino **Yun** (Serial1)
 See these links on [how to install ESP32](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/) and [ESP8266 boards](https://randomnerdtutorials.com/how-to-install-esp8266-board-arduino-ide/) in your Arduino IDE.
+
+Connect the robot's **yellow cable to TX**, the **white cable to RX**.
+<table><thead><tr><th></th><th colspan="2">Serial*</th><th colspan="2">Serial1</th><th colspan="2">Serial2</th><th colspan="2">Serial3</th></tr></thead><tbody><tr><td></td><td>RX</td><td>TX</td><td>RX</td><td>TX</td><td>RX</td><td>TX</td><td>RX</td><td>TX</td></tr><tr><td>Arduino UNO, Nano, Mini</td><td>0</td><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Arduino Leonado, Micro, Yun</td><td></td><td></td><td>0</td><td>1</td><td></td><td></td><td></td><td></td></tr><tr><td>Arduino Mega</td><td>0</td><td>1</td><td>19</td><td>18</td><td>17</td><td>16</td><td>15</td><td>14</td></tr><tr><td>ESP32</td><td>3</td><td>1</td><td>22</td><td>23</td><td>16</td><td>17</td><td></td><td></td></tr><tr><td>ESP8266</td><td>3</td><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+*When using the Serial port, you HAVE TO DISCONNECT the cables while uploading code to the board. There will appear bytestrings in the serial monitor which are commands sent to the motors
 
 ### Supported robot types
 - morobot-s (rrp)

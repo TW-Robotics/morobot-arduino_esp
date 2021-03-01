@@ -11,24 +11,24 @@ Visit https://tw-robotics.github.io/morobot-arduino_esp/ to read the documentati
 Download this library and install it in your Arduino IDE. See the [Arduino Help Page](https://www.arduino.cc/en/guide/libraries#toc4) for more information.
 
 ## Usage
-1. **Connect your robot**: Connect your morobot to the microcontroller and the power supply as shown in the picture below. Note the order in which you have to connect the motors (see the [robot info](robot_info/calibration-pose_coordinate-frames/))! The library is tested on Arduino Mega and ESP32 boards.
+1. **Connect your robot**: Connect your morobot to the microcontroller and the power supply as shown in the picture below. Note the order in which you have to connect the motors (see the [robot info](robot_info/calibration-pose_coordinate-frames/))! We recommend using an Arduino Mega (with HC-05 bluetooth module if you lilk) or an ESP32 development board.
 ![](robot_info/morobot_connection.png)
 2. **Calibrate your robot**: Run the example [calibrate_robot](examples/calibrate_robot/calibrate_robot.ino). You have to change the 'MOROBOT_TYPE' to match your robot model. Move the joints of the robot into their calibration position, which is shown on the graphics in the see the [robot info folder](robot_info/calibration-pose_coordinate-frames/). This ensures that in the future the joints can only move within a permitted range, which prevents the robot from being damaged. In addition, the kinematics can only be calculated correctly for calibrated robots.
 3. **Have fun**: See the other [examples](examples/) to learn how to move the robot around and teach positions. You can use the robots e.g. in combination with the Dabble-App and Bluetooth-Module to control them with your smartphone.
 4. **Using endeffectors**: To use a smartservo-gripper, just connect it to the last robot-servo. To use a normal servo just connect it to the microcontroller and see the [endeffector-example](examples/endeffector/endeffector.ino) on using it. It is important to calibrate the parallel-gripper according to the example before using it. When using the angular-gripper with micro-servo make sure to call setParams() to set the limits correctly!
 
 ### Examples
-- base_importantFunctionCalls<br>
+- **base_importantFunctionCalls**<br>
   Bare minimum program and function calls for controlling a morobot-s rrp. Just put control commands into the loop and look what happens.
-- calibrate_robot<br>
+- **calibrate_robot**<br>
   Change the origin position of all motors of the robot. These values are stored in the motors so this program must only be called once to initially calibrate the robot. Check the robot-info for details on the zero-positions of the motors.
-- driveAround<br>
+- **driveAround**<br>
   Control all morobots with the dabble app and drive around giving angular values or x-y-z-coordinates.
-- multiple_robots<br>
+- **multiple_robots**<br>
   Control multiple robots (in this case 2x morobot-s) with the dabble app. Use the app to switch between the robots and drive the axes of the robots directly.
-- teach_robot<br>
+- **teach_robot**<br>
   Move the robot around and store positions using the Dabble-App. The robot can than drive to these positions autonomously. You can also export all positions as movement comments.
-- endeffector<br>
+- **endeffector**<br>
   Use the different grippers in combination with the robots.
 ### Supported microcontrollers
 - Arduino **Mega** - Control up to 4 morobots (Serial1, Serial2, Serial3, (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!))

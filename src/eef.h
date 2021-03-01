@@ -40,10 +40,10 @@
  */
 
 #include <morobot.h>
-#ifndef ESP32
-#include <Servo.h>
+#if defined(ESP32)
+	#include <ESP32Servo.h>
 #else
-#include <ESP32Servo.h>
+	#include <Servo.h>
 #endif
 
 

@@ -65,50 +65,69 @@ morobotClass::morobotClass(uint8_t numSmartServos){
 }
 
 void morobotClass::begin(const char* stream){
-	bool serialComEstablished = false;
-	bool parametersValid = false;
-	
-	/*if (stream == "Serial") {
-		Serial.begin(115200);
-		_port = &Serial;
-		serialComEstablished = true;
-		parametersValid = true;
-	} else*/ if (stream == "Serial1") {
-		#ifndef ESP32
-		Serial1.begin(115200);
-		#else
-		Serial1.begin(115200, SERIAL_8N1, 22, 23);		// Map the serial pins to different pins since 9/10 are not mapped
-		#endif		
-		_port = &Serial1;
-		parametersValid = true;
-	} else if (stream == "Serial2") {
-		Serial2.begin(115200);
-		_port = &Serial2;
-		parametersValid = true;
-	} else if (stream == "Serial3") {
-		#ifndef ESP32		// Check if compiling for ESP32 since this controller does not have Serial3
-		Serial3.begin(115200);
-		_port = &Serial3;
-		#endif
-		#ifdef ESP32
-		Serial.begin(115200);
-		serialComEstablished = true;
-		Serial.println("ERROR: Serial3 not implemented for ESP32 controller");
-		/*Serial.begin(115200, SERIAL_8N1, 18, 19);		// Remap Serial (UART0) to pin 18/19 -> But works only without Serial-Prints
-		_port = &Serial;
-		serialComEstablished = true;
-		Serial.println("WARNING: Serial3 on ESP is connected to the USB-Controller, so you may get strange bytestings in the serial monitor!");*/
-		#endif
-		parametersValid = true;
-	}
-	
-	if (serialComEstablished == false) Serial.begin(115200);
-	if (parametersValid == false) Serial.println("ERROR: Serial-Parameter not valid");
-	
-    smartServos.beginSerial(_port);
+	Serial.begin(115200);
+	#if defined(ARDUINO_AVR_MEGA) || defined(ARDUINO_AVR_MEGA2560)
+		if (stream == "Serial") {
+			Serial.println(F("WARNING: Serial on Arduino Mega is connected to the USB-Controller, so you may get strange bytestings in the serial monitor!"));
+			_port = &Serial;
+		} else if (stream == "Serial1") {
+			Serial1.begin(115200);
+			_port = &Serial1;
+		} else if (stream == "Serial2") {
+			Serial2.begin(115200);
+			_port = &Serial2;
+		} else if (stream == "Serial3") {
+			Serial3.begin(115200);
+			_port = &Serial3;
+		} else {
+			Serial.println(F("ERROR: Serial-Parameter not valid. Choose 'Serial', 'Serial1', 'Serial2' or 'Serial3'."));
+		}
+		
+	#elif defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_MINI) || defined (ARDUINO_AVR_NANO)
+		if (stream == "Serial") {
+			Serial.println(F("WARNING: Serial on Arduino UNO is connected to the USB-Controller, so you may get strange bytestings in the serial monitor!"));
+			_port = &Serial;
+		} else {
+			Serial.println(F("ERROR: Serial-Parameter not valid. Only 'Serial' possible."));
+		}
+		
+	#elif defined(ARDUINO_AVR_LEONARDO) || defined(ARDUINO_AVR_MICRO) || defined(ARDUINO_AVR_YUN)
+		if (stream == "Serial1") {
+			Serial1.begin(115200);
+			_port = &Serial1;
+		} else {
+			Serial.println(F("ERROR: Serial-Parameter not valid. Only 'Serial1' possible."));
+		}
+		
+	#elif defined(ESP32)
+		if (stream == "Serial") {
+			Serial.println(F("WARNING: Serial on ESP32 is connected to the USB-Controller, so you may get strange bytestings in the serial monitor!"));
+			_port = &Serial;
+		} else if (stream == "Serial1") {
+			Serial1.begin(115200, SERIAL_8N1, 22, 23);		// Map the serial pins to different pins since 9/10 are not mapped
+			_port = &Serial1;
+		} else if (stream == "Serial2") {
+			Serial2.begin(115200);
+			_port = &Serial2;
+		} else {
+			Serial.println(F("ERROR: Serial-Parameter not valid. Choose 'Serial1' or 'Serial2'."));
+		}
+		
+	#elif defined(ESP8266)
+		if (stream == "Serial") {
+			Serial.println(F("WARNING: Serial on ESP32 is connected to the USB-Controller, so you may get strange bytestings in the serial monitor!"));
+			_port = &Serial;
+		} else {
+			Serial.println(F("ERROR: Serial-Parameter not valid. Only 'Serial' possible."));
+		}	
+	#else
+		#error "Board not supported"
+	#endif
+		
+	smartServos.beginSerial(_port);
 	delay(5);
-    smartServos.assignDevIdRequest();
-    delay(50);
+	smartServos.assignDevIdRequest();
+	delay(50);
 	
 	setTCPoffset(0, 0, 0);
 	setSpeedRPM(25);

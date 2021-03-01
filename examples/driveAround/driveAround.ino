@@ -49,15 +49,6 @@ void setup() {
 	delay(200);
 	initVars();
 	
-	Serial.println(morobot.getActAngle(0));
-	morobot.moveAngle(0, -25);
-	delay(500);
-	morobot.moveAngle(0, 25);
-	delay(500);
-	morobot.moveAngle(1, 15);
-	delay(500);
-	morobot.moveAngle(1, -15);
-	
 	if (morobot.type == "morobot_s_rrp") step = 1;
 	
 	Serial.println("Waiting for Dabble to connect to smartphone. If you are already connected, press any app-key.");

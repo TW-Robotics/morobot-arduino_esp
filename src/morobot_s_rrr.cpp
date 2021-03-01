@@ -23,7 +23,7 @@ void morobot_s_rrr::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	_tcpOffset[2] = zOffset;
 	
 	// At the moment, only x/z-offsets are valid!
-	if (yOffset != 0) Serial.println(" ********************************** WARNING: Y-OFFSETS OF TCP ARE NOT SUPPORTED! **********************************");
+	if (yOffset != 0) Serial.println(F(" ********************************** WARNING: Y-OFFSETS OF TCP ARE NOT SUPPORTED! **********************************"));
 	_tcpOffset[1] = 0;
 	
 	// Calculate new length and angle of last axis (since eef is connected to it statically)	
@@ -79,7 +79,7 @@ bool morobot_s_rrr::calculateAngles(float x, float y, float rotZ){
 	// Check if angles are valid
 	if (!checkIfAnglesValid(phi1, phi2, phi3)){
 		// Try out redundant configuration
-		Serial.println("Switching to other configuration");
+		Serial.println(F("Switching to other configuration"));
 		phi1 = - (-phi1 + 2*gamma);
 		phi3 = - (-phi3 + 2*(phi2-gamma));
 		phi2 = - phi2;

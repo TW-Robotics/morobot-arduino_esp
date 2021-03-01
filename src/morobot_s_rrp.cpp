@@ -29,7 +29,7 @@ void morobot_s_rrp::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	
 	/*// At the moment, only x/z-offsets are valid!
 	if (yOffset != 0) {
-		Serial.println(" ********************************** WARNING: Y-OFFSETS OF TCP ARE NOT SUPPORTED! **********************************");
+		Serial.println(F(" ********************************** WARNING: Y-OFFSETS OF TCP ARE NOT SUPPORTED! **********************************"));
 		_tcpOffset[1] = 0;
 		c_new = c+_tcpOffset[0];
 		beta_new = 0;
@@ -84,7 +84,7 @@ bool morobot_s_rrp::calculateAngles(float x, float y, float z){
 
 	// Recalculate angles if phi1 is out of range
 	if (phi1 < _jointLimits[0][0] || phi1 > _jointLimits[0][1] || phi2 < _jointLimits[1][0] || phi2 > _jointLimits[1][1]){
-		Serial.println("Switching to other configuration");
+		Serial.println(F("Switching to other configuration"));
 		phi2 = - convertToDeg(phi2n + beta_new);
 		phi1 = - convertToDeg(gamma - alpha);
 	}

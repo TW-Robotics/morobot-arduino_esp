@@ -58,7 +58,7 @@
 
 morobotClass::morobotClass(uint8_t numSmartServos){
 	if (numSmartServos > NUM_MAX_SERVOS){
-		Serial.print("Too many motors! Maximum number of motors: ");
+		Serial.print(F("Too many motors! Maximum number of motors: "));
 		Serial.println(NUM_MAX_SERVOS);
 	}
 	_numSmartServos = numSmartServos;
@@ -114,7 +114,7 @@ void morobotClass::begin(const char* stream){
 	setSpeedRPM(25);
 	updateTCPpose();
 
-	Serial.println("Morobot initialized. Connection to motors established");
+	Serial.println(F("Morobot initialized. Connection to motors established"));
 }
 
 void morobotClass::setZero(){
@@ -170,7 +170,7 @@ void morobotClass::waitUntilIsReady(){
 		if (isReady() == true) break;
 		// Stop waiting if the robot is not ready after a timeout occurs
 		if ((millis() - startTime) > TIMEOUT_DELAY) {
-			Serial.println("TIMEOUT OCCURED WHILE WAITING FOR ROBOT TO FINISH MOVEMENT!");
+			Serial.println(F("TIMEOUT OCCURED WHILE WAITING FOR ROBOT TO FINISH MOVEMENT!"));
 			break;
 		}
 	}
@@ -195,7 +195,7 @@ float morobotClass::getActPosition(char axis){
 	if (axis == 'x') return _actPos[0];
 	else if (axis == 'y') return _actPos[1];
 	else if (axis == 'z') return _actPos[2];
-	else Serial.println("ERROR! Invalid axis in getActPosition();");
+	else Serial.println(F("ERROR! Invalid axis in getActPosition();"));
 }
 
 float morobotClass::getActOrientation(char axis){
@@ -204,7 +204,7 @@ float morobotClass::getActOrientation(char axis){
 	if (axis == 'x') return _actOri[0];
 	else if (axis == 'y') return _actOri[1];
 	else if (axis == 'z') return _actOri[2];
-	else Serial.println("ERROR! Invalid axis in getActOrientation();");
+	else Serial.println(F("ERROR! Invalid axis in getActOrientation();"));
 }
 
 float morobotClass::getSpeed(uint8_t servoId){
@@ -247,7 +247,7 @@ void morobotClass::moveToAngle(uint8_t servoId, long angle, uint8_t speedRPM, bo
 
 void morobotClass::moveToAngles(long angles[]){
 	waitUntilIsReady();
-	Serial.print("Moving to [deg]: ");
+	Serial.print(F("Moving to [deg]: "));
 	printAngles(angles);
 	
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, angles[i]);
@@ -255,7 +255,7 @@ void morobotClass::moveToAngles(long angles[]){
 
 void morobotClass::moveToAngles(long angles[], uint8_t speedRPM){
 	waitUntilIsReady();
-	Serial.print("Moving to [deg]: ");
+	Serial.print(F("Moving to [deg]: "));
 	printAngles(angles);
 	
 	for (uint8_t i=0; i<_numSmartServos; i++) moveToAngle(i, angles[i], speedRPM);
@@ -285,7 +285,7 @@ void morobotClass::moveAngle(uint8_t servoId, long angle, uint8_t speedRPM, bool
 
 void morobotClass::moveAngles(long angles[]){
 	waitUntilIsReady();
-	Serial.print("Moving [deg]: ");
+	Serial.print(F("Moving [deg]: "));
 	printAngles(angles);
 
 	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i, angles[i]);
@@ -293,7 +293,7 @@ void morobotClass::moveAngles(long angles[]){
 
 void morobotClass::moveAngles(long angles[], uint8_t speedRPM){
 	waitUntilIsReady();
-	Serial.print("Moving [deg]: ");
+	Serial.print(F("Moving [deg]: "));
 	printAngles(angles);
 
 	for (uint8_t i=0; i<_numSmartServos; i++) moveAngle(i, angles[i], speedRPM);
@@ -301,7 +301,7 @@ void morobotClass::moveAngles(long angles[], uint8_t speedRPM){
 
 bool morobotClass::moveToPose(float x, float y, float z){
 	waitUntilIsReady();
-	Serial.print("Moving to [mm]: ");
+	Serial.print(F("Moving to [mm]: "));
 	Serial.print(x);
 	Serial.print(", ");
 	Serial.print(y);
@@ -351,13 +351,13 @@ void morobotClass::printAngles(long angles[]){
 
 void morobotClass::printTCPpose(){
 	updateTCPpose();
-	Serial.print("TCP-Pose x, y, z [mm]: ");
+	Serial.print(F("TCP-Pose x, y, z [mm]: "));
 	Serial.print(_actPos[0]);
 	Serial.print(", ");
 	Serial.print(_actPos[1]);
 	Serial.print(", ");
 	Serial.print(_actPos[2]);
-	Serial.print("; Orientation around z-axis [degrees]: ");
+	Serial.print(F("; Orientation around z-axis [degrees]: "));
 	Serial.println(_actOri[2]);
 }
 
@@ -376,15 +376,15 @@ void morobotClass::autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurr
 		if (getCurrent(servoId) > 25) break;
 	}
 	smartServos.setZero(servoId+1);
-	Serial.println("Linear axis set zero!");
+	Serial.println(F("Linear axis set zero!"));
 }
 
 bool morobotClass::checkForNANerror(uint8_t servoId, float angle){
 	// The values are NAN if the inverse kinematics does not provide a solution
 	if(isnan(angle)){
-		Serial.print("Angle for motor ");
+		Serial.print(F("Angle for motor "));
 		Serial.print(servoId);
-		Serial.println(" is NAN!");
+		Serial.println(F(" is NAN!"));
 		_tcpPoseIsValid = false;
 		return false;
 	}
@@ -393,11 +393,11 @@ bool morobotClass::checkForNANerror(uint8_t servoId, float angle){
 
 void morobotClass::printInvalidAngleError(uint8_t servoId, float angle){
 	// Moving the motors out of the joint limits may harm the robot's mechanics
-	Serial.print("Angle for motor ");
+	Serial.print(F("Angle for motor "));
 	Serial.print(servoId);
-	Serial.print(" is invalid! (");
+	Serial.print(F(" is invalid! ("));
 	Serial.print(angle);
-	Serial.println(" degrees).");
+	Serial.println(F(" degrees)."));
 	_tcpPoseIsValid = false;
 }
 

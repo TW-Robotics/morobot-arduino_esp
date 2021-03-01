@@ -26,7 +26,7 @@ void morobot_p::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	_tcpPoseIsValid = false;
 	
 	// At the moment, only x/z-offsets are valid!
-	if (yOffset != 0) Serial.println(" ********************************** WARNING: Y-OFFSETS OF TCP ARE NOT SUPPORTED! **********************************");
+	if (yOffset != 0) Serial.println(F(" ********************************** WARNING: Y-OFFSETS OF TCP ARE NOT SUPPORTED! **********************************"));
 	_tcpOffset[1] = 0;
 }
 
@@ -54,13 +54,13 @@ bool morobot_p::checkIfAngleValid(uint8_t servoId, float angle){
 
 bool morobot_p::checkIfAngleDiffValid(float servo1Angle, float servo2Angle){
 	if (90 - servo1Angle - servo2Angle < 20){
-		Serial.println("Difference between motor2 and motor3 too small - could harm mechanics");
+		Serial.println(F("Difference between motor2 and motor3 too small - could harm mechanics"));
 		_tcpPoseIsValid = false;
 		return false;
 	}
 	
 	if (90 - servo1Angle - servo2Angle > 135){
-		Serial.println("Difference between motor2 and motor3 too big - could harm mechanics");
+		Serial.println(F("Difference between motor2 and motor3 too big - could harm mechanics"));
 		_tcpPoseIsValid = false;
 		return false;		
 	}

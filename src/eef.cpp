@@ -56,7 +56,7 @@ void gripper::begin(){
 	setParams(0, -500, 0, -550);	// degClosed, degOpen, degCloseLimit, degOpenLimit
 	setTCPoffset(0, 0, -38);		// Store TCP-Offset and change TCP-Offset of morobot
 
-	Serial.println("Gripper connected to robot");
+	Serial.println(F("Gripper connected to robot"));
 }
 
 void gripper::begin(int8_t servoPin){
@@ -70,17 +70,17 @@ void gripper::begin(int8_t servoPin){
 	servo.attach(servoPin);
 	open();
 
-	Serial.println("Gripper connected to robot");
+	Serial.println(F("Gripper connected to robot"));
 }
 
 bool gripper::autoCalibrate(){
-	Serial.println("Autocalibrating Gripper");
+	Serial.println(F("Autocalibrating Gripper"));
 	bool returnValue = true;
 	
 	if (_gripperType == 0){
-		Serial.println("Closing...");
+		Serial.println(F("Closing..."));
 		if (closeToForce() == true){
-			Serial.println("Closed");
+			Serial.println(F("Closed"));
 		} else {
 			returnValue = false;
 		}
@@ -89,7 +89,7 @@ bool gripper::autoCalibrate(){
 		functionNotImplementedError();
 	}
 	if (returnValue == false) {
-		Serial.println("ERROR: Calibration failed!");
+		Serial.println(F("ERROR: Calibration failed!"));
 		return false;
 	}
 	
@@ -99,9 +99,9 @@ bool gripper::autoCalibrate(){
 	if (_closingDirectionIsPositive == true) positiveFactor = -1;
 	setParams(getCurrentOpeningAngle(), getCurrentOpeningAngle() + positiveFactor * 500, getCurrentOpeningAngle(), getCurrentOpeningAngle() + positiveFactor * 550);
 
-	Serial.print("Calibration successful! New Limits: Closed at ");
+	Serial.print(F("Calibration successful! New Limits: Closed at "));
 	Serial.print(_degClosed);
-	Serial.print(", Opened at ");
+	Serial.print(F(", Opened at "));
 	Serial.println(_degOpen);
 	close();
 	return true;
@@ -118,9 +118,9 @@ void gripper::setParams(float degClosed, float degOpen, float degCloseLimit, flo
 	if (_degClosed > _degOpen) _closingDirectionIsPositive = true;
 	else _closingDirectionIsPositive = false;
 
-	Serial.print("New Limits: Closed at ");
+	Serial.print(F("New Limits: Closed at "));
 	Serial.print(_degClosed);
-	Serial.print(", Opened at ");
+	Serial.print(F(", Opened at "));
 	Serial.println(_degOpen);	
 }
 
@@ -223,7 +223,7 @@ bool gripper::closeToForce(float maxCurrent){
 			if (morobot->smartServos.getCurrentRequest(_servoID+1) > maxCurrent) {		// Check the current
 				delay(20);
 				if (morobot->smartServos.getCurrentRequest(_servoID+1) > maxCurrent) {	// If after 20ms there is still too much current, the final position is reached (outlier detection)
-					Serial.println("Grasped object");
+					Serial.println(F("Grasped object"));
 					_currentAngle = getCurrentOpeningAngle();
 					_isOpened = false;
 					_isClosed = true;
@@ -233,7 +233,7 @@ bool gripper::closeToForce(float maxCurrent){
 			
 			// Stop if the gripper is not finished after a timeout occurs
 			if ((millis() - startTime) > TIMEOUT_DELAY_GRIPPER) {
-				Serial.println("TIMEOUT OCCURED WHILE WAITING FOR GRIPPER TO FINISH MOVEMENT!");
+				Serial.println(F("TIMEOUT OCCURED WHILE WAITING FOR GRIPPER TO FINISH MOVEMENT!"));
 				return false;
 			}
 		}
@@ -268,7 +268,7 @@ bool gripper::isOpened(){
 
 bool gripper::checkIfAngleValid(float angle){
 	if ((_closingDirectionIsPositive == true && (angle > _degCloseLimit || angle < _degOpenLimit)) || (_closingDirectionIsPositive == false && (angle < _degCloseLimit || angle > _degOpenLimit))){
-		Serial.println("ERROR: ANGLE OUT OF LIMIT");
+		Serial.println(F("ERROR: ANGLE OUT OF LIMIT"));
 		Serial.println(angle);
 		return false;
 	}
@@ -283,14 +283,14 @@ bool gripper::waitUntilFinished(){
 		if (startPos == getCurrentOpeningAngle()) return true;	// If after 50ms the position is still the same, the gripper has reached the goal
 		// Stop waiting if the gripper is not finished after a timeout occurs
 		if ((millis() - startTime) > TIMEOUT_DELAY_GRIPPER) {
-			Serial.println("TIMEOUT OCCURED WHILE WAITING FOR GRIPPER TO FINISH MOVEMENT!");
+			Serial.println(F("TIMEOUT OCCURED WHILE WAITING FOR GRIPPER TO FINISH MOVEMENT!"));
 			return false;
 		}
 	}
 }
 
 bool gripper::functionNotImplementedError(){
-	Serial.println("ERROR: Function not implemented for this gripper type");
+	Serial.println(F("ERROR: Function not implemented for this gripper type"));
 	return false;
 }
 

@@ -60,7 +60,7 @@ bool morobot_3d::calculateAngles(float x, float y, float z){
 	if (status == 0) status = calculateAngleYZ(x*cos120 + y*sin120, y*cos120-x*sin120, z, theta2);  // rotate coords to +120 deg
 	if (status == 0) status = calculateAngleYZ(x*cos120 - y*sin120, y*cos120+x*sin120, z, theta3);  // rotate coords to -120 deg
 	if (status != 0) {
-		Serial.println("ERROR calculating motor angles. The given point is invalid");
+		Serial.println(F("ERROR calculating motor angles. The given point is invalid"));
 		return false;
 	}
 	
@@ -144,7 +144,7 @@ void morobot_3d::updateTCPpose(bool output){
 	// discriminant
 	float d = b*b - (float)4.0*a*c;
 	if (d < 0) {
-		Serial.println("ERROR: Something went wrong. The calculated TCP pose is no valid point");
+		Serial.println(F("ERROR: Something went wrong. The calculated TCP pose is no valid point"));
 	} else {
 		_actPos[2] = -(float)0.5*(b+sqrt(d))/a;
 		_actPos[0] = (a1*_actPos[2] + b1)/dnm;

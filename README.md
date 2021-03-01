@@ -1,21 +1,21 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-# morobot software library for microcontrollers such as Arduino and ESP32
+# morobot software library for microcontrollers Arduino and ESP
 
 This library can be used to control the UAS Technikum Wien morobots using an Arduino or ESP32 microcontroller.<br>
 Visit https://tw-robotics.github.io/morobot-arduino_esp/ to read the documentation.
 
-![](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/morobot_types.png)
+![](robot_info/morobot_types.png)
 
 ## Installation
 Download this library and install it in your Arduino IDE. See the [Arduino Help Page](https://www.arduino.cc/en/guide/libraries#toc4) for more information.
 
 ## Usage
-1. **Connect your robot**: Connect your morobot to the microcontroller and the power supply as shown in the picture below. Note the order in which you have to connect the motors (see the [robot info](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/calibration-pose_coordinate-frames/))! The library is tested on Arduino Mega and ESP32 boards.
-![](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/morobot_connection.png)
-2. **Calibrate your robot**: Run the example [calibrate_robot](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/examples/calibrate_robot/calibrate_robot.ino). You have to change the 'MOROBOT_TYPE' to match your robot model. Move the joints of the robot into their calibration position, which is shown on the graphics in the see the [robot info folder](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/robot_info/calibration-pose_coordinate-frames/). This ensures that in the future the joints can only move within a permitted range, which prevents the robot from being damaged. In addition, the kinematics can only be calculated correctly for calibrated robots.
-3. **Have fun**: See the other [examples](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/examples/) to learn how to move the robot around and teach positions. You can use the robots e.g. in combination with the Dabble-App and Bluetooth-Module to control them with your smartphone.
-4. **Using endeffectors**: To use a smartservo-gripper, just connect it to the last robot-servo. To use a normal servo just connect it to the microcontroller and see the [endeffector-example](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/examples/endeffector/endeffector.ino) on using it.
+1. **Connect your robot**: Connect your morobot to the microcontroller and the power supply as shown in the picture below. Note the order in which you have to connect the motors (see the [robot info](robot_info/calibration-pose_coordinate-frames/))! The library is tested on Arduino Mega and ESP32 boards.
+![](robot_info/morobot_connection.png)
+2. **Calibrate your robot**: Run the example [calibrate_robot](examples/calibrate_robot/calibrate_robot.ino). You have to change the 'MOROBOT_TYPE' to match your robot model. Move the joints of the robot into their calibration position, which is shown on the graphics in the see the [robot info folder](robot_info/calibration-pose_coordinate-frames/). This ensures that in the future the joints can only move within a permitted range, which prevents the robot from being damaged. In addition, the kinematics can only be calculated correctly for calibrated robots.
+3. **Have fun**: See the other [examples](examples/) to learn how to move the robot around and teach positions. You can use the robots e.g. in combination with the Dabble-App and Bluetooth-Module to control them with your smartphone.
+4. **Using endeffectors**: To use a smartservo-gripper, just connect it to the last robot-servo. To use a normal servo just connect it to the microcontroller and see the [endeffector-example](examples/endeffector/endeffector.ino) on using it. It is important to calibrate the parallel-gripper according to the example before using it. When using the angular-gripper with micro-servo make sure to call setParams() to set the limits correctly!
 
 ### Examples
 - base_importantFunctionCalls<br>
@@ -31,8 +31,18 @@ Download this library and install it in your Arduino IDE. See the [Arduino Help 
 - endeffector<br>
   Use the different grippers in combination with the robots.
 ### Supported microcontrollers
-- Arduino Mega - Control up to 3 morobots
-- ESP32 - Control up to 2 morobots
+- Arduino **Mega** - Control up to 4 morobots (Serial1, Serial2, Serial3, (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!))
+- Arduino **Uno** - Control 1 morobot (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!)
+- **ESP32** - Control up to 3 morobots (Serial1, Serial2, (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!))
+- **ESP8266** - Control 1 morobot (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!)
+- Not tested but supported:
+  - Arduino **Mini** (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!)
+  - Arduino **Nano** (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!)
+  - Arduino **Leonardo** (Serial1)
+  - Arduino **Micro** (Serial1)
+  - Arduino **Yun** (Serial1)
+See these links on [how to install ESP32](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/) and [ESP8266 boards](https://randomnerdtutorials.com/how-to-install-esp8266-board-arduino-ide/) in your Arduino IDE.
+
 ### Supported robot types
 - morobot-s (rrp)
 - morobot-s (rrr)
@@ -63,4 +73,4 @@ The class morobotClass is an abstract base class implementing functions like mov
 - TCP-Offsets in y-directions not implemented for morobot-p and morobot-s (rrp and rrr)
 
 ## License
-This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](https://github.com/TW-Robotics/morobot-arduino_esp/blob/main/LICENSE) for more information.
+This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](LICENSE) for more information.

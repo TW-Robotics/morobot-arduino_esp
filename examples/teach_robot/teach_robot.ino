@@ -23,23 +23,13 @@
  */
 
 // **********************************************************************
-// ********************* CHANGE THIS LINES ******************************
+// ********************* CHANGE THESE TWO LINES *************************
 // **********************************************************************
-#define MOROBOT_TYPE 	morobot_s_rrr		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define MOROBOT_TYPE 	morobot_s_rrr	// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define SERIAL_PORT		"Serial2"		// "Serial", "Serial1", "Serial2", "Serial3" (not all supported for all microcontroller - see readme)
 
-#include <morobot_s_rrr.h>
-#include <morobot_s_rrp.h>
-#include <morobot_2d.h>
-#include <morobot_3d.h>
-#include <morobot_p.h>
-
-#ifndef ESP32
-#include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
-#define DABBLE_PARAM 9600	// Set transmission speed
-#else
-#include <DabbleESP32.h>	// Include Dabble library for ESP32 board
-#define DABBLE_PARAM "MyEsp32" // Set bluetooth name
-#endif
+#include <morobot.h>
+#include <dabble_include.h>
 
 #define MAX_NUM_POS 20
 #define NUM_SERVOS 3
@@ -54,7 +44,7 @@ MOROBOT_TYPE morobot;
 
 void setup() {
 	Dabble.begin(DABBLE_PARAM);
-	morobot.begin("Serial2");
+	morobot.begin(SERIAL_PORT);
 	morobot.moveHome();	
 	delay(500);
 	morobot.releaseBreaks();

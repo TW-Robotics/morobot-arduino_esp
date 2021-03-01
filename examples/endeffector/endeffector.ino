@@ -22,16 +22,14 @@
  *  Install the Dabble-App on your smartphone or tablet
  */
 
-#include <morobot_s_rrr.h>  	// If you are using another robot, change the name to the correct header file here
-#ifndef ESP32
-#include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
-#define DABBLE_PARAM 9600	// Set transmission speed
-#else
-#include <DabbleESP32.h>	// Include Dabble library for ESP32 board
-#define DABBLE_PARAM "MyEsp32" // Set bluetooth name
-#endif
+// **********************************************************************
+// ********************* CHANGE THESE TWO LINES *************************
+// **********************************************************************
+#define MOROBOT_TYPE 	morobot_s_rrp	// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define SERIAL_PORT		"Serial2"		// "Serial", "Serial1", "Serial2", "Serial3" (not all supported for all microcontroller - see readme)
 
-#include <eef.h>
+#include <morobot.h>
+#include <dabble_include.h>
 
 int delayDebounce = 100;
 

@@ -15,12 +15,18 @@
  *  					- White calbe to pin 17 (RX2)
  */
 
-#include <morobot_s_rrp.h>  	// If you are using another robot, change the name to the correct header file here
+// **********************************************************************
+// ********************* CHANGE THESE TWO LINES *************************
+// **********************************************************************
+#define MOROBOT_TYPE 	morobot_s_rrp	// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define SERIAL_PORT		"Serial2"		// "Serial", "Serial1", "Serial2", "Serial3" (not all supported for all microcontroller - see readme)
 
-morobot_s_rrp morobot;		// And change the class-name here
+#include <morobot.h>
+
+MOROBOT_TYPE morobot;		// And change the class-name here
 
 void setup() {
-	morobot.begin("Serial2");
+	morobot.begin(SERIAL_PORT);
 	morobot.moveHome();				// Move the robot into initial position
 	morobot.moveZAxisIn();			// Move the z-axis in (in case it is out more than one rotation of motor on startup)
 	morobot.setZero();				// Set the axes zero when move in

@@ -39,7 +39,6 @@
  *  			bool isDeactivated();
  */
 
-#include <morobot.h>
 #if defined(ESP32)
 	#include <ESP32Servo.h>
 #else
@@ -49,6 +48,8 @@
 
 #ifndef EEF_H
 #define EEF_H
+
+#include <morobot.h>
 
 #define TIMEOUT_DELAY_GRIPPER 25000		//!< Delay after which the gripper stops moving when closeToForce() is used
 

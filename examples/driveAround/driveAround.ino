@@ -23,23 +23,13 @@
  */
 
 // **********************************************************************
-// ********************* CHANGE THIS LINES ******************************
+// ********************* CHANGE THESE TWO LINES *************************
 // **********************************************************************
-#define MOROBOT_TYPE 	morobot_3d		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define MOROBOT_TYPE 	morobot_p		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define SERIAL_PORT		"Serial2"		// "Serial", "Serial1", "Serial2", "Serial3" (not all supported for all microcontroller - see readme)
 
-#include <morobot_s_rrr.h>
-#include <morobot_s_rrp.h>
-#include <morobot_2d.h>
-#include <morobot_3d.h>
-#include <morobot_p.h>
-
-#ifndef ESP32
-#include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
-#define DABBLE_PARAM 9600	// Set transmission speed
-#else
-#include <DabbleESP32.h>	// Include Dabble library for ESP32 board
-#define DABBLE_PARAM "MyEsp32" // Set bluetooth name
-#endif
+#include <morobot.h>
+#include <dabble_include.h>
 
 // Create morobot object and declare variables
 MOROBOT_TYPE morobot;
@@ -51,13 +41,22 @@ float actPosTemp[3];
 
 void setup() {
 	Dabble.begin(DABBLE_PARAM);		// Start connection to Dabble
-	morobot.begin("Serial2");		// The robot is connected to RX/TX2 -> Serial2
+	morobot.begin(SERIAL_PORT);
 	morobot.waitAfterEachMove = false;	// Make sure the robot moves without waiting
 	morobot.setSpeedRPM(1);
 	//morobot.setTCPoffset(20, 50, 50); // If the robot has an endeffector set its position here (e.g. Pen-Holder)
 	morobot.moveHome();				// Move the robot into initial position
 	delay(200);
 	initVars();
+	
+	Serial.println(morobot.getActAngle(0));
+	morobot.moveAngle(0, -25);
+	delay(500);
+	morobot.moveAngle(0, 25);
+	delay(500);
+	morobot.moveAngle(1, 15);
+	delay(500);
+	morobot.moveAngle(1, -15);
 	
 	if (morobot.type == "morobot_s_rrp") step = 1;
 	
@@ -86,11 +85,11 @@ void loop() {
 		if (drive_type == "xyz") {
 			drive_type = "angular";
 			step = step*2;
-			Serial.println("Changed Drive-Type to ANGULAR");
+			Serial.println(F("Changed Drive-Type to ANGULAR"));
 		} else {
 			drive_type = "xyz";
 			step = step/2;
-			Serial.println("Changed Drive-Type to XYZ");
+			Serial.println(F("Changed Drive-Type to XYZ"));
 			initVars();
 		}
 		delay(delayDebounce);

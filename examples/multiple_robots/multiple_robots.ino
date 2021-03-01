@@ -12,13 +12,13 @@
  *  				- First smart servo of robot 1 to Arduino:
  *  					- Red cable to Vin
  *  					- Black cable to GND
- *  					- Yellow cable to pin 16 (TX2) (Serial2)
- *  					- White calbe to pin 17 (RX2)
+ *  					- Yellow cable to pin 18 (TX2) (Serial1)
+ *  					- White calbe to pin 19 (RX2)
   *  				- First smart servo of robot 2 to Arduino:
  *  					- Red cable to Vin
  *  					- Black cable to GND
- *  					- Yellow cable to pin 18 (TX1) (Serial1)
- *  					- White calbe to pin 19 (RX1)
+ *  					- Yellow cable to pin 16 (TX1) (Serial2)
+ *  					- White calbe to pin 17 (RX1)
  *  				- HC-05 to Arduino (Configuration to work with Dabble):
  *  					- 5V to 5V
  *  					- GND to GND
@@ -27,39 +27,29 @@
  *  Install the Dabble-App on your smartphone or tablet
  */
 
-#include <morobot_s_rrr.h>
-#include <morobot_s_rrp.h>
-#include <morobot_2d.h>
-#include <morobot_3d.h>
-#include <morobot_p.h>
+// **********************************************************************
+// *********************** CHANGE THESE LINES ***************************
+// **********************************************************************
+#define MOROBOT_TYPE_1 	morobot_3d		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define MOROBOT_TYPE_2 	morobot_p		// morobot_s_rrr, morobot_s_rrp, morobot_2d, morobot_3d, morobot_p
+#define SERIAL_PORT_1	"Serial1"		// "Serial", "Serial1", "Serial2", "Serial3" (not all supported for all microcontroller - see readme)
+#define SERIAL_PORT_2	"Serial2"		// "Serial", "Serial1", "Serial2", "Serial3" (not all supported for all microcontroller - see readme)
 
-#ifndef ESP32
-#include <Dabble.h>			// Include Dabble library for AVR-based controllers (Arduino) if no ESP32 is used
-#define DABBLE_PARAM 9600	// Set transmission speed
-#else
-#include <DabbleESP32.h>	// Include Dabble library for ESP32 board
-#define DABBLE_PARAM "MyEsp32" // Set bluetooth name
-#endif
+#include <morobot.h>
+#include <dabble_include.h>
 
 int delayDebounce = 250;
 int angleStep = 6;
-int angleVertStep = 20;
 
-// **********************************************************************
-// *************** CHANGE THE ROBOT TYPES HERE **************************
-// **********************************************************************
-morobot_3d morobot1;
-morobot_p morobot2;
+MOROBOT_TYPE_1 morobot1;
+MOROBOT_TYPE_2 morobot2;
 
 morobotClass* actMorobot;	// Pointer to store which robot is active at the moment
 
 void setup() {
 	Dabble.begin(DABBLE_PARAM);
-	// **********************************************************************
-	// *************** CHANGE THE SERIAL PORTS HERE *************************
-	// **********************************************************************
-	morobot1.begin("Serial1");
-	morobot2.begin("Serial2");
+	morobot1.begin(SERIAL_PORT_1);
+	morobot2.begin(SERIAL_PORT_2);
 	delay(500);
 	morobot1.moveHome();
 	morobot2.moveHome();
@@ -86,9 +76,9 @@ void loop() {
 	} else if(GamePad.isPressed(1)) {   // Down
 		actMorobot->moveAngle(1, -angleStep);	
 	} else if(GamePad.isPressed(6)) {	// Triangle
-		actMorobot->moveAngle(2, -angleVertStep);
+		actMorobot->moveAngle(2, -angleStep);
 	} else if(GamePad.isPressed(8)) {   // X
-		actMorobot->moveAngle(2, angleVertStep);
+		actMorobot->moveAngle(2, angleStep);
 	} else if(GamePad.isPressed(7)) {	// O
 		Serial.println(actMorobot->getActAngle(0));
 		Serial.println(actMorobot->getActAngle(1));

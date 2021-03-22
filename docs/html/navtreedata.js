@@ -26,16 +26,17 @@ var NAVTREE =
 [
   [ "morobot-arduino_esp", "index.html", [
     [ "morobot software library for microcontrollers Arduino and ESP", "index.html#autotoc_md0", [
-      [ "Installation", "index.html#autotoc_md1", null ],
-      [ "Usage", "index.html#autotoc_md2", [
-        [ "Examples", "index.html#autotoc_md3", null ],
-        [ "Supported microcontrollers and ports", "index.html#autotoc_md4", null ],
-        [ "Supported robot types", "index.html#autotoc_md5", null ],
-        [ "Supported grippers", "index.html#autotoc_md6", null ]
+      [ "morobots in action", "index.html#autotoc_md1", null ],
+      [ "Installation", "index.html#autotoc_md2", null ],
+      [ "Usage", "index.html#autotoc_md3", [
+        [ "Examples", "index.html#autotoc_md4", null ],
+        [ "Supported microcontrollers and ports", "index.html#autotoc_md5", null ],
+        [ "Supported robot types", "index.html#autotoc_md6", null ],
+        [ "Supported grippers", "index.html#autotoc_md7", null ]
       ] ],
-      [ "How to add a new robot", "index.html#autotoc_md7", null ],
-      [ "Known issues", "index.html#autotoc_md8", null ],
-      [ "License", "index.html#autotoc_md9", null ]
+      [ "How to add a new robot", "index.html#autotoc_md8", null ],
+      [ "Known issues", "index.html#autotoc_md9", null ],
+      [ "License", "index.html#autotoc_md10", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

@@ -84,10 +84,10 @@ class morobot_3d:public morobotClass {
 		float z_def_offset_top = 24.0;			//!< Default offset from top side of robot to motor axes
 		float z_def_offset_bottom = 10.0;		//!< Default offset from bottom side of end effector triangle to rotation axis of last joint
 
-		float e = 69.82;      //!< Length of side of end effector triangle 
-		float f = 178.78;     //!< Length of side of base triangle
-		float re = 149.98;    //!< Length of parallelogram link
-		float rf = 97.6;      //!< Length of upper link
+		float e = 69.28;	//!< Length of side of end effector triangle
+		float f = 178.78;	//!< Length of side of base triangle
+		float re = 149.95;	//!< Length of parallelogram link
+		float rf = 96.00;	//!< Length of upper link
 		
 		// trigonometric constants
 		const float sqrt3 = sqrt(3.0);

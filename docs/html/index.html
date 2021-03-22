@@ -93,9 +93,12 @@ morobot software library for microcontrollers Arduino and ESP</h1>
  Visit <a href="https://tw-robotics.github.io/morobot-arduino_esp/">https://tw-robotics.github.io/morobot-arduino_esp/</a> to read the documentation.</p>
 <p><img src="robot_info/morobot_types.png" alt="" class="inline"/></p>
 <h2><a class="anchor" id="autotoc_md1"></a>
-Installation</h2>
-<p>Download this library and install it in your Arduino IDE. See the <a href="https://www.arduino.cc/en/guide/libraries#toc4">Arduino Help Page</a> for more information.</p>
+morobots in action</h2>
+<p>Visit <a href="https://fhtw-my.sharepoint.com/:f:/g/personal/rauer_technikum-wien_at/EqCmgnG48F5DhoUqymyPeDsBle8L1-g1K1zmv48mNSwo6Q">this link</a> to see the robots in action.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
+Installation</h2>
+<p>Download this library (the whole repository) and install it in your Arduino IDE. See the <a href="https://www.arduino.cc/en/guide/libraries#toc4">Arduino Help Page</a> for more information.</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
 Usage</h2>
 <ol type="1">
 <li><b>Connect your robot</b>: Connect your morobot to the microcontroller and the power supply as shown in the picture below. Note the order in which you have to connect the motors (see the <a href="robot_info/calibration-pose_coordinate-frames/">robot info</a>)! We recommend using an Arduino Mega (with HC-05 bluetooth module if you lilk) or an ESP32 development board. <img src="robot_info/morobot_connection.png" alt="" class="inline"/></li>
@@ -103,7 +106,7 @@ Usage</h2>
 <li><b>Have fun</b>: See the other <a href="examples/">examples</a> to learn how to move the robot around and teach positions. You can use the robots e.g. in combination with the Dabble-App and Bluetooth-Module to control them with your smartphone.</li>
 <li><b>Using endeffectors</b>: To use a smartservo-gripper, just connect it to the last robot-servo. To use a normal servo just connect it to the microcontroller and see the <a href="examples/endeffector/endeffector.ino">endeffector-example</a> on using it. It is important to calibrate the parallel-gripper according to the example before using it. When using the angular-gripper with micro-servo make sure to call setParams() to set the limits correctly!</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md3"></a>
+<h3><a class="anchor" id="autotoc_md4"></a>
 Examples</h3>
 <ul>
 <li><b>base_importantFunctionCalls</b><br  />
@@ -119,7 +122,7 @@ Examples</h3>
 <li><b>endeffector</b><br  />
  Use the different grippers in combination with the robots. </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4"></a>
+<h3><a class="anchor" id="autotoc_md5"></a>
 Supported microcontrollers and ports</h3>
 <ul>
 <li>Arduino <b>Mega</b> - Control up to 4 morobots (Serial1, Serial2, Serial3, (Serial - prints bytestrings into serial monitor. Disconnect wires while uploading software!))</li>
@@ -152,7 +155,7 @@ Supported microcontrollers and ports</h3>
 <td>ESP8266</td><td>3</td><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </table>
 <p>*When using the Serial port, you HAVE TO DISCONNECT the cables while uploading code to the board. There will appear bytestrings in the serial monitor which are commands sent to the motors</p>
-<h3><a class="anchor" id="autotoc_md5"></a>
+<h3><a class="anchor" id="autotoc_md6"></a>
 Supported robot types</h3>
 <ul>
 <li>morobot-s (rrp)</li>
@@ -161,14 +164,14 @@ Supported robot types</h3>
 <li>morobot-3d</li>
 <li>morobot-p </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md6"></a>
+<h3><a class="anchor" id="autotoc_md7"></a>
 Supported grippers</h3>
 <ul>
 <li>Smart-Servo Parallel-Gripper</li>
 <li>Micro-Servo Angular-Gripper</li>
 <li>Binary Endeffectors (Pumps, Electromagnets, Motors, ...) - Connected directly or via relais</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 How to add a new robot</h2>
 <p>The class <a class="el" href="classmorobot_class.html" title="morobot base class for microcontrollers such as Arduino or ESP32">morobotClass</a> is an abstract base class implementing functions like moving the robot's joints. For each new robot type, a new child class with corresponding header- and cpp-file has to be implemented. Start with <a class="el" href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> and make the following changes:</p><ul>
 <li>Copy the <a class="el" href="classnew_robot_class___template.html" title="morobot child class for newRobotClass_Template for microcontrollers such as Arduino or ESP32">newRobotClass_Template</a> files and rename them. Include type and kinematics into name</li>
@@ -188,12 +191,12 @@ How to add a new robot</h2>
 </li>
 <li>To use your robot type, simple add an include with your header file name into your file and create an instance of the robot object (see examples for existing robots)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 Known issues</h2>
 <ul>
 <li>TCP-Offsets in y-directions not implemented for morobot-p and morobot-s (rrp and rrr)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 License</h2>
 <p>This software is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](LICENSE) for more information. </p>
 </div></div><!-- PageDoc -->

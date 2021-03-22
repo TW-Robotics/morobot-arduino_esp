@@ -11,7 +11,7 @@ Visit https://tw-robotics.github.io/morobot-arduino_esp/ to read the documentati
 Visit [this link](https://fhtw-my.sharepoint.com/:f:/g/personal/rauer_technikum-wien_at/EqCmgnG48F5DhoUqymyPeDsBle8L1-g1K1zmv48mNSwo6Q) to see the robots in action.
 
 ## Installation
-Download this library and install it in your Arduino IDE. See the [Arduino Help Page](https://www.arduino.cc/en/guide/libraries#toc4) for more information.
+Download this library (the whole repository) and install it in your Arduino IDE. See the [Arduino Help Page](https://www.arduino.cc/en/guide/libraries#toc4) for more information.
 
 ## Usage
 1. **Connect your robot**: Connect your morobot to the microcontroller and the power supply as shown in the picture below. Note the order in which you have to connect the motors (see the [robot info](robot_info/calibration-pose_coordinate-frames/))! We recommend using an Arduino Mega (with HC-05 bluetooth module if you lilk) or an ESP32 development board.

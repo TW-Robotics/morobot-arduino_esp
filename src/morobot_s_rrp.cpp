@@ -16,7 +16,7 @@
 			virtual void updateTCPpose();
  */
  
-#include <morobot_s_rrp.h>
+#include "morobot_s_rrp.h"
 
 void morobot_s_rrp::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	_tcpOffset[0] = xOffset;

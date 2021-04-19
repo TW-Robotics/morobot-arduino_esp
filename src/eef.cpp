@@ -39,7 +39,7 @@
  *  			bool isDeactivated();
  */
  
-#include <eef.h>
+#include "eef.h"
 
 gripper::gripper(morobotClass* morobotToAttachTo){
 	_isOpened = false;

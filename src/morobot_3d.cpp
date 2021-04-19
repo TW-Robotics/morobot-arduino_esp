@@ -14,7 +14,7 @@
 			virtual void updateCurrentXYZ();
  */
  
-#include <morobot_3d.h>
+#include "morobot_3d.h"
 
 void morobot_3d::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	// Add given tcp-offset and default offsets

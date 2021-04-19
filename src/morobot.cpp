@@ -54,7 +54,7 @@
 			bool isReady();
  */
 
-#include <morobot.h>
+#include "morobot.h"
 
 morobotClass::morobotClass(uint8_t numSmartServos){
 	if (numSmartServos > NUM_MAX_SERVOS){

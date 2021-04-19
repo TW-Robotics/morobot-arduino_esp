@@ -15,7 +15,7 @@
 			virtual void updateCurrentXYZ();
  */
  
-#include <morobot_p.h>
+#include "morobot_p.h"
 
 void morobot_p::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	// Instead of using the tcp-offset in x-direction, make the last link longer (but store the offset just to be sure)

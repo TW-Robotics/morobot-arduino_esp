@@ -49,7 +49,7 @@
 #ifndef EEF_H
 #define EEF_H
 
-#include <morobot.h>
+#include "morobot.h"
 
 #define TIMEOUT_DELAY_GRIPPER 25000		//!< Delay after which the gripper stops moving when closeToForce() is used
 

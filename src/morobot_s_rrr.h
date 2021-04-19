@@ -18,7 +18,7 @@
 #ifndef MOROBOT_S_RRR_H
 #define MOROBOT_S_RRR_H
 
-#include <morobot.h>
+#include "morobot.h"
 
 class morobot_s_rrr:public morobotClass {
 	public:

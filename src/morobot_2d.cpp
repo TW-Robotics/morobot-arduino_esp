@@ -14,7 +14,7 @@
 			virtual void updateTCPpose(bool output);
  */
  
-#include <morobot_2d.h>
+#include "morobot_2d.h"
 
 void morobot_2d::setTCPoffset(float xOffset, float yOffset, float zOffset){
 	// Add given tcp-offset and default offsets

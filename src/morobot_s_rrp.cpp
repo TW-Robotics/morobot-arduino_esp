@@ -68,6 +68,10 @@ void morobot_s_rrp::moveZAxisIn(uint8_t maxMotorCurrent){
 	_tcpPoseIsValid = false;
 }
 
+String morobot_s_rrp::getType(){
+	return type;
+}
+
 /* PROTECTED FUNCTIONS */
 bool morobot_s_rrp::calculateAngles(float x, float y, float z){
 	float xSQ = pow(x-a,2);	// Base is in x-orientation --> Just subtract base-length from x-coordinate

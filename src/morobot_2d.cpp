@@ -37,6 +37,9 @@ bool morobot_2d::checkIfAngleValid(uint8_t servoId, float angle){
 	return true;
 }
 
+String morobot_2d::getType(){
+	return type;
+}
 
 /* PROTECTED FUNCTIONS */
 bool morobot_2d::calculateAngles(float x, float y, float z){

@@ -40,6 +40,10 @@ bool morobot_3d::checkIfAngleValid(uint8_t servoId, float angle){
 	return true;
 }
 
+String morobot_3d::getType(){
+	return type;
+}
+
 /* PROTECTED FUNCTIONS */
 bool morobot_3d::calculateAngles(float x, float y, float z){
 	// Subtract offset

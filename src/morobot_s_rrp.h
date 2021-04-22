@@ -64,6 +64,13 @@ class morobot_s_rrp:public morobotClass {
 		 *  \param [in] maxMotorCurrent (Optional) Current limit at which zero position is reached an calibration stops
 		 */
 		void moveZAxisIn(uint8_t maxMotorCurrent=25);
+		
+		/**
+		 *  \brief Returns the type of the robot
+		 *  \return Returns morobot type
+		 */
+		virtual String getType();		
+		
 		const String type = "morobot_s_rrp";		//!< Type of morobot
 
 	protected:

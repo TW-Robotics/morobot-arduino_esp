@@ -56,6 +56,13 @@ class morobot_s_rrr:public morobotClass {
 		 *  \return Returns true if the position is reachable; false if it is not.
 		 */
 		bool checkIfAnglesValid(float phi1, float phi2, float phi3);
+		
+		/**
+		 *  \brief Returns the type of the robot
+		 *  \return Returns morobot type
+		 */
+		virtual String getType();
+		
 		const String type = "morobot_s_rrr";		//!< Type of morobot
 
 	protected:

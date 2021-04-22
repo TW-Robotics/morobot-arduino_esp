@@ -76,6 +76,10 @@ void morobot_p::moveHome(){
 	waitUntilIsReady();
 }
 
+String morobot_p::getType(){
+	return type;
+}
+
 /* PROTECTED FUNCTIONS */
 bool morobot_p::calculateAngles(float x, float y, float z){
 	// Subtract offset

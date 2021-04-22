@@ -39,6 +39,10 @@ bool newRobotClass_Template::checkIfAngleValid(uint8_t servoId, float angle){
 	return true;
 }
 
+String newRobotClass_Template::getType(){
+	return type;
+}
+
 
 /* PROTECTED FUNCTIONS */
 bool newRobotClass_Template::calculateAngles(float x, float y, float z){

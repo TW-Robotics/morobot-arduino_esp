@@ -362,9 +362,16 @@ class morobotClass {
 		 */
 		float convertToRad(float angle);
 		
+		/**
+		 *  \brief Returns the type of the robot
+		 *  \return Returns morobot type
+		 */
+		virtual String getType()=0;
+		
 		/* PUBLIC VARIABLES */
 		MakeblockSmartServo smartServos;	//!< Makeblock smartservo object
 		bool waitAfterEachMove = true;		//!< Defines if the robot waits after moving or does not wait until movement has finished
+		
 	protected:
 		/**
 		 *  \brief Uses given coordinates to calculate the motor angles to reach this position (Solve inverse kinematics).

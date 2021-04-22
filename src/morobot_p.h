@@ -60,6 +60,13 @@ class morobot_p:public morobotClass {
 		 *  \brief Alternate home function which does not move the robot to 0/0/0 degrees but to a regular position where it does not push into the desk
 		 */
 		void moveHome();
+
+		/**
+		 *  \brief Returns the type of the robot
+		 *  \return Returns morobot type
+		 */
+		virtual String getType();		
+		
 		const String type = "morobot_p";		//!< Type of morobot
 		
 	protected:

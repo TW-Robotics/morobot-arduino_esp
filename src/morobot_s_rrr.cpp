@@ -55,6 +55,10 @@ bool morobot_s_rrr::checkIfAnglesValid(float phi1, float phi2, float phi3){
 	return true;
 }
 
+String morobot_s_rrr::getType(){
+	return type;
+}
+
 /* PROTECTED FUNCTIONS */
 bool morobot_s_rrr::calculateAngles(float x, float y, float rotZ){
 	rotZ = convertToRad(rotZ);			// Transform rotation into radians

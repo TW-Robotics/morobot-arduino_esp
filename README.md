@@ -3,7 +3,7 @@
 # morobot software library for microcontrollers Arduino and ESP
 
 This library can be used to control the UAS Technikum Wien morobots using an Arduino or ESP32 microcontroller.<br>
-Visit https://tw-robotics.github.io/morobot-arduino_esp/ to read the documentation.
+Visit https://tw-robotics.github.io/morobot-arduino_esp/html/index.html to read the documentation.
 
 ![](robot_info/morobot_types.png)
 

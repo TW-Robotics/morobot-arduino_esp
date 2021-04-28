@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['waitaftereachmove_319',['waitAfterEachMove',['../classmorobot_class.html#a85137f2bf5488f4d4d3e24be1b35adbe',1,'morobotClass']]]
+  ['x_5fdef_5foffset_245',['x_def_offset',['../classmorobot__2d.html#ab4277c65d3d7b0c161a5f4d266cfca73',1,'morobot_2d::x_def_offset()'],['../classmorobot__p.html#a342acca89edac4711cbdc2b057242210',1,'morobot_p::x_def_offset()']]]
 ];

@@ -3,6 +3,7 @@ var classmorobot__2d =
     [ "morobot_2d", "classmorobot__2d.html#a18bc9b1c2cbc4a8ad78920d203976ac5", null ],
     [ "calculateAngles", "classmorobot__2d.html#ad35805d85426264fa806dbff1b1b0cb9", null ],
     [ "checkIfAngleValid", "classmorobot__2d.html#ae5cdc4e13a2a334bc0c94f0eb33f4bc2", null ],
+    [ "getType", "classmorobot__2d.html#ae3d4bc1026aae78352183579b855bcc3", null ],
     [ "setTCPoffset", "classmorobot__2d.html#a29689078441ab46abf33dbdbe085d61b", null ],
     [ "updateTCPpose", "classmorobot__2d.html#a75e1e29b33eecdd394f0c1d7d4dfdd37", null ],
     [ "_jointLimits", "classmorobot__2d.html#ad767fe78825bdb5eadbe3eddde707a39", null ],

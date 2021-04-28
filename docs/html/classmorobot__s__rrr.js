@@ -4,6 +4,7 @@ var classmorobot__s__rrr =
     [ "calculateAngles", "classmorobot__s__rrr.html#afe3567cdcb3f0d9951d1ad17ed54fc9c", null ],
     [ "checkIfAnglesValid", "classmorobot__s__rrr.html#a9365276347a091e439c4b8df1aaed491", null ],
     [ "checkIfAngleValid", "classmorobot__s__rrr.html#a8be76ecdda83554e50a9be2fcdaa8d06", null ],
+    [ "getType", "classmorobot__s__rrr.html#a1184c7ddc55f433dd8a9d000bb1b83e8", null ],
     [ "setTCPoffset", "classmorobot__s__rrr.html#a965c93f616ed27d418951f94b58d81da", null ],
     [ "updateTCPpose", "classmorobot__s__rrr.html#a7e726abb3359eb0b3ddd8e25f4067036", null ],
     [ "_jointLimits", "classmorobot__s__rrr.html#a88d7f19da65eb9f5fc07154ce0556be2", null ],

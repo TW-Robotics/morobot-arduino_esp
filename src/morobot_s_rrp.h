@@ -61,9 +61,9 @@ class morobot_s_rrp:public morobotClass {
 		
 		/**
 		 *  \brief Calibrates the linear axis by increasing the angle until a current limit is reached
-		 *  \param [in] maxMotorCurrent (Optional) Current limit at which zero position is reached an calibration stops
+		 *  \param [in] maxMotorCurrent (Optional) Current limit at which zero position is reached and calibration stops
 		 */
-		void moveZAxisIn(uint8_t maxMotorCurrent=25);
+		void moveZAxisIn(uint8_t maxMotorCurrent=80);
 		
 		/**
 		 *  \brief Returns the type of the robot

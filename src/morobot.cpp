@@ -46,6 +46,8 @@
 			void printAngles(long angles[]);
 			void printTCPpose();
 			float convertToDeg(float angle);
+			float convertToRad(float angle);
+			virtual String getType();
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
 			virtual void updateTCPpose(bool output);

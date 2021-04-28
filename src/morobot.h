@@ -46,6 +46,8 @@
 			void printAngles(long angles[]);
 			void printTCPpose();
 			float convertToDeg(float angle);
+			float convertToRad(float angle);
+			virtual String getType();
 		protected:
 			virtual bool calculateAngles(float x, float y, float z);
 			virtual void updateTCPpose(bool output);
@@ -397,7 +399,7 @@ class morobotClass {
 		 *  \param [in] servoId Number of motor to calibrate (first motor has ID 0)
 		 *  \param [in] maxMotorCurrent (Optional) Current limit at which zero position is reached an calibration stops
 		 */
-		void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=25);
+		void autoCalibrateLinearAxis(uint8_t servoId, uint8_t maxMotorCurrent=80);
 
 		/**
 		 *  \brief Checks if a given angle is NAN-value and prints an error message. The values are NAN if the inverse kinematics does not provide a solution.

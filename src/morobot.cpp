@@ -108,7 +108,7 @@ void morobotClass::begin(const char* stream){
 			Serial.println(F("WARNING: Serial on ESP32 is connected to the USB-Controller, so you may get strange bytestings in the serial monitor!"));
 			_port = &Serial;
 		} else if (stream == "Serial1") {
-			Serial1.begin(115200, SERIAL_8N1, 22, 23);		// Map the serial pins to different pins since 9/10 are not mapped
+			Serial1.begin(115200, SERIAL_8N1, 18, 19);		// Map the serial pins to different pins since 9/10 are not mapped
 			_port = &Serial1;
 		} else if (stream == "Serial2") {
 			Serial2.begin(115200);

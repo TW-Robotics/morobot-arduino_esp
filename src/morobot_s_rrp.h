@@ -27,7 +27,7 @@ class morobot_s_rrp:public morobotClass {
 		 *  \brief Constructor of morobot_s_rrp class
 		 *  \details The value in brakets defines that the robot consists of three smartservos
 		 */
-		morobot_s_rrp() : morobotClass(3){};
+		morobot_s_rrp() : morobotClass(3){memcpy(_robotJointLimits, _jointLimits, 3*2*sizeof(long)); memcpy(_robotAxisLimits, _axisLimits, 3*2*sizeof(uint8_t));};
 		
 		/**
 		 *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.
@@ -95,6 +95,7 @@ class morobot_s_rrp:public morobotClass {
 	private:
 		float _tcpOffset[3];	//!< Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
 		long _jointLimits[3][2] = {{-100, 100}, {-100, 100}, {0, 780}};		//!< Limits for all joints
+		uint8_t _axisLimits[3][2] = {{-35, 210}, {-165, 165}, {-40, 0}};	//!< Limits of x, y, z axis
 	
 		float a = 47.0;				//!< Length from mounting to first axis
 		float b = 92.9;				//!< Length from first axis to second axis

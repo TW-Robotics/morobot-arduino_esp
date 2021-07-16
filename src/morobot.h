@@ -29,6 +29,8 @@
 			float getTemp(uint8_t servoId);
 			float getVoltage(uint8_t servoId);
 			float getCurrent(uint8_t servoId);
+			long getJointLimit(uint8_t servoId, bool limitNum);
+			uint8_t getAxisLimit(char axis, bool limitNum);
 			uint8_t getNumSmartServos();
 			
 			void moveToAngle(uint8_t servoId, long angle);
@@ -220,6 +222,20 @@ class morobotClass {
 		 *  \return Current current consumption of motor in Ampere.
 		 */
 		float getCurrent(uint8_t servoId);
+
+		/**
+		 *  \brief Returns the limits of a given axis
+		 *  \param [in] servoID Number of servo to get limit of
+		 *  \param [in] limitNum 0 for lower limit, 1 for upper limit
+		 */
+		long getJointLimit(uint8_t servoId, bool limitNum);
+		
+		/**
+		 *  \brief Return the limit in x/y/z orientation
+		 *  \param [in] axis Axis for which to get the limit
+		 *  \param [in] limitNum 0 for lower limit, 1 for upper limit
+		 */
+		 uint8_t getAxisLimit(char axis, bool limitNum);
 		
 		/**
 		 * \brief Returns number of smart servos in robot 
@@ -417,6 +433,8 @@ class morobotClass {
 		void printInvalidAngleError(uint8_t servoId, float angle);
 
 		uint8_t _numSmartServos;			//!< Number of smart servos of robot
+		long _robotJointLimits[3][2];	//!< Limits for all joints
+		uint8_t _robotAxisLimits[3][2];		//!< Limits of x, y, z axis
 		uint8_t _speedRPM;					//!< Default speed (used if movement-funtions to not provide specific speed)
 		float _actPos[3];					//!< Robot TCP position (in base frame)
 		float _actOri[3];					//!< Robot TCP orientation (rotation in degrees around base frame)

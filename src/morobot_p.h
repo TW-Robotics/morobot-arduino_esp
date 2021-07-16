@@ -26,7 +26,7 @@ class morobot_p:public morobotClass {
 		 *  \brief Constructor of morobot_p class
 		 *  \details The value in brakets defines that the robot consists of three smartservos
 		 */
-		morobot_p() : morobotClass(3){};
+		morobot_p() : morobotClass(3){memcpy(_robotJointLimits, _jointLimits, 3*2*sizeof(long)); memcpy(_robotAxisLimits, _axisLimits, 3*2*sizeof(uint8_t));};
 		
 		/**
 		 *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.
@@ -90,6 +90,7 @@ class morobot_p:public morobotClass {
 	private:
 		float _tcpOffset[3];	//!< Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
 		long _jointLimits[3][2] = {{-360, 360}, {0, 115}, {-100, 28}};		//!< Limits for all joints
+		uint8_t _axisLimits[3][2] = {{-300, 300}, {-300, 300}, {50, 210}};	//!< Limits of x, y, z axis
 		
 		float d1 = 88.20;		//!< Distance between base and rotational axes of motor 2
 		float a1 = 120;			//!< Length of first link connected to motor 2

@@ -25,7 +25,7 @@ class morobot_2d:public morobotClass {
 		 *  \brief Constructor of morobot_2d class
 		 *  \details The value in brakets defines that the robot consists of two smartservos
 		 */
-		morobot_2d() : morobotClass(2){};
+		morobot_2d() : morobotClass(2){memcpy(_robotJointLimits, _jointLimits, 3*2*sizeof(long)); memcpy(_robotAxisLimits, _axisLimits, 3*2*sizeof(uint8_t));};
 		
 		/**
 		 *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.
@@ -73,7 +73,8 @@ class morobot_2d:public morobotClass {
 
 	private:
 		float _tcpOffset[3];	//!< Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
-		long _jointLimits[2][2] = {{-110, 135}, {-72, 24}};		//!< Limits for all joints
+		long _jointLimits[3][2] = {{-110, 135}, {-72, 24}, {0, 0}};		//!< Limits for all joints
+		uint8_t _axisLimits[3][2] = {{-20, 280}, {74.24, 74.24}, {110, 240}};	//!< Limits of x, y, z axis
 		
 		float x_def_offset = 40.96;			//!< Default offset from side of robot to first motor
 		float y_def_offset = 74.24;			//!< Default offset from side of robot to center of eef

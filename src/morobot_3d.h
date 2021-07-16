@@ -26,7 +26,7 @@ class morobot_3d:public morobotClass {
 		 *  \brief Constructor of morobot_3d class
 		 *  \details The value in brakets defines that the robot consists of three smartservos
 		 */
-		morobot_3d() : morobotClass(3){};
+		morobot_3d() : morobotClass(3){memcpy(_robotJointLimits, _jointLimits, 3*2*sizeof(long)); memcpy(_robotAxisLimits, _axisLimits, 3*2*sizeof(uint8_t));};
 		
 		/**
 		 *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.
@@ -87,6 +87,7 @@ class morobot_3d:public morobotClass {
 	private:
 		float _tcpOffset[3];	//!< Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
 		long _jointLimits[3][2] = {{0, 85}, {0, 85}, {0, 85}};		//!< Limits for all joints
+		uint8_t _axisLimits[3][2] = {{-80, 80}, {-80, 80}, {112, 235}};	//!< Limits of x, y, z axis
 
 		float z_def_offset_top = 24.0;			//!< Default offset from top side of robot to motor axes
 		float z_def_offset_bottom = 10.0;		//!< Default offset from bottom side of end effector triangle to rotation axis of last joint

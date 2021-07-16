@@ -25,7 +25,7 @@ class newRobotClass_Template:public morobotClass {
 		 *  \brief Constructor of newRobotClass_Template class
 		 *  \details The value in brakets defines the number of smart servo motors
 		 */
-		newRobotClass_Template() : morobotClass(3){};	// TODO: PUT THE NUMBER OF SERVOS HERE
+		newRobotClass_Template() : morobotClass(3){memcpy(_robotJointLimits, _jointLimits, 3*2*sizeof(long)); memcpy(_robotAxisLimits, _axisLimits, 3*2*sizeof(uint8_t));};	// TODO: PUT THE NUMBER OF SERVOS HERE
 		
 		/**
 		 *  \brief Set the position of the TCP (tool center point) with respect to the center of the flange of the last robot axis.
@@ -76,6 +76,7 @@ class newRobotClass_Template:public morobotClass {
 	private:
 		float _tcpOffset[3];	//!< Position of the TCP (tool center point) with respect to the center of the flange of the last robot axis
 		long _jointLimits[3][2] = {{-100, 100}, {-100, 100}, {0, 780}};		//!< Limits for all joints
+		uint8_t _axisLimits[3][2] = {{-100, 100}, {-100, 100}, {-50, 50}};	//!< Limits of x, y, z axis
 				// TODO: CHANGE THE NUMBER OF SERVOS AND THE LIMITS HERE
 		
 		//TODO: PUT VARIABLES FOR INVERSE KINEMATICS HERE

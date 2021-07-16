@@ -29,6 +29,8 @@
 			float getTemp(uint8_t servoId);
 			float getVoltage(uint8_t servoId);
 			float getCurrent(uint8_t servoId);
+			long getJointLimit(uint8_t servoId, bool limitNum);
+			uint8_t getAxisLimit(char axis, bool limitNum);
 			uint8_t getNumSmartServos();
 			
 			void moveToAngle(uint8_t servoId, long angle);
@@ -242,6 +244,16 @@ float morobotClass::getVoltage(uint8_t servoId){
 
 float morobotClass::getCurrent(uint8_t servoId){
 	return smartServos.getCurrentRequest(servoId+1);
+}
+
+long morobotClass::getJointLimit(uint8_t servoId, bool limitNum){
+	return _robotJointLimits[servoId][limitNum];
+}
+
+uint8_t morobotClass::getAxisLimit(char axis, bool limitNum){
+	if (axis == 'x') return _robotAxisLimits[0][limitNum];
+	else if (axis == 'y') return _robotAxisLimits[1][limitNum];
+	else if (axis == 'z') return _robotAxisLimits[2][limitNum];
 }
 
 uint8_t morobotClass::getNumSmartServos(){

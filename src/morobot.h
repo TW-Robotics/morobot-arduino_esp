@@ -225,7 +225,7 @@ class morobotClass {
 
 		/**
 		 *  \brief Returns the limits of a given axis
-		 *  \param [in] servoID Number of servo to get limit of
+		 *  \param [in] servoId Number of servo to get limit of
 		 *  \param [in] limitNum 0 for lower limit, 1 for upper limit
 		 */
 		long getJointLimit(uint8_t servoId, bool limitNum);

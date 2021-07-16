@@ -1,5 +1,7 @@
 var class_makeblock_smart_servo =
 [
+    [ "MakeblockSmartServo", "class_makeblock_smart_servo.html#a3918489b089d82acbd1c740a5dac24ab", null ],
+    [ "MakeblockSmartServo", "class_makeblock_smart_servo.html#ab87a160a13b1f3ce23d8c766347e11d7", null ],
     [ "assignDevIdRequest", "class_makeblock_smart_servo.html#ad2f2fffdefa47dd677ea9cd60b0a16b6", null ],
     [ "assignDevIdResponse", "class_makeblock_smart_servo.html#ae7d28c11269be2bf54ffc78e06fb366a", null ],
     [ "beginSerial", "class_makeblock_smart_servo.html#af1abc1ce8cf5eb6bf302d457d73e3077", null ],

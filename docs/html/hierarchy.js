@@ -3,7 +3,9 @@ var hierarchy =
     [ "binaryEEF", "classbinary_e_e_f.html", null ],
     [ "Cmd_list_tab_type", "struct_cmd__list__tab__type.html", null ],
     [ "gripper", "classgripper.html", null ],
-    [ "MakeblockSmartServo", "class_makeblock_smart_servo.html", null ],
+    [ "MeSerialendif", null, [
+      [ "MakeblockSmartServo", "class_makeblock_smart_servo.html", null ]
+    ] ],
     [ "morobotClass", "classmorobot_class.html", [
       [ "morobot_2d", "classmorobot__2d.html", null ],
       [ "morobot_3d", "classmorobot__3d.html", null ],

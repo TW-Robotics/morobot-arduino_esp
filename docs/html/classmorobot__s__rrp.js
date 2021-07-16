@@ -8,6 +8,7 @@ var classmorobot__s__rrp =
     [ "moveZAxisIn", "classmorobot__s__rrp.html#a89912f849d663ee0687712eb6dfba631", null ],
     [ "setTCPoffset", "classmorobot__s__rrp.html#a88e4408c35f229091d35c84998efd35d", null ],
     [ "updateTCPpose", "classmorobot__s__rrp.html#a9a2f675a08dcda614b85e376eea9524e", null ],
+    [ "_axisLimits", "classmorobot__s__rrp.html#aceae8e8c0ee428a8f1b1c4d29057a2e5", null ],
     [ "_jointLimits", "classmorobot__s__rrp.html#a7abcfd3eec1b29e466dd12b18e6473aa", null ],
     [ "_tcpOffset", "classmorobot__s__rrp.html#aac091307944715fe24e347a907d7703f", null ],
     [ "a", "classmorobot__s__rrp.html#ad4e22ef9410c7f076d604346166ac128", null ],

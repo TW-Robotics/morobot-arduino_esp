@@ -95,9 +95,19 @@ $(document).ready(function(){initNavTree('class_makeblock_smart_servo.html','');
  <a href="class_makeblock_smart_servo.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_makeblock_smart_servo_8h_source.html">MakeblockSmartServo.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for MakeblockSmartServo:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_makeblock_smart_servo.png" alt=""/>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a3918489b089d82acbd1c740a5dac24ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_makeblock_smart_servo.html#a3918489b089d82acbd1c740a5dac24ab">MakeblockSmartServo</a> ()</td></tr>
+<tr class="separator:a3918489b089d82acbd1c740a5dac24ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab87a160a13b1f3ce23d8c766347e11d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_makeblock_smart_servo.html#ab87a160a13b1f3ce23d8c766347e11d7">MakeblockSmartServo</a> (uint8_t receivePin, uint8_t transmitPin, bool inverse_logic)</td></tr>
+<tr class="separator:ab87a160a13b1f3ce23d8c766347e11d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1abc1ce8cf5eb6bf302d457d73e3077"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_makeblock_smart_servo.html#af1abc1ce8cf5eb6bf302d457d73e3077">beginSerial</a> (Stream *servoPort)</td></tr>
 <tr class="separator:af1abc1ce8cf5eb6bf302d457d73e3077"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c5451a694fe703042c0f3d1d9effb07"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_makeblock_smart_servo.html#a2c5451a694fe703042c0f3d1d9effb07">readByte</a> (uint8_t *argv, int16_t idx)</td></tr>
@@ -188,7 +198,82 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>port</b></td></tr
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Driver for MakeBlock Smart Servo device. </p>
 <p>Class: <a class="el" href="class_makeblock_smart_servo.html" title="Driver for MakeBlock Smart Servo device.">MakeblockSmartServo</a> </p><dl class="section user"><dt>Description</dt><dd>Declaration of Class <a class="el" href="class_makeblock_smart_servo.html" title="Driver for MakeBlock Smart Servo device.">MakeblockSmartServo</a>. </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3918489b089d82acbd1c740a5dac24ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3918489b089d82acbd1c740a5dac24ab">&#9670;&nbsp;</a></span>MakeblockSmartServo() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MakeblockSmartServo::MakeblockSmartServo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Alternate Constructor which can call your own function to map the Me Smart Servo to arduino port, no pins are used or initialized here. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab87a160a13b1f3ce23d8c766347e11d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab87a160a13b1f3ce23d8c766347e11d7">&#9670;&nbsp;</a></span>MakeblockSmartServo() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MakeblockSmartServo::MakeblockSmartServo </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>receivePin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>transmitPin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>inverse_logic</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Alternate Constructor which can call your own function to map the Me Smart Servo to arduino port, If the hardware serial was selected, it will used the hardware serial. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">port</td><td>- RJ25 port from PORT_1 to M2 Alternate Constructor which can call your own function to map the Me Smart Servo to arduino port, If the hardware serial was selected, it will used the hardware serial. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">receivePin</td><td>- the rx pin of serial(arduino port) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">transmitPin</td><td>- the tx pin of serial(arduino port) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inverse_logic</td><td>- Whether the Serial level need inv.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Alternate Constructor which can call your own function to map the Me Smart Servo to arduino port, If the hardware serial was selected, it will used the hardware serial. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">receivePin</td><td>- the rx pin of serial(arduino port). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">transmitPin</td><td>- the tx pin of serial(arduino port). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">inverse_logic</td><td>- Whether the Serial level need inv. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad2f2fffdefa47dd677ea9cd60b0a16b6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad2f2fffdefa47dd677ea9cd60b0a16b6">&#9670;&nbsp;</a></span>assignDevIdRequest()</h2>
 

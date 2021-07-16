@@ -8,6 +8,7 @@ var classmorobot__p =
     [ "moveHome", "classmorobot__p.html#a8c8d00e0163b15ec2f70be4006a740ff", null ],
     [ "setTCPoffset", "classmorobot__p.html#ab8b0eed39d19418733ed38fd8b046729", null ],
     [ "updateTCPpose", "classmorobot__p.html#a2be9d28f02d0791fbc937ac5c98822fd", null ],
+    [ "_axisLimits", "classmorobot__p.html#aa74d463ecb5f9fbd8754fcd8ddabe484", null ],
     [ "_jointLimits", "classmorobot__p.html#af9b5cab45fd2834198b6a79a663baff0", null ],
     [ "_tcpOffset", "classmorobot__p.html#a54e8d87a773995123f8de3d00185cd43", null ],
     [ "a1", "classmorobot__p.html#a8967876cf67183fda2caed4c212f3551", null ],

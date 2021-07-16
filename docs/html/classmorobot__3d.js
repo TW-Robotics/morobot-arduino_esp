@@ -7,6 +7,7 @@ var classmorobot__3d =
     [ "getType", "classmorobot__3d.html#ad9ce03e405a563bcee0997524441732d", null ],
     [ "setTCPoffset", "classmorobot__3d.html#a0fdc102bbdfa0815059d1fc3fe2899e2", null ],
     [ "updateTCPpose", "classmorobot__3d.html#a8819cddf780665d8db0be3f246a44890", null ],
+    [ "_axisLimits", "classmorobot__3d.html#af7c1794284aa6075a34b66dc50c36563", null ],
     [ "_jointLimits", "classmorobot__3d.html#afa2692daaa2445bed13b20c8b6fdf550", null ],
     [ "_tcpOffset", "classmorobot__3d.html#a9456f2d57fb88488757d4f32580d5da2", null ],
     [ "cos120", "classmorobot__3d.html#af92d30b9f91cff7cbea83d30c2e4d580", null ],

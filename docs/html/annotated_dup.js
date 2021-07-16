@@ -9,7 +9,7 @@ var annotated_dup =
     [ "morobot_p", "classmorobot__p.html", "classmorobot__p" ],
     [ "morobot_s_rrp", "classmorobot__s__rrp.html", "classmorobot__s__rrp" ],
     [ "morobot_s_rrr", "classmorobot__s__rrr.html", "classmorobot__s__rrr" ],
-    [ "morobotClass", "classmorobot_class.html", null ],
+    [ "morobotClass", "classmorobot_class.html", "classmorobot_class" ],
     [ "newRobotClass_Template", "classnew_robot_class___template.html", "classnew_robot_class___template" ],
     [ "servo_device_type", "structservo__device__type.html", "structservo__device__type" ],
     [ "sysex_message", "unionsysex__message.html", "unionsysex__message" ],

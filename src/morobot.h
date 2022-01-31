@@ -45,6 +45,13 @@
 			bool moveXYZ(float xOffset, float yOffset, float zOffset);
 			bool moveInDirection(char axis, float value);
 			
+			void trajectoryPlanning(float points[][3], int nrPoints, int continuousMovement = 0, int polynomOrder = 3);
+			void moveLinear(float goalPoint[], int continuousMovement=1, float resolution=5,int useTrajectoryPlanning = 0);
+			float calcPolynomThirdOrder(int startAngle, int endAngle, float startVel, float endVel, float time, float totalTime);
+			float calcPolynomFifthOrder(int startAngle, int endAngle, float startVel, float endVel, float time, float totalTime);
+			float calcIntermediateVelocity(float time, float q0, float q1, float q2);
+			float calcPwm(float deg_per_sec);
+
 			void printAngles(long angles[]);
 			void printTCPpose();
 			float convertToDeg(float angle);
@@ -61,6 +68,7 @@
 #include <Arduino.h>
 #include "MakeblockSmartServo.h"
 #include "eef.h"
+#include <math.h> 
 
 #include "morobot_s_rrr.h"
 #include "morobot_s_rrp.h"
@@ -354,6 +362,67 @@ class morobotClass {
 		 */
 		bool moveInDirection(char axis, float value);
 		
+		//###############################
+		//----- trajectory planning -----
+		//###############################
+
+		/**
+		 *  \brief Uses trajectory planning to move the robot to goal positions.
+		 *  \param [in] points[][3] Goal poses with x-, y- and z-value
+		 *  \param [in] nrPoints Number of goal poses
+		 *  \param [in] continuousMovement (Optional) For a continuous movement set this parameter to 1
+		 *  \param [in] polynomOrder (Optional) Choose between third- (=3) and fifth-order (=5) polynomials
+		 */
+		void trajectoryPlanning(float points[][3], int nrPoints, int continuousMovement = 0, int polynomOrder = 3);
+
+		/**
+		 *  \brief Move the robot along a line
+		 *  \param [in] goalPoint[] Goal pose with x-, y- and z-value
+		 *  \param [in] continuousMovement (Optional) For a continuous movement set this parameter to 1
+		 *  \param [in] resolution (Optional) Set the resolution of the line in mm
+		 *  \param [in] useTrajectoryPlanning (Optional) If you want to use trajectory planning for the linear movement, set this parameter to 1 (method: third-order polynomials)
+		 */
+		void moveLinear(float goalPoint[], int continuousMovement=1, float resolution=5,int useTrajectoryPlanning = 0);
+
+		/**
+		 *  \brief Calculate the velocity of a joint in dependence of time with third-order polynomials
+		 *  \param [in] startAngle joint angle at the start position
+		 *  \param [in] endAngle joint angle at the final position
+		 *  \param [in] startVel start velocity 
+		 *  \param [in] endVel final velocity
+		 *  \param [in] time current time stamp
+		 *  \param [in] totalTime total time for the movement between the start and end point
+		 */
+		float calcPolynomThirdOrder(int startAngle, int endAngle, float startVel, float endVel, float time, float totalTime);
+
+		/**
+		 *  \brief Calculate the velocity of a joint in dependence of time with fifth-order polynomials
+		 *  \param [in] startAngle joint angle at the start position
+		 *  \param [in] endAngle joint angle at the final position
+		 *  \param [in] startVel start velocity 
+		 *  \param [in] endVel final velocity
+		 *  \param [in] time current time stamp
+		 *  \param [in] totalTime total time for the movement between the start and end point
+		 */
+		float calcPolynomFifthOrder(int startAngle, int endAngle, float startVel, float endVel, float time, float totalTime);
+
+		//Helper
+		/**
+		 *  \brief Calculate the intermediate velocities for a continuous point-to-point movement
+		 *  \param [in] time time intervall
+		 *  \param [in] q0 current joint angle
+		 *  \param [in] q1 goal joint angle
+		 *  \param [in] q2 next goal joint angle
+		 */
+		float calcIntermediateVelocity(float time, float q0, float q1, float q2);
+
+		/**
+		 *  \brief Convert the velocity from [°/sec] to a PWM value
+		 *  \param [in] deg_per_sec velocity in [°/sec]
+		 */
+		float calcPwm(float deg_per_sec);
+		//############################## 
+
 		/* HELPER */
 		/**
 		 *  \brief Prints an array of angles to the serial monitor.
@@ -386,6 +455,8 @@ class morobotClass {
 		 */
 		virtual String getType()=0;
 		
+		
+
 		/* PUBLIC VARIABLES */
 		MakeblockSmartServo smartServos;	//!< Makeblock smartservo object
 		bool waitAfterEachMove = true;		//!< Defines if the robot waits after moving or does not wait until movement has finished
